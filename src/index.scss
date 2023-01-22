@@ -1,6 +1,12 @@
 @import "/src/style/var.scss";
 
-body {
-  background-color: $main-color;
+@import "/src/style/default.scss";
+
+.title {
   color: $text;
+}
+
+.box {
+  background-color: bisque;
+  height: 40px;
 }

@@ -1,1 +1,0 @@
-{"version":3,"file":"main95d61a45e02e6d4dbda3.js","mappings":";;;;;AAAA;;AAEA;AACA;AACA;;AAEA;AACA","sources":["webpack://to-do/./src/index.js"],"sourcesContent":["/* @import \"./index.html\" */\n\nconst sum = (a, b) => {\n  return a + b;\n};\n\nconst res1 = sum(4, 9);\nconsole.log(res1);\n"],"names":[],"sourceRoot":""}

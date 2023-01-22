@@ -1,9 +1,9 @@
-import "./index.html";
-import "./index.scss";
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
 
-const sum = (a, b) => {
-  return a + b;
-};
+const container = document.getElementById("root");
 
-const res1 = sum(4, 9);
-console.log(res1);
+const root = createRoot(container);
+
+root.render(<App />);

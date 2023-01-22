@@ -1,0 +1,13 @@
+@import "./style/var.scss";
+h1 {
+  color: $text;
+}
+
+.title {
+  color: #000;
+}
+
+.box {
+  height: 20px;
+  background-color: $main-color;
+}

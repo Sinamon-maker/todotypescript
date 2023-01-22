@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const mode = process.env.NODE_ENV || "development";
 
 const devMode = mode === "development";
-const target = devMode ? "web" : "brouserslist";
+const target = devMode ? "web" : "browserslist";
 const devtool = devMode ? "source-map" : undefined;
 
 module.exports = {
@@ -22,7 +22,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
     filename: "main[contenthash].js",
-    assetModuleFilename: "assets/[name].[ext]",
   },
   plugins: [
     new HTMLWebpackPlugin({
@@ -91,15 +90,16 @@ module.exports = {
         type: "asset/resource",
       },
       {
-        test: /\.m?js$/,
+        test: /\.(m?js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: [["@babel/preset-env", { targets: "defaults" }]],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
     ],
   },
+  /*resolve: {extensions:["*", ".js", ".jsx", ".ts", ".tsx"]},*/
 };
