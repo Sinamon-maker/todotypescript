@@ -4,7 +4,7 @@ import style from "./app.Modules.scss";
 console.log("style", style);
 // import "./app.scss";
 
-export default function App() {
+function App() {
   return (
     <>
       <h1 className={style.title}>Hallo</h1>
@@ -12,3 +12,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;

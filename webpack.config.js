@@ -13,15 +13,18 @@ module.exports = {
   target,
   devtool,
   devServer: {
+    static: {
+      directory: path.resolve(__dirname, "./dist"),
+    },
     port: 8080,
     open: true,
     hot: true,
   },
-  entry: ["@babel/polyfill", path.resolve(__dirname, "src", "index.js")],
+  entry: [path.resolve(__dirname, "src", "index.tsx")],
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    filename: "main[contenthash].js",
+    filename: "index.js",
   },
   plugins: [
     new HTMLWebpackPlugin({
@@ -99,7 +102,19 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules|\.d\.ts$/,
+        use: {
+          loader: "ts-loader",
+          options: {
+            compilerOptions: {
+              noEmit: false, // this option will solve the issue
+            },
+          },
+        },
+      },
     ],
   },
-  /*resolve: {extensions:["*", ".js", ".jsx", ".ts", ".tsx"]},*/
+  resolve: { extensions: [".tsx", ".tsxs", ".jsx", ".js"] },
 };
