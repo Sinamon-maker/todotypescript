@@ -1,6 +1,8 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const tailwindcss = require("tailwindcss");
+const autoprefixer = require("autoprefixer"); // help tailwindcss to work
 
 const mode = process.env.NODE_ENV || "development";
 
@@ -49,7 +51,8 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: [require("postcss-preset-env")],
+                ident: "postcss",
+                plugins: [tailwindcss, autoprefixer],
               },
             },
           },
