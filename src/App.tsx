@@ -6,10 +6,9 @@ console.log("style", style);
 
 function App() {
   return (
-    <>
-      <h1 className={style.title}>Hallo</h1>
-      <div className={style.box}></div>
-    </>
+    <h1 className="text-3xl font-bold underline text-red-600">
+      Simple React Typescript Tailwind Sample
+    </h1>
   );
 }
 

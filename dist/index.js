@@ -33899,9 +33899,7 @@ const app_Modules_scss_1 = __importDefault(__webpack_require__(/*! ./app.Modules
 console.log("style", app_Modules_scss_1.default);
 // import "./app.scss";
 function App() {
-    return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement("h1", { className: app_Modules_scss_1.default.title }, "Hallo"),
-        react_1.default.createElement("div", { className: app_Modules_scss_1.default.box })));
+    return (react_1.default.createElement("h1", { className: "text-3xl font-bold underline text-red-600" }, "Simple React Typescript Tailwind Sample"));
 }
 exports["default"] = App;
 
