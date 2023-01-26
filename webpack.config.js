@@ -67,7 +67,12 @@ module.exports = {
         },
       },
       {
-        test: /\.(jpe?g|png|webp|gif|svg)$/i,
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        issuer: /\.[jt]sx?$/,
+        use: "@svgr/webpack",
+      },
+      {
+        test: /\.(jpe?g|png|webp|gif)$/i,
         use: [
           {
             loader: "image-webpack-loader",
@@ -95,6 +100,7 @@ module.exports = {
         ],
         type: "asset/resource",
       },
+
       {
         test: /\.(m?js|jsx)$/,
         exclude: /node_modules/,

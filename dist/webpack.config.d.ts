@@ -3,6 +3,8 @@ export const target: "web" | "browserslist";
 export const devtool: "source-map" | undefined;
 import HTMLWebpackPlugin = require("html-webpack-plugin");
 import MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import tailwindcss = require("tailwindcss");
+import autoprefixer = require("autoprefixer");
 export declare namespace devServer {
     export namespace _static {
         const directory: string;
@@ -26,6 +28,7 @@ export declare namespace module {
         use?: undefined;
         type?: undefined;
         generator?: undefined;
+        issuer?: undefined;
         exclude?: undefined;
     } | {
         test: RegExp;
@@ -33,13 +36,15 @@ export declare namespace module {
             loader: string;
             options: {
                 postcssOptions: {
-                    plugins: any[];
+                    ident: string;
+                    plugins: (typeof tailwindcss | typeof autoprefixer)[];
                 };
             };
         })[];
         loader?: undefined;
         type?: undefined;
         generator?: undefined;
+        issuer?: undefined;
         exclude?: undefined;
     } | {
         test: RegExp;
@@ -49,6 +54,15 @@ export declare namespace module {
         };
         loader?: undefined;
         use?: undefined;
+        issuer?: undefined;
+        exclude?: undefined;
+    } | {
+        test: RegExp;
+        issuer: RegExp;
+        use: string;
+        loader?: undefined;
+        type?: undefined;
+        generator?: undefined;
         exclude?: undefined;
     } | {
         test: RegExp;
@@ -76,6 +90,7 @@ export declare namespace module {
         type: string;
         loader?: undefined;
         generator?: undefined;
+        issuer?: undefined;
         exclude?: undefined;
     } | {
         test: RegExp;
@@ -90,6 +105,7 @@ export declare namespace module {
         loader?: undefined;
         type?: undefined;
         generator?: undefined;
+        issuer?: undefined;
     } | {
         test: RegExp;
         exclude: RegExp;
@@ -105,6 +121,7 @@ export declare namespace module {
         loader?: undefined;
         type?: undefined;
         generator?: undefined;
+        issuer?: undefined;
     })[];
 }
 export declare namespace resolve {

@@ -12,6 +12,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
+    "@svgr/webpack": "^6.5.1",
     "@types/node": "^18.11.18",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",

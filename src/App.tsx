@@ -1,38 +1,222 @@
-import React from "react";
+import React, { useState } from "react";
+import { KeyboardEvent } from "react";
 
-import style from "./app.Modules.scss";
-console.log("style", style);
+import { Header } from "./Components/Header/header";
+import { ContentOfTasks } from "./Components/ContentOfTasks/contentOfTasks";
+import { LoginForm } from "./Components/LoginForm/loginForm";
+import { RegisterForm } from "./Components/RegisterForm/registerForm";
+
+import { findUser, findTasks, saveInStorage } from "./utils";
+
+import { Task, Process, Users } from "./globalTypes";
+
 // import "./app.scss";
 
+enum TypeForm {
+  login = "login",
+  register = "register",
+}
+
+type List = Array<Task>;
+
 function App() {
+  const [userName, setUserName] = useState("");
+  const [logoName, setLogoName] = useState("");
+  const [errorName, setErrorName] = useState("");
+  const [taskName, setTaskName] = useState("");
+  const [typeForm, setTypeForm] = useState<TypeForm | null>(null);
+  const [isTasksShow, setTasksShow] = useState(false);
+  const [listOfTasks, setListOfTasks] = useState<List>([]);
+  const [disableRegister, setDisableRegister] = useState(true);
+  const [disableLogin, setDisableLogin] = useState(true);
+
+  const [disableSave, setDisableSave] = useState(true);
+
+  const onNewTask = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    if (taskName.length > 2) {
+      const newTask = {
+        text: taskName,
+        status: Process.inprogress,
+        created: +new Date(),
+      };
+
+      const newList: Array<Task> = [...listOfTasks, newTask];
+      setListOfTasks(newList);
+      saveInStorage(logoName, newList);
+      setTaskName("");
+    }
+  };
+
+  const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === "Enter") {
+      onNewTask(e);
+    }
+  };
+
+  const addNewUser = (user: string) => {
+    const data = localStorage.getItem("users") as string;
+    if (data) {
+      const res: Users = JSON.parse(data);
+      const newUserList: Users = [...res, user];
+      localStorage.setItem("user", JSON.stringify(newUserList));
+    } else {
+      localStorage.setItem("users", JSON.stringify([user]));
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<EventTarget>) => {
+    if (e.target instanceof HTMLInputElement) {
+      if (e.target.name === "login") {
+        setErrorName("");
+        const newValue = e.target.value;
+        setUserName(newValue);
+
+        if (e.target.value.length > 2) {
+          setDisableLogin(false);
+        }
+        if (e.target.value.length < 3) {
+          setDisableLogin(true);
+        }
+      }
+      if (e.target.name === "register") {
+        setErrorName("");
+        const newValue = e.target.value;
+        setUserName(newValue);
+        if (e.target.value.length > 2) {
+          setDisableRegister(false);
+        }
+        if (e.target.value.length < 3) {
+          setDisableRegister(true);
+        }
+      }
+      if (e.target.name === "task") {
+        setTaskName(e.target.value);
+        if (e.target.value.length > 2) {
+          setDisableSave(false);
+        }
+        if (e.target.value.length < 3) {
+          setDisableSave(true);
+        }
+      }
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.name === "cansel") {
+      setUserName("");
+      setErrorName("");
+      setTypeForm(null);
+    }
+    if (e.currentTarget.name === "login") {
+      setTypeForm(TypeForm.login);
+    }
+    if (e.currentTarget.name === "register") {
+      setTypeForm(TypeForm.register);
+    }
+    if (e.currentTarget.name === "logout") {
+      setTasksShow(false);
+      setLogoName("");
+    }
+  };
+
+  const onDeleteClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    created: number
+  ) => {
+    console.log("created", created);
+    const newTaskList: Task[] = listOfTasks.filter(
+      (task: Task) => task.created !== created
+    );
+    saveInStorage(logoName, newTaskList);
+    setListOfTasks(newTaskList);
+  };
+  const onChangeStatus = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    stat: string,
+    id: number
+  ) => {
+    const newTaskList = listOfTasks.map((task) => {
+      if (task.created !== id) return task;
+      else {
+        task.status === Process.inprogress;
+        return { text: task.text, created: task.created, status: Process.done };
+      }
+    });
+
+    setListOfTasks(newTaskList);
+    saveInStorage(logoName, newTaskList);
+  };
+
+  const onLogin = (e: React.FormEvent<EventTarget>): void => {
+    e.preventDefault();
+
+    const user = findUser(userName);
+    console.log("login", userName, user);
+    if (user) {
+      setTypeForm(null);
+      const list: Array<Task> = findTasks(userName);
+      setListOfTasks([...list]);
+      setTasksShow(true);
+      setLogoName(userName);
+      setUserName("");
+    } else {
+      const error = "No such user found. Try again.";
+      setErrorName(error);
+    }
+  };
+
+  const onRegister = (e: React.FormEvent<EventTarget>): void => {
+    e.preventDefault();
+    const user = findUser(userName);
+    if (user) {
+      const error = "User with this name also exists try another name";
+      setErrorName(error);
+    } else {
+      setTypeForm(null);
+      addNewUser(userName);
+      setLogoName(userName);
+      setUserName("");
+      setTasksShow(true);
+    }
+  };
+
   return (
-    <>
-      <h1 className="text-3xl font-bold underline text-red-600">
-        Simple React Typescript Tailwind Sample
-      </h1>
-      <form className="w-full max-w-sm">
-        <div className="flex items-center border-b border-teal-500 py-2">
-          <input
-            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-            type="text"
-            placeholder="Jane Doe"
-            aria-label="Full name"
-          />
-          <button
-            className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-            type="button"
-          >
-            Sign Up
-          </button>
-          <button
-            className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded"
-            type="button"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    </>
+    <div className="flex flex-col h-screen">
+      <Header handleClick={handleClick} logoName={logoName} />
+      {isTasksShow && (
+        <ContentOfTasks
+          onNewTask={onNewTask}
+          handleChange={handleChange}
+          taskName={taskName}
+          listOfTasks={listOfTasks}
+          onDeleteClick={onDeleteClick}
+          disableSave={disableSave}
+          onPressEnter={onPressEnter}
+          onChangeStatus={onChangeStatus}
+        />
+      )}
+      {typeForm === "login" && (
+        <LoginForm
+          handleClick={handleClick}
+          handleChange={handleChange}
+          onHandleSubmit={onLogin}
+          userName={userName}
+          disableLogin={disableLogin}
+          errorName={errorName}
+        />
+      )}
+      {typeForm === "register" && (
+        <RegisterForm
+          handleClick={handleClick}
+          handleChange={handleChange}
+          onHandleSubmit={onRegister}
+          userName={userName}
+          disableRegister={disableRegister}
+          errorName={errorName}
+        />
+      )}{" "}
+    </div>
   );
 }
 
