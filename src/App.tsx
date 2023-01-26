@@ -45,6 +45,7 @@ function App() {
       setListOfTasks(newList);
       saveInStorage(logoName, newList);
       setTaskName("");
+      setDisableSave(false);
     }
   };
 
@@ -152,7 +153,7 @@ function App() {
     e.preventDefault();
 
     const user = findUser(userName);
-    console.log("login", userName, user);
+
     if (user) {
       setTypeForm(null);
       const list: Array<Task> = findTasks(userName);
@@ -160,6 +161,7 @@ function App() {
       setTasksShow(true);
       setLogoName(userName);
       setUserName("");
+      setDisableLogin(false);
     } else {
       const error = "No such user found. Try again.";
       setErrorName(error);
@@ -178,6 +180,7 @@ function App() {
       setLogoName(userName);
       setUserName("");
       setTasksShow(true);
+      setDisableRegister(false);
     }
   };
 
