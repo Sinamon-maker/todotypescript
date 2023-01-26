@@ -6,7 +6,12 @@ import { ContentOfTasks } from "./Components/ContentOfTasks/contentOfTasks";
 import { LoginForm } from "./Components/LoginForm/loginForm";
 import { RegisterForm } from "./Components/RegisterForm/registerForm";
 
-import { findUser, findTasks, saveInStorage } from "./utils";
+import {
+  findUser,
+  findTasks,
+  saveInStorage,
+  addNewUserToStorage,
+} from "./utils";
 
 import { Task, Process, Users } from "./globalTypes";
 
@@ -52,17 +57,6 @@ function App() {
   const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === "Enter") {
       onNewTask(e);
-    }
-  };
-
-  const addNewUser = (user: string) => {
-    const data = localStorage.getItem("users") as string;
-    if (data) {
-      const res: Users = JSON.parse(data);
-      const newUserList: Users = [...res, user];
-      localStorage.setItem("user", JSON.stringify(newUserList));
-    } else {
-      localStorage.setItem("users", JSON.stringify([user]));
     }
   };
 
@@ -125,7 +119,6 @@ function App() {
     e: React.MouseEvent<HTMLButtonElement>,
     created: number
   ) => {
-    console.log("created", created);
     const newTaskList: Task[] = listOfTasks.filter(
       (task: Task) => task.created !== created
     );
@@ -176,7 +169,7 @@ function App() {
       setErrorName(error);
     } else {
       setTypeForm(null);
-      addNewUser(userName);
+      addNewUserToStorage(userName);
       setLogoName(userName);
       setUserName("");
       setTasksShow(true);
