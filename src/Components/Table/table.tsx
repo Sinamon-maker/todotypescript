@@ -2,6 +2,8 @@ import React from "react";
 
 import IconDone from "../../images/check-mark-line-icon.svg";
 
+import { Task } from "../../globalTypes";
+
 type Props = {
   listOfTasks: Array<Task>;
   onDeleteClick: (e: React.MouseEvent<HTMLButtonElement>, val: number) => void;
@@ -42,7 +44,7 @@ export const Table = ({
               key={Math.random() * 100}
               className=" border-b border-gray-700 dark:border-gray-700"
             >
-              <td className="whitespace-normal pl-6 pr-2 py-2  sm:py-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-white dark:bg-gray-800">
+              <td className="whitespace-normal pl-6 pr-2 py-2  sm:py-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-slate-300 dark:bg-gray-800">
                 {task.text}
               </td>
               <td className="w-8 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">

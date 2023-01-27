@@ -1,7 +1,7 @@
 {
   "name": "to-do",
   "version": "1.0.0",
-  "main": "./src/index.ts",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "webpack serve",
@@ -9,6 +9,11 @@
     "build-prod": "webpack --node-env=production",
     "clear": "rd /s /q dist"
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
@@ -16,6 +21,7 @@
     "@types/node": "^18.11.18",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",

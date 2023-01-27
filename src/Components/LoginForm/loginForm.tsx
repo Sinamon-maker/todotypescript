@@ -28,7 +28,7 @@ export const LoginForm = ({
       >
         <div className="flex items-center border-b border-teal-500 py-2">
           <input
-            className="appearance-none bg-transparent border-none w-full text-gray-400 mr-3 py-1 px-2 leading-tight focus:outline-none"
+            className="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text"
             name="login"
             value={userName}

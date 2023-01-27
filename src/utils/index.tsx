@@ -12,6 +12,17 @@ export const findUser = (user: string): string | null => {
   return result;
 };
 
+export const addNewUserToStorage = (user: string) => {
+  const data = localStorage.getItem("users") as string;
+  if (data) {
+    const res: Users = JSON.parse(data);
+    const newUserList: Users = [...res, user];
+    localStorage.setItem("user", JSON.stringify(newUserList));
+  } else {
+    localStorage.setItem("users", JSON.stringify([user]));
+  }
+};
+
 export const findTasks = (user: string) => {
   const data = localStorage.getItem(user) as string;
   let list: Task[] = [];

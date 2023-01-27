@@ -3,6 +3,7 @@ export const target: "web" | "browserslist";
 export const devtool: "source-map" | undefined;
 import HTMLWebpackPlugin = require("html-webpack-plugin");
 import MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import CopyPlugin = require("copy-webpack-plugin");
 import tailwindcss = require("tailwindcss");
 import autoprefixer = require("autoprefixer");
 export declare namespace devServer {
@@ -19,8 +20,9 @@ export declare namespace output {
     const path: string;
     const clean: boolean;
     const filename: string;
+    const assetModuleFilename: string;
 }
-export declare const plugins: (HTMLWebpackPlugin | MiniCssExtractPlugin)[];
+export declare const plugins: (HTMLWebpackPlugin | MiniCssExtractPlugin | CopyPlugin)[];
 export declare namespace module {
     const rules: ({
         test: RegExp;
@@ -66,29 +68,9 @@ export declare namespace module {
         exclude?: undefined;
     } | {
         test: RegExp;
-        use: {
-            loader: string;
-            options: {
-                mozjpeg: {
-                    progressive: boolean;
-                };
-                optipng: {
-                    enabled: boolean;
-                };
-                pngquant: {
-                    quality: number[];
-                    speed: number;
-                };
-                gifsicle: {
-                    interlaced: boolean;
-                };
-                webp: {
-                    quality: number;
-                };
-            };
-        }[];
         type: string;
         loader?: undefined;
+        use?: undefined;
         generator?: undefined;
         issuer?: undefined;
         exclude?: undefined;

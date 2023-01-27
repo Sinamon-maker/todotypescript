@@ -1,5 +1,6 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const tailwindcss = require("tailwindcss");
 const autoprefixer = require("autoprefixer"); // help tailwindcss to work
@@ -27,13 +28,18 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
     filename: "index.js",
+    assetModuleFilename: "assets/[name][ext]",
   },
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html"),
     }),
+
     new MiniCssExtractPlugin({
       filename: "main[contenthash].css",
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "src/images", to: "src/images" }],
     }),
   ],
   module: {
@@ -73,31 +79,6 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|webp|gif)$/i,
-        use: [
-          {
-            loader: "image-webpack-loader",
-            options: {
-              mozjpeg: {
-                progressive: true,
-              },
-              // optipng.enabled: false will disable optipng
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: [0.65, 0.9],
-                speed: 4,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 75,
-              },
-            },
-          },
-        ],
         type: "asset/resource",
       },
 

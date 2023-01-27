@@ -5,6 +5,7 @@ import { Header } from "./Components/Header/header";
 import { ContentOfTasks } from "./Components/ContentOfTasks/contentOfTasks";
 import { LoginForm } from "./Components/LoginForm/loginForm";
 import { RegisterForm } from "./Components/RegisterForm/registerForm";
+import { HelloImage } from "./Components/HelloImage/helloImage";
 
 import {
   findUser,
@@ -180,28 +181,31 @@ function App() {
   return (
     <div className="flex flex-col h-screen">
       <Header handleClick={handleClick} logoName={logoName} />
-      {isTasksShow && (
-        <ContentOfTasks
-          onNewTask={onNewTask}
-          handleChange={handleChange}
-          taskName={taskName}
-          listOfTasks={listOfTasks}
-          onDeleteClick={onDeleteClick}
-          disableSave={disableSave}
-          onPressEnter={onPressEnter}
-          onChangeStatus={onChangeStatus}
-        />
-      )}
-      {typeForm === "login" && (
-        <LoginForm
-          handleClick={handleClick}
-          handleChange={handleChange}
-          onHandleSubmit={onLogin}
-          userName={userName}
-          disableLogin={disableLogin}
-          errorName={errorName}
-        />
-      )}
+      <main className="w-full  m-auto grow ">
+        {isTasksShow && (
+          <ContentOfTasks
+            onNewTask={onNewTask}
+            handleChange={handleChange}
+            taskName={taskName}
+            listOfTasks={listOfTasks}
+            onDeleteClick={onDeleteClick}
+            disableSave={disableSave}
+            onPressEnter={onPressEnter}
+            onChangeStatus={onChangeStatus}
+          />
+        )}
+        {!isTasksShow && <HelloImage />}
+        {typeForm === "login" && (
+          <LoginForm
+            handleClick={handleClick}
+            handleChange={handleChange}
+            onHandleSubmit={onLogin}
+            userName={userName}
+            disableLogin={disableLogin}
+            errorName={errorName}
+          />
+        )}
+      </main>
       {typeForm === "register" && (
         <RegisterForm
           handleClick={handleClick}

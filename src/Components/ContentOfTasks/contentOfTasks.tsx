@@ -32,21 +32,19 @@ export const ContentOfTasks = ({
   onChangeStatus,
 }: Props) => {
   return (
-    <main className="w-full md:w-3/4 px-1 m-auto grow ">
-      <Container>
-        <NewTaskForm
-          onNewTask={onNewTask}
-          handleChange={handleChange}
-          taskName={taskName}
-          disableSave={disableSave}
-          onPressEnter={onPressEnter}
-        />
-        <Table
-          listOfTasks={listOfTasks}
-          onDeleteClick={onDeleteClick}
-          onChangeStatus={onChangeStatus}
-        />
-      </Container>
-    </main>
+    <Container>
+      <NewTaskForm
+        onNewTask={onNewTask}
+        handleChange={handleChange}
+        taskName={taskName}
+        disableSave={disableSave}
+        onPressEnter={onPressEnter}
+      />
+      <Table
+        listOfTasks={listOfTasks}
+        onDeleteClick={onDeleteClick}
+        onChangeStatus={onChangeStatus}
+      />
+    </Container>
   );
 };
