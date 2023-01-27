@@ -13,7 +13,7 @@ export const Header = ({
 }: Props) => {
   return (
     <header className=" bg-gray-800   ">
-      <div className="container bg-gray-800 m-auto  flex flex-col sm:flex-row sm:justify-between sm:items-center py-6 pl-8 pr-8 ">
+      <div className="container bg-gray-800 m-auto  flex flex-col sm:flex-row sm:justify-between sm:items-center py-6 pl-8 pr-8 shadow-lg">
         <p className="mb-4 sm:mb-0 text-slate-100">{logoName}</p>
         <div>
           {logoName === "" && (

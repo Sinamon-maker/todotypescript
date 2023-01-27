@@ -181,7 +181,7 @@ function App() {
   return (
     <div className="flex flex-col h-screen">
       <Header handleClick={handleClick} logoName={logoName} />
-      <main className="w-full  m-auto grow ">
+      <main className="w-full  m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
         {isTasksShow && (
           <ContentOfTasks
             onNewTask={onNewTask}
