@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { KeyboardEvent } from "react";
 
+import { TaskContext, Cont } from "./Context/taskContext";
+
 import { Header } from "./Components/Header/header";
 import { ContentOfTasks } from "./Components/ContentOfTasks/contentOfTasks";
 import { LoginForm } from "./Components/LoginForm/loginForm";
@@ -53,6 +55,10 @@ function App() {
       setTaskName("");
       setDisableSave(false);
     }
+  };
+
+  const onChangeTask = (text: string, id: number) => {
+    console.log(text, id);
   };
 
   const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -179,44 +185,45 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <Header handleClick={handleClick} logoName={logoName} />
-      <main className="w-full  m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
-        {isTasksShow && (
-          <ContentOfTasks
-            onNewTask={onNewTask}
-            handleChange={handleChange}
-            taskName={taskName}
-            listOfTasks={listOfTasks}
-            onDeleteClick={onDeleteClick}
-            disableSave={disableSave}
-            onPressEnter={onPressEnter}
-            onChangeStatus={onChangeStatus}
-          />
-        )}
-        {!isTasksShow && <HelloImage />}
-        {typeForm === "login" && (
-          <LoginForm
+    <TaskContext.Provider
+      value={{ listOfTasks, onChangeTask, onChangeStatus, onDeleteClick }}
+    >
+      <div className="flex flex-col h-screen">
+        <Header handleClick={handleClick} logoName={logoName} />
+        <main className="w-full  m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
+          {isTasksShow && (
+            <ContentOfTasks
+              onNewTask={onNewTask}
+              handleChange={handleChange}
+              taskName={taskName}
+              disableSave={disableSave}
+              onPressEnter={onPressEnter}
+            />
+          )}
+          {!isTasksShow && <HelloImage />}
+          {typeForm === "login" && (
+            <LoginForm
+              handleClick={handleClick}
+              handleChange={handleChange}
+              onHandleSubmit={onLogin}
+              userName={userName}
+              disableLogin={disableLogin}
+              errorName={errorName}
+            />
+          )}
+        </main>
+        {typeForm === "register" && (
+          <RegisterForm
             handleClick={handleClick}
             handleChange={handleChange}
-            onHandleSubmit={onLogin}
+            onHandleSubmit={onRegister}
             userName={userName}
-            disableLogin={disableLogin}
+            disableRegister={disableRegister}
             errorName={errorName}
           />
-        )}
-      </main>
-      {typeForm === "register" && (
-        <RegisterForm
-          handleClick={handleClick}
-          handleChange={handleChange}
-          onHandleSubmit={onRegister}
-          userName={userName}
-          disableRegister={disableRegister}
-          errorName={errorName}
-        />
-      )}{" "}
-    </div>
+        )}{" "}
+      </div>
+    </TaskContext.Provider>
   );
 }
 

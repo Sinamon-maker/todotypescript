@@ -1,26 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import IconDone from "../../images/check-mark-line-icon.svg";
-import { Task, TableHead, TableHeadings } from "../../globalTypes";
+import { TaskContext } from "../../Context/taskContext";
 
-type Props = {
-  listOfTasks: Array<Task>;
-  onDeleteClick: (e: React.MouseEvent<HTMLButtonElement>, val: number) => void;
-  onChangeStatus: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    val1: string,
-    val2: number
-  ) => void;
-};
+export const TableBody = () => {
+  const { listOfTasks, onChangeTask, onChangeStatus, onDeleteClick } =
+    useContext(TaskContext);
 
-export const TableBody = ({
-  onDeleteClick,
-  listOfTasks,
-  onChangeStatus,
-}: Props) => {
+  const list = listOfTasks === null ? [] : listOfTasks;
+
   return (
     <tbody>
-      {listOfTasks.map((task) => {
+      {list.map((task) => {
         return (
           <tr
             key={Math.random() * 100}
