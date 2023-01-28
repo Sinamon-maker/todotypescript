@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { KeyboardEvent } from "react";
 
 import { TaskContext, Cont } from "./Context/taskContext";
@@ -14,6 +14,7 @@ import {
   findTasks,
   saveInStorage,
   addNewUserToStorage,
+  setCurrentUserToStore,
 } from "./utils";
 
 import { Task, Process, Users } from "./globalTypes";
@@ -39,6 +40,21 @@ function App() {
   const [disableLogin, setDisableLogin] = useState(true);
 
   const [disableSave, setDisableSave] = useState(true);
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem("currentUser");
+
+    if (currentUser !== null) {
+      setLogoName(currentUser);
+      setTasksShow(true);
+
+      const list = findTasks(currentUser);
+
+      if (list !== undefined) {
+        setListOfTasks(list);
+      }
+    }
+  }, []);
 
   const onNewTask = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -132,6 +148,7 @@ function App() {
     if (e.currentTarget.name === "logout") {
       setTasksShow(false);
       setLogoName("");
+      localStorage.removeItem("currentUser");
     }
   };
 
@@ -173,6 +190,7 @@ function App() {
       setListOfTasks([...list]);
       setTasksShow(true);
       setLogoName(userName);
+      setCurrentUserToStore(userName);
       setUserName("");
       setDisableLogin(false);
     } else {
@@ -191,6 +209,7 @@ function App() {
       setTypeForm(null);
       addNewUserToStorage(userName);
       setLogoName(userName);
+      setCurrentUserToStore(userName);
       setUserName("");
       setTasksShow(true);
       setDisableRegister(false);
