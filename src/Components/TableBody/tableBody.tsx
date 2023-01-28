@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 
 import IconDone from "../../images/check-mark-line-icon.svg";
 import { TaskContext } from "../../Context/taskContext";
+import { TextTableElement } from "../TaskTableElements/TextTableElement/textTableElement";
+import { TableElementContainer } from "../../Module/TableElementContainer/tableElementContainer";
 import { Task } from "../../globalTypes";
 
 export const TableBody = () => {
   const { listOfTasks, onChangeTask, onChangeStatus, onDeleteClick } =
     useContext(TaskContext);
-  const [isChangeTask, setIsChangeTask] = useState(true);
+
   const [valueTask, setValueTask] = useState("");
   const [idTaskToEdit, setIdTaskToEdit] = useState(0);
 
@@ -51,27 +53,19 @@ export const TableBody = () => {
             key={task.created}
             className=" border-b border-gray-700 dark:border-gray-700 relative"
           >
-            {task.created === idTaskToEdit && (
-              <td className="whitespace-normal pl-6 pr-2 py-2  sm:py-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 rounded">
-                <textarea
-                  id="message"
-                  rows={3}
-                  className="block p-2.5 w-full"
-                  value={valueTask}
-                  onChange={onChange}
-                />
-              </td>
-            )}
-            {task.created !== idTaskToEdit && (
-              <td className="whitespace-normal pl-6 pr-2 py-2  sm:py-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-slate-300 dark:bg-gray-800">
-                <button
-                  className="block w-full w-full text-left"
-                  onClick={(e) => handleClickChangeTask(e, task)}
-                >
-                  {task.text}
-                </button>
-              </td>
-            )}
+            <TableElementContainer
+              style={
+                "whitespace-normal pl-6 pr-2 py-2  sm:py-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-white dark:bg-gray-800 rounded"
+              }
+            >
+              <TextTableElement
+                task={task}
+                valueTask={valueTask}
+                onChange={onChange}
+                handleClickChangeTask={handleClickChangeTask}
+                id={idTaskToEdit}
+              />
+            </TableElementContainer>
             <td className="w-8 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">
               {task.created === idTaskToEdit && (
                 <button
