@@ -32,17 +32,12 @@ export const findTasks = (user: string) => {
   return list;
 };
 
-export const saveTasks = (user: string, tasks: Array<Task>) => {
-  const data = JSON.stringify(tasks);
-  localStorage.setItem(user, data);
-};
-
 export const deleteTask = (user: string, list: Task[]) => {
   const data = JSON.stringify(list);
   localStorage.setItem(user, data);
 };
 
-export const saveInStorage = (user: string, list: Task[]) => {
+export const saveInStorage = <T,>(user: string, list: T[]) => {
   const data = JSON.stringify(list);
   localStorage.setItem(user, data);
 };

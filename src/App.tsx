@@ -59,6 +59,19 @@ function App() {
 
   const onChangeTask = (text: string, id: number) => {
     console.log(text, id);
+    const list = findTasks(logoName);
+
+    if (list !== null) {
+      const newList = list.map((task) => {
+        if (task.created === id) {
+          return { status: task.status, created: id, text: text };
+        } else {
+          return task;
+        }
+      });
+      setListOfTasks(newList);
+      saveInStorage(logoName, newList);
+    }
   };
 
   const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
