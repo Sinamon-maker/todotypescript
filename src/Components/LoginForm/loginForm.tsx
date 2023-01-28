@@ -1,6 +1,7 @@
 import React from "react";
 import { ModalContainer } from "../../Module/ModuleContainer/modalContainer";
 import { Error } from "../Error/error";
+import { AppButton } from "../../Module/Button/button";
 
 type Props = {
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -37,22 +38,20 @@ export const LoginForm = ({
             onChange={handleChange}
           />
 
-          <button
-            className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 disabled:opacity-25 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 roundedshadow-lg"
+          <AppButton
+            style="flex-shrink-0 bg-teal-500 hover:bg-teal-700 disabled:opacity-25 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 roundedshadow-lg"
             type="submit"
-            name="loginUser"
+            nameValue="loginUser"
             disabled={disableLogin}
-          >
-            Log In
-          </button>
-          <button
-            className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded shadow-lg"
-            type="button"
-            name="cansel"
+            title="Log In"
+          />
+
+          <AppButton
+            style="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded shadow-lg"
+            nameValue="cansel"
+            title="Cansel"
             onClick={(e) => handleClick(e)}
-          >
-            Cansel
-          </button>
+          />
         </div>
         <Error message={errorName} />
       </form>

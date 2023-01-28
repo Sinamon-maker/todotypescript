@@ -6,6 +6,7 @@ import { TextTableElement } from "../TaskTableElements/TextTableElement/textTabl
 import { TableElementContainer } from "../../Module/TableElementContainer/tableElementContainer";
 import { Task } from "../../globalTypes";
 import { StatusTableElement } from "../TaskTableElements/StatusTableElement/statusTableElement";
+import { AppButton } from "../../Module/Button/button";
 
 export const TableBody = () => {
   const { listOfTasks, onChangeTask, onChangeStatus, onDeleteClick } =
@@ -13,6 +14,27 @@ export const TableBody = () => {
 
   const [valueTask, setValueTask] = useState("");
   const [idTaskToEdit, setIdTaskToEdit] = useState(0);
+
+  const refWrap = React.useRef<HTMLTableSectionElement>(null);
+  React.useEffect(() => {
+    const handleClick = (ev: any) => {
+      if (refWrap !== undefined) {
+        const el = refWrap?.current;
+
+        if (!el || el.contains((ev?.target as Node) || null)) {
+          return;
+        }
+        canselEditTask(ev);
+        console.log("2", el);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [refWrap]);
 
   const list = listOfTasks === null ? [] : listOfTasks;
 
@@ -32,10 +54,8 @@ export const TableBody = () => {
     setValueTask(task.text);
   };
 
-  const canselEditTask = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    id: number
-  ) => {
+  const canselEditTask = (e: React.MouseEvent<HTMLElement>) => {
+    console.log("canselEdit");
     setIdTaskToEdit(0);
     setValueTask("");
   };
@@ -47,7 +67,7 @@ export const TableBody = () => {
   };
 
   return (
-    <tbody>
+    <tbody ref={refWrap}>
       {list.map((task) => {
         return (
           <tr
@@ -72,29 +92,27 @@ export const TableBody = () => {
                 task={task}
                 id={idTaskToEdit}
                 onChangeStatus={onChangeStatus}
-                canselEditTask={canselEditTask}
+                onSaveEditTask={onSaveEditTask}
               />
             </TableElementContainer>
             <TableElementContainer style="w-1/4 sm:w-1/6 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
-              {task.created === idTaskToEdit && (
-                <button
-                  className="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
-                  type="button"
-                  name="saveEdit"
-                  onClick={(e) => onSaveEditTask(e)}
-                >
-                  Save
-                </button>
-              )}
               {task.created !== idTaskToEdit && (
-                <button
-                  className="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
-                  type="button"
-                  name="delete"
+                <AppButton
+                  style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
+                  nameValue="deleteTask"
+                  title="Delete"
                   onClick={(e) => onDeleteClick(e, task.created)}
-                >
-                  Delete
-                </button>
+                />
+              )}
+
+              {task.created === idTaskToEdit && (
+                <AppButton
+                  style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
+                  type="button"
+                  nameValue="canselEditTask"
+                  onClick={(e) => canselEditTask(e)}
+                  title="Cansel"
+                />
               )}
             </TableElementContainer>
           </tr>

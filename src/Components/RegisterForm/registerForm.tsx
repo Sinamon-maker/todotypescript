@@ -1,4 +1,5 @@
 import React from "react";
+import { AppButton } from "../../Module/Button/button";
 import { ModalContainer } from "../../Module/ModuleContainer/modalContainer";
 import { Error } from "../Error/error";
 
@@ -36,22 +37,22 @@ export const RegisterForm = ({
             aria-label="Full name"
             onChange={handleChange}
           />
-          <button
-            className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 disabled:opacity-25 text-sm border-4 text-white py-1 px-2 rounded shadow-lg"
+
+          <AppButton
+            style="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 disabled:opacity-25 text-sm border-4 text-white py-1 px-2 rounded shadow-lg"
+            nameValue="registerUser"
             type="submit"
-            name="registerUser"
             disabled={disableRegister}
-          >
-            Register
-          </button>
-          <button
-            className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded shadow-lg"
+            title="Save"
+          />
+
+          <AppButton
+            style="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded shadow-lg"
             type="button"
-            name="cansel"
+            nameValue="cansel"
             onClick={(e) => handleClick(e)}
-          >
-            Cansel
-          </button>
+            title="Cansel"
+          />
         </div>
         {{ errorName } && <Error message={errorName} />}
       </form>

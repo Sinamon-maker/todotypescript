@@ -214,17 +214,17 @@ function App() {
             />
           )}
           {!isTasksShow && <HelloImage />}
-          {typeForm === "login" && (
-            <LoginForm
-              handleClick={handleClick}
-              handleChange={handleChange}
-              onHandleSubmit={onLogin}
-              userName={userName}
-              disableLogin={disableLogin}
-              errorName={errorName}
-            />
-          )}
         </main>
+        {typeForm === "login" && (
+          <LoginForm
+            handleClick={handleClick}
+            handleChange={handleChange}
+            onHandleSubmit={onLogin}
+            userName={userName}
+            disableLogin={disableLogin}
+            errorName={errorName}
+          />
+        )}
         {typeForm === "register" && (
           <RegisterForm
             handleClick={handleClick}

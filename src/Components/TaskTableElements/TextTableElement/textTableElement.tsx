@@ -1,4 +1,6 @@
 import React from "react";
+
+import { AppButton } from "../../../Module/Button/button";
 import { Task } from "../../../globalTypes";
 
 type Props = {
@@ -19,10 +21,13 @@ export const TextTableElement = ({
   handleClickChangeTask,
   id,
 }: Props) => {
-  const editable: boolean =
-    task.created === id && task.status !== "done" ? true : false;
+  if (task.status === "done") {
+    return (
+      <span className="block w-full h-full py-6 text-left">{task.text}</span>
+    );
+  }
 
-  if (editable) {
+  if (task.created === id) {
     return (
       <textarea
         id="message"
@@ -35,11 +40,13 @@ export const TextTableElement = ({
   }
 
   return (
-    <button
-      className="block w-full w-full text-left"
-      onClick={(e) => handleClickChangeTask(e, task)}
-    >
-      {task.text}
-    </button>
+    <AppButton
+      style="block w-full h-full py-6 text-left"
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+        handleClickChangeTask(e, task)
+      }
+      title={task.text}
+      nameValue="taskText"
+    />
   );
 };
