@@ -5,6 +5,7 @@ import { TaskContext } from "../../Context/taskContext";
 import { TextTableElement } from "../TaskTableElements/TextTableElement/textTableElement";
 import { TableElementContainer } from "../../Module/TableElementContainer/tableElementContainer";
 import { Task } from "../../globalTypes";
+import { StatusTableElement } from "../TaskTableElements/StatusTableElement/statusTableElement";
 
 export const TableBody = () => {
   const { listOfTasks, onChangeTask, onChangeStatus, onDeleteClick } =
@@ -66,40 +67,15 @@ export const TableBody = () => {
                 id={idTaskToEdit}
               />
             </TableElementContainer>
-            <td className="w-8 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">
-              {task.created === idTaskToEdit && (
-                <button
-                  className="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
-                  type="button"
-                  name="canselDdelete"
-                  onClick={(e) => canselEditTask(e, task.created)}
-                >
-                  Cansel
-                </button>
-              )}
-              {task.status === "inprogress" &&
-                task.created !== idTaskToEdit && (
-                  <button
-                    onClick={(e) =>
-                      onChangeStatus(e, task.status, task.created)
-                    }
-                    className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 block self-center border-2 border-solid border-transparent  hover:border-white rounded-lg dark:text-white dark:bg-gray-800"
-                  >
-                    ...
-                  </button>
-                )}
-              {task.status === "done" && (
-                <span className="flex-shrink-0 block w-6 h-6 sm:w-8 sm:h-8   flex  justify-center items-center border-2 border-solid border-transparent  rounded-lg dark:text-white dark:bg-orange-400">
-                  <IconDone
-                    fill="white"
-                    whith="30px"
-                    heght="auto"
-                    className="w-4 sm:w-4"
-                  />
-                </span>
-              )}
-            </td>
-            <td className="w-1/4 sm:w-1/6 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
+            <TableElementContainer style="w-8 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">
+              <StatusTableElement
+                task={task}
+                id={idTaskToEdit}
+                onChangeStatus={onChangeStatus}
+                canselEditTask={canselEditTask}
+              />
+            </TableElementContainer>
+            <TableElementContainer style="w-1/4 sm:w-1/6 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
               {task.created === idTaskToEdit && (
                 <button
                   className="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
@@ -120,7 +96,7 @@ export const TableBody = () => {
                   Delete
                 </button>
               )}
-            </td>
+            </TableElementContainer>
           </tr>
         );
       })}
