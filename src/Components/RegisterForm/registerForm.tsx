@@ -61,7 +61,7 @@ export const RegisterForm = ({}: Props) => {
       console.log("new user", userId);
       const destination = `/tasks/${userId}`;
 
-      navigate(`${destination}`);
+      navigate(`${destination}`, { replace: true });
     }
   };
 

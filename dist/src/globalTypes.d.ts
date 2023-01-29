@@ -7,4 +7,10 @@ export type Task = {
     status: Process;
     created: number;
 };
+export type List = Array<Task>;
 export type Users = Array<string>;
+export type TableHead = {
+    text: string;
+    style: string;
+};
+export type TableHeadings = TableHead[];

@@ -26,7 +26,7 @@ export const addNewUserToStorage = (user: string) => {
 export const findTasks = (user: string) => {
   const data = localStorage.getItem(user) as string;
   console.log(user);
-  let list: Task[] = [];
+  let list: Task[] | null = null;
   if (data !== null) {
     list = JSON.parse(data);
   }

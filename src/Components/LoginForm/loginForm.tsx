@@ -53,7 +53,7 @@ export const LoginForm = ({}: Props) => {
       console.log("redirect");
       const destination = `/tasks/${user}`;
 
-      navigate(`${destination}`);
+      navigate(`${destination}`, { replace: true });
     } else {
       const error = "No such user found. Try again.";
       setErrorName(error);

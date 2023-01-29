@@ -12,20 +12,13 @@ import { Task, Process, List } from "../../globalTypes";
 
 type Props = {
   logoName: string;
+  loadData: Task[] | null;
 };
 
-export const ContentOfTasks = ({ logoName }: Props) => {
+export const ContentOfTasks = ({ logoName, loadData }: Props) => {
   const [taskName, setTaskName] = useState("");
-  const [listOfTasks, setListOfTasks] = useState<List>([]);
+  const [listOfTasks, setListOfTasks] = useState(loadData);
   const [disableSave, setDisableSave] = useState(true);
-
-  useEffect(() => {
-    const list = findTasks(logoName);
-
-    if (list !== undefined) {
-      setListOfTasks(list);
-    }
-  }, []);
 
   const onNewTask = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -35,12 +28,21 @@ export const ContentOfTasks = ({ logoName }: Props) => {
         status: Process.inprogress,
         created: +new Date(),
       };
+      if (listOfTasks !== null) {
+        const newList: Array<Task> = [...listOfTasks, newTask];
 
-      const newList: Array<Task> = [...listOfTasks, newTask];
-      setListOfTasks(newList);
-      saveInStorage(logoName, newList);
-      setTaskName("");
-      setDisableSave(false);
+        setListOfTasks(newList);
+        saveInStorage(logoName, newList);
+        setTaskName("");
+        setDisableSave(false);
+      } else {
+        const newList: Array<Task> = [newTask];
+
+        setListOfTasks(newList);
+        saveInStorage(logoName, newList);
+        setTaskName("");
+        setDisableSave(false);
+      }
     }
   };
 
@@ -85,11 +87,13 @@ export const ContentOfTasks = ({ logoName }: Props) => {
     e: React.MouseEvent<HTMLButtonElement>,
     created: number
   ) => {
-    const newTaskList: Task[] = listOfTasks.filter(
-      (task: Task) => task.created !== created
-    );
-    saveInStorage(logoName, newTaskList);
-    setListOfTasks(newTaskList);
+    if (listOfTasks !== null) {
+      const newTaskList: Task[] = listOfTasks.filter(
+        (task: Task) => task.created !== created
+      );
+      saveInStorage(logoName, newTaskList);
+      setListOfTasks(newTaskList);
+    }
   };
 
   const onChangeStatus = (
@@ -97,16 +101,22 @@ export const ContentOfTasks = ({ logoName }: Props) => {
     stat: string,
     id: number
   ) => {
-    const newTaskList = listOfTasks.map((task) => {
-      if (task.created !== id) return task;
-      else {
-        task.status === Process.inprogress;
-        return { text: task.text, created: task.created, status: Process.done };
-      }
-    });
+    if (listOfTasks !== null) {
+      const newTaskList = listOfTasks.map((task) => {
+        if (task.created !== id) return task;
+        else {
+          task.status === Process.inprogress;
+          return {
+            text: task.text,
+            created: task.created,
+            status: Process.done,
+          };
+        }
+      });
 
-    setListOfTasks(newTaskList);
-    saveInStorage(logoName, newTaskList);
+      setListOfTasks(newTaskList);
+      saveInStorage(logoName, newTaskList);
+    }
   };
 
   return (
