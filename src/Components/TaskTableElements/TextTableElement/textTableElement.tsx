@@ -43,7 +43,7 @@ export const TextTableElement = ({
 
   return (
     <AppButton
-      style="block w-full h-full py-6 text-left"
+      style="block w-full h-full py-6 text-left hover:text-red-500"
       onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
         handleClickChangeTask(e, task)
       }

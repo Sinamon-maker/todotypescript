@@ -72,7 +72,7 @@ export const TableBody = () => {
             key={task.created}
             className=" border-b border-gray-700 dark:border-gray-700 relative"
           >
-            <TableElementContainer style="w-6 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">
+            <TableElementContainer style="w-6 sm: w-1/12  pl-2 sm:px-6 py-3 text-gray-400 text-center">
               {index + 1}
             </TableElementContainer>
 
@@ -90,7 +90,7 @@ export const TableBody = () => {
               />
             </TableElementContainer>
 
-            <TableElementContainer style="w-1/4 sm:w-1/6 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
+            <TableElementContainer style="w-1/4 sm:w-1/4 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
               <ActionsTableElement
                 task={task}
                 id={idTaskToEdit}

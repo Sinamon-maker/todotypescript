@@ -5,11 +5,11 @@ import { TableBody } from "../TableBody/tableBody";
 import { Task, TableHead, TableHeadings } from "../../globalTypes";
 
 const headings: TableHead[] = [
-  { text: "", style: "w-8 sm: w-1/6  pl-2 sm:px-6 py-3" },
+  { text: "", style: "w-1/12 sm: w-1/12  pl-2 sm:px-6 py-3" },
   { text: "Product name", style: "px-6 py-3 bg-gray-50 dark:bg-gray-800" },
   {
     text: "Actions",
-    style: "w-1/4 sm:w-1/6 px-2 py-3 bg-gray-50 dark:bg-gray-800",
+    style: "w-1/4 sm:w-1/4 px-2 py-3 bg-gray-50 dark:bg-gray-800",
   },
 ];
 
