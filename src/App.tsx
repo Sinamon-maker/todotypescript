@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { KeyboardEvent } from "react";
 
-import { TaskContext, Cont } from "./Context/taskContext";
+import { UserContext, ContextUser } from "./Context/userContext";
 
 import { Header } from "./Components/Header/header";
 import { ContentOfTasks } from "./Components/ContentOfTasks/contentOfTasks";
@@ -14,6 +14,7 @@ import {
   findTasks,
   saveInStorage,
   addNewUserToStorage,
+  setCurrentUserToStore,
 } from "./utils";
 
 import { Task, Process, Users } from "./globalTypes";
@@ -25,47 +26,23 @@ enum TypeForm {
   register = "register",
 }
 
-type List = Array<Task>;
-
 function App() {
   const [userName, setUserName] = useState("");
   const [logoName, setLogoName] = useState("");
   const [errorName, setErrorName] = useState("");
-  const [taskName, setTaskName] = useState("");
   const [typeForm, setTypeForm] = useState<TypeForm | null>(null);
   const [isTasksShow, setTasksShow] = useState(false);
-  const [listOfTasks, setListOfTasks] = useState<List>([]);
   const [disableRegister, setDisableRegister] = useState(true);
   const [disableLogin, setDisableLogin] = useState(true);
 
-  const [disableSave, setDisableSave] = useState(true);
+  useEffect(() => {
+    const currentUser = localStorage.getItem("currentUser");
 
-  const onNewTask = (e: React.FormEvent<EventTarget>) => {
-    e.preventDefault();
-    if (taskName.length > 2) {
-      const newTask = {
-        text: taskName,
-        status: Process.inprogress,
-        created: +new Date(),
-      };
-
-      const newList: Array<Task> = [...listOfTasks, newTask];
-      setListOfTasks(newList);
-      saveInStorage(logoName, newList);
-      setTaskName("");
-      setDisableSave(false);
+    if (currentUser !== null) {
+      setLogoName(currentUser);
+      setTasksShow(true);
     }
-  };
-
-  const onChangeTask = (text: string, id: number) => {
-    console.log(text, id);
-  };
-
-  const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === "Enter") {
-      onNewTask(e);
-    }
-  };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<EventTarget>) => {
     if (e.target instanceof HTMLInputElement) {
@@ -92,15 +69,6 @@ function App() {
           setDisableRegister(true);
         }
       }
-      if (e.target.name === "task") {
-        setTaskName(e.target.value);
-        if (e.target.value.length > 2) {
-          setDisableSave(false);
-        }
-        if (e.target.value.length < 3) {
-          setDisableSave(true);
-        }
-      }
     }
   };
 
@@ -119,34 +87,8 @@ function App() {
     if (e.currentTarget.name === "logout") {
       setTasksShow(false);
       setLogoName("");
+      localStorage.removeItem("currentUser");
     }
-  };
-
-  const onDeleteClick = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    created: number
-  ) => {
-    const newTaskList: Task[] = listOfTasks.filter(
-      (task: Task) => task.created !== created
-    );
-    saveInStorage(logoName, newTaskList);
-    setListOfTasks(newTaskList);
-  };
-  const onChangeStatus = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    stat: string,
-    id: number
-  ) => {
-    const newTaskList = listOfTasks.map((task) => {
-      if (task.created !== id) return task;
-      else {
-        task.status === Process.inprogress;
-        return { text: task.text, created: task.created, status: Process.done };
-      }
-    });
-
-    setListOfTasks(newTaskList);
-    saveInStorage(logoName, newTaskList);
   };
 
   const onLogin = (e: React.FormEvent<EventTarget>): void => {
@@ -157,9 +99,9 @@ function App() {
     if (user) {
       setTypeForm(null);
       const list: Array<Task> = findTasks(userName);
-      setListOfTasks([...list]);
       setTasksShow(true);
       setLogoName(userName);
+      setCurrentUserToStore(userName);
       setUserName("");
       setDisableLogin(false);
     } else {
@@ -178,6 +120,7 @@ function App() {
       setTypeForm(null);
       addNewUserToStorage(userName);
       setLogoName(userName);
+      setCurrentUserToStore(userName);
       setUserName("");
       setTasksShow(true);
       setDisableRegister(false);
@@ -185,33 +128,23 @@ function App() {
   };
 
   return (
-    <TaskContext.Provider
-      value={{ listOfTasks, onChangeTask, onChangeStatus, onDeleteClick }}
-    >
+    <UserContext.Provider value={logoName}>
       <div className="flex flex-col h-screen">
         <Header handleClick={handleClick} logoName={logoName} />
         <main className="w-full  m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
-          {isTasksShow && (
-            <ContentOfTasks
-              onNewTask={onNewTask}
-              handleChange={handleChange}
-              taskName={taskName}
-              disableSave={disableSave}
-              onPressEnter={onPressEnter}
-            />
-          )}
+          {isTasksShow && <ContentOfTasks logoName={logoName} />}
           {!isTasksShow && <HelloImage />}
-          {typeForm === "login" && (
-            <LoginForm
-              handleClick={handleClick}
-              handleChange={handleChange}
-              onHandleSubmit={onLogin}
-              userName={userName}
-              disableLogin={disableLogin}
-              errorName={errorName}
-            />
-          )}
         </main>
+        {typeForm === "login" && (
+          <LoginForm
+            handleClick={handleClick}
+            handleChange={handleChange}
+            onHandleSubmit={onLogin}
+            userName={userName}
+            disableLogin={disableLogin}
+            errorName={errorName}
+          />
+        )}
         {typeForm === "register" && (
           <RegisterForm
             handleClick={handleClick}
@@ -223,7 +156,7 @@ function App() {
           />
         )}{" "}
       </div>
-    </TaskContext.Provider>
+    </UserContext.Provider>
   );
 }
 

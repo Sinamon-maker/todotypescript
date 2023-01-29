@@ -1,4 +1,5 @@
 import React from "react";
+import { AppButton } from "../../Module/Button/button";
 
 type Props = {
   onNewTask: (e: React.FormEvent<EventTarget>) => void;
@@ -19,7 +20,7 @@ export const NewTaskForm = ({
     <form
       onSubmit={onNewTask}
       className="w-full max-w-xl  rounded px-6 sm:px-10 pt-4 pb-0 "
-      name="onLogin"
+      name="newTask"
     >
       <div className="flex items-center border-b border-teal-500 py-2">
         <input
@@ -34,14 +35,13 @@ export const NewTaskForm = ({
           onKeyDown={onPressEnter}
         />
 
-        <button
-          className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 disabled:opacity-25 text-sm border-4 text-white py-1 px-2 rounded shadow-lg"
+        <AppButton
+          style="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 disabled:opacity-25 text-sm border-4 text-white py-1 px-2 rounded shadow-lg"
           type="submit"
-          name="addTask"
+          nameValue="addTask"
           disabled={disableSave}
-        >
-          Save
-        </button>
+          title="Save"
+        />
       </div>
     </form>
   );

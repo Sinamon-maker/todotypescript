@@ -9,6 +9,8 @@ export type Task = {
   created: number;
 };
 
+export type List = Array<Task>;
+
 export type Users = Array<string>;
 
 export type TableHead = {

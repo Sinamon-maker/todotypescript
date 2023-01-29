@@ -17,7 +17,7 @@ export const addNewUserToStorage = (user: string) => {
   if (data) {
     const res: Users = JSON.parse(data);
     const newUserList: Users = [...res, user];
-    localStorage.setItem("user", JSON.stringify(newUserList));
+    localStorage.setItem("users", JSON.stringify(newUserList));
   } else {
     localStorage.setItem("users", JSON.stringify([user]));
   }
@@ -25,6 +25,7 @@ export const addNewUserToStorage = (user: string) => {
 
 export const findTasks = (user: string) => {
   const data = localStorage.getItem(user) as string;
+  console.log(user);
   let list: Task[] = [];
   if (data !== null) {
     list = JSON.parse(data);
@@ -32,17 +33,16 @@ export const findTasks = (user: string) => {
   return list;
 };
 
-export const saveTasks = (user: string, tasks: Array<Task>) => {
-  const data = JSON.stringify(tasks);
-  localStorage.setItem(user, data);
-};
-
 export const deleteTask = (user: string, list: Task[]) => {
   const data = JSON.stringify(list);
   localStorage.setItem(user, data);
 };
 
-export const saveInStorage = (user: string, list: Task[]) => {
+export const saveInStorage = <T,>(user: string, list: T[]) => {
   const data = JSON.stringify(list);
   localStorage.setItem(user, data);
+};
+
+export const setCurrentUserToStore = (user: string) => {
+  localStorage.setItem("currentUser", user);
 };
