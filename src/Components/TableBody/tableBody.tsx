@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
 
-import IconDone from "../../images/check-mark-line-icon.svg";
 import { TaskContext } from "../../Context/taskContext";
 import { TextTableElement } from "../TaskTableElements/TextTableElement/textTableElement";
 import { TableElementContainer } from "../../Module/TableElementContainer/tableElementContainer";
 import { Task } from "../../globalTypes";
-import { StatusTableElement } from "../TaskTableElements/StatusTableElement/statusTableElement";
-import { AppButton } from "../../Module/Button/button";
+import { ActionsTableElement } from "../TaskTableElements/ActionsTableElement/actionsTableElement";
 
 export const TableBody = () => {
   const { listOfTasks, onChangeTask, onChangeStatus, onDeleteClick } =
@@ -68,12 +66,16 @@ export const TableBody = () => {
 
   return (
     <tbody ref={refWrap}>
-      {list.map((task) => {
+      {list.map((task, index) => {
         return (
           <tr
             key={task.created}
             className=" border-b border-gray-700 dark:border-gray-700 relative"
           >
+            <TableElementContainer style="w-6 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">
+              {index + 1}
+            </TableElementContainer>
+
             <TableElementContainer
               style={
                 "whitespace-normal pl-6 pr-2 py-2  sm:py-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-white dark:bg-gray-800 rounded"
@@ -87,33 +89,16 @@ export const TableBody = () => {
                 id={idTaskToEdit}
               />
             </TableElementContainer>
-            <TableElementContainer style="w-8 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">
-              <StatusTableElement
+
+            <TableElementContainer style="w-1/4 sm:w-1/6 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
+              <ActionsTableElement
                 task={task}
                 id={idTaskToEdit}
                 onChangeStatus={onChangeStatus}
                 onSaveEditTask={onSaveEditTask}
+                onDeleteClick={onDeleteClick}
+                canselEditTask={canselEditTask}
               />
-            </TableElementContainer>
-            <TableElementContainer style="w-1/4 sm:w-1/6 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
-              {task.created !== idTaskToEdit && (
-                <AppButton
-                  style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
-                  nameValue="deleteTask"
-                  title="Delete"
-                  onClick={(e) => onDeleteClick(e, task.created)}
-                />
-              )}
-
-              {task.created === idTaskToEdit && (
-                <AppButton
-                  style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
-                  type="button"
-                  nameValue="canselEditTask"
-                  onClick={(e) => canselEditTask(e)}
-                  title="Cansel"
-                />
-              )}
             </TableElementContainer>
           </tr>
         );

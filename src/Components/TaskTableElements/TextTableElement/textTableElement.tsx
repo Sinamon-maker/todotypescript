@@ -23,7 +23,9 @@ export const TextTableElement = ({
 }: Props) => {
   if (task.status === "done") {
     return (
-      <span className="block w-full h-full py-6 text-left">{task.text}</span>
+      <span className="block w-full h-full py-6 text-left line-through">
+        {task.text}
+      </span>
     );
   }
 
