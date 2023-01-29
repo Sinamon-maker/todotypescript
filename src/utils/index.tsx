@@ -46,3 +46,7 @@ export const saveInStorage = <T,>(user: string, list: T[]) => {
 export const setCurrentUserToStore = (user: string) => {
   localStorage.setItem("currentUser", user);
 };
+
+export const removeCurrentUserFromStore = () => {
+  localStorage.removeItem("currentUser");
+};

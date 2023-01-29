@@ -1,30 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { AppButton } from "../../Module/Button/button";
-import { ModalContainer } from "../../Module/ModuleContainer/modalContainer";
+import {
+  findUser,
+  setCurrentUserToStore,
+  addNewUserToStorage,
+} from "../../utils";
 import { Error } from "../Error/error";
 
-type Props = {
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  handleChange: (e: React.ChangeEvent<EventTarget>) => void;
-  onHandleSubmit: (e: React.FormEvent<EventTarget>) => void;
-  userName: string;
-  disableRegister: boolean;
-  errorName: string;
-};
+type Props = {};
 
-export const RegisterForm = ({
-  handleClick,
-  handleChange,
-  onHandleSubmit,
-  userName,
-  disableRegister,
-  errorName,
-}: Props) => {
+export const RegisterForm = ({}: Props) => {
+  const [userName, setUserName] = useState("");
+  const [errorName, setErrorName] = useState("");
+
+  const navigate = useNavigate();
+
+  const [disableRegister, setDisableRegister] = useState(true);
+
+  const handleChange = (e: React.ChangeEvent<EventTarget>) => {
+    if (e.target instanceof HTMLInputElement) {
+      if (e.target.name === "register") {
+        setErrorName("");
+        const newValue = e.target.value;
+        setUserName(newValue);
+        if (e.target.value.length > 2) {
+          setDisableRegister(false);
+        }
+        if (e.target.value.length < 3) {
+          setDisableRegister(true);
+        }
+      }
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.name === "cansel") {
+      setUserName("");
+      setErrorName("");
+
+      navigate("/");
+    }
+  };
+
+  const onRegister = (e: React.FormEvent<EventTarget>): void => {
+    e.preventDefault();
+    const user = findUser(userName);
+    if (user) {
+      const error = "User with this name also exists try another name";
+      setErrorName(error);
+    } else {
+      const userId = userName;
+      addNewUserToStorage(userName);
+
+      setCurrentUserToStore(userName);
+      setUserName("");
+
+      setDisableRegister(false);
+      console.log("new user", userId);
+      const destination = `/tasks/${userId}`;
+
+      navigate(`${destination}`);
+    }
+  };
+
   return (
-    <ModalContainer>
+    <div className="w-128">
       <form
-        onSubmit={onHandleSubmit}
-        className="w-full max-w-sm bg-gray-800 rounded p-10 pb-8 shadow-lg"
+        onSubmit={onRegister}
+        className="w-full max-w-md m-auto bg-gray-800/75 rounded p-10 pb-8 shadow-lg"
         name="onRegister"
       >
         <div className="flex items-center border-b border-teal-500 py-2">
@@ -56,6 +101,6 @@ export const RegisterForm = ({
         </div>
         {{ errorName } && <Error message={errorName} />}
       </form>
-    </ModalContainer>
+    </div>
   );
 };

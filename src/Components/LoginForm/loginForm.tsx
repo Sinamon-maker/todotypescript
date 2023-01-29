@@ -1,30 +1,70 @@
-import React from "react";
-import { ModalContainer } from "../../Module/ModuleContainer/modalContainer";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Error } from "../Error/error";
 import { AppButton } from "../../Module/Button/button";
 
-type Props = {
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  handleChange: (e: React.ChangeEvent<EventTarget>) => void;
-  onHandleSubmit: (e: React.FormEvent<EventTarget>) => void;
-  userName: string;
-  disableLogin: boolean;
-  errorName: string;
-};
+import { findUser, setCurrentUserToStore } from "../../utils";
 
-export const LoginForm = ({
-  handleClick,
-  handleChange,
-  onHandleSubmit,
-  userName,
-  disableLogin,
-  errorName,
-}: Props) => {
+type Props = {};
+
+export const LoginForm = ({}: Props) => {
+  const [userName, setUserName] = useState("");
+  const [errorName, setErrorName] = useState("");
+  const [disableLogin, setDisableLogin] = useState(true);
+
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<EventTarget>) => {
+    if (e.target instanceof HTMLInputElement) {
+      if (e.target.name === "login") {
+        setErrorName("");
+        const newValue = e.target.value;
+        setUserName(newValue);
+
+        if (e.target.value.length > 2) {
+          setDisableLogin(false);
+        }
+        if (e.target.value.length < 3) {
+          setDisableLogin(true);
+        }
+      }
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.name === "cansel") {
+      setUserName("");
+      setErrorName("");
+      navigate("/");
+    }
+  };
+
+  const onLogin = (e: React.FormEvent<EventTarget>): void => {
+    e.preventDefault();
+
+    const user = findUser(userName);
+
+    if (user) {
+      setCurrentUserToStore(userName);
+      setUserName("");
+      setDisableLogin(false);
+      // redirect to /:userId
+      console.log("redirect");
+      const destination = `/tasks/${user}`;
+
+      navigate(`${destination}`);
+    } else {
+      const error = "No such user found. Try again.";
+      setErrorName(error);
+    }
+  };
+
   return (
-    <ModalContainer>
+    <div className="w-128">
       <form
-        onSubmit={onHandleSubmit}
-        className="w-full max-w-sm bg-gray-800 rounded p-10 pb-8 shadow-lg"
+        onSubmit={onLogin}
+        className="w-full max-w-md m-auto bg-gray-800/75 rounded p-10 pb-8 shadow-lg"
         name="onLogin"
       >
         <div className="flex items-center border-b border-teal-500 py-2">
@@ -55,6 +95,6 @@ export const LoginForm = ({
         </div>
         <Error message={errorName} />
       </form>
-    </ModalContainer>
+    </div>
   );
 };
