@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TableHead, TableHeadings } from "../../globalTypes";
+import { TableHead } from "../../globalTypes";
 
 type Props = {
   headings: TableHead[];
@@ -10,10 +10,10 @@ export const TableHeading = ({ headings }: Props) => {
   return (
     <thead>
       <tr>
-        {headings.map((heading) => {
+        {headings.map((heading, index) => {
           return (
             <th
-              key={Math.random() * 100}
+              key={index + 56788987}
               scope="col"
               className={`${heading.style}`}
             >

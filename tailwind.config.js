@@ -7,6 +7,10 @@ module.exports = {
         "hello-pattern":
           "url('./images/pramod-tiwari-KXtBffEKYZ4-unsplash.jpg')",
       },
+      width: {
+        128: "32rem",
+        9: "90%",
+      },
     },
     container: {
       center: true,

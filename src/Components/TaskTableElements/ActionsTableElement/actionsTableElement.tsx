@@ -2,7 +2,6 @@ import React from "react";
 
 import { AppButton } from "../../../Module/Button/button";
 
-import IconDone from "../../../images/check-mark-line-icon.svg";
 import { Task } from "../../../globalTypes";
 
 type Props = {
@@ -26,9 +25,11 @@ export const ActionsTableElement = ({
   onDeleteClick,
   canselEditTask,
 }: Props) => {
+  const disableFinished = task.status === "done" ? true : false;
+
   if (task.created === id) {
     return (
-      <>
+      <span className="block w-full h-full flex flex-col sm:flex-row gap-2 justify-between">
         <AppButton
           style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
           nameValue="=saveEditTask"
@@ -42,24 +43,25 @@ export const ActionsTableElement = ({
           onClick={(e) => canselEditTask(e)}
           title="Cansel"
         />
-      </>
+      </span>
     );
   }
 
   return (
-    <>
+    <span className="block w-full h-full flex flex-col sm:flex-row gap-2 justify-between">
       <AppButton
-        style="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 block self-center border-2 border-solid border-transparent  hover:border-white rounded-lg dark:text-white dark:bg-gray-800"
+        style="flex-shrink-0 block self-center bg-teal-500 disabled:opacity-25 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
         nameValue="inProcess"
         onClick={(e) => onChangeStatus(e, task.status, task.created)}
-        title="..."
+        title="Finish"
+        disabled={disableFinished}
       />
       <AppButton
-        style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
+        style="flex-shrink-0 block self-center bg-teal-500 disabled:opacity-25 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
         nameValue="deleteTask"
         title="Delete"
         onClick={(e) => onDeleteClick(e, task.created)}
       />
-    </>
+    </span>
   );
 };

@@ -23,7 +23,6 @@ export const TableBody = () => {
           return;
         }
         canselEditTask(ev);
-        console.log("2", el);
       }
     };
 
@@ -38,7 +37,6 @@ export const TableBody = () => {
 
   const onChange = (e: React.ChangeEvent<EventTarget>) => {
     if (e.target instanceof HTMLTextAreaElement) {
-      console.log("textarea");
       const newValue = e.target.value;
       setValueTask(newValue);
     }
@@ -53,7 +51,6 @@ export const TableBody = () => {
   };
 
   const canselEditTask = (e: React.MouseEvent<HTMLElement>) => {
-    console.log("canselEdit");
     setIdTaskToEdit(0);
     setValueTask("");
   };
@@ -72,13 +69,13 @@ export const TableBody = () => {
             key={task.created}
             className=" border-b border-gray-700 dark:border-gray-700 relative"
           >
-            <TableElementContainer style="w-6 sm: w-1/6  pl-2 sm:px-6 py-3 text-gray-400 text-center">
+            <TableElementContainer style="w-6 sm: w-1/12  pl-2 sm:px-6 py-3 text-gray-400 text-center">
               {index + 1}
             </TableElementContainer>
 
             <TableElementContainer
               style={
-                "whitespace-normal pl-6 pr-2 py-2  sm:py-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-white dark:bg-gray-800 rounded"
+                "whitespace-normal pl-6 pr-2 pt-1 pb-0.5  sm:pt-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-slate-300 dark:bg-gray-800 rounded"
               }
             >
               <TextTableElement
@@ -90,7 +87,7 @@ export const TableBody = () => {
               />
             </TableElementContainer>
 
-            <TableElementContainer style="w-1/4 sm:w-1/6 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-white dark:bg-gray-800">
+            <TableElementContainer style="w-1/4 sm:2/4 md:w-1/4 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-slate-300 dark:bg-gray-800">
               <ActionsTableElement
                 task={task}
                 id={idTaskToEdit}

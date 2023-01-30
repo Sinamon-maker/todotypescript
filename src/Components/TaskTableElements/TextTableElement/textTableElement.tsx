@@ -23,7 +23,7 @@ export const TextTableElement = ({
 }: Props) => {
   if (task.status === "done") {
     return (
-      <span className="block w-full h-full py-6 text-left line-through">
+      <span className="block w-full h-full py-2 text-left line-through text-slate-400">
         {task.text}
       </span>
     );
@@ -43,7 +43,7 @@ export const TextTableElement = ({
 
   return (
     <AppButton
-      style="block w-full h-full py-6 text-left"
+      style="block w-full h-full py-2 text-left hover:text-red-500"
       onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
         handleClickChangeTask(e, task)
       }
