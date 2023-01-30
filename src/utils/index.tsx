@@ -3,7 +3,7 @@ import { Task, Users } from "../globalTypes";
 export const findUser = (user: string): string | null => {
   let data = localStorage.getItem("users");
   let result = null;
-  console.log("find users", data);
+
   if (data !== null) {
     let users: Users = JSON.parse(data);
     result = users.find((key) => key === user) as string;
@@ -25,7 +25,7 @@ export const addNewUserToStorage = (user: string) => {
 
 export const findTasks = (user: string) => {
   const data = localStorage.getItem(user) as string;
-  console.log(user);
+
   let list: Task[] | null = null;
   if (data !== null) {
     list = JSON.parse(data);

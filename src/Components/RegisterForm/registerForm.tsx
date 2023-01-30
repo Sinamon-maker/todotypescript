@@ -58,7 +58,7 @@ export const RegisterForm = ({}: Props) => {
       setUserName("");
 
       setDisableRegister(false);
-      console.log("new user", userId);
+
       const destination = `/tasks/${userId}`;
 
       navigate(`${destination}`, { replace: true });

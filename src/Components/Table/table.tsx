@@ -9,7 +9,7 @@ const headings: TableHead[] = [
   { text: "Product name", style: "px-6 py-3 bg-gray-50 dark:bg-gray-800" },
   {
     text: "Actions",
-    style: "w-1/4 sm:w-1/4 px-2 py-3 bg-gray-50 dark:bg-gray-800",
+    style: "w-1/4 sm:w-2/6 md:w-1/4 px-2 py-3 bg-gray-50 dark:bg-gray-800",
   },
 ];
 

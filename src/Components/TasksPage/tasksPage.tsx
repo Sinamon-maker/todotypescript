@@ -25,7 +25,6 @@ function TasksPage() {
 
   const params = useParams<QuizParams>();
 
-  console.log("userId", params);
   if (!params.userId) return <div>halo</div>;
 
   useEffect(() => {

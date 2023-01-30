@@ -26,10 +26,10 @@ export const ActionsTableElement = ({
   canselEditTask,
 }: Props) => {
   const disableFinished = task.status === "done" ? true : false;
-  console.log(disableFinished);
+
   if (task.created === id) {
     return (
-      <span className="block w-full h-full flex flex-col sm:flex-row gap-2">
+      <span className="block w-full h-full flex flex-col sm:flex-row gap-2 justify-between">
         <AppButton
           style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
           nameValue="=saveEditTask"
@@ -48,7 +48,7 @@ export const ActionsTableElement = ({
   }
 
   return (
-    <span className="block w-full h-full flex flex-col sm:flex-row gap-2">
+    <span className="block w-full h-full flex flex-col sm:flex-row gap-2 justify-between">
       <AppButton
         style="flex-shrink-0 block self-center bg-teal-500 disabled:opacity-25 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
         nameValue="inProcess"

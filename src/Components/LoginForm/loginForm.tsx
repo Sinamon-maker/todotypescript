@@ -49,8 +49,7 @@ export const LoginForm = ({}: Props) => {
       setCurrentUserToStore(userName);
       setUserName("");
       setDisableLogin(false);
-      // redirect to /:userId
-      console.log("redirect");
+
       const destination = `/tasks/${user}`;
 
       navigate(`${destination}`, { replace: true });

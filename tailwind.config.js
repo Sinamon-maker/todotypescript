@@ -9,6 +9,7 @@ module.exports = {
       },
       width: {
         128: "32rem",
+        9: "90%",
       },
     },
     container: {

@@ -47,7 +47,6 @@ export const ContentOfTasks = ({ logoName, loadData }: Props) => {
   };
 
   const onChangeTask = (text: string, id: number) => {
-    console.log(text, id);
     const list = findTasks(logoName);
 
     if (list !== null) {
