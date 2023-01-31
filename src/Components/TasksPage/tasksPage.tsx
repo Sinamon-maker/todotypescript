@@ -15,6 +15,7 @@ type QuizParams = {
 
 import { removeCurrentUserFromStore } from "../../utils";
 import { TaskContext } from "../../Context/taskContext";
+import { ModalDelete } from "../ModalDeleteTask/modalDeleteTask";
 
 function TasksPage() {
   const navigate = useNavigate();

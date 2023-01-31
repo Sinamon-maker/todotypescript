@@ -9,6 +9,7 @@ import { TaskContext, Cont } from "../../Context/taskContext";
 import { findTasks, saveInStorage } from "../../utils";
 
 import { Task, Process, List } from "../../globalTypes";
+import { ModalDelete } from "../ModalDeleteTask/modalDeleteTask";
 
 type Props = {
   logoName: string;
@@ -19,6 +20,7 @@ export const ContentOfTasks = ({ logoName, loadData }: Props) => {
   const [taskName, setTaskName] = useState("");
   const [listOfTasks, setListOfTasks] = useState(loadData);
   const [disableSave, setDisableSave] = useState(true);
+  const [idTaskToDelete, setIdTaskToDelete] = useState(0);
 
   const onNewTask = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -82,16 +84,14 @@ export const ContentOfTasks = ({ logoName, loadData }: Props) => {
     }
   };
 
-  const onDeleteClick = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    created: number
-  ) => {
+  const onDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (listOfTasks !== null) {
       const newTaskList: Task[] = listOfTasks.filter(
-        (task: Task) => task.created !== created
+        (task: Task) => task.created !== idTaskToDelete
       );
       saveInStorage(logoName, newTaskList);
       setListOfTasks(newTaskList);
+      setIdTaskToDelete(0);
     }
   };
 
@@ -118,9 +118,20 @@ export const ContentOfTasks = ({ logoName, loadData }: Props) => {
     }
   };
 
+  const canselDeleteTask = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIdTaskToDelete(0);
+  };
+
+  const onSettingDeleteId = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    val: number
+  ) => {
+    setIdTaskToDelete(val);
+  };
+
   return (
     <TaskContext.Provider
-      value={{ listOfTasks, onChangeStatus, onChangeTask, onDeleteClick }}
+      value={{ listOfTasks, onChangeStatus, onChangeTask, onSettingDeleteId }}
     >
       <Container>
         <NewTaskForm
@@ -132,6 +143,13 @@ export const ContentOfTasks = ({ logoName, loadData }: Props) => {
         />
         <Table />
       </Container>
+      {idTaskToDelete !== 0 && (
+        <ModalDelete
+          id={idTaskToDelete}
+          deleteTask={onDeleteClick}
+          canselDeleteTask={canselDeleteTask}
+        />
+      )}
     </TaskContext.Provider>
   );
 };

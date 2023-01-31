@@ -9,7 +9,10 @@ type TaskContext = {
     stat: string,
     id: number
   ) => void;
-  onDeleteClick: (e: React.MouseEvent<HTMLButtonElement>, val: number) => void;
+  onSettingDeleteId: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    val: number
+  ) => void;
 };
 
 export type Cont = TaskContext | null;
@@ -18,5 +21,5 @@ export const TaskContext = React.createContext<TaskContext>({
   listOfTasks: null,
   onChangeTask: () => {},
   onChangeStatus: () => {},
-  onDeleteClick: () => {},
+  onSettingDeleteId: () => {},
 });

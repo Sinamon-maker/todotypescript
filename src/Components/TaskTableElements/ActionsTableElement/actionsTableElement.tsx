@@ -1,7 +1,8 @@
 import React from "react";
 
 import { AppButton } from "../../../Module/Button/button";
-import ImageDone from "../../../images/check-mark-line-icon.svg";
+import ImageDone from "../../../images/check.svg";
+import Cansel from "../../../images/cansel.svg";
 
 import { Task } from "../../../globalTypes";
 
@@ -16,6 +17,7 @@ type Props = {
   onSaveEditTask: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDeleteClick: (e: React.MouseEvent<HTMLButtonElement>, val: number) => void;
   canselEditTask: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  cancelEditBeforeDelete: () => void;
 };
 
 export const ActionsTableElement = ({
@@ -23,10 +25,16 @@ export const ActionsTableElement = ({
   id,
   onChangeStatus,
   onSaveEditTask,
-  onDeleteClick,
+  cancelEditBeforeDelete,
   canselEditTask,
+  onDeleteClick,
 }: Props) => {
   const disableFinished = task.status === "done" ? true : false;
+
+  const delClick = (e: React.MouseEvent<HTMLButtonElement>, val: number) => {
+    cancelEditBeforeDelete();
+    onDeleteClick(e, val);
+  };
 
   if (task.created === id) {
     return (
@@ -38,11 +46,12 @@ export const ActionsTableElement = ({
           onClick={(e) => onSaveEditTask(e)}
         />
         <AppButton
-          style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
+          style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-teal-500 text-teal-500  hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4"
           type="button"
           nameValue="canselEditTask"
+          title=""
           onClick={(e) => canselEditTask(e)}
-          title="Cansel"
+          Icon={<Cansel fill="white" className="w-4 h-4 sm:w-6 sm:g-6" />}
         />
       </span>
     );
@@ -57,7 +66,7 @@ export const ActionsTableElement = ({
           onClick={(e) => onChangeStatus(e, task.status, task.created)}
           title=""
           disabled={disableFinished}
-          Icon={<ImageDone fill="white" className="w-4 h-4 sm:w-6 sm:g-6" />}
+          Icon={<ImageDone className="w-4 h-4 sm:w-6 sm:g-6" />}
         />
       ) : (
         <AppButton
@@ -72,7 +81,7 @@ export const ActionsTableElement = ({
         style="flex-shrink-0 block self-center bg-teal-500 disabled:opacity-25 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
         nameValue="deleteTask"
         title="Delete"
-        onClick={(e) => onDeleteClick(e, task.created)}
+        onClick={(e) => delClick(e, task.created)}
       />
     </span>
   );

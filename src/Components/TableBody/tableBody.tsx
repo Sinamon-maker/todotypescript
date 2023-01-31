@@ -7,7 +7,7 @@ import { Task } from "../../globalTypes";
 import { ActionsTableElement } from "../TaskTableElements/ActionsTableElement/actionsTableElement";
 
 export const TableBody = () => {
-  const { listOfTasks, onChangeTask, onChangeStatus, onDeleteClick } =
+  const { listOfTasks, onChangeTask, onChangeStatus, onSettingDeleteId } =
     useContext(TaskContext);
 
   const [valueTask, setValueTask] = useState("");
@@ -60,6 +60,12 @@ export const TableBody = () => {
     setIdTaskToEdit(0);
     setValueTask("");
   };
+  const cancelEditBeforeDelete = () => {
+    if (idTaskToEdit !== 0) {
+      setIdTaskToEdit(0);
+      setValueTask("");
+    }
+  };
 
   return (
     <tbody ref={refWrap}>
@@ -93,8 +99,9 @@ export const TableBody = () => {
                 id={idTaskToEdit}
                 onChangeStatus={onChangeStatus}
                 onSaveEditTask={onSaveEditTask}
-                onDeleteClick={onDeleteClick}
+                onDeleteClick={onSettingDeleteId}
                 canselEditTask={canselEditTask}
+                cancelEditBeforeDelete={cancelEditBeforeDelete}
               />
             </TableElementContainer>
           </tr>
