@@ -91,7 +91,7 @@ export const TaskTableRaw = <
 
       <TableElementContainer
         style={
-          "whitespace-normal pl-6 pr-2 pt-1 pb-0.5  sm:pt-4 sm:pr-6 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-slate-300 dark:bg-gray-800 rounded"
+          "whitespace-normal pl-6 pr-2 pt-1 pb-0.5  sm:pt-4 sm:pr-2 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-slate-300 dark:bg-gray-800 rounded"
         }
       >
         <TextTableElement

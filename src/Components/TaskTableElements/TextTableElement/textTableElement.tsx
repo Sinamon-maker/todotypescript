@@ -33,7 +33,7 @@ export const TextTableElement = ({
     return (
       <textarea
         id="message"
-        rows={3}
+        rows={2}
         className="block p-2.5 w-full text-gray-900"
         value={valueTask}
         onChange={onChange}
