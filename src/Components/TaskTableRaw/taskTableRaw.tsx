@@ -5,14 +5,23 @@ import { TextTableElement } from "../TaskTableElements/TextTableElement/textTabl
 import { TableElementContainer } from "../../Module/TableElementContainer/tableElementContainer";
 import { ActionsTableElement } from "../TaskTableElements/ActionsTableElement/actionsTableElement";
 
-import { Task } from "../../globalTypes";
+import { Task, Process } from "../../globalTypes";
 
-type Props = {
-  task: Task;
+//type Props = {
+//  task: Task;
+//  index: number;
+//};
+interface Props<ObjectType> {
+  item: ObjectType;
   index: number;
-};
+}
 
-export const TaskTableRaw = ({ task, index }: Props) => {
+export const TaskTableRaw = <
+  ObjectType extends { text: string; status: Process; created: number }
+>({
+  item,
+  index,
+}: Props<ObjectType>) => {
   const { onChangeTask, onChangeStatus, onSettingDeleteId } =
     useContext(TaskContext);
 
@@ -73,7 +82,7 @@ export const TaskTableRaw = ({ task, index }: Props) => {
   return (
     <tr
       ref={refWrap}
-      key={task.created}
+      key={item.created}
       className=" border-b border-gray-700 dark:border-gray-700 relative"
     >
       <TableElementContainer style="w-6 sm: w-1/12  pl-2 sm:px-6 py-3 text-gray-400 text-center">
@@ -86,7 +95,7 @@ export const TaskTableRaw = ({ task, index }: Props) => {
         }
       >
         <TextTableElement
-          task={task}
+          task={item}
           valueTask={valueTask}
           onChange={onChange}
           handleClickChangeTask={handleClickChangeTask}
@@ -96,7 +105,7 @@ export const TaskTableRaw = ({ task, index }: Props) => {
 
       <TableElementContainer style="w-1/4 sm:2/4 md:w-1/4 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-slate-300 dark:bg-gray-800">
         <ActionsTableElement
-          task={task}
+          task={item}
           id={idTaskToEdit}
           onChangeStatus={onChangeStatus}
           onSaveEditTask={onSaveEditTask}

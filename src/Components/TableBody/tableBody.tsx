@@ -1,17 +1,22 @@
 import React, { useContext, useState } from "react";
 
-import { TaskContext } from "../../Context/taskContext";
 import { TaskTableRaw } from "../TaskTableRaw/taskTableRaw";
 
-export const TableBody = () => {
-  const { listOfTasks } = useContext(TaskContext);
+import { Process } from "../../globalTypes";
 
-  const list = listOfTasks === null ? [] : listOfTasks;
+interface Items<ObjectType> {
+  list: ObjectType[];
+}
 
+export const TableBody = <
+  ObjectType extends { text: string; status: Process; created: number }
+>({
+  list,
+}: Items<ObjectType>) => {
   return (
     <tbody>
-      {list.map((task, index) => {
-        return <TaskTableRaw key={index} task={task} index={index} />;
+      {list.map((item, index) => {
+        return <TaskTableRaw key={item.created} item={item} index={index} />;
       })}
     </tbody>
   );

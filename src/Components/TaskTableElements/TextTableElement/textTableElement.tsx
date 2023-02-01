@@ -3,7 +3,7 @@ import React from "react";
 import { AppButton } from "../../../Module/Button/button";
 import { Task } from "../../../globalTypes";
 
-type Props = {
+interface Props {
   task: Task;
   valueTask: string;
   id: number;
@@ -12,7 +12,7 @@ type Props = {
     e: React.MouseEvent<HTMLButtonElement>,
     val: Task
   ) => void;
-};
+}
 
 export const TextTableElement = ({
   task,

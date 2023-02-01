@@ -3,11 +3,15 @@ export enum Process {
   done = "done",
 }
 
-export type Task = {
+export interface Items<ObjectType> {
+  list: ObjectType[];
+}
+
+export interface Task {
   text: string;
   status: Process;
   created: number;
-};
+}
 
 export type List = Array<Task>;
 

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TableHeading } from "../../Module/TableHeading/tableHeading";
+import { TaskContext } from "../../Context/taskContext";
 
 import { TableBody } from "../TableBody/tableBody";
 import { Task, TableHead, TableHeadings } from "../../globalTypes";
@@ -14,11 +15,15 @@ const headings: TableHead[] = [
 ];
 
 export const Table = () => {
+  const { listOfTasks } = useContext(TaskContext);
+  const list = listOfTasks === null ? [] : listOfTasks;
+
+  if (list === null) return <div>No Tasks to do</div>;
   return (
     <>
       <table className="table-fixed w-full sm:w-full min-w-fit  text-sm text-left text-blue-600 dark:text-gray-400 rounded shadow-lg">
         <TableHeading headings={headings} />
-        <TableBody />
+        <TableBody list={list} />
       </table>
     </>
   );
