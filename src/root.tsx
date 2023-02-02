@@ -5,10 +5,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Main from "./Main";
-import { ErrorPage } from "./Components/ErrorPage/errorPage";
-import { LoginForm } from "./Components/LoginForm/loginForm";
-import { RegisterForm } from "./Components/RegisterForm/registerForm";
-import TasksPage from "./Components/TasksPage/tasksPage";
+import { ErrorPage } from "./Pages/ErrorPage/errorPage";
+import { LoginForm } from "./Pages/LoginForm/loginForm";
+import { RegisterForm } from "./Pages/RegisterForm/registerForm";
+import TasksPage from "./Pages/TaskPage/tasksPage";
 import { findTasks } from "./utils";
 
 const func = () => {

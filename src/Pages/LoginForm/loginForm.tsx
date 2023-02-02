@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Error } from "../Error/error";
+import { Error } from "../../Components/Error/error";
 import { AppButton } from "../../Module/Button/button";
 
 import { findUser, setCurrentUserToStore } from "../../utils";

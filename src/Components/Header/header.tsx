@@ -1,16 +1,13 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
+import { UserContext } from "../../Context/userContext";
 
 type Props = {
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-
-  logoName: string | "";
 };
 
-export const Header = ({
-  handleClick,
+export const Header = ({ handleClick }: Props) => {
+  const logoName = useContext(UserContext);
 
-  logoName = "",
-}: Props) => {
   return (
     <header className=" bg-gray-800   ">
       <div className="container bg-gray-800 m-auto  flex flex-col sm:flex-row sm:justify-between sm:items-center py-6 pl-8 pr-8 shadow-lg">

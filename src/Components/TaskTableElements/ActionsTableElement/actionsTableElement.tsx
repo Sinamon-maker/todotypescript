@@ -12,30 +12,23 @@ type Props = {
   id: number;
   onChangeStatus: (
     e: React.MouseEvent<HTMLButtonElement>,
-    val1: string,
-    val: number
+    val: number,
+    val2: string
   ) => void;
+  delClick: (e: React.MouseEvent<HTMLButtonElement>, val: number) => void;
+  onClickCanselEditTask: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSaveEditTask: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onDeleteClick: (e: React.MouseEvent<HTMLButtonElement>, val: number) => void;
-  canselEditTask: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  cancelEditBeforeDelete: () => void;
 };
 
 export const ActionsTableElement = ({
   task,
   id,
   onChangeStatus,
+  delClick,
+  onClickCanselEditTask,
   onSaveEditTask,
-  cancelEditBeforeDelete,
-  canselEditTask,
-  onDeleteClick,
 }: Props) => {
   const disableFinished = task.status === "done" ? true : false;
-
-  const delClick = (e: React.MouseEvent<HTMLButtonElement>, val: number) => {
-    cancelEditBeforeDelete();
-    onDeleteClick(e, val);
-  };
 
   if (task.created === id) {
     return (
@@ -45,7 +38,7 @@ export const ActionsTableElement = ({
           type="button"
           nameValue="canselEditTask"
           title=""
-          onClick={(e) => canselEditTask(e)}
+          onClick={(e) => onClickCanselEditTask(e)}
           Icon={<Cansel fill="white" className="w-4 h-4 sm:w-10 sm:h-10" />}
         />
         <AppButton
@@ -64,7 +57,7 @@ export const ActionsTableElement = ({
         <AppButton
           style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-teal-500  hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-gray-800 disabled:border-teal-700"
           nameValue="inProcess"
-          onClick={(e) => onChangeStatus(e, task.status, task.created)}
+          onClick={(e) => onChangeStatus(e, task.created, task.status)}
           title=""
           disabled={disableFinished}
           Icon={<ImageDone className="w-4 h-4 sm:w-10 sm:h-10" />}
@@ -73,7 +66,7 @@ export const ActionsTableElement = ({
         <AppButton
           style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-teal-500 disabled:opacity-5  hover:bg-teal-700 border-teal-500 hover:border-teal-700  text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded-full shadow-lg flex justify-center items-center "
           nameValue="inProcess"
-          onClick={(e) => onChangeStatus(e, task.status, task.created)}
+          onClick={(e) => onChangeStatus(e, task.created, task.status)}
           title=""
           disabled={disableFinished}
         />

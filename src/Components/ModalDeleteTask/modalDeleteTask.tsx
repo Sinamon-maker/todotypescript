@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TaskContext } from "../../Context/taskContext";
 import { AppButton } from "../../Module/Button/button";
 import { ModalContainer } from "../../Module/ModuleContainer/modalContainer";
 
-type Props = {
-  id: number;
-  deleteTask: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  canselDeleteTask: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
+type Props = {};
 
-export const ModalDelete = ({ id, deleteTask, canselDeleteTask }: Props) => {
+export const ModalDelete = () => {
+  const { confirmDeleteClick, canselDeleteTask } = useContext(TaskContext);
+
+  const onConfirmDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    confirmDeleteClick();
+  };
+  const onCanselDeleteTask = (e: React.MouseEvent<HTMLButtonElement>) => {
+    canselDeleteTask();
+  };
+
   return (
     <ModalContainer>
       <div className="w-80  p-4 pb-8 rounded bg-white">
@@ -17,13 +23,13 @@ export const ModalDelete = ({ id, deleteTask, canselDeleteTask }: Props) => {
         <span className="block w-full flex justify-around">
           <AppButton
             style=""
-            onClick={(e) => deleteTask(e)}
+            onClick={(e) => onConfirmDeleteClick(e)}
             title="Yes"
             nameValue="confirmDelete"
           />
           <AppButton
             style=""
-            onClick={(e) => canselDeleteTask(e)}
+            onClick={(e) => onCanselDeleteTask(e)}
             title="No"
             nameValue="canselDelete"
           />

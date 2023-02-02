@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { TaskContext } from "../../Context/taskContext";
+import { UserContext } from "../../Context/userContext";
 import { AppButton } from "../../Module/Button/button";
 
 type Props = {
@@ -9,16 +11,43 @@ type Props = {
   onPressEnter: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
-export const NewTaskForm = ({
-  onNewTask,
-  taskName,
-  handleChange,
-  onPressEnter,
-  disableSave,
-}: Props) => {
+export const NewTaskForm = () => {
+  const [taskName, setTaskName] = useState("");
+  const [disableSave, setDisableSave] = useState(true);
+
+  const { onNewTask } = useContext(TaskContext);
+  const logoName = useContext(UserContext);
+
+  const handleChange = (e: React.ChangeEvent<EventTarget>) => {
+    if (e.target instanceof HTMLInputElement) {
+      const newValue = e.target.value;
+      setTaskName(newValue);
+
+      if (e.target.value.length > 2) {
+        setDisableSave(false);
+      }
+      if (e.target.value.length < 3) {
+        setDisableSave(true);
+      }
+    }
+  };
+
+  const onSubmit = (e: React.FormEvent<EventTarget>): void => {
+    e.preventDefault();
+    onNewTask(taskName);
+    setTaskName("");
+    setDisableSave(true);
+  };
+
+  const onPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === "Enter") {
+      onSubmit(e);
+    }
+  };
+
   return (
     <form
-      onSubmit={onNewTask}
+      onSubmit={(e) => onSubmit(e)}
       className="w-full max-w-xl  rounded px-6 sm:px-10 pt-4 pb-0 "
       name="newTask"
     >

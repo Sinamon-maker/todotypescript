@@ -22,11 +22,11 @@ export const TaskTableRaw = <
   item,
   index,
 }: Props<ObjectType>) => {
-  const { onChangeTask, onChangeStatus, onSettingDeleteId } =
+  const { changeTask, changeStatus, onSettingDeleteId } =
     useContext(TaskContext);
 
+  const [idEdotTask, setIdEditTask] = useState(0);
   const [valueTask, setValueTask] = useState("");
-  const [idTaskToEdit, setIdTaskToEdit] = useState(0);
 
   const refWrap = React.useRef<HTMLTableRowElement>(null);
   React.useEffect(() => {
@@ -37,7 +37,7 @@ export const TaskTableRaw = <
         if (!el || el.contains((ev?.target as Node) || null)) {
           return;
         }
-        canselEditTask(ev);
+        canselEditTask();
       }
     };
 
@@ -48,6 +48,14 @@ export const TaskTableRaw = <
     };
   }, [refWrap]);
 
+  const onChangeStatus = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: number,
+    stat: string
+  ) => {
+    changeStatus(id, stat);
+  };
+
   const onChange = (e: React.ChangeEvent<EventTarget>) => {
     if (e.target instanceof HTMLTextAreaElement) {
       const newValue = e.target.value;
@@ -55,30 +63,42 @@ export const TaskTableRaw = <
     }
   };
 
+  const canselEditTask = () => {
+    setValueTask("");
+    setIdEditTask(0);
+  };
+
   const handleClickChangeTask = (
     e: React.MouseEvent<HTMLButtonElement>,
     task: Task
   ) => {
-    if (task.status !== "done") setIdTaskToEdit(task.created);
+    if (task.status !== "done") setIdEditTask(task.created);
     setValueTask(task.text);
   };
 
-  const canselEditTask = (e: React.MouseEvent<HTMLElement>) => {
-    setIdTaskToEdit(0);
-    setValueTask("");
+  const onClickCanselEditTask = (e: React.MouseEvent<HTMLElement>) => {
+    canselEditTask();
   };
 
   const onSaveEditTask = (e: React.MouseEvent<HTMLButtonElement>) => {
-    onChangeTask(valueTask, idTaskToEdit);
-    setIdTaskToEdit(0);
+    console.log("I try to save task");
+    changeTask(idEdotTask, valueTask);
+    setIdEditTask(0);
     setValueTask("");
   };
+
   const cancelEditBeforeDelete = () => {
-    if (idTaskToEdit !== 0) {
-      setIdTaskToEdit(0);
+    if (idEdotTask !== 0) {
+      setIdEditTask(0);
       setValueTask("");
     }
   };
+
+  const delClick = (e: React.MouseEvent<HTMLButtonElement>, val: number) => {
+    cancelEditBeforeDelete();
+    onSettingDeleteId(val);
+  };
+
   return (
     <tr
       ref={refWrap}
@@ -99,19 +119,18 @@ export const TaskTableRaw = <
           valueTask={valueTask}
           onChange={onChange}
           handleClickChangeTask={handleClickChangeTask}
-          id={idTaskToEdit}
+          id={idEdotTask}
         />
       </TableElementContainer>
 
       <TableElementContainer style="w-1/4 sm:2/4 md:w-1/4 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-slate-300 dark:bg-gray-800">
         <ActionsTableElement
           task={item}
-          id={idTaskToEdit}
+          id={idEdotTask}
           onChangeStatus={onChangeStatus}
           onSaveEditTask={onSaveEditTask}
-          onDeleteClick={onSettingDeleteId}
-          canselEditTask={canselEditTask}
-          cancelEditBeforeDelete={cancelEditBeforeDelete}
+          delClick={delClick}
+          onClickCanselEditTask={onClickCanselEditTask}
         />
       </TableElementContainer>
     </tr>
