@@ -7,7 +7,7 @@ import {
   setCurrentUserToStore,
   addNewUserToStorage,
 } from "../../utils";
-import { Error } from "../Error/error";
+import { Error } from "../../Components/Error/error";
 
 type Props = {};
 

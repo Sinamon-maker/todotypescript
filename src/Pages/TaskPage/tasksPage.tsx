@@ -15,6 +15,7 @@ type QuizParams = {
 
 import { removeCurrentUserFromStore } from "../../utils";
 import { TaskContext } from "../../Context/taskContext";
+import { ModalDelete } from "../../Components/ModalDeleteTask/modalDeleteTask";
 
 function TasksPage() {
   const navigate = useNavigate();
@@ -45,10 +46,8 @@ function TasksPage() {
   return (
     <UserContext.Provider value={logoName}>
       <div className="flex flex-col h-screen">
-        <Header handleClick={logout} logoName={logoName} />
-        <main className="w-full  m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
-          <ContentOfTasks logoName={logoName} loadData={loadData} />
-        </main>
+        <Header handleClick={logout} />
+        <ContentOfTasks loadData={loadData} />
       </div>
     </UserContext.Provider>
   );

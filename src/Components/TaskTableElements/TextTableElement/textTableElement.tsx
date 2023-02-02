@@ -3,7 +3,7 @@ import React from "react";
 import { AppButton } from "../../../Module/Button/button";
 import { Task } from "../../../globalTypes";
 
-type Props = {
+interface Props {
   task: Task;
   valueTask: string;
   id: number;
@@ -12,7 +12,7 @@ type Props = {
     e: React.MouseEvent<HTMLButtonElement>,
     val: Task
   ) => void;
-};
+}
 
 export const TextTableElement = ({
   task,
@@ -33,7 +33,7 @@ export const TextTableElement = ({
     return (
       <textarea
         id="message"
-        rows={3}
+        rows={2}
         className="block p-2.5 w-full text-gray-900"
         value={valueTask}
         onChange={onChange}
