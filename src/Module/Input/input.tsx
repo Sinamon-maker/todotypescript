@@ -23,7 +23,7 @@ export const AppInput = ({
   onKeyDown,
 }: Props) => {
   return (
-    <label>
+    <label className="w-full">
       <input
         className={`${style}`}
         type={type}

@@ -3,14 +3,6 @@ import { TaskContext } from "../../Context/taskContext";
 import { AppButton } from "../../Module/Button/button";
 import { AppInput } from "../../Module/Input/input";
 
-type Props = {
-  onNewTask: (e: React.FormEvent<EventTarget>) => void;
-  handleChange: (e: React.ChangeEvent<EventTarget>) => void;
-  taskName: string;
-  disableSave: boolean;
-  onPressEnter: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-};
-
 export const NewTaskForm = () => {
   const [taskName, setTaskName] = useState("");
   const [disableSave, setDisableSave] = useState(true);
@@ -55,7 +47,6 @@ export const NewTaskForm = () => {
           style="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
           type="text"
           nameValue="task"
-          autoFocus="autoFocus"
           value={taskName}
           placeholder="Buy products"
           ariaLabel="Full name"
