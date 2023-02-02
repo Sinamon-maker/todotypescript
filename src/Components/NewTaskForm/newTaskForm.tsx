@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { TaskContext } from "../../Context/taskContext";
 import { AppButton } from "../../Module/Button/button";
+import { AppInput } from "../../Module/Input/input";
 
 type Props = {
   onNewTask: (e: React.FormEvent<EventTarget>) => void;
@@ -50,14 +51,14 @@ export const NewTaskForm = () => {
       name="newTask"
     >
       <div className="flex items-center border-b border-teal-500 py-2">
-        <input
-          className="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
+        <AppInput
+          style="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
           type="text"
-          name="task"
-          autoFocus
+          nameValue="task"
+          autoFocus="autoFocus"
           value={taskName}
           placeholder="Buy products"
-          aria-label="Full name"
+          ariaLabel="Full name"
           onChange={handleChange}
           onKeyDown={onPressEnter}
         />

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { AppInput } from "../../Module/Input/input";
 import { AppButton } from "../../Module/Button/button";
+import { Error } from "../../Components/Error/error";
 import {
   findUser,
   setCurrentUserToStore,
   addNewUserToStorage,
 } from "../../utils";
-import { Error } from "../../Components/Error/error";
 
 type Props = {};
 
@@ -73,13 +74,13 @@ export const RegisterForm = ({}: Props) => {
         name="onRegister"
       >
         <div className="flex items-center border-b border-teal-500 py-2">
-          <input
-            className="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          <AppInput
+            style="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text"
-            name="register"
+            nameValue="register"
             value={userName}
             placeholder="Jane Doe"
-            aria-label="Full name"
+            ariaLabel="Full name"
             onChange={handleChange}
           />
 

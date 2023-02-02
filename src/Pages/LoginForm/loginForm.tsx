@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Error } from "../../Components/Error/error";
+import { AppInput } from "../../Module/Input/input";
 import { AppButton } from "../../Module/Button/button";
 
 import { findUser, setCurrentUserToStore } from "../../utils";
@@ -67,13 +68,13 @@ export const LoginForm = ({}: Props) => {
         name="onLogin"
       >
         <div className="flex items-center border-b border-teal-500 py-2">
-          <input
-            className="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          <AppInput
+            style="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text"
-            name="login"
+            nameValue="login"
             value={userName}
             placeholder="Jane Doe"
-            aria-label="Full name"
+            ariaLabel="Full name"
             onChange={handleChange}
           />
 
