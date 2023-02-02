@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Main from "./Main";
+import { MainPage } from "./Pages/MainPage/MainPage";
 import { ErrorPage } from "./Pages/ErrorPage/errorPage";
 import { LoginForm } from "./Pages/LoginForm/loginForm";
 import { RegisterForm } from "./Pages/RegisterForm/registerForm";
@@ -28,9 +29,10 @@ const func2 = () => {
 };
 
 export const Root = createBrowserRouter([
+  { element: <Main /> },
   {
     path: "/",
-    element: <Main />,
+    element: <MainPage />,
     errorElement: <ErrorPage />,
     loader: func,
     children: [
