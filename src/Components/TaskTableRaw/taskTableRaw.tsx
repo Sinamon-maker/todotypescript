@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 import { TaskContext } from "../../Context/taskContext";
 import { TextTableElement } from "../TaskTableElements/TextTableElement/textTableElement";
@@ -7,10 +7,6 @@ import { ActionsTableElement } from "../TaskTableElements/ActionsTableElement/ac
 
 import { Task, Process } from "../../globalTypes";
 
-//type Props = {
-//  task: Task;
-//  index: number;
-//};
 interface Props<ObjectType> {
   item: ObjectType;
   index: number;
