@@ -1,4 +1,4 @@
-import React, { ReactComponentElement } from "react";
+import React from "react";
 
 type Props = {
   title: string;
@@ -7,7 +7,6 @@ type Props = {
   disabled?: boolean;
   style: string;
   Icon?: React.ReactNode;
-  fill?: string;
   onClick?: <T>(e: React.MouseEvent<HTMLButtonElement>, ...args: T[]) => void;
 };
 
@@ -19,7 +18,6 @@ export const AppButton = ({
   style,
   onClick,
   Icon,
-  fill,
 }: Props) => {
   if (Icon) {
     return (

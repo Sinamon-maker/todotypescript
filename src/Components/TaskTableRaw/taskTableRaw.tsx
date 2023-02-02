@@ -7,10 +7,6 @@ import { ActionsTableElement } from "../TaskTableElements/ActionsTableElement/ac
 
 import { Task, Process } from "../../globalTypes";
 
-//type Props = {
-//  task: Task;
-//  index: number;
-//};
 interface Props<ObjectType> {
   item: ObjectType;
   index: number;

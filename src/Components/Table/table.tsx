@@ -3,13 +3,22 @@ import { TableHeading } from "../../Module/TableHeading/tableHeading";
 import { TaskContext } from "../../Context/taskContext";
 
 import { TableBody } from "../TableBody/tableBody";
-import { Task, TableHead, TableHeadings } from "../../globalTypes";
+import { TableHead } from "../../globalTypes";
 import { NotTasks } from "../NotTasks/notTasks";
 
 const headings: TableHead[] = [
-  { text: "", style: "w-1/12 sm: w-1/12  pl-2 sm:px-6 py-3" },
-  { text: "Product name", style: "px-6 py-3 bg-gray-50 dark:bg-gray-800" },
   {
+    id: Math.floor(Math.random(), 4),
+    text: "",
+    style: "w-1/12 sm: w-1/12  pl-2 sm:px-6 py-3",
+  },
+  {
+    id: Math.floor(Math.random(), 4),
+    text: "Product name",
+    style: "px-6 py-3 bg-gray-50 dark:bg-gray-800",
+  },
+  {
+    id: Math.floor(Math.random(), 4),
     text: "Actions",
     style: "w-1/4 sm:w-2/6 md:w-1/4 px-2 py-3 bg-gray-50 dark:bg-gray-800",
   },

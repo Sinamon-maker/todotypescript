@@ -10,13 +10,9 @@ export const TableHeading = ({ headings }: Props) => {
   return (
     <thead>
       <tr>
-        {headings.map((heading, index) => {
+        {headings.map((heading) => {
           return (
-            <th
-              key={index + 56788987}
-              scope="col"
-              className={`${heading.style}`}
-            >
+            <th key={heading.id} scope="col" className={`${heading.style}`}>
               {heading.text}
             </th>
           );

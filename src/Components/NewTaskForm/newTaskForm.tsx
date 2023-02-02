@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { TaskContext } from "../../Context/taskContext";
-import { UserContext } from "../../Context/userContext";
 import { AppButton } from "../../Module/Button/button";
 
 type Props = {
@@ -16,7 +15,6 @@ export const NewTaskForm = () => {
   const [disableSave, setDisableSave] = useState(true);
 
   const { onNewTask } = useContext(TaskContext);
-  const logoName = useContext(UserContext);
 
   const handleChange = (e: React.ChangeEvent<EventTarget>) => {
     if (e.target instanceof HTMLInputElement) {
