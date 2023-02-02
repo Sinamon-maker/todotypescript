@@ -1,6 +1,7 @@
 import React from "react";
 
 import { AppButton } from "../../../Module/Button/button";
+import { AppTextarea } from "../../../Module/TextArea/textarea";
 import { Task, Process } from "../../../globalTypes";
 
 interface Props {
@@ -31,10 +32,10 @@ export const TextTableElement = ({
 
   if (task.created === id) {
     return (
-      <textarea
+      <AppTextarea
         id="message"
         rows={2}
-        className="block p-2.5 w-full text-gray-900"
+        style="block p-2.5 w-full text-gray-900"
         value={valueTask}
         onChange={onChange}
       />
