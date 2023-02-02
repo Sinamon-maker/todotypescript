@@ -29,29 +29,33 @@ const func2 = () => {
 };
 
 export const Root = createBrowserRouter([
-  { element: <Main /> },
   {
-    path: "/",
-    element: <MainPage />,
-    errorElement: <ErrorPage />,
-    loader: func,
+    element: <Main />,
     children: [
       {
-        path: "/login",
-        element: <LoginForm />,
+        path: "/",
+        element: <MainPage />,
         errorElement: <ErrorPage />,
+        loader: func,
+        children: [
+          {
+            path: "/login",
+            element: <LoginForm />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "/register",
+            element: <RegisterForm />,
+            errorElement: <ErrorPage />,
+          },
+        ],
       },
       {
-        path: "/register",
-        element: <RegisterForm />,
+        path: "tasks/:userId",
+        element: <TasksPage />,
         errorElement: <ErrorPage />,
+        loader: func2,
       },
     ],
-  },
-  {
-    path: "tasks/:userId",
-    element: <TasksPage />,
-    errorElement: <ErrorPage />,
-    loader: func2,
   },
 ]);

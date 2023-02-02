@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AppButton } from "../../../Module/Button/button";
-import { Task } from "../../../globalTypes";
+import { Task, Process } from "../../../globalTypes";
 
 interface Props {
   task: Task;
@@ -21,7 +21,7 @@ export const TextTableElement = ({
   handleClickChangeTask,
   id,
 }: Props) => {
-  if (task.status === "done") {
+  if (task.status === Process.done) {
     return (
       <span className="block w-full h-full py-2 text-left line-through text-slate-400">
         {task.text}

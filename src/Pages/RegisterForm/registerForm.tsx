@@ -22,27 +22,22 @@ export const RegisterForm = ({}: Props) => {
 
   const handleChange = (e: React.ChangeEvent<EventTarget>) => {
     if (e.target instanceof HTMLInputElement) {
-      if (e.target.name === "register") {
-        setErrorName("");
-        const newValue = e.target.value;
-        setUserName(newValue);
-        if (e.target.value.length > 2) {
-          setDisableRegister(false);
-        }
-        if (e.target.value.length < 3) {
-          setDisableRegister(true);
-        }
+      setErrorName("");
+      const newValue = e.target.value;
+      setUserName(newValue);
+      if (e.target.value.length > 2) {
+        setDisableRegister(false);
+      }
+      if (e.target.value.length < 3) {
+        setDisableRegister(true);
       }
     }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (e.currentTarget.name === "cansel") {
-      setUserName("");
-      setErrorName("");
-
-      navigate("/");
-    }
+    setUserName("");
+    setErrorName("");
+    navigate("/");
   };
 
   const onRegister = (e: React.FormEvent<EventTarget>): void => {

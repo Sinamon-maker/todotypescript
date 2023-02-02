@@ -34,11 +34,9 @@ export const LoginForm = ({}: Props) => {
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (e.currentTarget.name === "cansel") {
-      setUserName("");
-      setErrorName("");
-      navigate("/");
-    }
+    setUserName("");
+    setErrorName("");
+    navigate("/");
   };
 
   const onLogin = (e: React.FormEvent<EventTarget>): void => {
