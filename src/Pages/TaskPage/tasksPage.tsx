@@ -24,7 +24,7 @@ function TasksPage() {
 
   const params = useParams<QuizParams>();
 
-  if (!params.userId) return <div>halo</div>;
+  if (!params.userId) navigate("/login");
 
   useEffect(() => {
     const user = localStorage.getItem("currentUser");

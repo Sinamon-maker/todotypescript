@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Main from "./Main";
+import { MainPage } from "./Pages/MainPage/MainPage";
 import { ErrorPage } from "./Pages/ErrorPage/errorPage";
 import { LoginForm } from "./Pages/LoginForm/loginForm";
 import { RegisterForm } from "./Pages/RegisterForm/registerForm";
@@ -29,27 +30,32 @@ const func2 = () => {
 
 export const Root = createBrowserRouter([
   {
-    path: "/",
     element: <Main />,
-    errorElement: <ErrorPage />,
-    loader: func,
     children: [
       {
-        path: "/login",
-        element: <LoginForm />,
+        path: "/",
+        element: <MainPage />,
         errorElement: <ErrorPage />,
+        loader: func,
+        children: [
+          {
+            path: "/login",
+            element: <LoginForm />,
+            errorElement: <ErrorPage />,
+          },
+          {
+            path: "/register",
+            element: <RegisterForm />,
+            errorElement: <ErrorPage />,
+          },
+        ],
       },
       {
-        path: "/register",
-        element: <RegisterForm />,
+        path: "tasks/:userId",
+        element: <TasksPage />,
         errorElement: <ErrorPage />,
+        loader: func2,
       },
     ],
-  },
-  {
-    path: "tasks/:userId",
-    element: <TasksPage />,
-    errorElement: <ErrorPage />,
-    loader: func2,
   },
 ]);

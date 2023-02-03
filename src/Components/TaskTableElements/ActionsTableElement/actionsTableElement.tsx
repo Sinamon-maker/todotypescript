@@ -5,7 +5,7 @@ import ImageDone from "../../../images/check.svg";
 import Cansel from "../../../images/cansel.svg";
 import ImageDelete from "../../../images/trash.svg";
 
-import { Task } from "../../../globalTypes";
+import { Task, Process } from "../../../globalTypes";
 
 type Props = {
   task: Task;
@@ -28,7 +28,7 @@ export const ActionsTableElement = ({
   onClickCanselEditTask,
   onSaveEditTask,
 }: Props) => {
-  const disableFinished = task.status === "done" ? true : false;
+  const disableFinished = task.status === Process.done ? true : false;
 
   if (task.created === id) {
     return (

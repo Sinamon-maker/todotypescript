@@ -1,7 +1,8 @@
 import React from "react";
 
 import { AppButton } from "../../../Module/Button/button";
-import { Task } from "../../../globalTypes";
+import { AppTextarea } from "../../../Module/TextArea/textarea";
+import { Task, Process } from "../../../globalTypes";
 
 interface Props {
   task: Task;
@@ -21,7 +22,7 @@ export const TextTableElement = ({
   handleClickChangeTask,
   id,
 }: Props) => {
-  if (task.status === "done") {
+  if (task.status === Process.done) {
     return (
       <span className="block w-full h-full py-2 text-left line-through text-slate-400">
         {task.text}
@@ -31,10 +32,10 @@ export const TextTableElement = ({
 
   if (task.created === id) {
     return (
-      <textarea
+      <AppTextarea
         id="message"
         rows={2}
-        className="block p-2.5 w-full text-gray-900"
+        style="block p-2.5 w-full text-gray-900"
         value={valueTask}
         onChange={onChange}
       />

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { AppInput } from "../../Module/Input/input";
 import { AppButton } from "../../Module/Button/button";
+import { Error } from "../../Components/Error/error";
 import {
   findUser,
   setCurrentUserToStore,
   addNewUserToStorage,
 } from "../../utils";
-import { Error } from "../../Components/Error/error";
 
 type Props = {};
 
@@ -21,27 +22,22 @@ export const RegisterForm = ({}: Props) => {
 
   const handleChange = (e: React.ChangeEvent<EventTarget>) => {
     if (e.target instanceof HTMLInputElement) {
-      if (e.target.name === "register") {
-        setErrorName("");
-        const newValue = e.target.value;
-        setUserName(newValue);
-        if (e.target.value.length > 2) {
-          setDisableRegister(false);
-        }
-        if (e.target.value.length < 3) {
-          setDisableRegister(true);
-        }
+      setErrorName("");
+      const newValue = e.target.value;
+      setUserName(newValue);
+      if (e.target.value.length > 2) {
+        setDisableRegister(false);
+      }
+      if (e.target.value.length < 3) {
+        setDisableRegister(true);
       }
     }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (e.currentTarget.name === "cansel") {
-      setUserName("");
-      setErrorName("");
-
-      navigate("/");
-    }
+    setUserName("");
+    setErrorName("");
+    navigate("/");
   };
 
   const onRegister = (e: React.FormEvent<EventTarget>): void => {
@@ -73,13 +69,13 @@ export const RegisterForm = ({}: Props) => {
         name="onRegister"
       >
         <div className="flex items-center border-b border-teal-500 py-2">
-          <input
-            className="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          <AppInput
+            style="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text"
-            name="register"
+            nameValue="register"
             value={userName}
             placeholder="Jane Doe"
-            aria-label="Full name"
+            ariaLabel="Full name"
             onChange={handleChange}
           />
 

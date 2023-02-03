@@ -18,7 +18,7 @@ export const ContentOfTasks = ({ loadData }: Props) => {
   return (
     <>
       <TaskProvider loadData={loadData} logoName={logoName}>
-        <main className="w-full  m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
+        <main className="w-full  m-auto grow  ">
           <Container>
             <NewTaskForm />
             <Table />
