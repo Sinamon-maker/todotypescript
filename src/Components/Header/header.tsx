@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../../Context/userContext';
+import { UserContext } from '../../Context/UserContext';
 
-import { AppButton } from '../../Module/Button/button';
+import { AppButton } from '../../Module/Button/Button';
 
 type Props = {
 	handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;

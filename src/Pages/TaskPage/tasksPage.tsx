@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { useParams, useNavigate, useLoaderData } from 'react-router-dom';
 
-import { UserContext } from '../../Context/userContext';
+import { UserContext } from '../../Context/UserContext';
 
-import { Header } from '../../Components/Header/header';
-import { ContentOfTasks } from '../../Components/ContentOfTasks/contentOfTasks';
-import { removeCurrentUserFromStore } from '../../utils';
+import { Header } from '../../Components/Header/Header';
+import { ContentOfTasks } from '../../Components/ContentOfTasks/ContentOfTasks';
+import { removeCurrentUserFromStore } from '../../Utils';
 import { Task } from '../../globalTypes';
 
 type QuizParams = {

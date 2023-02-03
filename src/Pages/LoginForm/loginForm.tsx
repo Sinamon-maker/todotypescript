@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Error } from '../../Components/Error/error';
-import { AppInput } from '../../Module/Input/input';
-import { AppButton } from '../../Module/Button/button';
+import { Error } from '../../Components/Error/Error';
+import { AppInput } from '../../Module/Input/Input';
+import { AppButton } from '../../Module/Button/Button';
 
-import { findUser, setCurrentUserToStore } from '../../utils';
+import { findUser, setCurrentUserToStore } from '../../Utils';
 
 export const LoginForm = () => {
 	const [userName, setUserName] = useState('');

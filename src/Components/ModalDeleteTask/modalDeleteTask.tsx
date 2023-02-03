@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { TaskContext } from '../../Context/taskContext';
-import { AppButton } from '../../Module/Button/button';
-import { ModalContainer } from '../../Module/ModuleContainer/modalContainer';
+import { TaskContext } from '../../Context/TaskContext';
+import { AppButton } from '../../Module/Button/Button';
+import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
 
 export const ModalDelete = () => {
 	const { confirmDeleteClick, canselDeleteTask } = useContext(TaskContext);

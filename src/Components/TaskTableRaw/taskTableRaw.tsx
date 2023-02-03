@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 
-import { TaskContext } from '../../Context/taskContext';
-import { TextTableElement } from '../TaskTableElements/TextTableElement/textTableElement';
-import { TableElementContainer } from '../../Module/TableElementContainer/tableElementContainer';
-import { ActionsTableElement } from '../TaskTableElements/ActionsTableElement/actionsTableElement';
+import { TaskContext } from '../../Context/TaskContext';
+import { TextTableElement } from '../TaskTableElements/TextTableElement/TextTableElement';
+import { TableElementContainer } from '../../Module/TableElementContainer/TableElementContainer';
+import { ActionsTableElement } from '../TaskTableElements/ActionsTableElement/ActionsTableElement';
 
 import { Task, Process } from '../../globalTypes';
 

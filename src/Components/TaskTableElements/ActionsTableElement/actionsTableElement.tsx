@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { AppButton } from '../../../Module/Button/button';
-import ImageDone from '../../../images/check.svg';
-import Cansel from '../../../images/cansel.svg';
-import ImageDelete from '../../../images/trash.svg';
+import { AppButton } from '../../../Module/Button/Button';
+import ImageDone from '../../../Images/check.svg';
+import Cansel from '../../../Images/cansel.svg';
+import ImageDelete from '../../../Images/trash.svg';
 
 import { Task, Process } from '../../../globalTypes';
 
