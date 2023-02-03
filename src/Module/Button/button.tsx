@@ -6,7 +6,7 @@ type Props = {
 	nameValue: string;
 	disabled?: boolean;
 	style: string;
-	ariaLabel: string;
+	ariaLabel?: string;
 	Icon?: React.ReactNode;
 	onClick?: <T>(e: React.MouseEvent<HTMLButtonElement>, ...args: T[]) => void;
 };

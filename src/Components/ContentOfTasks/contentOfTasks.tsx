@@ -17,7 +17,7 @@ export const ContentOfTasks = ({ loadData }: Props) => {
 	const logoName = useContext(UserContext);
 	return (
 		<TaskProvider loadData={loadData}>
-			<main className="w-full  m-auto grow  ">
+			<main className="w-full  m-auto grow overflow-y-auto scroll-smooth ">
 				<Container>
 					<NewTaskForm />
 					<Table />
