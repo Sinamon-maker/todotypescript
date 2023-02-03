@@ -1,109 +1,120 @@
-import React, { useContext, useState } from "react";
-import { TaskContext } from "./taskContext";
+import React, { useContext, useState, useCallback, useMemo } from 'react';
+import { TaskContext } from './taskContext';
 
-import { Task, Process } from "../globalTypes";
-import { findTasks, saveInStorage } from "../utils";
-import { UserContext } from "./userContext";
+import { Task, Process } from '../globalTypes';
+import { findTasks, saveInStorage } from '../utils';
+import { UserContext } from './userContext';
 
-import { ModalDelete } from "../Components/ModalDeleteTask/modalDeleteTask";
+import { ModalDelete } from '../Components/ModalDeleteTask/modalDeleteTask';
 
 type Props = {
-  children: React.ReactNode;
-  loadData: Task[] | null;
-  logoName: string;
+	children: React.ReactNode;
+	loadData: Task[] | null;
 };
 
 export const TaskProvider = ({ children, loadData }: Props) => {
-  const logoName = useContext(UserContext);
-  const [listOfTasks, setListOfTasks] = useState<Task[] | null>(loadData);
-  const [idTaskToDelete, setIdTaskToDelete] = useState(0);
+	const logoName = useContext(UserContext);
+	const [listOfTasks, setListOfTasks] = useState<Task[] | null>(loadData);
+	const [idTaskToDelete, setIdTaskToDelete] = useState(0);
 
-  const onNewTask = (text: string) => {
-    const newTask = {
-      text,
-      status: Process.inprogress,
-      created: +new Date(),
-    };
-    if (listOfTasks !== null) {
-      const newList: Array<Task> = [...listOfTasks, newTask];
-      setListOfTasks(newList);
-      saveInStorage(logoName, newList);
-    } else {
-      const newList: Array<Task> = [newTask];
+	const onNewTask = useCallback(
+		(text: string) => {
+			const newTask = {
+				text,
+				status: Process.inprogress,
+				created: +new Date(),
+			};
+			if (listOfTasks !== null) {
+				const newList: Array<Task> = [...listOfTasks, newTask];
+				setListOfTasks(newList);
+				saveInStorage(logoName, newList);
+			} else {
+				const newList: Array<Task> = [newTask];
 
-      setListOfTasks(newList);
-      saveInStorage(logoName, newList);
-    }
-  };
+				setListOfTasks(newList);
+				saveInStorage(logoName, newList);
+			}
+		},
+		[listOfTasks, logoName]
+	);
 
-  const changeTask = (id: number, text: string) => {
-    const list = findTasks(logoName);
+	const changeTask = useCallback(
+		(id: number, text: string) => {
+			const list = findTasks(logoName);
 
-    if (list !== null) {
-      const newList = list.map((task) => {
-        if (task.created === id) {
-          return { ...task, text };
-        } else {
-          return task;
-        }
-      });
-      setListOfTasks(newList);
-      saveInStorage(logoName, newList);
-    }
-  };
+			if (list !== null) {
+				const newList = list.map((task) => {
+					if (task.created === id) {
+						return { ...task, text };
+					}
+					return task;
+				});
+				setListOfTasks(newList);
+				saveInStorage(logoName, newList);
+			}
+		},
+		[logoName]
+	);
 
-  const confirmDeleteClick = () => {
-    if (listOfTasks !== null) {
-      const newTaskList: Task[] = listOfTasks.filter(
-        (task: Task) => task.created !== idTaskToDelete
-      );
-      saveInStorage(logoName, newTaskList);
-      setListOfTasks(newTaskList);
-      setIdTaskToDelete(0);
-    }
-  };
+	const confirmDeleteClick = useCallback(() => {
+		if (listOfTasks !== null) {
+			const newTaskList: Task[] = listOfTasks.filter((task: Task) => task.created !== idTaskToDelete);
+			saveInStorage(logoName, newTaskList);
+			setListOfTasks(newTaskList);
+			setIdTaskToDelete(0);
+		}
+	}, [idTaskToDelete, listOfTasks, logoName]);
 
-  const changeStatus = (id: number, stat: string) => {
-    if (listOfTasks !== null) {
-      const newTaskList = listOfTasks.map((task) => {
-        if (task.created !== id) return task;
-        else {
-          task.status === Process.inprogress;
-          return {
-            text: task.text,
-            created: task.created,
-            status: Process.done,
-          };
-        }
-      });
+	const changeStatus = useCallback(
+		(id: number, stat: string) => {
+			if (listOfTasks !== null) {
+				const newTaskList = listOfTasks.map((task) => {
+					if (task.created !== id) return task;
 
-      setListOfTasks(newTaskList);
-      saveInStorage(logoName, newTaskList);
-    }
-  };
+					return {
+						text: task.text,
+						created: task.created,
+						status: Process.done,
+					};
+				});
 
-  const canselDeleteTask = () => {
-    setIdTaskToDelete(0);
-  };
+				setListOfTasks(newTaskList);
+				saveInStorage(logoName, newTaskList);
+			}
+		},
+		[listOfTasks, logoName]
+	);
 
-  const onSettingDeleteId = (val: number) => {
-    setIdTaskToDelete(val);
-  };
+	const canselDeleteTask = useCallback(() => {
+		setIdTaskToDelete(0);
+	}, []);
 
-  return (
-    <TaskContext.Provider
-      value={{
-        listOfTasks,
-        onNewTask,
-        changeStatus,
-        confirmDeleteClick,
-        onSettingDeleteId,
-        canselDeleteTask,
-        changeTask,
-      }}
-    >
-      {children}
-      {idTaskToDelete !== 0 && <ModalDelete />}
-    </TaskContext.Provider>
-  );
+	const onSettingDeleteId = useCallback((val: number) => {
+		setIdTaskToDelete(val);
+	}, []);
+
+	//	const login = useCallback((response) => {
+	//		storeCredentials(response.credentials);
+	//		setCurrentUser(response.user);
+	//	  }, []);
+
+	const contextValue = useMemo(
+		() => ({
+			listOfTasks,
+			onNewTask,
+			changeStatus,
+			confirmDeleteClick,
+			onSettingDeleteId,
+			canselDeleteTask,
+			changeTask,
+		}),
+		[listOfTasks, onNewTask, changeStatus, confirmDeleteClick, onSettingDeleteId, canselDeleteTask, changeTask]
+	);
+
+	return (
+		<TaskContext.Provider value={contextValue}>
+			{children}
+			{idTaskToDelete !== 0 && <ModalDelete />}
+		</TaskContext.Provider>
+	);
 };

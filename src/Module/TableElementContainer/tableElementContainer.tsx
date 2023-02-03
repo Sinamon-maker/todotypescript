@@ -1,10 +1,8 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
-  children: React.ReactNode;
-  style: string;
+	children: React.ReactNode;
+	style: string;
 };
 
-export const TableElementContainer = ({ style, children }: Props) => {
-  return <td className={`${style}`}>{children}</td>;
-};
+export const TableElementContainer = ({ style, children }: Props) => <td className={`${style}`}>{children}</td>;
