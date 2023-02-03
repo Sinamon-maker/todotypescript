@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { TaskContext } from '../../Context/taskContext';
-import { AppButton } from '../../Module/Button/button';
-import { AppInput } from '../../Module/Input/input';
+import { TaskContext } from '../../Context/TaskContext';
+import { AppButton } from '../../Module/Button/Button';
+import { AppInput } from '../../Module/Input/Input';
 
 export const NewTaskForm = () => {
 	const [taskName, setTaskName] = useState('');

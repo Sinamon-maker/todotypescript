@@ -1,11 +1,11 @@
 import React, { useContext, useState, useCallback, useMemo } from 'react';
-import { TaskContext } from './taskContext';
+import { TaskContext } from './TaskContext';
 
 import { Task, Process } from '../globalTypes';
-import { findTasks, saveInStorage } from '../utils';
-import { UserContext } from './userContext';
+import { findTasks, saveInStorage } from '../Utils';
+import { UserContext } from './UserContext';
 
-import { ModalDelete } from '../Components/ModalDeleteTask/modalDeleteTask';
+import { ModalDelete } from '../Components/ModalDeleteTask/ModalDeleteTask';
 
 type Props = {
 	children: React.ReactNode;

@@ -2,11 +2,11 @@ import React from 'react';
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import Main from './Main';
 import { MainPage } from './Pages/MainPage/MainPage';
-import { ErrorPage } from './Pages/ErrorPage/errorPage';
-import { LoginForm } from './Pages/LoginForm/loginForm';
-import { RegisterForm } from './Pages/RegisterForm/registerForm';
-import TasksPage from './Pages/TaskPage/tasksPage';
-import { findTasks } from './utils';
+import { ErrorPage } from './Pages/ErrorPage/ErrorPage';
+import { LoginForm } from './Pages/LoginForm/LoginForm';
+import { RegisterForm } from './Pages/RegisterForm/RegisterForm';
+import TasksPage from './Pages/TaskPage/TasksPage';
+import { findTasks } from './Utils';
 
 const func = () => {
 	const user = localStorage.getItem('currentUser') as string | null;

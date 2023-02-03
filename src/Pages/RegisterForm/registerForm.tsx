@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AppInput } from '../../Module/Input/input';
-import { AppButton } from '../../Module/Button/button';
-import { Error } from '../../Components/Error/error';
-import { findUser, setCurrentUserToStore, addNewUserToStorage } from '../../utils';
+import { AppInput } from '../../Module/Input/Input';
+import { AppButton } from '../../Module/Button/Button';
+import { Error } from '../../Components/Error/Error';
+import { findUser, setCurrentUserToStore, addNewUserToStorage } from '../../Utils';
 
 export const RegisterForm = () => {
 	const [userName, setUserName] = useState('');

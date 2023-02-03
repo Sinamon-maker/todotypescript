@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 
-import { Container } from '../../Module/Container/container';
-import { NewTaskForm } from '../NewTaskForm/newTaskForm';
-import { Table } from '../Table/table';
-import { TaskProvider } from '../../Context/taskProvider';
+import { Container } from '../../Module/Container/Container';
+import { NewTaskForm } from '../NewTaskForm/NewTaskForm';
+import { Table } from '../Table/Table';
+import { TaskProvider } from '../../Context/TaskProvider';
 
-import { UserContext } from '../../Context/userContext';
+import { UserContext } from '../../Context/UserContext';
 
 import { Task } from '../../globalTypes';
 
