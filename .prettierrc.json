@@ -1,0 +1,14 @@
+{
+	"tabWidth": 2,
+	"useTabs": true,
+	"singleQuote": true,
+	"printWidth": 160,
+	"endOfLine": "auto",
+	"max-line-length": [
+		true,
+		{
+			"limit": 80,
+			"ignore-pattern": "^import |^export {(.*?)}"
+		}
+	]
+}

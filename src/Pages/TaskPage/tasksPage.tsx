@@ -1,54 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useParams, useNavigate, useLoaderData } from "react-router-dom";
+import { useParams, useNavigate, useLoaderData } from 'react-router-dom';
 
-import { UserContext } from "../../Context/userContext";
+import { UserContext } from '../../Context/userContext';
 
-import { Header } from "../../Components/Header/header";
-import { ContentOfTasks } from "../../Components/ContentOfTasks/contentOfTasks";
-
-import { Task, Process } from "../../globalTypes";
+import { Header } from '../../Components/Header/header';
+import { ContentOfTasks } from '../../Components/ContentOfTasks/contentOfTasks';
+import { removeCurrentUserFromStore } from '../../utils';
+import { Task } from '../../globalTypes';
 
 type QuizParams = {
-  userId: string;
+	userId: string;
 };
 
-import { removeCurrentUserFromStore } from "../../utils";
+const TasksPage = () => {
+	const navigate = useNavigate();
 
-function TasksPage() {
-  const navigate = useNavigate();
+	const [logoName, setLogoName] = useState('');
 
-  const [logoName, setLogoName] = useState("");
+	const loadData = useLoaderData() as Task[] | null;
 
-  const loadData = useLoaderData() as Task[] | null;
+	const params = useParams<QuizParams>();
 
-  const params = useParams<QuizParams>();
+	if (!params.userId) navigate('/login');
 
-  if (!params.userId) navigate("/login");
+	useEffect(() => {
+		const user = localStorage.getItem('currentUser');
+		if (!user) {
+			navigate('/login');
+		} else {
+			setLogoName(user);
+		}
+	}, [navigate]);
 
-  useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-    if (!user) {
-      navigate("/login");
-    } else {
-      setLogoName(user);
-    }
-  }, []);
+	const logout = () => {
+		setLogoName('');
+		removeCurrentUserFromStore();
+		navigate('/');
+	};
 
-  const logout = () => {
-    setLogoName("");
-    removeCurrentUserFromStore();
-    navigate("/");
-  };
-
-  return (
-    <UserContext.Provider value={logoName}>
-      <div className="flex flex-col h-screen">
-        <Header handleClick={logout} />
-        <ContentOfTasks loadData={loadData} />
-      </div>
-    </UserContext.Provider>
-  );
-}
+	return (
+		<UserContext.Provider value={logoName}>
+			<div className="flex flex-col h-screen">
+				<Header handleClick={logout} />
+				<ContentOfTasks loadData={loadData} />
+			</div>
+		</UserContext.Provider>
+	);
+};
 
 export default TasksPage;

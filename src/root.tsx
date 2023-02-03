@@ -1,61 +1,57 @@
-import React from "react";
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider,
-} from "react-router-dom";
-import Main from "./Main";
-import { MainPage } from "./Pages/MainPage/MainPage";
-import { ErrorPage } from "./Pages/ErrorPage/errorPage";
-import { LoginForm } from "./Pages/LoginForm/loginForm";
-import { RegisterForm } from "./Pages/RegisterForm/registerForm";
-import TasksPage from "./Pages/TaskPage/tasksPage";
-import { findTasks } from "./utils";
+import React from 'react';
+import { createBrowserRouter, redirect } from 'react-router-dom';
+import Main from './Main';
+import { MainPage } from './Pages/MainPage/MainPage';
+import { ErrorPage } from './Pages/ErrorPage/errorPage';
+import { LoginForm } from './Pages/LoginForm/loginForm';
+import { RegisterForm } from './Pages/RegisterForm/registerForm';
+import TasksPage from './Pages/TaskPage/tasksPage';
+import { findTasks } from './utils';
 
 const func = () => {
-  const user = localStorage.getItem("currentUser") as string | null;
-  if (user) {
-    const destination = `/tasks/${user}`;
+	const user = localStorage.getItem('currentUser') as string | null;
+	if (user) {
+		const destination = `/tasks/${user}`;
 
-    return redirect(`${destination}`);
-  }
-  return 3;
+		return redirect(`${destination}`);
+	}
+	return 3;
 };
 
 const func2 = () => {
-  const user = localStorage.getItem("currentUser") as string;
-  const list = findTasks(user);
-  return list;
+	const user = localStorage.getItem('currentUser') as string;
+	const list = findTasks(user);
+	return list;
 };
 
 export const Root = createBrowserRouter([
-  {
-    element: <Main />,
-    children: [
-      {
-        path: "/",
-        element: <MainPage />,
-        errorElement: <ErrorPage />,
-        loader: func,
-        children: [
-          {
-            path: "/login",
-            element: <LoginForm />,
-            errorElement: <ErrorPage />,
-          },
-          {
-            path: "/register",
-            element: <RegisterForm />,
-            errorElement: <ErrorPage />,
-          },
-        ],
-      },
-      {
-        path: "tasks/:userId",
-        element: <TasksPage />,
-        errorElement: <ErrorPage />,
-        loader: func2,
-      },
-    ],
-  },
+	{
+		element: <Main />,
+		children: [
+			{
+				path: '/',
+				element: <MainPage />,
+				errorElement: <ErrorPage />,
+				loader: func,
+				children: [
+					{
+						path: '/login',
+						element: <LoginForm />,
+						errorElement: <ErrorPage />,
+					},
+					{
+						path: '/register',
+						element: <RegisterForm />,
+						errorElement: <ErrorPage />,
+					},
+				],
+			},
+			{
+				path: 'tasks/:userId',
+				element: <TasksPage />,
+				errorElement: <ErrorPage />,
+				loader: func2,
+			},
+		],
+	},
 ]);
