@@ -69,7 +69,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		(id: number, stat: string) => {
 			if (listOfTasks !== null) {
 				const newTaskList = listOfTasks.map((task) => {
-					if (task.created !== id) return task;
+					if (task.created !== id || stat !== Process.inprogress) return task;
 
 					return {
 						text: task.text,
