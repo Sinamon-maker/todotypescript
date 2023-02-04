@@ -18,7 +18,6 @@ export type List = Array<Task>;
 export type Users = Array<string>;
 
 export type TableHead = {
-	id: number;
 	text: string;
 	style: string;
 };

@@ -84,14 +84,14 @@ export const TaskTableRaw = <ObjectType extends { text: string; status: Process;
 	};
 
 	return (
-		<tr ref={refWrap} key={item.created} className=" border-b border-gray-700 dark:border-gray-700 relative">
+		<tr ref={refWrap} key={item.created} className=" border-b border-gray-700 relative">
 			<TableElementContainer style="w-6 sm: w-1/12  pl-2 sm:px-6 py-3 text-gray-400 text-center">{index + 1}</TableElementContainer>
 
-			<TableElementContainer style="whitespace-normal pl-6 pr-2 pt-1 pb-0.5  sm:pt-4 sm:pr-2 md:pl-10 font-medium ext-left text-gray-900 bg-gray-50 dark:text-slate-300 dark:bg-gray-800 rounded">
+			<TableElementContainer style="whitespace-normal pl-6 pr-2 pt-1 pb-0.5  sm:pt-4 sm:pr-2 md:pl-10 font-medium text-left  bg-fill-main rounded">
 				<TextTableElement task={item} valueTask={valueTask} onChange={onChange} handleClickChangeTask={handleClickChangeTask} id={idEdotTask} />
 			</TableElementContainer>
 
-			<TableElementContainer style="w-1/4 sm:2/4 md:w-1/4 px-2 py-2  sm:py-4 sm:px-6 bg-gray-700 text-center dark:text-slate-300 dark:bg-gray-800">
+			<TableElementContainer style="w-1/4 sm:2/4 md:w-1/4 px-2 py-2  sm:py-4 sm:px-6  text-center bg-fill-main">
 				<ActionsTableElement
 					task={item}
 					id={idEdotTask}

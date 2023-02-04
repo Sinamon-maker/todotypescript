@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 function Main() {
 	return (
-		<div className="w-full h-screen m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
+		<div className="forth  w-full h-screen m-auto grow bg-gradient-to-tr from-blue-800  to-red-800  ">
 			<Outlet />
 		</div>
 	);

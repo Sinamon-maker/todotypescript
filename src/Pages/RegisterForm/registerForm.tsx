@@ -57,10 +57,10 @@ export const RegisterForm = () => {
 
 	return (
 		<div className="w-128">
-			<form onSubmit={onRegister} className="w-full max-w-md m-auto bg-gray-800/75 rounded p-10 pb-8 shadow-lg" name="onRegister">
-				<div className="flex items-center border-b border-teal-500 py-2">
+			<form onSubmit={onRegister} className="w-full max-w-md m-auto bg-fill-main rounded p-10 pb-8 shadow-lg" name="onRegister">
+				<div className="flex items-center border-b border-fill-weak py-2">
 					<AppInput
-						style="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
+						style="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
 						type="text"
 						nameValue="register"
 						value={userName}
@@ -70,7 +70,7 @@ export const RegisterForm = () => {
 					/>
 
 					<AppButton
-						style="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 disabled:opacity-25 text-sm border-4 text-white py-1 px-2 rounded shadow-lg"
+						style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong border-fill-weak hover:border-fill-strong disabled:opacity-25 text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
 						nameValue="registerUser"
 						type="submit"
 						disabled={disableRegister}
@@ -78,7 +78,7 @@ export const RegisterForm = () => {
 					/>
 
 					<AppButton
-						style="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded shadow-lg"
+						style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
 						type="button"
 						nameValue="cansel"
 						onClick={(e) => handleClick(e)}

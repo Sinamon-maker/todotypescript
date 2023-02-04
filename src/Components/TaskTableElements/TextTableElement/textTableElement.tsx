@@ -14,7 +14,7 @@ interface Props {
 
 export const TextTableElement = ({ task, valueTask, onChange, handleClickChangeTask, id }: Props) => {
 	if (task.status === Process.done) {
-		return <span className="block w-full h-full py-2 text-left line-through text-slate-400">{task.text}</span>;
+		return <span className="block w-full h-full py-2 text-left line-through text-skin-weak">{task.text}</span>;
 	}
 
 	if (task.created === id) {
