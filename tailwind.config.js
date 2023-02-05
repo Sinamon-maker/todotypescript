@@ -3,28 +3,28 @@ module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		extend: {
-			colors: {
+			borderColor: {
 				fill: {
-					main: 'var(--fill-color)',
-					weak: 'var(--btn-color)',
-					strong: 'var(--btnHover-color)',
+					main: 'rgb(var(--fill-color)/ <alpha-value>)',
+					weak: 'rgb(var(--btn-color)/ <alpha-value>)',
+					strong: 'rgb(var(--btnHover-color)/ <alpha-value>)',
 				},
 			},
 			textColor: {
 				skin: {
-					base: 'var(--text-color)',
-					weak: 'var(--textWeak-color)',
+					base: 'rgb(var(--text-color)/ <alpha-value>)',
+					weak: 'rgb(var(--textWeak-color)/ <alpha-value>)',
 				},
 				fill: {
-					weak: 'var(--btn-color)',
-					strong: 'var(--btnHover-color)',
+					weak: 'rgb(var(--btn-color)/ <alpha-value>)',
+					strong: 'rgb(var(--btnHover-color)/ <alpha-value>)',
 				},
 			},
 			backgroundColor: {
 				fill: {
-					main: 'var(--fill-color)',
-					weak: 'var(--btn-color)',
-					strong: 'var(--btnHover-color)',
+					main: 'rgb(var(--fill-color)/ <alpha-value>)',
+					weak: 'rgb(var(--btn-color)/ <alpha-value>)',
+					strong: 'rgb(var(--btnHover-color)/ <alpha-value>)',
 				},
 			},
 			backgroundImage: {
