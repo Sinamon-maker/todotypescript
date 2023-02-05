@@ -4,6 +4,7 @@ import { AppButton } from '../../../Module/Button/Button';
 import ImageDone from '../../../Images/check.svg';
 import Cansel from '../../../Images/cansel.svg';
 import ImageDelete from '../../../Images/trash.svg';
+import Send from '../../../Images/send.svg';
 
 import { Task, Process } from '../../../globalTypes';
 
@@ -32,11 +33,12 @@ export const ActionsTableElement = ({ task, id, onChangeStatus, delClick, onClic
 					Icon={<Cansel className="w-4 h-4 sm:w-10 sm:h-10" />}
 				/>
 				<AppButton
-					style="flex-shrink-0 block self-center bg-fill-weak hover:bg-fill-strong border-fill-weak hover:border-fill-strong text-sm border-4  p-px sm:py-1 sm:px-2 rounded shadow-lg"
+					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong border-fill-weak hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
 					nameValue="=saveEditTask"
-					title="Save"
+					title=""
 					ariaLabel="saveEditedTask"
 					onClick={(e) => onSaveEditTask(e)}
+					Icon={<Send className="w-4 h-4 sm:w-10 sm:h-10" />}
 				/>
 			</span>
 		);
