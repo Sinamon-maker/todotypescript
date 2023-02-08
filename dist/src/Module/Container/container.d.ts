@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 type Props = {
-    children?: ReactNode;
+    children: ReactNode;
 };
 export declare const Container: ({ children }: Props) => JSX.Element;
 export {};

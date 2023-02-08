@@ -1,6 +1,6 @@
 export const mode: string;
 export const target: "web" | "browserslist";
-export const devtool: "source-map" | undefined;
+export const devtool: "inline-source-map" | undefined;
 import HTMLWebpackPlugin = require("html-webpack-plugin");
 import MiniCssExtractPlugin = require("mini-css-extract-plugin");
 import CopyPlugin = require("copy-webpack-plugin");
@@ -14,12 +14,14 @@ export declare namespace devServer {
     export const port: number;
     export const open: boolean;
     export const hot: boolean;
+    export const historyApiFallback: boolean;
 }
 export declare const entry: string[];
 export declare namespace output {
     const path: string;
     const clean: boolean;
     const filename: string;
+    const publicPath: string;
     const assetModuleFilename: string;
 }
 export declare const plugins: (HTMLWebpackPlugin | MiniCssExtractPlugin | CopyPlugin)[];

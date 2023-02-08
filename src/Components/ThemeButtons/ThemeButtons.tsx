@@ -7,10 +7,10 @@ type PropsBtn = {
 };
 
 const ThemeBtn = ({ value, setTheme, style }: PropsBtn) => {
-	const onClick = () => {
+	const handleClick = () => {
 		setTheme(value);
 	};
-	return <button aria-label="changeColors" className={`w-6 h-6 sm:w-8 sm:h-8 block border-2 mr-2 last:mr-0 rounded-full ${style}`} onClick={onClick} />;
+	return <button aria-label="changeColors" className={`w-6 h-6 sm:w-8 sm:h-8 block border-2 mr-2 last:mr-0 rounded-full ${style}`} onClick={handleClick} />;
 };
 
 type Props = {
