@@ -1,5 +1,6 @@
+import { Task } from '../../globalTypes';
 type Props = {
-    logoName: string;
+    loadData: Task[] | null;
 };
-export declare const ContentOfTasks: ({ logoName }: Props) => JSX.Element;
+export declare const ContentOfTasks: ({ loadData }: Props) => JSX.Element;
 export {};

@@ -4,6 +4,7 @@ import { AppButton } from '../../../Module/Button/Button';
 import ImageDone from '../../../Images/check.svg';
 import Cansel from '../../../Images/cansel.svg';
 import ImageDelete from '../../../Images/trash.svg';
+import Send from '../../../Images/send.svg';
 
 import { Task, Process } from '../../../globalTypes';
 
@@ -23,20 +24,21 @@ export const ActionsTableElement = ({ task, id, onChangeStatus, delClick, onClic
 		return (
 			<span className="block w-full h-full flex justify-between sm:flex-row gap-2 sm:justify-between">
 				<AppButton
-					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-teal-500  hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-gray-800 disabled:border-teal-700"
+					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong border-fill-weak hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
 					type="button"
 					nameValue="canselEditTask"
 					title=""
 					ariaLabel="cancelEditTask"
 					onClick={(e) => onClickCanselEditTask(e)}
-					Icon={<Cansel fill="white" className="w-4 h-4 sm:w-10 sm:h-10" />}
+					Icon={<Cansel className="w-4 h-4 sm:w-10 sm:h-10" />}
 				/>
 				<AppButton
-					style="flex-shrink-0 block self-center bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded shadow-lg"
+					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong border-fill-weak hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
 					nameValue="=saveEditTask"
-					title="Save"
+					title=""
 					ariaLabel="saveEditedTask"
 					onClick={(e) => onSaveEditTask(e)}
+					Icon={<Send className="w-4 h-4 sm:w-10 sm:h-10" />}
 				/>
 			</span>
 		);
@@ -46,7 +48,7 @@ export const ActionsTableElement = ({ task, id, onChangeStatus, delClick, onClic
 		<span className="block w-full h-full flex justify-between ssm:flex-row gap-2 ssm:justify-between">
 			{task.status === 'done' ? (
 				<AppButton
-					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-teal-500  hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-gray-800 disabled:border-teal-700"
+					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong  hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
 					nameValue="inProcess"
 					onClick={(e) => onChangeStatus(e, task.created, task.status)}
 					title=""
@@ -56,7 +58,7 @@ export const ActionsTableElement = ({ task, id, onChangeStatus, delClick, onClic
 				/>
 			) : (
 				<AppButton
-					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-teal-500 disabled:opacity-5  hover:bg-teal-700 border-teal-500 hover:border-teal-700  text-sm border-4 text-white p-px sm:py-1 sm:px-2 rounded-full shadow-lg flex justify-center items-center "
+					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak disabled:opacity-5  hover:bg-fill-strong border-fill-weak hover:border-fill-strong text-sm border-4  p-px sm:py-1 sm:px-2 rounded-full shadow-lg flex justify-center items-center "
 					nameValue="inProcess"
 					onClick={(e) => onChangeStatus(e, task.created, task.status)}
 					title=""
@@ -65,7 +67,7 @@ export const ActionsTableElement = ({ task, id, onChangeStatus, delClick, onClic
 				/>
 			)}
 			<AppButton
-				style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-teal-500  hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-gray-800 disabled:border-teal-700"
+				style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong border-fill-strong hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
 				nameValue="deleteTask"
 				title=""
 				ariaLabel="deleteTask"

@@ -58,6 +58,7 @@
 		"react/style-prop-object": "off",
 		"react/button-has-type": "off",
 		"no-shadow": "off",
+		"prefer-destructuring": "off",
 		"@typescript-eslint/no-shadow": ["error"]
 	}
 }

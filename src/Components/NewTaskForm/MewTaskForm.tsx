@@ -38,9 +38,9 @@ export const NewTaskForm = () => {
 
 	return (
 		<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded px-6 sm:px-10 pt-4 pb-0 " name="newTask">
-			<div className="flex items-center border-b border-teal-500 py-2">
+			<div className="flex items-center border-b border-fill-weak py-2">
 				<AppInput
-					style="appearance-none bg-transparent border-none w-full text-gray-400 text-slate-300 mr-3 py-1 px-2 leading-tight focus:outline-none"
+					style="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
 					type="text"
 					nameValue="task"
 					value={taskName}
@@ -51,7 +51,7 @@ export const NewTaskForm = () => {
 				/>
 
 				<AppButton
-					style="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 disabled:opacity-25 text-sm border-4 text-white py-1 px-2 rounded shadow-lg"
+					style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong border-fill-weak hover:border-fill-strong disabled:opacity-25 text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
 					type="submit"
 					nameValue="addTask"
 					disabled={disableSave}

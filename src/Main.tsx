@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
+import { ThemeComponent } from './Components/ContentOfTasks/ThemeComponent';
 
 function Main() {
 	return (
-		<div className="w-full h-screen m-auto grow bg-cover  bg-no-repeat bg-center bg-hello-pattern ">
-			<Outlet />
-		</div>
+		<ThemeComponent>
+			<div className="forth   w-full h-screen m-auto grow bg-gradient-to-tr from-blue-800  to-red-800  ">
+				<Outlet />
+			</div>
+		</ThemeComponent>
 	);
 }
 

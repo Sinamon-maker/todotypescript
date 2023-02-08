@@ -93,11 +93,6 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		setIdTaskToDelete(val);
 	}, []);
 
-	//	const login = useCallback((response) => {
-	//		storeCredentials(response.credentials);
-	//		setCurrentUser(response.user);
-	//	  }, []);
-
 	const contextValue = useMemo(
 		() => ({
 			listOfTasks,

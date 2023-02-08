@@ -1,4 +1,4 @@
-import { TableHead } from "../../globalTypes";
+import { TableHead } from '../../globalTypes';
 type Props = {
     headings: TableHead[];
 };
