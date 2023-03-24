@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Container } from '../../Module/Container/Container';
 import { NewTaskForm } from '../NewTaskForm/MewTaskForm';
-import { Table } from '../Table/Table';
-import { TaskProvider } from '../../Context/TaskProvider';
+import { Table } from '../Table/table';
+import { TaskProvider } from '../../Context/taskProvider';
 
 import { Task } from '../../globalTypes';
 

@@ -4,8 +4,8 @@ import { useParams, useNavigate, useLoaderData } from 'react-router-dom';
 
 import { UserContext } from '../../Context/UserContext';
 
-import { Header } from '../../Components/Header/Header';
-import { ContentOfTasks } from '../../Components/ContentOfTasks/ContentOfTasks';
+import { Header } from '../../Components/Header/header';
+import { ContentOfTasks } from '../../Components/ContentOfTasks/contentOfTasks';
 import { removeCurrentUserFromStore } from '../../Utils';
 import { Task } from '../../globalTypes';
 

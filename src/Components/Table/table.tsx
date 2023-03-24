@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { TableHeading } from '../../Module/TableHeading/TableHeading';
+import { TableHeading } from '../../Module/TableHeading/tableHeading';
 import { TaskContext } from '../../Context/TaskContext';
 
 import { TableBody } from '../TableBody/TableBody';

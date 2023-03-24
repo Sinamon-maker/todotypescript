@@ -3,8 +3,8 @@ import { createBrowserRouter, redirect } from 'react-router-dom';
 import Main from './Main';
 import { MainPage } from './Pages/MainPage/MainPage';
 import { ErrorPage } from './Pages/ErrorPage/ErrorPage';
-import { LoginForm } from './Pages/LoginForm/LoginForm';
-import { RegisterForm } from './Pages/RegisterForm/RegisterForm';
+import { LoginForm } from './Pages/LoginForm/loginForm';
+import { RegisterForm } from './Pages/RegisterForm/registerForm';
 import TasksPage from './Pages/TaskPage/TasksPage';
 import { findTasks } from './Utils';
 

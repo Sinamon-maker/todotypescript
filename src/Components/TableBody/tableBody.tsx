@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TaskTableRaw } from '../TaskTableRaw/TaskTableRaw';
+import { TaskTableRaw } from '../TaskTableRaw/taskTableRaw';
 
 import { Process } from '../../globalTypes';
 
