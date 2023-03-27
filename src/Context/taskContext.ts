@@ -1,5 +1,5 @@
 import React from 'react';
-import { Task } from '../globalTypes';
+import { Task, SortParam } from '../globalTypes';
 
 type TaskContext = {
 	listOfTasks: Task[] | null;
@@ -10,6 +10,8 @@ type TaskContext = {
 	onSettingDeleteId: (val: number) => void;
 	canselDeleteTask: () => void;
 	confirmDeleteClick: () => void;
+	sorting: SortParam;
+	setSorting: React.Dispatch<React.SetStateAction<SortParam>>;
 };
 
 export type Cont = TaskContext | null;
@@ -22,4 +24,6 @@ export const TaskContext = React.createContext<TaskContext>({
 	onSettingDeleteId: () => null,
 	canselDeleteTask: () => null,
 	confirmDeleteClick: () => null,
+	sorting: SortParam.all,
+	setSorting: () => null,
 });

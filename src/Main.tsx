@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { ThemeComponent } from './Components/ContentOfTasks/ThemeComponent';
+import { ThemeComponent } from './Components/ThemeComponent/ThemeComponent';
 
 function Main() {
 	return (
