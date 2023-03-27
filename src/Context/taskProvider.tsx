@@ -45,16 +45,16 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 				status: false,
 				created: +new Date(),
 			};
+
 			let newList: Array<Task> = [];
 			if (listOfTasks.length) {
 				newList = [...listOfTasks, newTask];
 			} else {
 				newList = [newTask];
-
-				setListOfTasks(newList);
-				setSorting(SortParam.all);
-				saveInStorage(logoName, newList);
 			}
+			setListOfTasks(newList);
+			setSorting(SortParam.all);
+			saveInStorage(logoName, newList);
 		},
 		[listOfTasks, logoName]
 	);
