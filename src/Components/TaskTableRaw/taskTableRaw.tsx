@@ -5,8 +5,6 @@ import { TextTableElement } from '../TaskTableElements/TextTableElement/textTabl
 import { TableElementContainer } from '../../Module/TableElementContainer/TableElementContainer';
 import { ActionsTableElement } from '../TaskTableElements/ActionsTableElement/actionsTableElement';
 
-import { Task } from '../../globalTypes';
-
 interface Props<ObjectType> {
 	item: ObjectType;
 	index: number;

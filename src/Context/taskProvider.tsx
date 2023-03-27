@@ -32,11 +32,11 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	};
 
 	useEffect(() => {
-		if (loadData.length) {
+		if (listOfTasks.length) {
 			const newList = sortList(listOfTasks, sorting);
 			setSortedList(newList);
 		}
-	}, [sorting, loadData]);
+	}, [sorting, listOfTasks, logoName]);
 
 	const onNewTask = useCallback(
 		(text: string) => {
@@ -76,12 +76,11 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 
 				saveInStorage(logoName, newList);
 				setListOfTasks(newList);
-				const sortedList = sortList(newList, sorting);
-				setSortedList(sortedList);
+
 				canselEditTask();
 			}
 		},
-		[logoName]
+		[logoName, canselEditTask, listOfTasks]
 	);
 
 	const confirmDeleteClick = useCallback(() => {
@@ -93,7 +92,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 			const newSortedList = sortList(newTaskList, sorting);
 			setSortedList(newSortedList);
 		}
-	}, [idTaskToDelete, listOfTasks, logoName]);
+	}, [idTaskToDelete, listOfTasks, logoName, sorting]);
 
 	const changeStatus = useCallback(
 		(id: number) => {
@@ -106,11 +105,9 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 
 				setListOfTasks(newTaskList);
 				saveInStorage(logoName, newTaskList);
-				const newList = sortList(newTaskList, sorting);
-				setSortedList(newList);
 			}
 		},
-		[listOfTasks, logoName, sorting]
+		[listOfTasks, logoName]
 	);
 
 	const canselDeleteTask = useCallback(() => {

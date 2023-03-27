@@ -27,7 +27,7 @@ export const ModalEditTask = () => {
 			const editTask = list.find((task) => task.created === idEditTask);
 			setText(editTask?.text ?? '');
 		}
-	}, []);
+	}, [logoName, idEditTask]);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {

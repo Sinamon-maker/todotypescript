@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { AppButton } from '../../../Module/Button/Button';
-import { AppTextarea } from '../../../Module/TextArea/Textarea';
-import { Task, Process } from '../../../globalTypes';
+import { Task } from '../../../globalTypes';
 
 interface Props {
 	task: Task;
