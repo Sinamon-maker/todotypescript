@@ -7,6 +7,12 @@ export enum Process {
 	done = 'done',
 }
 
+export enum SortParam {
+	all = 'All',
+	done = 'Done',
+	ongoing = 'Ongoing',
+}
+
 export interface Task {
 	text: string;
 	status: Process;

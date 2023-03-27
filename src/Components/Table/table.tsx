@@ -17,7 +17,7 @@ const headings: TableHead[] = [
 	},
 	{
 		text: 'Actions',
-		style: 'w-1/4 sm:w-2/6 md:w-1/4 px-2 py-3 bg-fill-main',
+		style: ' px-2 sm:px-6 py-3 bg-fill-main text-end',
 	},
 ];
 
@@ -27,7 +27,7 @@ export const Table = () => {
 
 	if (list === null || list.length === 0) return <NotTasks />;
 	return (
-		<table className="table-fixed w-full sm:w-full min-w-fit  text-sm sm:text-base text-left  text-skin-base rounded shadow-lg">
+		<table className="table-auto w-full sm:w-full   text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-2xl shadow-md">
 			<TableHeading headings={headings} />
 			<TableBody list={list} />
 		</table>

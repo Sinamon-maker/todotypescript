@@ -1,7 +1,7 @@
-import React, { useContext, useState, useCallback, useMemo } from 'react';
+import React, { useContext, useState, useCallback, useMemo, useEffect } from 'react';
 import { TaskContext } from './TaskContext';
 
-import { Task, Process } from '../globalTypes';
+import { Task, Process, SortParam } from '../globalTypes';
 import { findTasks, saveInStorage } from '../Utils';
 import { UserContext } from './UserContext';
 
@@ -9,13 +9,31 @@ import { ModalDelete } from '../Components/ModalDeleteTask/ModalDeleteTask';
 
 type Props = {
 	children: React.ReactNode;
-	loadData: Task[] | null;
+	loadData: Task[] | [];
 };
 
 export const TaskProvider = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
-	const [listOfTasks, setListOfTasks] = useState<Task[] | null>(loadData);
+	const [listOfTasks, setListOfTasks] = useState<Task[] | []>(loadData);
 	const [idTaskToDelete, setIdTaskToDelete] = useState(0);
+	const [sorting, setSorting] = useState<SortParam>(SortParam.all);
+
+	const sortList = (list: Array<Task>, sort: SortParam) => {
+		if (sort === SortParam.done) {
+			return list?.filter((task) => task.status === Process.done);
+		}
+		if (sort === SortParam.ongoing) {
+			return list?.filter((task) => task.status === Process.inprogress);
+		}
+		return list;
+	};
+
+	useEffect(() => {
+		if (loadData.length) {
+			const newList = sortList(loadData, sorting);
+			setListOfTasks(newList);
+		}
+	}, [sorting, loadData]);
 
 	const onNewTask = useCallback(
 		(text: string) => {
@@ -102,8 +120,10 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 			onSettingDeleteId,
 			canselDeleteTask,
 			changeTask,
+			sorting,
+			setSorting,
 		}),
-		[listOfTasks, onNewTask, changeStatus, confirmDeleteClick, onSettingDeleteId, canselDeleteTask, changeTask]
+		[listOfTasks, onNewTask, changeStatus, confirmDeleteClick, onSettingDeleteId, canselDeleteTask, changeTask, sorting, setSorting]
 	);
 
 	return (

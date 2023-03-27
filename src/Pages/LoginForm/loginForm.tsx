@@ -71,7 +71,7 @@ export const LoginForm = () => {
 					/>
 
 					<AppButton
-						style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong disabled:opacity-25 border-fill-weak hover:border-fill-stromg text-sm border-4 text-skin-base py-1 px-2 roundedshadow-lg"
+						style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong disabled:opacity-25 border-fill-weak hover:border-fill-strong text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
 						type="submit"
 						nameValue="loginUser"
 						disabled={disableLogin}

@@ -18,7 +18,7 @@ const TasksPage = () => {
 
 	const [logoName, setLogoName] = useState('');
 
-	const loadData = useLoaderData() as Task[] | null;
+	const loadData = useLoaderData() as Task[] | [];
 
 	const params = useParams<QuizParams>();
 

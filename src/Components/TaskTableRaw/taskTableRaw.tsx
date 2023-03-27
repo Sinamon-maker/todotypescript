@@ -91,7 +91,7 @@ export const TaskTableRaw = <ObjectType extends { text: string; status: Process;
 				<TextTableElement task={item} valueTask={valueTask} onChange={onChange} handleClickChangeTask={handleClickChangeTask} id={idEdotTask} />
 			</TableElementContainer>
 
-			<TableElementContainer style="w-1/4 sm:2/4 md:w-1/4 px-2 py-2  sm:py-4 sm:px-6  text-center bg-fill-main">
+			<TableElementContainer style="w-1/4 sm:2/4 md:w-1/4 px-2 py-2  sm:py-4 sm:px-6 w-fit text-center bg-fill-main">
 				<ActionsTableElement
 					task={item}
 					id={idEdotTask}
