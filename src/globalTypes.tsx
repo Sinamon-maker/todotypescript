@@ -15,7 +15,7 @@ export enum SortParam {
 
 export interface Task {
 	text: string;
-	status: Process;
+	status: boolean;
 	created: number;
 }
 

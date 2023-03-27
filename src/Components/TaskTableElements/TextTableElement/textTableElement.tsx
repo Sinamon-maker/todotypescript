@@ -1,30 +1,23 @@
 import React from 'react';
 
 import { AppButton } from '../../../Module/Button/Button';
-import { AppTextarea } from '../../../Module/TextArea/Textarea';
-import { Task, Process } from '../../../globalTypes';
+import { Task } from '../../../globalTypes';
 
 interface Props {
 	task: Task;
-	valueTask: string;
-	id: number;
-	onChange: (e: React.ChangeEvent<EventTarget>) => void;
-	handleClickChangeTask: (e: React.MouseEvent<HTMLButtonElement>, val: Task) => void;
 }
 
-export const TextTableElement = ({ task, valueTask, onChange, handleClickChangeTask, id }: Props) => {
-	if (task.status === Process.done) {
-		return <span className="block w-full h-full py-2 text-left line-through text-skin-weak">{task.text}</span>;
-	}
+export const TextTableElement = ({ task }: Props) => {
+	const doneStyle = task.status ? 'line-through' : '';
 
-	if (task.created === id) {
-		return <AppTextarea id="message" rows={2} style="block p-2.5 w-full text-gray-900" value={valueTask} onChange={onChange} />;
-	}
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>, task: Task) => {
+		console.log(task);
+	};
 
 	return (
 		<AppButton
-			style="block w-full h-full py-2 text-left hover:text-red-500"
-			onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClickChangeTask(e, task)}
+			style={`block w-full h-full py-2 text-left hover:text-red-500 ${doneStyle}`}
+			onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e, task)}
 			title={task.text}
 			nameValue="taskText"
 		/>

@@ -5,7 +5,7 @@ import { MainPage } from './Pages/MainPage/MainPage';
 import { ErrorPage } from './Pages/ErrorPage/ErrorPage';
 import { LoginForm } from './Pages/LoginForm/loginForm';
 import { RegisterForm } from './Pages/RegisterForm/registerForm';
-import TasksPage from './Pages/TaskPage/TasksPage';
+import TasksPage from './Pages/TaskPage/tasksPage';
 import { findTasks } from './Utils';
 
 const func = () => {
