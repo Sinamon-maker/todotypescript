@@ -26,7 +26,7 @@ export const Table = () => {
 
 	if (!sortedList.length) return <NotTasks />;
 	return (
-		<table className="table-auto w-full sm:w-full   text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-2xl shadow-md">
+		<table className="table-auto w-full sm:w-full   text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-md shadow-md">
 			<TableHeading headings={headings} />
 			<TableBody list={sortedList} />
 		</table>

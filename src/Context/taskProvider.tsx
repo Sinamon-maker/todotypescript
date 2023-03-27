@@ -156,7 +156,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	return (
 		<TaskContext.Provider value={contextValue}>
 			{children}
-			{idEditTask !== 0 && <ModalEditTask />}
+			{idEditTask && <ModalEditTask />}
 			{idTaskToDelete !== 0 && <ModalDelete />}
 		</TaskContext.Provider>
 	);

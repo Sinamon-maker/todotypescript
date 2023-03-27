@@ -15,12 +15,22 @@ export const ModalDelete = () => {
 
 	return (
 		<ModalContainer>
-			<div className="w-80  p-4 pb-8 rounded bg-white">
+			<div className="w-80  p-4 py-6 pl-6 rounded bg-fill-main text-skin-base">
 				<h3>Are you sure?</h3>
-				<p className="my-4">Do you whont to delete task?</p>
+				<p className="my-4">Do you whant to delete task?</p>
 				<span className="block w-full flex justify-around">
-					<AppButton style="" onClick={(e) => onConfirmDeleteClick(e)} title="Yes" nameValue="confirmDelete" />
-					<AppButton style="" onClick={(e) => onCanselDeleteTask(e)} title="No" nameValue="canselDelete" />
+					<AppButton
+						style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
+						onClick={(e) => onConfirmDeleteClick(e)}
+						title="Yes"
+						nameValue="confirmDelete"
+					/>
+					<AppButton
+						style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
+						onClick={(e) => onCanselDeleteTask(e)}
+						title="No"
+						nameValue="canselDelete"
+					/>
 				</span>
 			</div>
 			;
