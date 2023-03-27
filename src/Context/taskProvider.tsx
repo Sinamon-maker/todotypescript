@@ -5,7 +5,7 @@ import { Task, SortParam } from '../globalTypes';
 import { saveInStorage } from '../Utils';
 import { UserContext } from './UserContext';
 
-import { ModalDelete } from '../Components/ModalDeleteTask/ModalDeleteTask';
+import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
 import { ModalEditTask } from '../Components/ModalEditTask/ModalEditTask';
 
 type Props = {
@@ -157,7 +157,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		<TaskContext.Provider value={contextValue}>
 			{children}
 			{idEditTask && <ModalEditTask />}
-			{idTaskToDelete !== 0 && <ModalDelete />}
+			{idTaskToDelete !== 0 && <ModalDeleteTask />}
 		</TaskContext.Provider>
 	);
 };

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { TableHeading } from '../../Module/TableHeading/tableHeading';
 import { TaskContext } from '../../Context/taskContext';
 
-import { TableBody } from '../TableBody/TableBody';
+import { TableBody } from '../TableBody/tableBody';
 import { TableHead } from '../../globalTypes';
 import { NotTasks } from '../NotTasks/NotTasks';
 

@@ -3,7 +3,7 @@ import { TaskContext } from '../../Context/taskContext';
 import { AppButton } from '../../Module/Button/Button';
 import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
 
-export const ModalDelete = () => {
+export const ModalDeleteTask = () => {
 	const { confirmDeleteClick, canselDeleteTask } = useContext(TaskContext);
 
 	const onConfirmDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
