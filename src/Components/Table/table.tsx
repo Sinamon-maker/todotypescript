@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { TableHeading } from '../../Module/TableHeading/tableHeading';
-import { TaskContext } from '../../Context/TaskContext';
+import { TaskContext } from '../../Context/taskContext';
 
 import { TableBody } from '../TableBody/TableBody';
 import { TableHead } from '../../globalTypes';
@@ -22,14 +22,13 @@ const headings: TableHead[] = [
 ];
 
 export const Table = () => {
-	const { listOfTasks } = useContext(TaskContext);
-	const list = listOfTasks === null ? [] : listOfTasks;
+	const { sortedList } = useContext(TaskContext);
 
-	if (list === null || list.length === 0) return <NotTasks />;
+	if (!sortedList.length) return <NotTasks />;
 	return (
 		<table className="table-auto w-full sm:w-full   text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-2xl shadow-md">
 			<TableHeading headings={headings} />
-			<TableBody list={list} />
+			<TableBody list={sortedList} />
 		</table>
 	);
 };
