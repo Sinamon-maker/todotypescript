@@ -20,6 +20,7 @@ export const ContentOfTasks = ({ loadData }: Props) => (
 					<NewTaskForm />
 					<SortingButtons />
 				</div>
+
 				<Table />
 			</Container>
 		</main>

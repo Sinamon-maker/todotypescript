@@ -22,7 +22,7 @@ export const ActionsTableElement = ({ task, id, onChangeStatus, delClick, onClic
 
 	if (task.created === id) {
 		return (
-			<span className="block w-full h-full flex justify-between sm:flex-row gap-2 sm:justify-between">
+			<span className="block w-full h-full flex justify-end sm:flex-row gap-4 sm:justify-end">
 				<AppButton
 					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong border-fill-weak hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
 					type="button"
@@ -45,7 +45,7 @@ export const ActionsTableElement = ({ task, id, onChangeStatus, delClick, onClic
 	}
 
 	return (
-		<span className="block w-full h-full flex justify-between ssm:flex-row gap-2 ssm:justify-between">
+		<span className="block w-full h-full flex justify-end ssm:flex-row gap-4 ssm:justify-end">
 			{task.status === 'done' ? (
 				<AppButton
 					style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong  hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
