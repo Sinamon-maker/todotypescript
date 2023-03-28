@@ -7,6 +7,8 @@ import { LoginForm } from './Pages/LoginForm/loginForm';
 import { RegisterForm } from './Pages/RegisterForm/registerForm';
 import TasksPage from './Pages/TaskPage/tasksPage';
 import { findTasks } from './Utils';
+import { TasksCataloge } from './Pages/TasksCataloge/TasksCataloge';
+import Home from './Pages/Home/Home';
 
 const func = () => {
 	const user = localStorage.getItem('currentUser') as string | null;
@@ -47,10 +49,24 @@ export const Root = createBrowserRouter([
 				],
 			},
 			{
-				path: 'tasks/:userId',
-				element: <TasksPage />,
+				path: '/tasks',
+				element: <Home />,
 				errorElement: <ErrorPage />,
 				loader: func2,
+				children: [
+					{
+						path: '/tasks',
+						element: <TasksCataloge />,
+						errorElement: <ErrorPage />,
+						loader: func2,
+					},
+					{
+						path: '/tasks/:userId',
+						element: <TasksPage />,
+						errorElement: <ErrorPage />,
+						loader: func2,
+					},
+				],
 			},
 		],
 	},

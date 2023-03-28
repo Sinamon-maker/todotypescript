@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Container } from '../../Module/Container/Container';
-import { NewTaskForm } from '../NewTaskForm/MewTaskForm';
+import { NewTaskForm } from '../NewTaskForm/NewTaskForm';
 import { Table } from '../Table/table';
 import { TaskProvider } from '../../Context/taskProvider';
 
