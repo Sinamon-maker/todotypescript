@@ -14,7 +14,7 @@ export const ModalDeleteTask = () => {
 	};
 
 	return (
-		<ModalContainer>
+		<ModalContainer close={canselDeleteTask}>
 			<div className="w-80  p-4 py-6 pl-6 rounded bg-fill-main text-skin-base">
 				<h3>Are you sure?</h3>
 				<p className="my-4">Do you whant to delete task?</p>

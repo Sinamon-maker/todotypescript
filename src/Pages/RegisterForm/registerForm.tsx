@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { AppInput } from '../../Module/Input/Input';
 import { AppButton } from '../../Module/Button/Button';
 import { Error } from '../../Components/Error/Error';
-import { findUser, setCurrentUserToStore, addNewUserToStorage } from '../../Utils';
+import { findUser } from '../../Utils';
+import useSignup from '../../Hooks/useSignup';
 
 export const RegisterForm = () => {
-	const [userName, setUserName] = useState('');
-	const [errorName, setErrorName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [displayName, setDisplayName] = useState('');
+	const { error, signup } = useSignup();
 
 	const navigate = useNavigate();
 
@@ -16,76 +19,91 @@ export const RegisterForm = () => {
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
-			setErrorName('');
-			const newValue = e.target.value;
-			setUserName(newValue);
-			if (e.target.value.length > 2) {
-				setDisableRegister(false);
+			if (e.target.name === 'email') {
+				const newValue = e.target.value;
+				setEmail(newValue);
 			}
-			if (e.target.value.length < 3) {
-				setDisableRegister(true);
+			if (e.target.name === 'password') {
+				const newValue = e.target.value;
+				setPassword(newValue);
+			}
+			if (e.target.name === 'displayName') {
+				const newValue = e.target.value;
+				setDisplayName(newValue);
 			}
 		}
 	};
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		setUserName('');
-		setErrorName('');
+		setEmail('');
+		setPassword('');
 		navigate('/');
 	};
 
-	const onRegister = (e: React.FormEvent<EventTarget>): void => {
+	const onRegister = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
-		const user = findUser(userName);
-		if (user) {
-			const error = 'User with this name also exists try another name';
-			setErrorName(error);
-		} else {
-			const userId = userName;
-			addNewUserToStorage(userName);
-
-			setCurrentUserToStore(userName);
-			setUserName('');
-
-			setDisableRegister(false);
-
-			const destination = `/tasks/${userId}`;
+		const user = await signup(email, password, displayName);
+		if (error === null) {
+			setPassword('');
+			setEmail('');
+			setDisplayName('');
+			const destination = `/tasks`;
 
 			navigate(`${destination}`, { replace: true });
 		}
+		console.log({ error });
 	};
 
 	return (
 		<div className="w-128">
 			<form onSubmit={onRegister} className="w-full max-w-md m-auto bg-fill-main rounded p-10 pb-8 shadow-lg" name="onRegister">
-				<div className="flex items-center border-b border-fill-weak py-2">
+				<div className=" border-b border-fill-weak py-2 mb-2">
 					<AppInput
-						style="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+						style="appearance-none bg-transparent border-none w-full text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
 						type="text"
-						nameValue="register"
-						value={userName}
-						placeholder="Jane Doe"
-						ariaLabel="Full name"
+						nameValue="displayName"
+						value={displayName}
+						placeholder="displayName"
+						ariaLabel="displayName"
 						onChange={handleChange}
 					/>
-
-					<AppButton
-						style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong border-fill-weak hover:border-fill-strong disabled:opacity-25 text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
-						nameValue="registerUser"
-						type="submit"
-						disabled={disableRegister}
-						title="Save"
-					/>
-
-					<AppButton
-						style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
-						type="button"
-						nameValue="cansel"
-						onClick={(e) => handleClick(e)}
-						title="Cansel"
+				</div>
+				<div className=" border-b border-fill-weak py-2 mb-2">
+					<AppInput
+						style="appearance-none bg-transparent border-none w-full text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+						type="text"
+						nameValue="email"
+						value={email}
+						placeholder="test@rest.com"
+						ariaLabel="Email"
+						onChange={handleChange}
 					/>
 				</div>
-				{{ errorName } && <Error message={errorName} />}
+				<div className=" border-b border-fill-weak py-2 mb-2">
+					<AppInput
+						style="appearance-none bg-transparent border-none w-full text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+						type="password"
+						nameValue="password"
+						value={password}
+						placeholder="Enter your password"
+						ariaLabel="Password"
+						onChange={handleChange}
+					/>
+				</div>
+				<Error message={error} />
+				<AppButton
+					style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong disabled:opacity-25 border-fill-weak hover:border-fill-strong text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
+					type="submit"
+					nameValue="signUp"
+					title="Sign up"
+				/>
+
+				<AppButton
+					style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
+					nameValue="cansel"
+					title="Cansel"
+					onClick={(e) => handleClick(e)}
+				/>
 			</form>
 		</div>
 	);

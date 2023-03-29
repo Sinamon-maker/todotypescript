@@ -1,10 +1,9 @@
+import { User } from 'firebase/auth';
+
+export type ContextUser = User | null;
+
 export interface Items<ObjectType> {
 	list: ObjectType[];
-}
-
-export enum Process {
-	inprogress = 'inprogress',
-	done = 'done',
 }
 
 export enum SortParam {
@@ -18,6 +17,21 @@ export interface Task {
 	status: boolean;
 	created: number;
 }
+
+export interface Data {
+	title: string;
+	id: string;
+	createdAt: Data | null;
+	userId: string;
+	tasks: Array<Task>;
+	displayName: string;
+}
+
+export type UserObject = {
+	id: string;
+	displayName: string;
+	email: string;
+};
 
 export type List = Array<Task>;
 

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { TableHeading } from '../../Module/TableHeading/tableHeading';
 import { TaskContext } from '../../Context/taskContext';
+import { UserContext } from '../../Context/UserContext';
 
 import { TableBody } from '../TableBody/tableBody';
 import { TableHead } from '../../globalTypes';
@@ -23,6 +24,8 @@ const headings: TableHead[] = [
 
 export const Table = () => {
 	const { sortedList } = useContext(TaskContext);
+	const logoName = useContext(UserContext);
+	console.log({ logoName });
 
 	if (!sortedList.length) return <NotTasks />;
 	return (

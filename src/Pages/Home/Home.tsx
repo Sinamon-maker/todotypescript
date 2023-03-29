@@ -1,39 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLoaderData } from 'react-router-dom';
 
-import { UserContext } from '../../Context/UserContext';
+import { TaskProvider } from '../../Context/taskProvider';
 
 import { Header } from '../../Components/Header/header';
-import { removeCurrentUserFromStore } from '../../Utils';
+import { Container } from '../../Module/Container/Container';
+import { UserProvider } from '../../Context/UserProvider';
+
+import { Task } from '../../globalTypes';
+import getCollection from '../../Hooks/getCollection';
 
 const Home = () => {
-	const navigate = useNavigate();
-
-	const [logoName, setLogoName] = useState('');
-
-	useEffect(() => {
-		const user = localStorage.getItem('currentUser');
-		if (!user) {
-			navigate('/login');
-		} else {
-			setLogoName(user);
-		}
-	}, [navigate]);
-
-	const logout = () => {
-		setLogoName('');
-		removeCurrentUserFromStore();
-		navigate('/');
-	};
+	//const { documents, error } = getCollection('tasks');
+	//	const loadData = useLoaderData() as Task[] | [];
+	//console.log('home', documents, error);
 
 	return (
-		<UserContext.Provider value={logoName}>
+		<TaskProvider loadData={[]}>
 			<div className="flex flex-col h-screen">
-				<Header handleClick={logout} />
-				<Outlet />
+				<Header />
+				<main className="w-full border border-white  m-auto grow overflow-y-auto scroll-smooth ">
+					<Container>
+						<Outlet />
+					</Container>
+				</main>
 			</div>
-		</UserContext.Provider>
+		</TaskProvider>
 	);
 };
 

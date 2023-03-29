@@ -20,14 +20,14 @@ export const ModalEditTask = () => {
 		canselEditTask();
 	};
 
-	useEffect(() => {
-		const list = findTasks(logoName);
+	//	useEffect(() => {
+	//		const list <Array>Task = [];
 
-		if (list) {
-			const editTask = list.find((task) => task.created === idEditTask);
-			setText(editTask?.text ?? '');
-		}
-	}, [logoName, idEditTask]);
+	//		if (list.length) {
+	//			const editTask = list.find((task) => task.created === idEditTask);
+	//			setText(editTask?.text ?? '');
+	//		}
+	//	}, [logoName, idEditTask]);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -36,7 +36,7 @@ export const ModalEditTask = () => {
 	};
 
 	return (
-		<ModalContainer>
+		<ModalContainer close={canselEditTask}>
 			<div className="w-80   rounded bg-white">
 				<form onSubmit={onSubmit} className="w-full max-w-md m-auto bg-fill-main rounded pt-10 px-4 pb-8 shadow-lg" name="onEdit">
 					<div className="flex items-center border-b border-fill-weak mb-6  py-2">

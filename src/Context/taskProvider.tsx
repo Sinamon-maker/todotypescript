@@ -2,7 +2,6 @@ import React, { useContext, useState, useCallback, useMemo, useEffect } from 're
 import { TaskContext } from './taskContext';
 
 import { Task, SortParam } from '../globalTypes';
-import { saveInStorage } from '../Utils';
 import { UserContext } from './UserContext';
 
 import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
@@ -15,7 +14,7 @@ type Props = {
 
 export const TaskProvider = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
-	const [listOfTasks, setListOfTasks] = useState<Task[] | []>(loadData);
+	const [listOfTasks, setListOfTasks] = useState<Task[] | []>(loadData || []);
 	const [idTaskToDelete, setIdTaskToDelete] = useState(0);
 	const [sorting, setSorting] = useState<SortParam>(SortParam.all);
 	const [sortedList, setSortedList] = useState<Task[] | []>(listOfTasks);
@@ -54,7 +53,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 			}
 			setListOfTasks(newList);
 			setSorting(SortParam.all);
-			saveInStorage(logoName, newList);
+			//	saveInStorage(logoName, newList);
 		},
 		[listOfTasks, logoName]
 	);
@@ -74,7 +73,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 					return task;
 				});
 
-				saveInStorage(logoName, newList);
+				//		saveInStorage(logoName, newList);
 				setListOfTasks(newList);
 
 				canselEditTask();
@@ -86,7 +85,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	const confirmDeleteClick = useCallback(() => {
 		if (listOfTasks.length) {
 			const newTaskList: Task[] = listOfTasks.filter((task: Task) => task.created !== idTaskToDelete);
-			saveInStorage(logoName, newTaskList);
+			//	saveInStorage(logoName, newTaskList);
 			setListOfTasks(newTaskList);
 			setIdTaskToDelete(0);
 			const newSortedList = sortList(newTaskList, sorting);
@@ -104,7 +103,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 				});
 
 				setListOfTasks(newTaskList);
-				saveInStorage(logoName, newTaskList);
+				//		saveInStorage(logoName, newTaskList);
 			}
 		},
 		[listOfTasks, logoName]

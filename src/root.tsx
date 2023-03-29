@@ -1,29 +1,27 @@
 import React from 'react';
-import { createBrowserRouter, redirect } from 'react-router-dom';
+import { createBrowserRouter, redirect, Router } from 'react-router-dom';
 import Main from './Main';
 import { MainPage } from './Pages/MainPage/MainPage';
 import { ErrorPage } from './Pages/ErrorPage/ErrorPage';
 import { LoginForm } from './Pages/LoginForm/loginForm';
 import { RegisterForm } from './Pages/RegisterForm/registerForm';
 import TasksPage from './Pages/TaskPage/tasksPage';
-import { findTasks } from './Utils';
 import { TasksCataloge } from './Pages/TasksCataloge/TasksCataloge';
 import Home from './Pages/Home/Home';
+import { auth } from './Firebase/Config';
+import getCollection from './Hooks/getCollection';
 
-const func = () => {
-	const user = localStorage.getItem('currentUser') as string | null;
-	if (user) {
-		const destination = `/tasks/${user}`;
+import { User, onAuthStateChanged } from 'firebase/auth';
 
-		return redirect(`${destination}`);
-	}
-	return 3;
+const func = async () => {
+	const user = auth.currentUser;
+	console.log('user', user);
+
+	return 2;
 };
 
-const func2 = () => {
-	const user = localStorage.getItem('currentUser') as string;
-	const list = findTasks(user);
-	return list;
+const LoadData = () => {
+	return 50;
 };
 
 export const Root = createBrowserRouter([
@@ -52,19 +50,19 @@ export const Root = createBrowserRouter([
 				path: '/tasks',
 				element: <Home />,
 				errorElement: <ErrorPage />,
-				loader: func2,
+				loader: LoadData,
 				children: [
 					{
 						path: '/tasks',
 						element: <TasksCataloge />,
 						errorElement: <ErrorPage />,
-						loader: func2,
+						loader: LoadData,
 					},
 					{
 						path: '/tasks/:userId',
 						element: <TasksPage />,
 						errorElement: <ErrorPage />,
-						loader: func2,
+						loader: LoadData,
 					},
 				],
 			},
