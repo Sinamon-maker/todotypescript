@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { TaskContext } from '../../Context/taskContext';
-import { AppButton } from '../../Module/Button/Button';
+import { TaskContext } from '../../../Context/taskContext';
+import { AppButton } from '../../../Module/Button/Button';
 
-import { SortParam } from '../../globalTypes';
+import { SortParam } from '../../../globalTypes';
 
 export const SortingButtons = () => {
 	const { sorting, setSorting } = useContext(TaskContext);

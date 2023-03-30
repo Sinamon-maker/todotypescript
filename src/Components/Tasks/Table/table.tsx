@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { TableHeading } from '../../Module/TableHeading/tableHeading';
-import { TaskContext } from '../../Context/taskContext';
-import { UserContext } from '../../Context/UserContext';
+import { TableHeading } from '../../../Module/TableHeading/tableHeading';
+import { TaskContext } from '../../../Context/taskContext';
+import { UserContext } from '../../../Context/UserContext';
 
-import { TableBody } from '../TableBody/tableBody';
-import { TableHead } from '../../globalTypes';
-import { NotTasks } from '../NotTasks/NotTasks';
+import { TableBody } from '../TableElements/TableBody/tableBody';
+import { TableHead } from '../../../globalTypes';
+import { NotTasks } from '../../NotTasks/NotTasks';
 
 const headings: TableHead[] = [
 	{

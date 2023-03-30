@@ -1,6 +1,6 @@
 import React from 'react';
-import { Data } from '../../globalTypes';
-import { AppButton } from '../../Module/Button/Button';
+import { Data } from '../../../globalTypes';
+import { AppButton } from '../../../Module/Button/Button';
 
 type Props = {
 	resultData: Data | null;

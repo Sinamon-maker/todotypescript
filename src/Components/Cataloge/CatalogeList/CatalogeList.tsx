@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import getCollection from '../../Hooks/getCollection';
-import getDocum from '../../Hooks/getDocument';
+import getCollection from '../../../Hooks/getCollection';
+import getDocum from '../../../Hooks/getDocument';
 import { collection, getDocs, QuerySnapshot, DocumentData } from 'firebase/firestore';
-import { db } from '../../Firebase/Config';
-import { Data } from '../../globalTypes';
+import { db } from '../../../Firebase/Config';
+import { Data } from '../../../globalTypes';
 
 export const CatalogeList = () => {
 	const { documents, error } = getCollection('tasks');

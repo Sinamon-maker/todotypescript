@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 
-import { NewTaskForm } from '../NewTaskForm/NewTaskForm';
-import { Table } from '../Table/table';
+import { NewTaskForm } from '../Tasks/NewTaskForm/NewTaskForm';
+import { Table } from '../Tasks/Table/table';
 
-import { SortingButtons } from '../SortingButtons/SortingButtons';
-import { CatalogeHeading } from '../CatalogeHeading/CatalogeHeading';
+import { SortingButtons } from '../Tasks/SortingButtons/SortingButtons';
+import { CatalogeHeading } from '../Tasks/CatalogeHeading/CatalogeHeading';
 import { TaskContext } from '../../Context/taskContext';
 
 export const ContentOfTasks = () => {

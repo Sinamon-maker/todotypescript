@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { AppButton } from '../../../Module/Button/Button';
-import { Task } from '../../../globalTypes';
+import { AppButton } from '../../../../Module/Button/Button';
+import { Task } from '../../../../globalTypes';
 
 interface Props {
 	task: Task;

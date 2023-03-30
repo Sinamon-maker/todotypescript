@@ -1,42 +1,33 @@
 import React, { useState, useContext } from 'react';
-import { UserContext } from '../../Context/UserContext';
-import useCollection from '../../Hooks/useCollection';
-import { serverTimestamp } from 'firebase/firestore';
+import { TaskContext } from '../../../Context/taskContext';
+import { AppButton } from '../../../Module/Button/Button';
+import { AppInput } from '../../../Module/Input/Input';
 
-import { AppButton } from '../../Module/Button/Button';
-import { AppInput } from '../../Module/Input/Input';
-
-export const NewCatalogeForm = () => {
+export const NewTaskForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
 
-	const { error, addDocument } = useCollection('tasks');
-	const { logoName } = useContext(UserContext);
-
-	//const { onNewTask } = useContext(TaskContext);
+	const { onNewTask } = useContext(TaskContext);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
-			console.log(e.target.value);
-			const neVal = e.target.value;
-			setTaskName(neVal);
+			const newValue = e.target.value;
+			setTaskName(newValue);
+
+			if (e.target.value.length > 2) {
+				setDisableSave(false);
+			}
+			if (e.target.value.length < 3) {
+				setDisableSave(true);
+			}
 		}
 	};
 
-	const onSubmit = async (e: React.FormEvent<EventTarget>): Promise<void> => {
+	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
 		e.preventDefault();
-
-		if (taskName.length > 3) {
-			const newTask = {
-				title: taskName,
-				userId: logoName?.uid,
-				displayName: logoName?.displayName,
-				createdAt: serverTimestamp(),
-				tasks: [],
-			};
-			console.log(newTask);
-			await addDocument(newTask);
-		}
+		onNewTask(taskName);
+		setTaskName('');
+		setDisableSave(true);
 	};
 
 	const onPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -46,14 +37,14 @@ export const NewCatalogeForm = () => {
 	};
 
 	return (
-		<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded  px-2 pt-4 pb-0 " name="newCataloge">
+		<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded px-6 sm:px-10 pt-4 pb-0 " name="newTask">
 			<div className="flex items-center border-b border-fill-weak py-2">
 				<AppInput
 					style="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
 					type="text"
 					nameValue="task"
 					value={taskName}
-					placeholder="Enter a name of cataloge"
+					placeholder="Buy products"
 					ariaLabel="Full name"
 					onChange={handleChange}
 					onKeyDown={onPressEnter}
@@ -63,6 +54,7 @@ export const NewCatalogeForm = () => {
 					style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong border-fill-weak hover:border-fill-strong disabled:opacity-25 text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
 					type="submit"
 					nameValue="addTask"
+					disabled={disableSave}
 					title="Save"
 				/>
 			</div>
