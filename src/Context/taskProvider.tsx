@@ -16,7 +16,7 @@ type Props = {
 
 export const TaskProvider = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
-	const taskResult: Data | null = loadData.newDoc;
+	const [taskResult, setTaskResult] = useState<Data | null>(null);
 	const [listOfTasks, setListOfTasks] = useState<Task[] | []>([]);
 
 	const [idTaskToDelete, setIdTaskToDelete] = useState(0);
@@ -35,8 +35,9 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	};
 
 	useEffect(() => {
-		if (taskResult) {
-			setListOfTasks(taskResult.tasks);
+		if (loadData.newDoc) {
+			setTaskResult(loadData.newDoc);
+			setListOfTasks(loadData.newDoc.tasks);
 		}
 	}, []);
 
@@ -161,6 +162,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 
 	const contextValue = useMemo(
 		() => ({
+			taskResult,
 			sortedList,
 			listOfTasks,
 			idEditTask,
@@ -177,6 +179,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		}),
 		[
 			sortedList,
+			taskResult,
 			listOfTasks,
 			idEditTask,
 			onNewTask,

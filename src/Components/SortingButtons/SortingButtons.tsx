@@ -10,7 +10,7 @@ export const SortingButtons = () => {
 	return (
 		<div className="flex gap-2 items-center   py-2 w-full ssm:w-fit justify-end ">
 			<AppButton
-				style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg disabled:opacity-25"
+				style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg disabled:underline"
 				type="button"
 				nameValue="allTask"
 				title="All"
@@ -18,7 +18,7 @@ export const SortingButtons = () => {
 				onClick={(e: React.MouseEvent<HTMLButtonElement>) => setSorting(SortParam.all)}
 			/>
 			<AppButton
-				style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg disabled:opacity-25"
+				style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg  disabled:underline"
 				type="button"
 				nameValue="doneTask"
 				title="Done"
@@ -27,7 +27,7 @@ export const SortingButtons = () => {
 			/>
 
 			<AppButton
-				style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg disabled:opacity-25"
+				style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg disabled:underline"
 				type="button"
 				nameValue="ongoingTask"
 				title="Ongoing"
