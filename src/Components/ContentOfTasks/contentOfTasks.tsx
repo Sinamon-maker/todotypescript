@@ -11,7 +11,6 @@ export const ContentOfTasks = () => (
 			<NewTaskForm />
 			<SortingButtons />
 		</div>
-
 		<Table />
 	</>
 );

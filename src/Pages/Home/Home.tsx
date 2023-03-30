@@ -17,16 +17,14 @@ const Home = () => {
 	//console.log('home', documents, error);
 
 	return (
-		<TaskProvider loadData={[]}>
-			<div className="flex flex-col h-screen">
-				<Header />
-				<main className="w-full border border-white  m-auto grow overflow-y-auto scroll-smooth ">
-					<Container>
-						<Outlet />
-					</Container>
-				</main>
-			</div>
-		</TaskProvider>
+		<div className="h-full flex flex-col">
+			<Header />
+			<main className="w-full h-full border border-white  m-auto grow overflow-y-auto scroll-smooth ">
+				<Container>
+					<Outlet />
+				</Container>
+			</main>
+		</div>
 	);
 };
 

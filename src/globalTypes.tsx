@@ -32,6 +32,10 @@ export type UserObject = {
 	displayName: string;
 	email: string;
 };
+export type serverDataTask = {
+	error: string;
+	newDoc: Data | null;
+};
 
 export type List = Array<Task>;
 

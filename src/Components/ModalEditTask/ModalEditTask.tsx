@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TaskContext } from '../../Context/taskContext';
 import { UserContext } from '../../Context/UserContext';
+import { Task } from '../../globalTypes';
 import { AppButton } from '../../Module/Button/Button';
 import { AppInput } from '../../Module/Input/Input';
 import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
@@ -8,7 +9,7 @@ import { findTasks } from '../../Utils';
 
 export const ModalEditTask = () => {
 	const [text, setText] = useState('');
-	const { changeTask, canselEditTask, idEditTask } = useContext(TaskContext);
+	const { changeTask, canselEditTask, idEditTask, listOfTasks } = useContext(TaskContext);
 	const logoName = useContext(UserContext);
 
 	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
@@ -20,14 +21,12 @@ export const ModalEditTask = () => {
 		canselEditTask();
 	};
 
-	//	useEffect(() => {
-	//		const list <Array>Task = [];
-
-	//		if (list.length) {
-	//			const editTask = list.find((task) => task.created === idEditTask);
-	//			setText(editTask?.text ?? '');
-	//		}
-	//	}, [logoName, idEditTask]);
+	useEffect(() => {
+		if (listOfTasks.length) {
+			const editTask: Task | undefined = listOfTasks.find((task: Task) => task.created === idEditTask);
+			setText(editTask?.text ?? '');
+		}
+	}, [logoName, idEditTask]);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {

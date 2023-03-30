@@ -1,20 +1,24 @@
 import React, { useContext, useState, useCallback, useMemo, useEffect } from 'react';
 import { TaskContext } from './taskContext';
 
-import { Task, SortParam } from '../globalTypes';
+import { Data, Task, SortParam, serverDataTask } from '../globalTypes';
 import { UserContext } from './UserContext';
 
 import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
 import { ModalEditTask } from '../Components/ModalEditTask/ModalEditTask';
 
+import { updateTask } from '../Hooks/updateDocument';
+
 type Props = {
 	children: React.ReactNode;
-	loadData: Task[] | [];
+	loadData: serverDataTask;
 };
 
 export const TaskProvider = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
-	const [listOfTasks, setListOfTasks] = useState<Task[] | []>(loadData || []);
+	const taskResult: Data | null = loadData.newDoc;
+	const [listOfTasks, setListOfTasks] = useState<Task[] | []>([]);
+
 	const [idTaskToDelete, setIdTaskToDelete] = useState(0);
 	const [sorting, setSorting] = useState<SortParam>(SortParam.all);
 	const [sortedList, setSortedList] = useState<Task[] | []>(listOfTasks);
@@ -31,14 +35,22 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	};
 
 	useEffect(() => {
+		if (taskResult) {
+			setListOfTasks(taskResult.tasks);
+		}
+	}, []);
+
+	useEffect(() => {
 		if (listOfTasks.length) {
 			const newList = sortList(listOfTasks, sorting);
 			setSortedList(newList);
+		} else {
+			setSortedList([]);
 		}
 	}, [sorting, listOfTasks, logoName]);
 
 	const onNewTask = useCallback(
-		(text: string) => {
+		async (text: string) => {
 			const newTask = {
 				text,
 				status: false,
@@ -51,8 +63,16 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 			} else {
 				newList = [newTask];
 			}
-			setListOfTasks(newList);
-			setSorting(SortParam.all);
+			if (taskResult) {
+				try {
+					console.log(newList, taskResult?.id);
+					await updateTask('tasks', { tasks: newList }, taskResult?.id);
+
+					setListOfTasks(newList);
+				} catch (err) {
+					console.log(err);
+				}
+			}
 			//	saveInStorage(logoName, newList);
 		},
 		[listOfTasks, logoName]
@@ -63,7 +83,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	}, []);
 
 	const changeTask = useCallback(
-		(text: string, id: number) => {
+		async (text: string, id: number) => {
 			if (listOfTasks !== null) {
 				const newList = listOfTasks.map((task) => {
 					if (task.created === id) {
@@ -72,37 +92,55 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 
 					return task;
 				});
-
+				if (taskResult) {
+					try {
+						await updateTask('tasks', { tasks: newList }, taskResult?.id);
+						setListOfTasks(newList);
+						canselEditTask();
+					} catch (err) {
+						console.log(err);
+					}
+				}
 				//		saveInStorage(logoName, newList);
-				setListOfTasks(newList);
-
-				canselEditTask();
 			}
 		},
 		[logoName, canselEditTask, listOfTasks]
 	);
 
-	const confirmDeleteClick = useCallback(() => {
+	const confirmDeleteClick = useCallback(async () => {
 		if (listOfTasks.length) {
-			const newTaskList: Task[] = listOfTasks.filter((task: Task) => task.created !== idTaskToDelete);
+			const newTaskList: Task[] | [] = listOfTasks.filter((task: Task) => task.created !== idTaskToDelete);
+			if (taskResult) {
+				try {
+					console.log('delete', newTaskList);
+					await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
+					setListOfTasks(newTaskList);
+					setIdTaskToDelete(0);
+				} catch (err) {
+					console.log(err);
+				}
+			}
 			//	saveInStorage(logoName, newTaskList);
-			setListOfTasks(newTaskList);
-			setIdTaskToDelete(0);
-			const newSortedList = sortList(newTaskList, sorting);
-			setSortedList(newSortedList);
 		}
 	}, [idTaskToDelete, listOfTasks, logoName, sorting]);
 
 	const changeStatus = useCallback(
-		(id: number) => {
+		async (id: number) => {
 			if (listOfTasks.length) {
 				const newTaskList = listOfTasks.map((task) => {
 					if (task.created === id) return { ...task, status: !task.status };
 
 					return task;
 				});
+				if (taskResult) {
+					try {
+						await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
+						setListOfTasks(newTaskList);
+					} catch (err) {
+						console.log(err);
+					}
+				}
 
-				setListOfTasks(newTaskList);
 				//		saveInStorage(logoName, newTaskList);
 			}
 		},
@@ -124,6 +162,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	const contextValue = useMemo(
 		() => ({
 			sortedList,
+			listOfTasks,
 			idEditTask,
 			onNewTask,
 			changeStatus,
@@ -138,6 +177,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		}),
 		[
 			sortedList,
+			listOfTasks,
 			idEditTask,
 			onNewTask,
 			changeStatus,
@@ -155,7 +195,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	return (
 		<TaskContext.Provider value={contextValue}>
 			{children}
-			{idEditTask && <ModalEditTask />}
+			{idEditTask !== 0 && <ModalEditTask />}
 			{idTaskToDelete !== 0 && <ModalDeleteTask />}
 		</TaskContext.Provider>
 	);

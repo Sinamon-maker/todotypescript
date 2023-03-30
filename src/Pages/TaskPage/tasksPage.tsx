@@ -6,14 +6,17 @@ import { UserContext } from '../../Context/UserContext';
 
 import { ContentOfTasks } from '../../Components/ContentOfTasks/contentOfTasks';
 
-import { Task } from '../../globalTypes';
-
-type QuizParams = {
-	userId: string;
-};
+import { Data, serverDataTask } from '../../globalTypes';
+import { TaskProvider } from '../../Context/taskProvider';
 
 const TasksPage = () => {
-	return <ContentOfTasks />;
+	const loadData = useLoaderData() as serverDataTask;
+	console.log(loadData);
+	return (
+		<TaskProvider loadData={loadData}>
+			<ContentOfTasks />
+		</TaskProvider>
+	);
 };
 
 export default TasksPage;

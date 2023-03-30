@@ -10,6 +10,7 @@ import { TasksCataloge } from './Pages/TasksCataloge/TasksCataloge';
 import Home from './Pages/Home/Home';
 import { auth } from './Firebase/Config';
 import getCollection from './Hooks/getCollection';
+import { loadDocFromFirebase } from './Hooks/getDocument';
 
 import { User, onAuthStateChanged } from 'firebase/auth';
 
@@ -20,8 +21,9 @@ const func = async () => {
 	return 2;
 };
 
-const LoadData = () => {
-	return 50;
+const LoadData = async ({ params }: any) => {
+	console.log('params', params);
+	return await loadDocFromFirebase(params.userId);
 };
 
 export const Root = createBrowserRouter([
@@ -50,13 +52,12 @@ export const Root = createBrowserRouter([
 				path: '/tasks',
 				element: <Home />,
 				errorElement: <ErrorPage />,
-				loader: LoadData,
+
 				children: [
 					{
 						path: '/tasks',
 						element: <TasksCataloge />,
 						errorElement: <ErrorPage />,
-						loader: LoadData,
 					},
 					{
 						path: '/tasks/:userId',

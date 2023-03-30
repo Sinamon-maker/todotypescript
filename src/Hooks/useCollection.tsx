@@ -1,6 +1,6 @@
-import { db } from '../Firebase/Config';
-import { collection, addDoc } from 'firebase/firestore';
 import { useState } from 'react';
+import { db } from '../Firebase/Config';
+import { collection, addDoc, CollectionReference } from 'firebase/firestore';
 
 const useCollection = (collectionName: string) => {
 	const [error, setError] = useState('');
@@ -8,8 +8,8 @@ const useCollection = (collectionName: string) => {
 	const addDocument = async (doc: any) => {
 		setError('');
 		try {
-			const refDoc = collection(db, collectionName);
-			await addDoc(refDoc, doc);
+			const ref = collection(db, collectionName);
+			await addDoc(ref, doc);
 		} catch (err) {
 			console.log(err);
 			setError('could not send the message');

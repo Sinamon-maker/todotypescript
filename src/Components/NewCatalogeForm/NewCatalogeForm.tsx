@@ -29,7 +29,7 @@ export const NewCatalogeForm = () => {
 		if (taskName.length > 3) {
 			const newTask = {
 				title: taskName,
-				userId: logoName?.getIdToken,
+				userId: logoName?.uid,
 				displayName: logoName?.displayName,
 				createdAt: serverTimestamp(),
 				tasks: [],
