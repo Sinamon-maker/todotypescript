@@ -27,7 +27,7 @@ export const Table = () => {
 	const logoName = useContext(UserContext);
 	console.log({ logoName });
 
-	if (!listOfTasks.length) return <NotTasks />;
+	if (!listOfTasks?.length) return <NotTasks />;
 	return (
 		<table className="table-auto w-full sm:w-full  bg-fill-main text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-md shadow-md">
 			<TableHeading headings={headings} />

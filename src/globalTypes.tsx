@@ -33,8 +33,8 @@ export type UserObject = {
 	email: string;
 };
 export type serverDataTask = {
-	error: string;
 	newDoc: Data | null;
+	error: string;
 };
 
 export type List = Array<Task>;

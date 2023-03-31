@@ -8,6 +8,7 @@ import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
 import { ModalEditTask } from '../Components/ModalEditTask/ModalEditTask';
 
 import { updateTask } from '../Hooks/updateDocument';
+import { deleteTask } from '../Hooks/deleteDocument';
 
 type Props = {
 	children: React.ReactNode;
@@ -16,6 +17,7 @@ type Props = {
 
 export const TaskProvider = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
+	const [errorLoadData, setErrorLoadDoc] = useState('');
 	const [taskResult, setTaskResult] = useState<Data | null>(null);
 	const [listOfTasks, setListOfTasks] = useState<Task[] | []>([]);
 
@@ -39,16 +41,27 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 			setTaskResult(loadData.newDoc);
 			setListOfTasks(loadData.newDoc.tasks);
 		}
+		if (loadData.error) {
+			setErrorLoadDoc(loadData.error);
+		}
 	}, []);
 
 	useEffect(() => {
-		if (listOfTasks.length) {
+		if (listOfTasks && listOfTasks.length) {
 			const newList = sortList(listOfTasks, sorting);
 			setSortedList(newList);
 		} else {
 			setSortedList([]);
 		}
 	}, [sorting, listOfTasks, logoName]);
+
+	const deleteCatalogue = async () => {
+		try {
+			if (taskResult) {
+				await deleteTask('tasks', taskResult.id);
+			}
+		} catch (err) {}
+	};
 
 	const onNewTask = useCallback(
 		async (text: string) => {
@@ -163,6 +176,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	const contextValue = useMemo(
 		() => ({
 			taskResult,
+			errorLoadData,
 			sortedList,
 			listOfTasks,
 			idEditTask,
@@ -179,6 +193,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		}),
 		[
 			sortedList,
+			errorLoadData,
 			taskResult,
 			listOfTasks,
 			idEditTask,

@@ -8,7 +8,8 @@ import { CatalogeHeading } from '../Tasks/CatalogeHeading/CatalogeHeading';
 import { TaskContext } from '../../Context/taskContext';
 
 export const ContentOfTasks = () => {
-	const { taskResult } = useContext(TaskContext);
+	const { taskResult, errorLoadData } = useContext(TaskContext);
+	if (errorLoadData) return <div>Could not retreive document</div>;
 	return (
 		<>
 			<div className="w-full flex flex-col ssm:flex-row justify-between">

@@ -10,19 +10,20 @@ export const loadDocFromFirebase = async (id: string) => {
 		error = '';
 		const docSnap = await getDoc(doc(db, 'tasks', id));
 		console.log('getDoc', docSnap);
-		if (!docSnap) {
-			throw Error('this task does not exist');
+
+		if (!docSnap.exists()) {
+			throw new Error('this task does not exist');
 		}
 		const docId = docSnap.id as string;
 		newDoc = { ...docSnap.data(), id: docId } as Data;
-		return { newDoc, error };
+		return { error, newDoc };
 	} catch (err) {
 		console.log('err', err);
 		let message;
 		if (err instanceof Error) message = err.message;
 		else message = String(err);
 		error = message;
-		return { newDoc, error };
+		return { error, newDoc };
 	}
 };
 

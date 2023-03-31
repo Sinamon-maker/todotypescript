@@ -3,6 +3,7 @@ import { Task, SortParam, Data } from '../globalTypes';
 
 type TaskContext = {
 	taskResult: Data | null;
+	errorLoadData: string;
 	sortedList: Task[] | [];
 	listOfTasks: Task[] | [];
 	idEditTask: number;
@@ -22,6 +23,7 @@ export type Cont = TaskContext | null;
 
 export const TaskContext = React.createContext<TaskContext>({
 	sortedList: [],
+	errorLoadData: '',
 	taskResult: null,
 	listOfTasks: [],
 	idEditTask: 0,
