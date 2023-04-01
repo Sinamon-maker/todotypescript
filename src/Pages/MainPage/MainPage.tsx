@@ -11,7 +11,7 @@ export const MainPage = () => {
 			console.log('999');
 			navigate('/tasks');
 		}
-	}, [logoName]);
+	}, [logoName, navigate]);
 	if (isLoading) return <div>Loading...</div>;
 	return (
 		<>

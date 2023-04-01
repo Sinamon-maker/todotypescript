@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { AppInput } from '../../Module/Input/Input';
 import { AppButton } from '../../Module/Button/Button';
 import { Error } from '../../Components/Error/Error';
-import { findUser } from '../../Utils';
 import useSignup from '../../Hooks/useSignup';
 
 export const RegisterForm = () => {
@@ -14,8 +13,6 @@ export const RegisterForm = () => {
 	const { error, signup } = useSignup();
 
 	const navigate = useNavigate();
-
-	const [disableRegister, setDisableRegister] = useState(true);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -34,7 +31,7 @@ export const RegisterForm = () => {
 		}
 	};
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleClick = () => {
 		setEmail('');
 		setPassword('');
 		navigate('/');
@@ -42,16 +39,7 @@ export const RegisterForm = () => {
 
 	const onRegister = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
-		const user = await signup(email, password, displayName);
-		if (error === null) {
-			setPassword('');
-			setEmail('');
-			setDisplayName('');
-			const destination = `/tasks`;
-
-			navigate(`${destination}`, { replace: true });
-		}
-		console.log({ error });
+		await signup(email, password, displayName);
 	};
 
 	return (
@@ -102,7 +90,7 @@ export const RegisterForm = () => {
 					style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
 					nameValue="cansel"
 					title="Cansel"
-					onClick={(e) => handleClick(e)}
+					onClick={handleClick}
 				/>
 			</form>
 		</div>

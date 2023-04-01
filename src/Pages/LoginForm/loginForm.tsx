@@ -9,7 +9,6 @@ import { AppButton } from '../../Module/Button/Button';
 export const LoginForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [disableLogin, setDisableLogin] = useState(true);
 
 	const navigate = useNavigate();
 	const { error, login } = useLogin();
@@ -27,7 +26,7 @@ export const LoginForm = () => {
 		}
 	};
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleClick = () => {
 		setEmail('');
 		setPassword('');
 		navigate('/');
@@ -36,17 +35,7 @@ export const LoginForm = () => {
 	const onLogin = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
 		console.log(email, password);
-		const user = await login(email, password);
-		console.log('ppp', error, user);
-		if (error === null) {
-			console.log({ error });
-			setEmail('');
-			setPassword('');
-			const destination = `/tasks`;
-
-			navigate(`${destination}`, { replace: true });
-		}
-		console.log({ error });
+		await login(email, password);
 	};
 
 	return (
@@ -86,7 +75,7 @@ export const LoginForm = () => {
 					style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
 					nameValue="cansel"
 					title="Cansel"
-					onClick={(e) => handleClick(e)}
+					onClick={handleClick}
 				/>
 			</form>
 		</div>

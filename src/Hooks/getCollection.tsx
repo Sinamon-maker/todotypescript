@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react';
-import { collection, onSnapshot, CollectionReference } from 'firebase/firestore';
-
-import { Task, Data } from '../globalTypes';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../Firebase/Config';
 
-const getCollection = (collectionName: string) => {
-	const [documents, setDocuments] = useState<any[] | null>(null);
+const useGetCollection = <T,>(collectionName: string) => {
+	const [documents, setDocuments] = useState<T[] | []>([]);
 	const [error, setError] = useState('');
-
-	let colRef = collection(db, collectionName);
-	//const citiesRef = collection(db, collectionName) as CollectionReference<Data>;
+	const colRef = collection(db, collectionName);
 
 	useEffect(() => {
 		const unsub = onSnapshot(
 			colRef,
 			(snapshot) => {
-				let results: any[] = [];
+				const results = [] as T[];
 				snapshot.docs.forEach((doc) => {
 					console.log('doc');
-					doc.data().createdAt && results.push({ ...doc.data(), id: doc.id });
+					const d = { ...doc.data(), id: doc.id } as T;
+					results.push(d);
 				});
 				setDocuments(results);
 			},
@@ -30,10 +27,12 @@ const getCollection = (collectionName: string) => {
 				setError(message);
 			}
 		);
+
 		return unsub;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return { documents, error };
 };
 
-export default getCollection;
+export default useGetCollection;

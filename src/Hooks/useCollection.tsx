@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../Firebase/Config';
-import { collection, addDoc, CollectionReference } from 'firebase/firestore';
 
-const useCollection = (collectionName: string) => {
+const useCollection = <T extends { [x: string]: any }>(collectionName: string) => {
 	const [error, setError] = useState('');
 
-	const addDocument = async (doc: any) => {
+	const addDocument = async (doc: T) => {
 		setError('');
 		try {
 			const ref = collection(db, collectionName);

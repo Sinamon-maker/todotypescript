@@ -1,8 +1,8 @@
-import React, { useContext, useState, useCallback, useMemo, useEffect } from 'react';
-import { Outlet, useNavigate, useLoaderData } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
 
-import getUser from '../Hooks/getUser';
+import UseGetUser from '../Hooks/UseGetUser';
 
 import { ContextUser } from '../globalTypes';
 
@@ -15,18 +15,17 @@ export const UserProvider = ({ children }: Props) => {
 
 	const [logoName, setLogoName] = useState<ContextUser>(null);
 
-	const { user, isLoading } = getUser();
+	const { user, isLoading } = UseGetUser();
 
 	useEffect(() => {
 		if (user !== null) {
 			setLogoName(user);
-			//navigate('/tasks');
 		} else {
-			if (!isLoading) {
-				navigate('/login');
-			}
+			setLogoName(null);
 		}
 	}, [navigate, user, isLoading]);
 
-	return <UserContext.Provider value={{ logoName, isLoading }}>{children}</UserContext.Provider>;
+	const userContextValue = useMemo(() => ({ logoName, isLoading }), [logoName, isLoading]);
+
+	return <UserContext.Provider value={userContextValue}>{children}</UserContext.Provider>;
 };

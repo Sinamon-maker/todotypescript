@@ -1,11 +1,8 @@
-import { auth } from '../Firebase/Config';
-import { User, onAuthStateChanged } from 'firebase/auth';
-
 import { useState, useEffect } from 'react';
-type Us = {} | null;
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../Firebase/Config';
 
-const getUser = () => {
-	const l: null | {} = null;
+const UseGetUser = () => {
 	const [user, setUser] = useState<User | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -19,8 +16,9 @@ const getUser = () => {
 		});
 
 		return unsubscribe;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [setUser]);
 
 	return { user, isLoading };
 };
-export default getUser;
+export default UseGetUser;

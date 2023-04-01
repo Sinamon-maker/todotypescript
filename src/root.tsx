@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter, redirect, Router } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import Main from './Main';
 import { MainPage } from './Pages/MainPage/MainPage';
 import { ErrorPage } from './Pages/ErrorPage/ErrorPage';
@@ -9,10 +9,8 @@ import TasksPage from './Pages/TaskPage/tasksPage';
 import { TasksCataloge } from './Pages/TasksCataloge/TasksCataloge';
 import Home from './Pages/Home/Home';
 import { auth } from './Firebase/Config';
-import getCollection from './Hooks/getCollection';
-import { loadDocFromFirebase } from './Hooks/getDocument';
 
-import { User, onAuthStateChanged } from 'firebase/auth';
+import { loadDocFromFirebase } from './api/getDocument';
 
 const func = async () => {
 	const user = auth.currentUser;
@@ -23,7 +21,7 @@ const func = async () => {
 
 const LoadData = async ({ params }: any) => {
 	console.log('params', params);
-	return await loadDocFromFirebase(params.userId);
+	return loadDocFromFirebase(params.userId);
 };
 
 export const Root = createBrowserRouter([

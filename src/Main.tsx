@@ -1,27 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 
-import { RouterProvider, Outlet } from 'react-router-dom';
-import { Root } from './root';
-import { auth } from './Firebase/Config';
-import { User, onAuthStateChanged } from 'firebase/auth';
+import { Outlet } from 'react-router-dom';
 
 import { ThemeComponent } from './Components/ThemeComponent/ThemeComponent';
 import { UserProvider } from './Context/UserProvider';
-import { UserContext } from './Context/UserContext';
 
 function Main() {
-	const [isInit, setInit] = useState(true);
-
-	//onAuthStateChanged(auth, (firebaseUser) => {
-	//	console.log('main', firebaseUser);
-	//	if (isInit) {
-	//		setInit(false);
-	///	}
-	//});
-
-	const { isLoading } = useContext(UserContext);
-	console.log('main2', isLoading, auth.currentUser);
-
 	return (
 		<ThemeComponent>
 			<UserProvider>

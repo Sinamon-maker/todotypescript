@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { TaskContext } from '../../../Context/taskContext';
 import { AppButton } from '../../../Module/Button/Button';
 
@@ -15,7 +15,7 @@ export const SortingButtons = () => {
 				nameValue="allTask"
 				title="All"
 				disabled={sorting === SortParam.all}
-				onClick={(e: React.MouseEvent<HTMLButtonElement>) => setSorting(SortParam.all)}
+				onClick={() => setSorting(SortParam.all)}
 			/>
 			<AppButton
 				style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg  disabled:underline"
@@ -23,7 +23,7 @@ export const SortingButtons = () => {
 				nameValue="doneTask"
 				title="Done"
 				disabled={sorting === SortParam.done}
-				onClick={(e: React.MouseEvent<HTMLButtonElement>) => setSorting(SortParam.done)}
+				onClick={() => setSorting(SortParam.done)}
 			/>
 
 			<AppButton
@@ -32,7 +32,7 @@ export const SortingButtons = () => {
 				nameValue="ongoingTask"
 				title="Ongoing"
 				disabled={sorting === SortParam.ongoing}
-				onClick={(e: React.MouseEvent<HTMLButtonElement>) => setSorting(SortParam.ongoing)}
+				onClick={() => setSorting(SortParam.ongoing)}
 			/>
 		</div>
 	);

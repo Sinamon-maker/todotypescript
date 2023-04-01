@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import getCollection from '../../../Hooks/getCollection';
-import getDocum from '../../../Hooks/getDocument';
-import { collection, getDocs, QuerySnapshot, DocumentData } from 'firebase/firestore';
-import { db } from '../../../Firebase/Config';
+import useGetCollectction from '../../../Hooks/getCollection';
 import { Data } from '../../../globalTypes';
 
 export const CatalogeList = () => {
-	const { documents, error } = getCollection('tasks');
-	console.log('documents', documents);
-	//	const loadData = useLoaderData() as Task[] | [];
-	const [todos, setTodos] = useState<Data[] | []>([]);
+	const { documents, error } = useGetCollectction<Data>('tasks');
 
 	return (
 		<div className="w-full flex  flex-col gap-4">

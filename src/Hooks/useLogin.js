@@ -3,11 +3,11 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 
 const useLogin = () => {
-	const [error, setError] = useState(null);
+	const [error, setError] = useState('');
 	const login = async (email, password) => {
-		setError(null);
+		setError('');
 		try {
-			setError(null);
+			setError('');
 			const res = await signInWithEmailAndPassword(auth, email, password);
 			return res;
 		} catch (err) {

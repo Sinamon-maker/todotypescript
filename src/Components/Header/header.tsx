@@ -18,7 +18,7 @@ export const Header = () => {
 			<div className="container  m-auto  flex flex-col sm:flex-row sm:justify-between sm:items-center py-6 pl-8 pr-8 shadow-lg">
 				{logoName && <p className="mb-4 sm:mb-0 text-skin-base">{logoName.displayName}</p>}
 				<nav>
-					<Link to={'/tasks'}>
+					<Link to="/tasks">
 						<AppButton
 							style="flex-shrink-0 border-transparent border-4 text-fill-weak  hover:text-fill-strong disabled:opacity-25 text-sm py-1 px-2 rounded shadow-lg"
 							type="button"

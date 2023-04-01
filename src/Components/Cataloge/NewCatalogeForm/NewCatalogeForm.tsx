@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
+import { serverTimestamp } from 'firebase/firestore';
 import { UserContext } from '../../../Context/UserContext';
 import useCollection from '../../../Hooks/useCollection';
-import { serverTimestamp } from 'firebase/firestore';
 
 import { AppButton } from '../../../Module/Button/Button';
 import { AppInput } from '../../../Module/Input/Input';
@@ -13,12 +13,12 @@ export const NewCatalogeForm = () => {
 	const { error, addDocument } = useCollection('tasks');
 	const { logoName } = useContext(UserContext);
 
-	//const { onNewTask } = useContext(TaskContext);
-
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
 			console.log(e.target.value);
 			const neVal = e.target.value;
+			if (neVal.length < 3) setDisableSave(true);
+			if (neVal.length >= 3) setDisableSave(false);
 			setTaskName(neVal);
 		}
 	};
@@ -26,7 +26,7 @@ export const NewCatalogeForm = () => {
 	const onSubmit = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
 
-		if (taskName.length > 3) {
+		if (taskName.length >= 3) {
 			const newTask = {
 				title: taskName,
 				userId: logoName?.uid,
@@ -64,6 +64,7 @@ export const NewCatalogeForm = () => {
 					type="submit"
 					nameValue="addTask"
 					title="Save"
+					disabled={disableSave}
 				/>
 			</div>
 		</form>

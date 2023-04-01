@@ -1,6 +1,6 @@
-import { auth } from '../Firebase/Config';
-import { signOut } from 'firebase/auth';
 import { useState } from 'react';
+import { signOut } from 'firebase/auth';
+import { auth } from '../Firebase/Config';
 
 const useLogout = () => {
 	const [error, setError] = useState<string | null>(null);

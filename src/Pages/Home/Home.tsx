@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 
-import { Outlet, useLoaderData } from 'react-router-dom';
-
-import { TaskProvider } from '../../Context/taskProvider';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContext';
 
 import { Header } from '../../Components/Header/header';
 import { Container } from '../../Module/Container/Container';
-import { UserProvider } from '../../Context/UserProvider';
-
-import { Task } from '../../globalTypes';
-import getCollection from '../../Hooks/getCollection';
 
 const Home = () => {
-	//const { documents, error } = getCollection('tasks');
-	//	const loadData = useLoaderData() as Task[] | [];
-	//console.log('home', documents, error);
-
+	const { isLoading, logoName } = useContext(UserContext);
+	const navigate = useNavigate();
+	console.log('Welcome', isLoading, logoName);
+	useEffect(() => {
+		if (logoName === null && !isLoading) {
+			console.log('By from Home');
+			navigate('/login');
+		}
+	}, [logoName, navigate, isLoading]);
 	return (
 		<div className="h-full flex flex-col">
 			<Header />

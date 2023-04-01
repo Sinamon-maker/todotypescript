@@ -10,8 +10,8 @@ interface Props {
 export const TextTableElement = ({ task }: Props) => {
 	const doneStyle = task.status ? 'line-through' : '';
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>, task: Task) => {
-		console.log(task);
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>, sth: Task) => {
+		console.log(sth);
 	};
 
 	return (
