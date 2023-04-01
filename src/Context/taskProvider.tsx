@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TaskContext } from './taskContext';
 
 import { Data, Task, SortParam, serverDataTask } from '../globalTypes';
-import { UserContext } from './UserContext';
+import { UserContext } from './userContext';
 
 import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
 import { ModalEditTask } from '../Components/ModalEditTask/ModalEditTask';

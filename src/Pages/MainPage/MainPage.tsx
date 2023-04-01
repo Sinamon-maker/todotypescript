@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { UserContext } from '../../Context/UserContext';
+import { UserContext } from '../../Context/userContext';
 
 export const MainPage = () => {
 	const { isLoading, logoName } = useContext(UserContext);

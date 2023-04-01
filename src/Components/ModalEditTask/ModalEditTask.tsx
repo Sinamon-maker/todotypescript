@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TaskContext } from '../../Context/taskContext';
-import { UserContext } from '../../Context/UserContext';
+import { UserContext } from '../../Context/userContext';
 import { Task } from '../../globalTypes';
 import { AppButton } from '../../Module/Button/Button';
 import { AppInput } from '../../Module/Input/Input';
-import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
+import { ModalContainer } from '../../Module/ModuleContainer/modalContainer';
 
 type Props = {
 	canselEditTask: () => void;

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 
 import { Outlet, useNavigate } from 'react-router-dom';
-import { UserContext } from '../../Context/UserContext';
+import { UserContext } from '../../Context/userContext';
 
 import { Header } from '../../Components/Header/header';
 import { Container } from '../../Module/Container/Container';

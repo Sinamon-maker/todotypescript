@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppInput } from '../../Module/Input/Input';
 import { AppButton } from '../../Module/Button/Button';
-import { Error } from '../../Components/Error/Error';
+import { Error } from '../../Components/Error/error';
 import useSignup from '../../Hooks/useSignup';
 
 export const RegisterForm = () => {

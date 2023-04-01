@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { serverTimestamp } from 'firebase/firestore';
-import { UserContext } from '../../../Context/UserContext';
+import { UserContext } from '../../../Context/userContext';
 import useCollection from '../../../Hooks/useCollection';
 
 import { AppButton } from '../../../Module/Button/Button';
