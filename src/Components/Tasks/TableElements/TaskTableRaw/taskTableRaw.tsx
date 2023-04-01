@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
-import { TaskContext } from '../../Context/taskContext';
-import { TextTableElement } from '../TaskTableElements/TextTableElement/textTableElement';
-import { TableElementContainer } from '../../Module/TableElementContainer/TableElementContainer';
-import { ActionsTableElement } from '../TaskTableElements/ActionsTableElement/actionsTableElement';
+import { TaskContext } from '../../../../Context/taskContext';
+import { TextTableElement } from '../TextTableElement/textTableElement';
+import { TableElementContainer } from '../../../../Module/TableElementContainer/TableElementContainer';
+import { ActionsTableElement } from '../ActionsTableElement/actionsTableElement';
 
 interface Props<ObjectType> {
 	item: ObjectType;

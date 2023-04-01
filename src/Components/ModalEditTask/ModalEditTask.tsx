@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TaskContext } from '../../Context/taskContext';
 import { UserContext } from '../../Context/UserContext';
+import { Task } from '../../globalTypes';
 import { AppButton } from '../../Module/Button/Button';
 import { AppInput } from '../../Module/Input/Input';
 import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
-import { findTasks } from '../../Utils';
 
-export const ModalEditTask = () => {
+type Props = {
+	canselEditTask: () => void;
+	changeTask: (val1: string, val2: number) => void;
+};
+
+export const ModalEditTask = ({ canselEditTask, changeTask }: Props) => {
 	const [text, setText] = useState('');
-	const { changeTask, canselEditTask, idEditTask } = useContext(TaskContext);
+	const { idEditTask, listOfTasks } = useContext(TaskContext);
 	const logoName = useContext(UserContext);
 
 	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
@@ -16,18 +21,16 @@ export const ModalEditTask = () => {
 		changeTask(text, idEditTask);
 	};
 
-	const onCanselEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const onCanselEditClick = () => {
 		canselEditTask();
 	};
 
 	useEffect(() => {
-		const list = findTasks(logoName);
-
-		if (list) {
-			const editTask = list.find((task) => task.created === idEditTask);
+		if (listOfTasks.length) {
+			const editTask: Task | undefined = listOfTasks.find((task: Task) => task.created === idEditTask);
 			setText(editTask?.text ?? '');
 		}
-	}, [logoName, idEditTask]);
+	}, [logoName, idEditTask, listOfTasks]);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -36,7 +39,7 @@ export const ModalEditTask = () => {
 	};
 
 	return (
-		<ModalContainer>
+		<ModalContainer close={onCanselEditClick}>
 			<div className="w-80   rounded bg-white">
 				<form onSubmit={onSubmit} className="w-full max-w-md m-auto bg-fill-main rounded pt-10 px-4 pb-8 shadow-lg" name="onEdit">
 					<div className="flex items-center border-b border-fill-weak mb-6  py-2">
@@ -59,7 +62,7 @@ export const ModalEditTask = () => {
 						/>
 						<AppButton
 							style="flex-shrink-0 border-transparent border-4 text-fill-weak hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg"
-							onClick={(e) => onCanselEditClick(e)}
+							onClick={onCanselEditClick}
 							title="Cansel"
 							nameValue="canselEdit"
 						/>

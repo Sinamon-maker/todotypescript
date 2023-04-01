@@ -1,5 +1,9 @@
 import React from 'react';
+import { ContextUser } from '../globalTypes';
 
-export type ContextUser = string;
+type UserAuth = {
+	logoName: ContextUser;
+	isLoading: boolean;
+};
 
-export const UserContext = React.createContext<ContextUser>('');
+export const UserContext = React.createContext<UserAuth>({ logoName: null, isLoading: true });

@@ -1,28 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { Container } from '../../Module/Container/Container';
-import { NewTaskForm } from '../NewTaskForm/MewTaskForm';
-import { Table } from '../Table/table';
-import { TaskProvider } from '../../Context/taskProvider';
+import { NewTaskForm } from '../Tasks/NewTaskForm/NewTaskForm';
+import { Table } from '../Tasks/Table/table';
 
-import { Task } from '../../globalTypes';
-import { SortingButtons } from '../SortingButtons/SortingButtons';
+import { SortingButtons } from '../Tasks/SortingButtons/SortingButtons';
+import { CatalogeHeading } from '../Tasks/CatalogeHeading/CatalogeHeading';
+import { TaskContext } from '../../Context/taskContext';
 
-type Props = {
-	loadData: Task[] | [];
+export const ContentOfTasks = () => {
+	const { taskResult, errorLoadData } = useContext(TaskContext);
+	if (errorLoadData) return <div className="mb-4 text-skin-base">Could not retreive document {errorLoadData}</div>;
+	return (
+		<>
+			<div className="w-full flex flex-col ssm:flex-row justify-between">
+				<NewTaskForm />
+				<SortingButtons />
+			</div>
+			<CatalogeHeading resultData={taskResult} />
+			<Table />
+		</>
+	);
 };
-
-export const ContentOfTasks = ({ loadData }: Props) => (
-	<TaskProvider loadData={loadData}>
-		<main className="w-full  m-auto grow overflow-y-auto scroll-smooth ">
-			<Container>
-				<div className="w-full flex flex-col ssm:flex-row justify-between">
-					<NewTaskForm />
-					<SortingButtons />
-				</div>
-
-				<Table />
-			</Container>
-		</main>
-	</TaskProvider>
-);

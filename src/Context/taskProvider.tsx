@@ -1,25 +1,36 @@
 import React, { useContext, useState, useCallback, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TaskContext } from './taskContext';
 
-import { Task, SortParam } from '../globalTypes';
-import { saveInStorage } from '../Utils';
+import { Data, Task, SortParam, serverDataTask } from '../globalTypes';
 import { UserContext } from './UserContext';
 
 import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
 import { ModalEditTask } from '../Components/ModalEditTask/ModalEditTask';
 
+import { updateTask } from '../api/updateDocument';
+import { deleteTask } from '../api/deleteDocument';
+
+import { ModalDeleteCatalogue } from '../Components/ModalDeleteCatalogue/ModalDeleteCatalogue';
+
 type Props = {
 	children: React.ReactNode;
-	loadData: Task[] | [];
+	loadData: serverDataTask;
 };
 
 export const TaskProvider = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
-	const [listOfTasks, setListOfTasks] = useState<Task[] | []>(loadData);
+	const [errorLoadData, setErrorLoadDoc] = useState('');
+	const [taskResult, setTaskResult] = useState<Data | null>(null);
+	const [listOfTasks, setListOfTasks] = useState<Task[] | []>([]);
+
 	const [idTaskToDelete, setIdTaskToDelete] = useState(0);
 	const [sorting, setSorting] = useState<SortParam>(SortParam.all);
 	const [sortedList, setSortedList] = useState<Task[] | []>(listOfTasks);
 	const [idEditTask, setIdEditTask] = useState(0);
+	const [isCatalogueDel, setIsCatalogueDel] = useState(false);
+
+	const navigate = useNavigate();
 
 	const sortList = (list: Array<Task>, sort: SortParam) => {
 		if (sort === SortParam.done) {
@@ -32,14 +43,41 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	};
 
 	useEffect(() => {
-		if (listOfTasks.length) {
+		if (loadData.newDoc) {
+			setTaskResult(loadData.newDoc);
+			setListOfTasks(loadData.newDoc.tasks);
+		}
+		if (loadData.error) {
+			setErrorLoadDoc(loadData.error);
+		}
+	}, [loadData.error, loadData.newDoc]);
+
+	useEffect(() => {
+		if (listOfTasks && listOfTasks.length) {
 			const newList = sortList(listOfTasks, sorting);
 			setSortedList(newList);
+		} else {
+			setSortedList([]);
 		}
 	}, [sorting, listOfTasks, logoName]);
 
+	const deleteCatalogue = async () => {
+		try {
+			if (taskResult) {
+				await deleteTask('tasks', taskResult.id);
+				navigate('/tasks');
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const canselDeleteCatalogue = () => {
+		setIsCatalogueDel(false);
+	};
+
 	const onNewTask = useCallback(
-		(text: string) => {
+		async (text: string) => {
 			const newTask = {
 				text,
 				status: false,
@@ -52,11 +90,19 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 			} else {
 				newList = [newTask];
 			}
-			setListOfTasks(newList);
-			setSorting(SortParam.all);
-			saveInStorage(logoName, newList);
+			if (taskResult) {
+				try {
+					console.log(newList, taskResult?.id);
+					await updateTask('tasks', { tasks: newList }, taskResult?.id);
+
+					setListOfTasks(newList);
+				} catch (err) {
+					console.log(err);
+				}
+			}
+			//	saveInStorage(logoName, newList);
 		},
-		[listOfTasks, logoName]
+		[listOfTasks, taskResult]
 	);
 
 	const canselEditTask = useCallback(() => {
@@ -64,7 +110,7 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	}, []);
 
 	const changeTask = useCallback(
-		(text: string, id: number) => {
+		async (text: string, id: number) => {
 			if (listOfTasks !== null) {
 				const newList = listOfTasks.map((task) => {
 					if (task.created === id) {
@@ -73,41 +119,59 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 
 					return task;
 				});
-
-				saveInStorage(logoName, newList);
-				setListOfTasks(newList);
-
-				canselEditTask();
+				if (taskResult) {
+					try {
+						await updateTask('tasks', { tasks: newList }, taskResult?.id);
+						setListOfTasks(newList);
+						canselEditTask();
+					} catch (err) {
+						console.log(err);
+					}
+				}
+				//		saveInStorage(logoName, newList);
 			}
 		},
-		[logoName, canselEditTask, listOfTasks]
+		[canselEditTask, listOfTasks, taskResult]
 	);
 
-	const confirmDeleteClick = useCallback(() => {
+	const confirmDeleteClick = useCallback(async () => {
 		if (listOfTasks.length) {
-			const newTaskList: Task[] = listOfTasks.filter((task: Task) => task.created !== idTaskToDelete);
-			saveInStorage(logoName, newTaskList);
-			setListOfTasks(newTaskList);
-			setIdTaskToDelete(0);
-			const newSortedList = sortList(newTaskList, sorting);
-			setSortedList(newSortedList);
+			const newTaskList: Task[] | [] = listOfTasks.filter((task: Task) => task.created !== idTaskToDelete);
+			if (taskResult) {
+				try {
+					console.log('delete', newTaskList);
+					await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
+					setListOfTasks(newTaskList);
+					setIdTaskToDelete(0);
+				} catch (err) {
+					console.log(err);
+				}
+			}
+			//	saveInStorage(logoName, newTaskList);
 		}
-	}, [idTaskToDelete, listOfTasks, logoName, sorting]);
+	}, [idTaskToDelete, listOfTasks, taskResult]);
 
 	const changeStatus = useCallback(
-		(id: number) => {
+		async (id: number) => {
 			if (listOfTasks.length) {
 				const newTaskList = listOfTasks.map((task) => {
 					if (task.created === id) return { ...task, status: !task.status };
 
 					return task;
 				});
+				if (taskResult) {
+					try {
+						await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
+						setListOfTasks(newTaskList);
+					} catch (err) {
+						console.log(err);
+					}
+				}
 
-				setListOfTasks(newTaskList);
-				saveInStorage(logoName, newTaskList);
+				//		saveInStorage(logoName, newTaskList);
 			}
 		},
-		[listOfTasks, logoName]
+		[listOfTasks, taskResult]
 	);
 
 	const canselDeleteTask = useCallback(() => {
@@ -124,40 +188,41 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 
 	const contextValue = useMemo(
 		() => ({
+			taskResult,
+			errorLoadData,
 			sortedList,
+			listOfTasks,
 			idEditTask,
 			onNewTask,
 			changeStatus,
-			confirmDeleteClick,
 			onSettingDeleteId,
 			onSettingEditedId,
-			canselDeleteTask,
-			canselEditTask,
-			changeTask,
 			sorting,
 			setSorting,
+			setIsCatalogueDel,
 		}),
 		[
 			sortedList,
+			errorLoadData,
+			taskResult,
+			listOfTasks,
 			idEditTask,
 			onNewTask,
 			changeStatus,
-			confirmDeleteClick,
 			onSettingDeleteId,
 			onSettingEditedId,
-			canselDeleteTask,
-			canselEditTask,
-			changeTask,
 			sorting,
 			setSorting,
+			setIsCatalogueDel,
 		]
 	);
 
 	return (
 		<TaskContext.Provider value={contextValue}>
 			{children}
-			{idEditTask && <ModalEditTask />}
-			{idTaskToDelete !== 0 && <ModalDeleteTask />}
+			{isCatalogueDel && <ModalDeleteCatalogue deleteCatalogue={deleteCatalogue} canselDeleteCatalogue={canselDeleteCatalogue} />}
+			{idEditTask !== 0 && <ModalEditTask canselEditTask={canselEditTask} changeTask={changeTask} />}
+			{idTaskToDelete !== 0 && <ModalDeleteTask confirmDeleteClick={confirmDeleteClick} canselDeleteTask={canselDeleteTask} />}
 		</TaskContext.Provider>
 	);
 };

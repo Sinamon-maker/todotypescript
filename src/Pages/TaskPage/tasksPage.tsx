@@ -1,51 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { useParams, useNavigate, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
-import { UserContext } from '../../Context/UserContext';
-
-import { Header } from '../../Components/Header/header';
 import { ContentOfTasks } from '../../Components/ContentOfTasks/contentOfTasks';
-import { removeCurrentUserFromStore } from '../../Utils';
-import { Task } from '../../globalTypes';
 
-type QuizParams = {
-	userId: string;
-};
+import { serverDataTask } from '../../globalTypes';
+import { TaskProvider } from '../../Context/taskProvider';
 
 const TasksPage = () => {
-	const navigate = useNavigate();
-
-	const [logoName, setLogoName] = useState('');
-
-	const loadData = useLoaderData() as Task[] | [];
-
-	const params = useParams<QuizParams>();
-
-	if (!params.userId) navigate('/login');
-
-	useEffect(() => {
-		const user = localStorage.getItem('currentUser');
-		if (!user) {
-			navigate('/login');
-		} else {
-			setLogoName(user);
-		}
-	}, [navigate]);
-
-	const logout = () => {
-		setLogoName('');
-		removeCurrentUserFromStore();
-		navigate('/');
-	};
+	const loadData = useLoaderData() as serverDataTask;
+	console.log('taskPage', loadData);
 
 	return (
-		<UserContext.Provider value={logoName}>
-			<div className="flex flex-col h-screen">
-				<Header handleClick={logout} />
-				<ContentOfTasks loadData={loadData} />
-			</div>
-		</UserContext.Provider>
+		<TaskProvider loadData={loadData}>
+			<ContentOfTasks />
+		</TaskProvider>
 	);
 };
 

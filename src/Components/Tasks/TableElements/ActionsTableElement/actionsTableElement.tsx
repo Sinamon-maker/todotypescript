@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { AppButton } from '../../../Module/Button/Button';
-import ImageDone from '../../../Images/check.svg';
+import { AppButton } from '../../../../Module/Button/Button';
+import ImageDone from '../../../../Images/check.svg';
 
-import ImageDelete from '../../../Images/trash.svg';
-import ImageEdit from '../../../Images/edit.svg';
+import ImageDelete from '../../../../Images/trash.svg';
+import ImageEdit from '../../../../Images/edit.svg';
 
-import { Task } from '../../../globalTypes';
+import { Task } from '../../../../globalTypes';
 
 type Props = {
 	task: Task;
