@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const ActionsTableElement = ({ task, onChangeStatus, delClick, editClick }: Props) => (
-	<span className="block w-full h-full flex justify-end ssm:flex-row gap-4 ssm:justify-end">
+	<span className=" h-full flex justify-end ssm:flex-row gap-4 ssm:justify-end">
 		<AppButton
 			style="w-6 h-6 sm:w-8 sm:h-8 block border-2 border-fill-weak  hover:bg-fill-strong  hover:border-fill-strong text-sm border-4  rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
 			nameValue="edit"

@@ -1,5 +1,5 @@
 type Props = {
-    message: string | null;
+    message: string;
 };
 export declare const Error: ({ message }: Props) => JSX.Element;
 export {};

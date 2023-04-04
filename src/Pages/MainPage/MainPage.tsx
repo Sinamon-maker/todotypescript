@@ -8,8 +8,7 @@ export const MainPage = () => {
 	console.log('Welcome', isLoading, logoName);
 	useEffect(() => {
 		if (logoName !== null) {
-			console.log('999');
-			navigate('/tasks');
+			navigate('/tasks/user');
 		}
 	}, [logoName, navigate]);
 	if (isLoading) return <div>Loading...</div>;

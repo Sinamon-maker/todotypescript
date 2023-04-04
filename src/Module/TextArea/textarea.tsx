@@ -2,19 +2,19 @@ import React from 'react';
 
 type Props = {
 	style: string;
-	rows?: number;
-	onChange: (e: React.ChangeEvent<EventTarget>) => void;
+
+	onChangeText: (e: React.ChangeEvent<EventTarget>) => void;
 	value: string;
 	id?: string;
 };
 const defaultProps = {
 	id: '',
-	rows: '',
 };
 
-export const AppTextarea = ({ style, rows = 2, onChange, value, id = '' }: Props) => (
-	<label htmlFor={id}>
-		<textarea className={`${style}`} rows={rows} id={id} value={value} onChange={onChange} />
+export const AppTextarea = ({ style, onChangeText, value, id }: Props) => (
+	<label className="w-full text-rose-600 italic" htmlFor={id}>
+		Detailes (you can skip it)
+		<textarea className={`${style}`} id={id} value={value} onChange={onChangeText} />
 	</label>
 );
 
