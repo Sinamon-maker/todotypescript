@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { NewTaskForm } from '../Tasks/NewTaskForm/NewTaskForm';
-import { Table } from '../Tasks/Table/table';
+import { TaskTable } from '../Tasks/Table/taskTable';
 
 import { SortingButtons } from '../Tasks/SortingButtons/SortingButtons';
 import { CatalogeHeading } from '../Tasks/CatalogeHeading/CatalogeHeading';
@@ -17,7 +17,7 @@ export const ContentOfTasks = () => {
 				<SortingButtons />
 			</div>
 			<CatalogeHeading resultData={taskResult} />
-			<Table />
+			<TaskTable />
 		</>
 	);
 };

@@ -5,19 +5,16 @@ import { Task } from '../../../../globalTypes';
 
 interface Props {
 	task: Task;
+	handleClick: () => void;
 }
 
-export const TextTableElement = ({ task }: Props) => {
+export const TextTableElement = ({ task, handleClick }: Props) => {
 	const doneStyle = task.status ? 'line-through' : '';
-
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>, sth: Task) => {
-		console.log(sth);
-	};
 
 	return (
 		<AppButton
-			style={`block w-full h-full py-2 text-left hover:text-red-500 ${doneStyle}`}
-			onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e, task)}
+			style={`grow h-full py-2 text-left text-base sm:text-lg hover:text-red-500 ${doneStyle}`}
+			onClick={handleClick}
 			title={task.text}
 			nameValue="taskText"
 		/>

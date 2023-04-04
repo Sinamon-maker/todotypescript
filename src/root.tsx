@@ -7,6 +7,7 @@ import { LoginForm } from './Pages/LoginForm/loginForm';
 import { RegisterForm } from './Pages/RegisterForm/registerForm';
 import TasksPage from './Pages/TaskPage/tasksPage';
 import { TasksCataloge } from './Pages/TasksCataloge/TasksCataloge';
+import { MyTasksCataloge } from './Pages/MyTasksCatalogue/MyTasksCatalogue';
 import Home from './Pages/Home/Home';
 import { auth } from './Firebase/Config';
 
@@ -60,6 +61,12 @@ export const Root = createBrowserRouter([
 					{
 						path: '/tasks/:userId',
 						element: <TasksPage />,
+						errorElement: <ErrorPage />,
+						loader: LoadData,
+					},
+					{
+						path: '/tasks/user',
+						element: <MyTasksCataloge />,
 						errorElement: <ErrorPage />,
 						loader: LoadData,
 					},

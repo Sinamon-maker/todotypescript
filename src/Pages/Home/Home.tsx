@@ -19,7 +19,7 @@ const Home = () => {
 	return (
 		<div className="h-full flex flex-col">
 			<Header />
-			<main className="w-full h-full border border-white  m-auto grow overflow-y-auto scroll-smooth ">
+			<main className="w-full h-full  m-auto grow overflow-y-auto scroll-smooth ">
 				<Container>
 					<Outlet />
 				</Container>

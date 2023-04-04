@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { TableHead } from '../../globalTypes';
 type Props = {
     headings: TableHead[];

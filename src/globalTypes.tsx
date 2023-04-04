@@ -16,6 +16,7 @@ export interface Task {
 	text: string;
 	status: boolean;
 	created: number;
+	detailes?: string;
 }
 
 export interface Data {

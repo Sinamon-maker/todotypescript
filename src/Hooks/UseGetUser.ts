@@ -9,14 +9,13 @@ const UseGetUser = () => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
 			console.log(firebaseUser?.displayName);
-			if (isLoading) {
-				setIsLoading(false);
-			}
+
+			setIsLoading(false);
+
 			setUser(firebaseUser);
 		});
 
 		return unsubscribe;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [setUser]);
 
 	return { user, isLoading };

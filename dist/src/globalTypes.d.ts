@@ -26,6 +26,10 @@ export type UserObject = {
     displayName: string;
     email: string;
 };
+export type serverDataTask = {
+    newDoc: Data | null;
+    error: string;
+};
 export type List = Array<Task>;
 export type Users = Array<string>;
 export type TableHead = {
