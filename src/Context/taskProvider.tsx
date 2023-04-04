@@ -34,12 +34,12 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 
 	const sortList = (list: Array<Task>, sort: SortParam) => {
 		if (sort === SortParam.done) {
-			return list?.filter((task) => task.status);
+			return list?.filter((task) => task.status).sort((a, b) => b.created - a.created);
 		}
 		if (sort === SortParam.ongoing) {
-			return list?.filter((task) => !task.status);
+			return list?.filter((task) => !task.status).sort((a, b) => b.created - a.created);
 		}
-		return list;
+		return list.slice().sort((a, b) => b.created - a.created);
 	};
 
 	useEffect(() => {
@@ -110,11 +110,11 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	}, []);
 
 	const changeTask = useCallback(
-		async (text: string, id: number) => {
+		async (text: string, id: number, detailes: string) => {
 			if (listOfTasks !== null) {
 				const newList = listOfTasks.map((task) => {
 					if (task.created === id) {
-						return { ...task, text };
+						return { ...task, text, detailes };
 					}
 
 					return task;

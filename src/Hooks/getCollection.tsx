@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
-import { collection, onSnapshot, query, where, WhereFilterOp } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, CollectionReference, DocumentData, Query } from 'firebase/firestore';
 import { db } from '../Firebase/Config';
 
-const useGetCollection = <T,>(collectionName: string, q?: [string, WhereFilterOp, string | undefined]) => {
+const useGetCollection = <T,>(collectionName: string, q?: string | undefined) => {
 	const [documents, setDocuments] = useState<T[] | []>([]);
 	const [error, setError] = useState('');
+	const [isPending, setIsPending] = useState(true);
 
 	useEffect(() => {
 		const colRe = collection(db, collectionName);
-		let colRef;
+		let colRef: CollectionReference<DocumentData> | Query<DocumentData>;
 		if (q && q[q.length - 1]) {
-			colRef = query(colRe, where(...q));
-		} else colRef = colRe;
-
+			colRef = query(collection(db, collectionName), where('userId', '==', q));
+		} else {
+			colRef = colRe;
+		}
 		const unsub = onSnapshot(
 			colRef,
 			(snapshot) => {
@@ -23,6 +25,7 @@ const useGetCollection = <T,>(collectionName: string, q?: [string, WhereFilterOp
 					results.push(d);
 				});
 				setDocuments(results);
+				setIsPending(false);
 			},
 			(err) => {
 				console.log('err', err);
@@ -36,7 +39,7 @@ const useGetCollection = <T,>(collectionName: string, q?: [string, WhereFilterOp
 		return unsub;
 	}, [collectionName, q]);
 
-	return { documents, error };
+	return { documents, error, isPending };
 };
 
 export default useGetCollection;

@@ -9,8 +9,10 @@ export const TaskTable = () => {
 
 	if (!listOfTasks?.length) return <NotTasks />;
 	return (
-		<table className="table-auto w-full sm:w-full  bg-fill-main text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-md shadow-md">
-			<TaskTableBody list={sortedList} />
-		</table>
+		<div className="overflow-auto ">
+			<table className="table-auto w-full sm:w-full  bg-fill-main text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-md shadow-md">
+				<TaskTableBody list={sortedList} />
+			</table>
+		</div>
 	);
 };

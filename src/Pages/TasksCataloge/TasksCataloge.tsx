@@ -6,7 +6,8 @@ import useGetCollectction from '../../Hooks/getCollection';
 import { Data } from '../../globalTypes';
 
 export const TasksCataloge = () => {
-	const { documents, error } = useGetCollectction<Data>('tasks');
+	const { documents, error, isPending } = useGetCollectction<Data>('tasks');
+	if (isPending) return <div>Loading...</div>;
 	return (
 		<div className="w-full flex flex-col ">
 			<NewCatalogeForm />

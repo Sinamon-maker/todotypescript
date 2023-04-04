@@ -9,7 +9,8 @@ import { Data } from '../../globalTypes';
 export const MyTasksCataloge = () => {
 	const { logoName } = useContext(UserContext);
 
-	const { documents, error } = useGetCollectction<Data>('tasks', ['userId', '==', logoName?.uid]);
+	const { documents, error, isPending } = useGetCollectction<Data>('tasks', logoName?.uid);
+	if (isPending) return <div>Loading...</div>;
 
 	return (
 		<div className="w-full flex flex-col ">
