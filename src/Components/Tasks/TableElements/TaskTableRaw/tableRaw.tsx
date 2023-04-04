@@ -43,7 +43,7 @@ export const TableRaw = ({ item, index }: Props) => {
 				</div>
 
 				{showDetailes && (
-					<p className="rounded py-2 border border-gray-700">
+					<p className="rounded py-2 border border-gray-700 leading-relaxed md:w-3/4 lg:4/5">
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto qui, sequi pariatur odit quis non, ab, praesentium quidem repudiandae nisi ea! Omnis
 						dolorem delectus nisi quae debitis perspiciatis minus doloremque?
 					</p>
