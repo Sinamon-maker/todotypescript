@@ -33,7 +33,7 @@ export const TableRaw = ({ item, index }: Props) => {
 	};
 
 	return (
-		<tr key={item.created} className=" border-b border-gray-700 relative">
+		<tr key={item.created} className="  relative">
 			<TableElementContainer style="w-6 sm: w-1/12  pl-2 sm:px-6 py-3 text-gray-400 text-center">{index + 1}</TableElementContainer>
 
 			<TableElementContainer style="whitespace-normal pl-6 px-2 py-2  sm:pt-2 sm:pr-2 md:pl-10 font-medium text-left  bg-fill-main rounded">

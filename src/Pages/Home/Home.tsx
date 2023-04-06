@@ -4,7 +4,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../Context/userContext';
 
 import { Header } from '../../Components/Header/header';
-import { Container } from '../../Module/Container/Container';
 
 const Home = () => {
 	const { isLoading, logoName } = useContext(UserContext);
@@ -19,10 +18,8 @@ const Home = () => {
 	return (
 		<div className="h-full flex flex-col">
 			<Header />
-			<main className="w-full h-full  m-auto grow overflow-y-auto scroll-smooth p-b-1">
-				<Container>
-					<Outlet />
-				</Container>
+			<main className="w-full h-full flex flex-col overflow-y-auto scroll-smooth m-auto grow   p-b-1">
+				<Outlet />
 			</main>
 		</div>
 	);

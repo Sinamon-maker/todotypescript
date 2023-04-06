@@ -68,7 +68,6 @@ export const Root = createBrowserRouter([
 						path: '/tasks/user',
 						element: <MyTasksCataloge />,
 						errorElement: <ErrorPage />,
-						loader: LoadData,
 					},
 				],
 			},

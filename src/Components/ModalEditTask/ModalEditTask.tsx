@@ -4,7 +4,7 @@ import { UserContext } from '../../Context/userContext';
 import { Task } from '../../globalTypes';
 import { AppButton } from '../../Module/Button/Button';
 import { AppInput } from '../../Module/Input/Input';
-import { AppTextarea } from '../../Module/TextArea/Textarea';
+import { AppTextarea } from '../../Module/TextArea/textarea';
 import { ModalContainer } from '../../Module/ModuleContainer/modalContainer';
 
 type Props = {

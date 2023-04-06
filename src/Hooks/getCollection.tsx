@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { collection, onSnapshot, query, where, CollectionReference, DocumentData, Query } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, CollectionReference, DocumentData, Query, orderBy } from 'firebase/firestore';
 import { db } from '../Firebase/Config';
 
 const useGetCollection = <T,>(collectionName: string, q?: string | undefined) => {
@@ -8,12 +8,11 @@ const useGetCollection = <T,>(collectionName: string, q?: string | undefined) =>
 	const [isPending, setIsPending] = useState(true);
 
 	useEffect(() => {
-		const colRe = collection(db, collectionName);
 		let colRef: CollectionReference<DocumentData> | Query<DocumentData>;
 		if (q && q[q.length - 1]) {
-			colRef = query(collection(db, collectionName), where('userId', '==', q));
+			colRef = query(collection(db, collectionName), where('userId', '==', q), orderBy('createdAt'));
 		} else {
-			colRef = colRe;
+			colRef = query(collection(db, collectionName), orderBy('createdAt'));
 		}
 		const unsub = onSnapshot(
 			colRef,

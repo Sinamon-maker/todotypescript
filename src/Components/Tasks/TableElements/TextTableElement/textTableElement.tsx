@@ -12,12 +12,12 @@ interface Props {
 export const TextTableElement = ({ task, handleClick, disabled }: Props) => {
 	const doneStyle = task.status ? 'line-through' : '';
 	if (!task.detailes) {
-		return <span className={`grow h-full py-2 text-left relative text-base sm:text-lg  ${doneStyle}`}>{task.text}</span>;
+		return <span className={`grow h-full py-2 text-left font-normal text-sm relative text-base sm:text-lg  ${doneStyle}`}>{task.text}</span>;
 	}
 
 	return (
 		<AppButton
-			style={`grow h-full py-2 text-left relative text-base sm:text-lg hover:text-red-500 ${doneStyle}`}
+			style={`grow h-full py-2 text-left relative font-normal text-sm text-base sm:text-lg hover:text-red-500 ${doneStyle}`}
 			onClick={handleClick}
 			title={task.text}
 			nameValue="taskText"

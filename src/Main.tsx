@@ -9,7 +9,7 @@ function Main() {
 	return (
 		<ThemeComponent>
 			<UserProvider>
-				<div className="forth  w-full h-screen m-auto  bg-gradient-to-tr from-blue-800  to-red-800  ">
+				<div className="forth  w-full h-screen m-auto bg-fixed bg-gradient-to-tr from-blue-800  to-red-800  ">
 					{' '}
 					<Outlet />
 				</div>

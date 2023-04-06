@@ -7,16 +7,18 @@ type Props = { children: React.ReactNode };
 
 export const ThemeComponent = ({ children }: Props) => {
 	const [theme, setTheme] = useState('default');
+	let them = '';
 	let styl = '';
 	if (theme === 'red') {
-		styl = style[0];
+		them = style[0];
 	}
 	if (theme === 'yellow') {
-		styl = style[2];
+		them = style[2];
 	}
 	if (theme === 'indigo') {
-		styl = style[1];
+		them = style[1];
 	}
+	styl = `h-screen ${them}`;
 
 	return (
 		<div className={styl}>
