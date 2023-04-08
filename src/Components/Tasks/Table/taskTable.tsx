@@ -12,7 +12,7 @@ export const TaskTable = () => {
 	return (
 		<div className="w-full grow  overflow-y-auto scroll-smooth">
 			<Container>
-				<table className="table-auto w-full sm:w-full  bg-fill-main font-normal text-sm sm:text-base text-left  text-skin-base overflow-hidden rounded-md shadow-md">
+				<table className="table-auto w-full sm:w-full tracking-normal  bg-fill-main font-normal text-sm sm:text-base lg:text-lg text-left  text-skin-base overflow-hidden rounded-md shadow-md">
 					<TaskTableBody list={sortedList} />
 				</table>
 			</Container>

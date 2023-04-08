@@ -39,8 +39,8 @@ export const TableRaw = ({ item, index }: Props) => {
 			<TableElementContainer style="whitespace-normal pl-6 px-2 py-2  sm:pt-2 sm:pr-2 md:pl-10 font-medium text-left  bg-fill-main rounded">
 				<div className="flex justify-between items-center">
 					<TextTableElement task={item} handleClick={handleClick} disabled={disableText} />
-					{item.detailes && !showDetailes && <span className=" absolute bottom-px right-0.5">...</span>}
-					<ActionsTableElement task={item} onChangeStatus={onChangeStatus} delClick={delClick} editClick={editClick} />
+
+					<ActionsTableElement task={item} onChangeStatus={onChangeStatus} delClick={delClick} editClick={editClick} toggleDetailes={handleClick} />
 				</div>
 
 				{showDetailes && <p className="rounded py-2 border text-rose-600 border-gray-700 leading-relaxed md:w-3/4 lg:4/5">{item.detailes}</p>}
