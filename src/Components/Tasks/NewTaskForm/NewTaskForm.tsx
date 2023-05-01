@@ -10,10 +10,11 @@ export const NewTaskForm = () => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
+		console.log('inputRef', inputRef.current);
 		if (inputRef.current) {
 			inputRef.current.focus();
 		}
-	});
+	}, []);
 
 	const { onNewTask } = useContext(TaskContext);
 

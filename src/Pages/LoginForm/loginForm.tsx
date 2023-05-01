@@ -19,7 +19,7 @@ export const LoginForm = () => {
 		if (inputRef.current) {
 			inputRef.current.focus();
 		}
-	});
+	}, []);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { TaskContext } from '../../Context/taskContext';
 import { UserContext } from '../../Context/userContext';
 import { Task } from '../../globalTypes';
@@ -27,12 +27,17 @@ export const ModalEditTask = ({ canselEditTask, changeTask }: Props) => {
 		canselEditTask();
 	};
 
+	const inputRef = useRef<HTMLInputElement>(null);
+
 	useEffect(() => {
 		if (listOfTasks.length) {
 			const editTask: Task | undefined = listOfTasks.find((task: Task) => task.created === idEditTask);
 			setText(editTask?.text ?? '');
 			if (editTask?.detailes) {
 				setDetailesValue(editTask?.detailes);
+			}
+			if (inputRef.current) {
+				inputRef.current.focus();
 			}
 		}
 	}, [logoName, idEditTask, listOfTasks]);
@@ -61,6 +66,7 @@ export const ModalEditTask = ({ canselEditTask, changeTask }: Props) => {
 							placeholder=""
 							ariaLabel="Full name"
 							onChange={handleChange}
+							inputRef={inputRef}
 						/>
 					</div>
 					<div className="flex items-center border-b border-fill-weak mb-6  py-2">

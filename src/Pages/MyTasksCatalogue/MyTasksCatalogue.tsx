@@ -6,6 +6,7 @@ import { UserContext } from '../../Context/userContext';
 import useGetCollectction from '../../Hooks/getCollection';
 import { Data } from '../../globalTypes';
 import { Loader } from '../../Components/Loader/loader';
+import { Error } from '../../Components/Error/error';
 
 export const MyTasksCataloge = () => {
 	const { logoName } = useContext(UserContext);
@@ -15,6 +16,7 @@ export const MyTasksCataloge = () => {
 
 	return (
 		<div className="w-full h-full flex flex-col gap-2 ">
+			{error && <Error message={error} />}
 			<NewCatalogeForm />
 			{!documents.length && <div className="m-4 text-skin-base">There is not any Catalogue yet, Just start creating.</div>}
 			{documents.length !== 0 && <CatalogeList documents={documents} />}

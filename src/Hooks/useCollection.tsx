@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, DocumentData, WithFieldValue } from 'firebase/firestore';
 import { db } from '../Firebase/Config';
 
-const useCollection = <T extends { [x: string]: any }>(collectionName: string) => {
+const useCollection = <T extends WithFieldValue<DocumentData>>(collectionName: string) => {
 	const [error, setError] = useState('');
 
 	const addDocument = async (doc: T) => {

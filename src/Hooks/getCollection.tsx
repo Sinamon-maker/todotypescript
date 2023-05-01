@@ -32,6 +32,7 @@ const useGetCollection = <T,>(collectionName: string, q?: string | undefined) =>
 				if (err instanceof Error) message = err.message;
 				else message = String(err);
 				setError(message);
+				setIsPending(false);
 			}
 		);
 
