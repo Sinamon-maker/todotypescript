@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { serverTimestamp } from 'firebase/firestore';
 import { UserContext } from '../../../Context/userContext';
 import useCollection from '../../../Hooks/useCollection';
@@ -13,6 +13,14 @@ export const NewCatalogeForm = () => {
 
 	const { error, addDocument } = useCollection('tasks');
 	const { logoName } = useContext(UserContext);
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -53,7 +61,7 @@ export const NewCatalogeForm = () => {
 			<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded  px-2 pt-2 sm:pt-4 pb-0 " name="newCataloge">
 				<div className="flex items-center border-b border-fill-weak py-2">
 					<AppInput
-						style="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+						style=" bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
 						type="text"
 						nameValue="task"
 						value={taskName}
@@ -61,6 +69,7 @@ export const NewCatalogeForm = () => {
 						ariaLabel="Full name"
 						onChange={handleChange}
 						onKeyDown={onPressEnter}
+						inputRef={inputRef}
 					/>
 
 					<AppButton

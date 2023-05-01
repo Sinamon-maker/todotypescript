@@ -10,6 +10,7 @@ type Props = {
 	id?: string;
 	onChange: (e: React.ChangeEvent<EventTarget>) => void;
 	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+	inputRef: React.RefObject<HTMLInputElement>;
 };
 
 const defaultProps = {
@@ -19,11 +20,13 @@ const defaultProps = {
 	type: '',
 	placeholder: '',
 	onKeyDown: () => null,
+	inputRef: undefined,
 };
 
-export const AppInput = ({ style, type = 'text', id = '', nameValue = '', value, placeholder = '', onChange, ariaLabel = '', onKeyDown }: Props) => (
+export const AppInput = ({ inputRef, style, type = 'text', id = '', nameValue = '', value, placeholder = '', onChange, ariaLabel = '', onKeyDown }: Props) => (
 	<label htmlFor={id} className="w-full">
 		<input
+			ref={inputRef}
 			className={`${style}`}
 			type={type}
 			name={nameValue}

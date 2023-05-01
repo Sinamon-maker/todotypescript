@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { TaskContext } from '../../../Context/taskContext';
 import { AppButton } from '../../../Module/Button/Button';
 import { AppInput } from '../../../Module/Input/Input';
@@ -6,6 +6,14 @@ import { AppInput } from '../../../Module/Input/Input';
 export const NewTaskForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
 	const { onNewTask } = useContext(TaskContext);
 
@@ -48,6 +56,7 @@ export const NewTaskForm = () => {
 					ariaLabel="Full name"
 					onChange={handleChange}
 					onKeyDown={onPressEnter}
+					inputRef={inputRef}
 				/>
 
 				<AppButton
