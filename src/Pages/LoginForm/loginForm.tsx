@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLogin from '../../Hooks/useLogin';
 
@@ -12,6 +12,14 @@ export const LoginForm = () => {
 
 	const navigate = useNavigate();
 	const { error, login } = useLogin();
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -50,6 +58,7 @@ export const LoginForm = () => {
 						placeholder="test@rest.com"
 						ariaLabel="Email"
 						onChange={handleChange}
+						inputRef={inputRef}
 					/>
 				</div>
 				<div className=" border-b border-fill-weak py-2 mb-2">

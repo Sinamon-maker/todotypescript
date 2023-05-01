@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppInput } from '../../Module/Input/Input';
@@ -13,6 +13,14 @@ export const RegisterForm = () => {
 	const { error, signup } = useSignup();
 
 	const navigate = useNavigate();
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -54,6 +62,7 @@ export const RegisterForm = () => {
 						placeholder="displayName"
 						ariaLabel="displayName"
 						onChange={handleChange}
+						inputRef={inputRef}
 					/>
 				</div>
 				<div className=" border-b border-fill-weak py-2 mb-2">
