@@ -7,7 +7,6 @@ import ImageEdit from '../../../../Images/edit.svg';
 import Chevron from '../../../../Images/chevron.svg';
 
 import { Task } from '../../../../globalTypes';
-import { ChangeStatusbtn } from '../../../../Module/ChangeStatusBtn/ChangeStatusBtn';
 
 type Props = {
 	task: Task;

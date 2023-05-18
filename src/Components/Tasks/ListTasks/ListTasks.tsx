@@ -17,7 +17,7 @@ export const ListTasks = () => {
 	return (
 		<div className="w-full grow  overflow-y-auto  scroll-smooth grid">
 			<Container>
-				<ul className=" w-full sm:w-full p-2 border-2 border-fill-weak tracking-normal  bg-fill-main font-normal text-base ssm:text-lg text-left  text-skin-base overflow-hidden rounded-md shadow-md">
+				<ul className=" w-full sm:w-full p-2 border-2 border-fill-weak bg-fill-main tracking-normal   font-normal text-base ssm:text-lg text-left  text-skin-base overflow-hidden rounded-md shadow-md">
 					{sortedList.map((item, index) => (
 						<TableRaw key={item.created} item={item} index={index} />
 					))}

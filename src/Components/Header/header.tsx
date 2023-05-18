@@ -14,7 +14,7 @@ export const Header = () => {
 	};
 
 	return (
-		<header className=" bg-fill-main ">
+		<header className="  ">
 			<div className="container  m-auto  flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 sm:py-6 pl-8 pr-8 shadow-lg">
 				{logoName && <p className="mb-2 sm:mb-4 sm:mb-0 text-skin-base">{logoName.displayName}</p>}
 				<nav className="flex justify-between sm:block">

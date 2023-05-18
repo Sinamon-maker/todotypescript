@@ -37,7 +37,7 @@ export const TableRaw = ({ item, index }: Props) => {
 		<li key={item.created} className="  flex items-center">
 			<div className="w-6 sm: w-1/12  pl-2 sm:px-6 py-1 shrink-0 text-gray-400 ">{index + 1}</div>
 			<ChangeStatusbtn task={item} onChangeStatus={onChangeStatus} />
-			<div className="whitespace-normal grow px-2 py-1  sm:pt-2 sm:pr-2 md:pl-6 font-medium text-left  bg-fill-main rounded items-center">
+			<div className="whitespace-normal grow px-2 py-1  sm:pt-2 sm:pr-2 md:pl-6 font-medium text-left  rounded items-center">
 				<div className="grow ml-4">
 					<TextTableElement task={item} />
 					{showDetailes && <p className="rounded py-2 border-b text-rose-600 border-gray-700 leading-relaxed md:w-3/4 lg:4/5">{item.detailes}</p>}

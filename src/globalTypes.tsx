@@ -22,7 +22,7 @@ export interface Task {
 export interface Data {
 	title: string;
 	id: string;
-	createdAt: Data | null;
+	createdAt: number;
 	userId: string;
 	tasks: Array<Task>;
 	displayName: string;

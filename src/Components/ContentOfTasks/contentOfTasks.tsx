@@ -9,8 +9,8 @@ import { Container } from '../../Module/Container/Container';
 import { ListTasks } from '../Tasks/ListTasks/ListTasks';
 
 export const ContentOfTasks = () => {
-	const { taskResult, errorLoadData } = useContext(TaskContext);
-	if (errorLoadData) return <div className="mb-4 text-skin-base">Could not retreive document {errorLoadData}</div>;
+	const { taskResult, error } = useContext(TaskContext);
+	if (error) return <div className="mb-4 text-skin-base">Could not retreive document {error}</div>;
 	return (
 		<>
 			<div className="w-full flex flex-col ssm:flex-row justify-betweens">

@@ -3,7 +3,7 @@ import { Task, SortParam, Data } from '../globalTypes';
 
 type TaskContext = {
 	taskResult: Data | null;
-	errorLoadData: string;
+	error: string;
 
 	onNewTask: (val: string) => void;
 	changeStatus: (id: number) => void;
@@ -12,7 +12,7 @@ type TaskContext = {
 export type Cont = TaskContext | null;
 
 export const TaskContext = React.createContext<TaskContext>({
-	errorLoadData: '',
+	error: '',
 	taskResult: null,
 
 	onNewTask: () => null,

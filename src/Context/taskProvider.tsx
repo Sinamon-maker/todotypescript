@@ -2,7 +2,7 @@ import React, { useContext, useState, useCallback, useMemo, useEffect } from 're
 import { useNavigate } from 'react-router-dom';
 import { TaskContext } from './taskContext';
 
-import { Data, Task, SortParam, serverDataTask } from '../globalTypes';
+import { Task, serverDataTask } from '../globalTypes';
 import { UserContext } from './userContext';
 
 import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
@@ -21,28 +21,25 @@ type Props = {
 
 export const TaskProvider = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
-	const [errorLoadData, setErrorLoadDoc] = useState(loadData.error);
-	const [taskResult, setTaskResult] = useState<Data | null>(loadData.newDoc);
-	// const [listOfTasks, setListOfTasks] = useState<Task[] | []>([]);
 
+	const taskResult = loadData.newDoc;
+	const error = loadData.error;
 	const idTaskDel = useChangeTaskQueryStore((s) => s.idTaskDel);
 	const setTaskDel = useChangeTaskQueryStore((s) => s.setTaskDel);
 	const idTaskComplete = useChangeTaskQueryStore((s) => s.idTaskComplete);
+	const setTaskComplete = useChangeTaskQueryStore((s) => s.setTaskComplete);
 	const setTaskEdit = useChangeTaskQueryStore((s) => s.setTaskEdit);
 	const taskEdit = useChangeTaskQueryStore((s) => s.taskEdit);
 
 	const [isCatalogueDel, setIsCatalogueDel] = useState(false);
-	const [idCompleteTask, setIdCompleteTask] = useState(0);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (idCompleteTask) {
-			//	updateTask(idCompleteTask)
-			setIdCompleteTask(0);
-			//receive new
-		}
-	}, [idCompleteTask]);
+		if (idTaskComplete) changeStatus(idTaskComplete);
+		setTaskComplete(0);
+		//receive new
+	}, [idTaskComplete]);
 
 	const deleteCatalogue = async () => {
 		try {
@@ -128,27 +125,24 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		}
 	};
 
-	const changeStatus = useCallback(
-		async (id: number) => {
-			if (taskResult && taskResult.tasks.length) {
-				const newTaskList = taskResult.tasks.map((task) => {
-					if (task.created === id) return { ...task, status: !task.status };
+	const changeStatus = async (id: number) => {
+		if (taskResult && taskResult.tasks.length) {
+			const newTaskList = taskResult.tasks.map((task) => {
+				if (task.created === id) return { ...task, status: !task.status };
 
-					return task;
-				});
-				if (taskResult) {
-					try {
-						await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
-					} catch (err) {
-						console.log(err);
-					}
+				return task;
+			});
+			if (taskResult) {
+				try {
+					await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
+				} catch (err) {
+					console.log(err);
 				}
-
-				//		saveInStorage(logoName, newTaskList);
 			}
-		},
-		[taskResult]
-	);
+
+			//		saveInStorage(logoName, newTaskList);
+		}
+	};
 
 	const canselDeleteTask = useCallback(() => {
 		setTaskDel(0);
@@ -157,11 +151,11 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	const contextValue = useMemo(
 		() => ({
 			taskResult,
-			errorLoadData,
+			error,
 			onNewTask,
 			changeStatus,
 		}),
-		[errorLoadData, taskResult, onNewTask, changeStatus]
+		[error, taskResult, onNewTask, changeStatus]
 	);
 
 	return (

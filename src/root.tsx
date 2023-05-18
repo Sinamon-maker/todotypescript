@@ -11,7 +11,7 @@ import { MyTasksCataloge } from './Pages/MyTasksCatalogue/MyTasksCatalogue';
 import Home from './Pages/Home/Home';
 import { auth } from './Firebase/Config';
 
-import { loadDocFromFirebase } from './api/getDocument';
+import { useGetDocument } from './api/useGetDocument';
 import { PrivateRoutes } from './Pages/PrivateRoutes/PrivateRoutes';
 
 const func = async () => {
@@ -19,11 +19,6 @@ const func = async () => {
 	console.log('user', user);
 
 	return 2;
-};
-
-const LoadData = async ({ params }: any) => {
-	console.log('params', params);
-	return loadDocFromFirebase(params.userId);
 };
 
 export const Root = createBrowserRouter([
@@ -66,7 +61,6 @@ export const Root = createBrowserRouter([
 								path: ':userId',
 								element: <TasksPage />,
 								errorElement: <ErrorPage />,
-								loader: LoadData,
 							},
 							{
 								path: 'user',
