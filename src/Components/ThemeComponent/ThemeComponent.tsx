@@ -25,7 +25,7 @@ export const ThemeComponent = ({ children }: Props) => {
 	styl = `h-screen ${them}`;
 
 	return (
-		<div className={styl}>
+		<div className={`bg-fill-main ${styl}`}>
 			<ThemeButtons setTheme={setTheme} />
 			{children}
 		</div>

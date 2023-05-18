@@ -11,12 +11,12 @@ type Props = {
 export const CatalogueItem = ({ docum, logoName }: Props) => {
 	if (logoName && docum.userId === logoName.uid) {
 		return (
-			<Link className="w-full grow hover:scale-105 hover:shadow-lg hover:transition-all transition-all" to={`/tasks/${docum.id}`}>
-				<div className="w-full  p-4 rounded-lg border flex gap-4 items-center text-skin-base">
+			<div className="w-full grow p-4 rounded-lg border border-fill-weak flex gap-4 items-center text-skin-base hover:scale-105 hover:shadow-lg hover:transition-all transition-all">
+				<Link className="w-full grow " to={`/tasks/${docum.id}`}>
 					<div className="grow">{docum.title}</div>
-					<div>{docum.tasks.length}</div>
-				</div>
-			</Link>
+				</Link>
+				<div>{docum.tasks.length}</div>
+			</div>
 		);
 	}
 

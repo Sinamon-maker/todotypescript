@@ -5,6 +5,7 @@ import { NotTasks } from '../../NotTasks/notTasks';
 import { Container } from '../../../Module/Container/Container';
 import useChangeTaskQueryStore from '../../../store/tasksStore';
 import { TableRaw } from '../TableElements/TaskTableRaw/tableRaw';
+import { Loader } from '../../Loader/loader';
 
 export const ListTasks = () => {
 	const { taskResult } = useContext(TaskContext);
@@ -14,9 +15,9 @@ export const ListTasks = () => {
 
 	if (!taskResult?.tasks?.length) return <NotTasks />;
 	return (
-		<div className="w-full grow  overflow-y-auto scroll-smooth grid">
+		<div className="w-full grow  overflow-y-auto  scroll-smooth grid">
 			<Container>
-				<ul className="table-auto w-full sm:w-full p-2 tracking-normal  bg-fill-main font-normal text-base ssm:text-lg text-left  text-skin-base overflow-hidden rounded-md shadow-md">
+				<ul className=" w-full sm:w-full p-2 border-2 border-fill-weak tracking-normal  bg-fill-main font-normal text-base ssm:text-lg text-left  text-skin-base overflow-hidden rounded-md shadow-md">
 					{sortedList.map((item, index) => (
 						<TableRaw key={item.created} item={item} index={index} />
 					))}

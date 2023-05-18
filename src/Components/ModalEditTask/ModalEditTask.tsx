@@ -57,7 +57,7 @@ export const ModalEditTask = ({ taskEdit, canselEditTask, changeTask }: Props) =
 						/>
 					</div>
 					<div className="flex items-center border-b border-fill-weak mb-6  py-2">
-						<AppTextarea style="block h-16 w-full mt-2 rounded" value={task?.detailes || ''} onChangeText={onChangeText} />
+						<AppTextarea style="block bg-transparent h-16 w-full mt-2 text-skin-base rounded" value={task?.detailes || ''} onChangeText={onChangeText} />
 					</div>
 					<span className="block w-full flex justify-around">
 						<AppButton

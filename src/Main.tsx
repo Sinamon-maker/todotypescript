@@ -7,7 +7,7 @@ import { UserProvider } from './Context/UserProvider';
 
 function Main() {
 	return (
-		<div className="forth  w-full h-screen  bg-fixed bg-gradient-to-tr from-blue-800  to-red-800  ">
+		<div className="forth  w-full h-screen  ">
 			<UserProvider>
 				<ThemeComponent>
 					<Outlet />

@@ -13,7 +13,7 @@ export const CatalogeList = ({ documents }: Props) => {
 	return (
 		<div className=" grow overflow-y-auto scroll-smooth">
 			<Container>
-				<div className="w-full flex  flex-col gap-4">
+				<div className="w-full flex  flex-col gap-4 ">
 					{documents?.map((docum) => (
 						<CatalogueItem key={docum.id} docum={docum} logoName={logoName} />
 					))}

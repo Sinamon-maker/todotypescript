@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { NewTaskForm } from '../Tasks/NewTaskForm/NewTaskForm';
-import { TaskTable } from '../Tasks/Table/taskTable';
 
 import { SortingButtons } from '../Tasks/SortingButtons/SortingButtons';
 import { CatalogeHeading } from '../Tasks/CatalogeHeading/CatalogeHeading';
