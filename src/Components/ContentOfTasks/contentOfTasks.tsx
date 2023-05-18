@@ -7,6 +7,7 @@ import { SortingButtons } from '../Tasks/SortingButtons/SortingButtons';
 import { CatalogeHeading } from '../Tasks/CatalogeHeading/CatalogeHeading';
 import { TaskContext } from '../../Context/taskContext';
 import { Container } from '../../Module/Container/Container';
+import { ListTasks } from '../Tasks/ListTasks/ListTasks';
 
 export const ContentOfTasks = () => {
 	const { taskResult, errorLoadData } = useContext(TaskContext);
@@ -22,7 +23,7 @@ export const ContentOfTasks = () => {
 				</Container>
 			</div>
 			<CatalogeHeading resultData={taskResult} />
-			<TaskTable />
+			<ListTasks />
 		</>
 	);
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { ThemeButtons } from '../ThemeButtons/ThemeButtons';
 
-const style = ['theme-red', 'theme-indigo', 'theme-yellow', ''] as const;
+const style = ['theme-red', 'theme-indigo', 'theme-yellow', '', 'theme-white'] as const;
 type Props = { children: React.ReactNode };
 
 export const ThemeComponent = ({ children }: Props) => {
@@ -18,6 +18,10 @@ export const ThemeComponent = ({ children }: Props) => {
 	if (theme === 'indigo') {
 		them = style[1];
 	}
+	if (theme === 'white') {
+		them = style[4];
+	}
+
 	styl = `h-screen ${them}`;
 
 	return (

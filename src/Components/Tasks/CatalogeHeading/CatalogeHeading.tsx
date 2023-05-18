@@ -8,10 +8,8 @@ type Props = {
 	resultData: Data | null;
 };
 export const CatalogeHeading = ({ resultData }: Props) => {
-	const { setIsCatalogueDel } = useContext(TaskContext);
-
 	const delCatalodue = () => {
-		setIsCatalogueDel(true);
+		console.log('del catalogue');
 	};
 
 	if (!resultData) return <div>No such Cataloge</div>;

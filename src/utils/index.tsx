@@ -1,4 +1,4 @@
-import { Task, Users } from '../globalTypes';
+import { SortParam, Task, Users } from '../globalTypes';
 
 export const findUser = (user: string): string | null => {
 	const data = localStorage.getItem('users');
@@ -49,4 +49,14 @@ export const setCurrentUserToStore = (user: string) => {
 
 export const removeCurrentUserFromStore = () => {
 	localStorage.removeItem('currentUser');
+};
+
+export const sortList = (list: Array<Task>, sort: SortParam) => {
+	if (sort === SortParam.done) {
+		return list?.filter((task) => task.status).sort((a, b) => b.created - a.created);
+	}
+	if (sort === SortParam.ongoing) {
+		return list?.filter((task) => !task.status).sort((a, b) => b.created - a.created);
+	}
+	return list.slice().sort((a, b) => b.created - a.created);
 };

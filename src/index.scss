@@ -16,7 +16,7 @@ body {
 
 @layer base {
 	:root {
-		--text-color: 241 245 249;
+		--text-color: 203 213 225;
 		--textWeak-color: 148 163 184;
 		--btn-color: 20 184 166;
 		--btnHover-color: 15 118 110;
@@ -32,17 +32,24 @@ body {
 	}
 
 	.theme-red {
-		--text-color: 241 245 249;
+		--text-color: 226 232 240;
 		--textWeak-color: 148 163 184;
 		--btn-color: 225 29 72;
 		--btnHover-color: 190 18 60;
 		--fill-color: 49 46 129;
 	}
 	.theme-indigo {
-		--text-color: 241 245 249;
+		--text-color: 226 232 240;
 		--textWeak-color: 148 163 184;
 		--btn-color: 107 114 128;
 		--btnHover-color: 75 85 99;
 		--fill-color: 49 46 129;
+	}
+	.theme-white {
+		--text-color: 49 46 129;
+		--textWeak-color: 148 163 184;
+		--btn-color: 107 114 128;
+		--btnHover-color: 75 85 99;
+		--fill-color: 226 232 240;
 	}
 }
