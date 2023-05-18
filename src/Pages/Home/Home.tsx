@@ -6,11 +6,11 @@ import { UserContext } from '../../Context/userContext';
 import { Header } from '../../Components/Header/header';
 
 const Home = () => {
-	const { isLoading, logoName } = useContext(UserContext);
+	//const { isLoading, logoName } = useContext(UserContext);
 
-	console.log('Welcome', isLoading, logoName);
+	//console.log('Welcome', isLoading, logoName);
 
-	if (!logoName) return <Navigate to="/login" />;
+	//if (!logoName) return <Navigate to="/login" />;
 
 	return (
 		<div className="h-full flex flex-col">

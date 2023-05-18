@@ -9,7 +9,7 @@ export const PrivateRoutes = () => {
 
 	console.log('Welcome', isLoading, logoName);
 
-	if (!logoName) navigate('/login');
+	if (!logoName) return <Navigate to="/login" />;
 	return (
 		<>
 			<Outlet />

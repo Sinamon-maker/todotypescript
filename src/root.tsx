@@ -49,26 +49,31 @@ export const Root = createBrowserRouter([
 				],
 			},
 			{
-				path: '/tasks',
-				element: <Home />,
-				errorElement: <ErrorPage />,
-
+				element: <PrivateRoutes />,
 				children: [
 					{
-						path: '',
-						element: <TasksCataloge />,
+						path: '/tasks',
+						element: <Home />,
 						errorElement: <ErrorPage />,
-					},
-					{
-						path: ':userId',
-						element: <TasksPage />,
-						errorElement: <ErrorPage />,
-						loader: LoadData,
-					},
-					{
-						path: 'user',
-						element: <MyTasksCataloge />,
-						errorElement: <ErrorPage />,
+
+						children: [
+							{
+								path: '',
+								element: <TasksCataloge />,
+								errorElement: <ErrorPage />,
+							},
+							{
+								path: ':userId',
+								element: <TasksPage />,
+								errorElement: <ErrorPage />,
+								loader: LoadData,
+							},
+							{
+								path: 'user',
+								element: <MyTasksCataloge />,
+								errorElement: <ErrorPage />,
+							},
+						],
 					},
 				],
 			},
