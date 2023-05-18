@@ -12,6 +12,7 @@ import Home from './Pages/Home/Home';
 import { auth } from './Firebase/Config';
 
 import { loadDocFromFirebase } from './api/getDocument';
+import { PrivateRoutes } from './Pages/PrivateRoutes/PrivateRoutes';
 
 const func = async () => {
 	const user = auth.currentUser;
@@ -36,12 +37,12 @@ export const Root = createBrowserRouter([
 				loader: func,
 				children: [
 					{
-						path: '/login',
+						path: 'login',
 						element: <LoginForm />,
 						errorElement: <ErrorPage />,
 					},
 					{
-						path: '/register',
+						path: 'register',
 						element: <RegisterForm />,
 						errorElement: <ErrorPage />,
 					},
@@ -54,18 +55,18 @@ export const Root = createBrowserRouter([
 
 				children: [
 					{
-						path: '/tasks',
+						path: '',
 						element: <TasksCataloge />,
 						errorElement: <ErrorPage />,
 					},
 					{
-						path: '/tasks/:userId',
+						path: ':userId',
 						element: <TasksPage />,
 						errorElement: <ErrorPage />,
 						loader: LoadData,
 					},
 					{
-						path: '/tasks/user',
+						path: 'user',
 						element: <MyTasksCataloge />,
 						errorElement: <ErrorPage />,
 					},

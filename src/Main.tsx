@@ -7,14 +7,13 @@ import { UserProvider } from './Context/UserProvider';
 
 function Main() {
 	return (
-		<ThemeComponent>
+		<div className="forth  w-full h-screen  bg-fixed bg-gradient-to-tr from-blue-800  to-red-800  ">
 			<UserProvider>
-				<div className="forth  w-full h-screen m-auto bg-fixed bg-gradient-to-tr from-blue-800  to-red-800  ">
-					{' '}
+				<ThemeComponent>
 					<Outlet />
-				</div>
+				</ThemeComponent>
 			</UserProvider>
-		</ThemeComponent>
+		</div>
 	);
 }
 

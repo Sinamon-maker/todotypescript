@@ -11,7 +11,7 @@ export const MainPage = () => {
 			navigate('/tasks/user');
 		}
 	}, [logoName, navigate]);
-	if (isLoading) return <div>Loading...</div>;
+
 	return (
 		<>
 			<div className="p-10 sm:p-20 text-2xl flex flex-wrap text-skin-base items-center">

@@ -1,20 +1,17 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 import { UserContext } from '../../Context/userContext';
 
 import { Header } from '../../Components/Header/header';
 
 const Home = () => {
 	const { isLoading, logoName } = useContext(UserContext);
-	const navigate = useNavigate();
+
 	console.log('Welcome', isLoading, logoName);
-	useEffect(() => {
-		if (logoName === null && !isLoading) {
-			console.log('By from Home');
-			navigate('/login');
-		}
-	}, [logoName, navigate, isLoading]);
+
+	if (!logoName) return <Navigate to="/login" />;
+
 	return (
 		<div className="h-full flex flex-col">
 			<Header />
