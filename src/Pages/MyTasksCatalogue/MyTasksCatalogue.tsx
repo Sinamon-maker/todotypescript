@@ -19,7 +19,7 @@ export const MyTasksCataloge = () => {
 	console.log('err', err);
 	if (isPending) return <Loader />;
 	return (
-		<div className="w-full  flex  gap-2 ">
+		<div className="w-full h-full  flex  gap-2 ">
 			<SideBar folders={folders} />
 			<div className="flex flex-col grow gap-2">
 				<NewCatalogeForm />

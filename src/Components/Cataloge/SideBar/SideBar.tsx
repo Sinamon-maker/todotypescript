@@ -47,33 +47,33 @@ export const SideBar = ({ folders }: Props) => {
 	};
 
 	return (
-		<aside className=" p-4 w-1/3 h-full rounded text-skin-base border border-fill-weak">
+		<aside className=" p-4 w-1/3 h-full flex flex-col rounded text-skin-base border border-fill-weak">
 			<h2 className="text-lg">Folders</h2>
-			<div className="h-full flex flex-col ">
+			<div className="grow  ">
 				{folders && (
-					<ul className="grow my-4">
+					<ul className=" my-4">
 						{folders.folders.map((it) => (
 							<li key={it}>{it}</li>
 						))}
 					</ul>
 				)}
 				{!folders && <p>No folders yet. Start creating</p>}
-				<form onSubmit={onSubmit} className="h-full w-full mt-6">
-					<div className="w-full border-2 border-sky-800 p-2 rounded flex ">
-						<AppInput style="w-full bg-transparent" placeholder="Add new folder" value={value} onChange={onChange} />
-						<AppButton
-							style={styleType.buttonStyle}
-							disabled={isDisabled}
-							ariaLabel=""
-							type="submit"
-							nameValue="addFolder"
-							title="Add"
-							onClick={() => console.log('add folder')}
-						/>
-					</div>
-					<p className="">{error}</p>
-				</form>
 			</div>
+			<form onSubmit={onSubmit} className=" w-full mt-6">
+				<div className="w-full border-2 border-sky-800 p-2 rounded flex ">
+					<AppInput style="w-full bg-transparent" placeholder="Add new folder" value={value} onChange={onChange} />
+					<AppButton
+						style={styleType.buttonStyle}
+						disabled={isDisabled}
+						ariaLabel=""
+						type="submit"
+						nameValue="addFolder"
+						title="Add"
+						onClick={() => console.log('add folder')}
+					/>
+				</div>
+				<p className="">{error}</p>
+			</form>
 		</aside>
 	);
 };

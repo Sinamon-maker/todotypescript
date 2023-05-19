@@ -12,9 +12,9 @@ const Home = () => {
 	//if (!logoName) return <Navigate to="/login" />;
 
 	return (
-		<div className=" flex flex-col relative h-screen">
+		<div className="   h-screen flex flex-col">
 			<Header />
-			<main className="w-full  h-full flex flex-col  m-auto grow   p-b-1">
+			<main className="w-full h-full  grow  overflow-y-auto  scroll-smooth  p-b-1">
 				<Outlet />
 			</main>
 		</div>
