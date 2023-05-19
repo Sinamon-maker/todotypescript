@@ -1,7 +1,7 @@
 import React, { useContext, useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Task, serverDataTask } from '../../globalTypes';
+import { Task, serverDataTask, Data } from '../../globalTypes';
 import { UserContext } from '../../Context/userContext';
 
 import { ModalDeleteTask } from '../ModalDeleteTask/modalDeleteTask';
@@ -15,14 +15,15 @@ import useChangeTaskQueryStore from '../../store/tasksStore';
 
 type Props = {
 	children: React.ReactNode;
-	loadData: serverDataTask;
+	newDoc: Data;
+	error: string;
 };
 
-export const TaskContainer = ({ children, loadData }: Props) => {
+export const TaskContainer = ({ children, newDoc, error }: Props) => {
 	const logoName = useContext(UserContext);
 
-	const taskResult = loadData.newDoc;
-	const error = loadData.error;
+	const taskResult = newDoc;
+
 	const idTaskDel = useChangeTaskQueryStore((s) => s.idTaskDel);
 	const setTaskDel = useChangeTaskQueryStore((s) => s.setTaskDel);
 	const idTaskComplete = useChangeTaskQueryStore((s) => s.idTaskComplete);

@@ -33,9 +33,15 @@ export type UserObject = {
 	displayName: string;
 	email: string;
 };
+
+export type UsersCollection = {
+	userId: string;
+	folders: string[];
+};
 export type serverDataTask = {
 	newDoc: Data | null;
 	error: string;
+	isLoading: boolean;
 };
 
 export type List = Array<Task>;

@@ -11,9 +11,7 @@ import { MyTasksCataloge } from './Pages/MyTasksCatalogue/MyTasksCatalogue';
 import Home from './Pages/Home/Home';
 import { auth } from './Firebase/Config';
 
-import { useGetDocument } from './api/useGetDocument';
 import { PrivateRoutes } from './Pages/PrivateRoutes/PrivateRoutes';
-import { Cataloge } from './Components/Cataloge/Catalogue/Catalogue';
 
 const func = async () => {
 	const user = auth.currentUser;

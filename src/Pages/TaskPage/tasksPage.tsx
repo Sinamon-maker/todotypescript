@@ -10,24 +10,20 @@ import { Container } from '../../Module/Container/Container';
 import { NewTaskForm } from '../../Components/Tasks/NewTaskForm/NewTaskForm';
 import { CatalogeHeading } from '../../Components/Tasks/CatalogeHeading/CatalogeHeading';
 import { Loader } from '../../Components/Loader/loader';
+import { Data, serverDataTask } from '../../globalTypes';
 
 const TasksPage = () => {
 	//const loadData = useLoaderData() as serverDataTask;
 
 	const { userId, catalogueId } = useParams();
 	console.log('id', userId);
-	const { error, newDoc, isLoading } = useGetDocument(catalogueId!);
+	const { error, newDoc, isLoading } = useGetDocument<serverDataTask>(catalogueId!, 'tasks') as serverDataTask;
 
-	const loadData = { error, newDoc };
-
-	if (loadData) {
-		console.log('taskPage', loadData);
-	}
 	if (isLoading) return <Loader />;
 	if (!newDoc) return <p>Could Not Retreive the data {error}</p>;
 
 	return (
-		<TaskContainer loadData={loadData}>
+		<TaskContainer newDoc={newDoc} error={error}>
 			<Container>
 				<div className="flex flex-col justify-between items-end ssm:flex-row">
 					<NewTaskForm />
