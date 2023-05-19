@@ -12,7 +12,7 @@ export const CatalogueItem = ({ docum, logoName }: Props) => {
 	if (logoName && docum.userId === logoName.uid) {
 		return (
 			<div className="w-full grow p-4 rounded-lg border border-fill-weak flex gap-4 items-center text-skin-base hover:scale-105 hover:shadow-lg hover:transition-all transition-all">
-				<Link className="w-full grow " to={`/tasks/${docum.id}`}>
+				<Link className="w-full grow " to={`/catalogue/${logoName.uid}/${docum.id}`}>
 					<div className="grow">{docum.title}</div>
 				</Link>
 				<div>{docum.tasks.length}</div>

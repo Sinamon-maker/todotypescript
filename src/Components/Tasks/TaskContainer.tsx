@@ -1,25 +1,24 @@
 import React, { useContext, useState, useCallback, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TaskContext } from './taskContext';
 
-import { Task, serverDataTask } from '../globalTypes';
-import { UserContext } from './userContext';
+import { Task, serverDataTask } from '../../globalTypes';
+import { UserContext } from '../../Context/userContext';
 
-import { ModalDeleteTask } from '../Components/ModalDeleteTask/modalDeleteTask';
-import { ModalEditTask } from '../Components/ModalEditTask/ModalEditTask';
+import { ModalDeleteTask } from '../ModalDeleteTask/modalDeleteTask';
+import { ModalEditTask } from '../ModalEditTask/ModalEditTask';
 
-import { updateTask } from '../api/updateDocument';
-import { deleteTask } from '../api/deleteDocument';
+import { updateTask } from '../../api/updateDocument';
+import { deleteTask } from '../../api/deleteDocument';
 
-import { ModalDeleteCatalogue } from '../Components/ModalDeleteCatalogue/ModalDeleteCatalogue';
-import useChangeTaskQueryStore from '../store/tasksStore';
+import { ModalDeleteCatalogue } from '../ModalDeleteCatalogue/ModalDeleteCatalogue';
+import useChangeTaskQueryStore from '../../store/tasksStore';
 
 type Props = {
 	children: React.ReactNode;
 	loadData: serverDataTask;
 };
 
-export const TaskProvider = ({ children, loadData }: Props) => {
+export const TaskContainer = ({ children, loadData }: Props) => {
 	const logoName = useContext(UserContext);
 
 	const taskResult = loadData.newDoc;
@@ -30,6 +29,8 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 	const setTaskComplete = useChangeTaskQueryStore((s) => s.setTaskComplete);
 	const setTaskEdit = useChangeTaskQueryStore((s) => s.setTaskEdit);
 	const taskEdit = useChangeTaskQueryStore((s) => s.taskEdit);
+	const newTask = useChangeTaskQueryStore((s) => s.newTask);
+	const setNewTask = useChangeTaskQueryStore((s) => s.setNewTask);
 
 	const [isCatalogueDel, setIsCatalogueDel] = useState(false);
 
@@ -40,6 +41,12 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		setTaskComplete(0);
 		//receive new
 	}, [idTaskComplete]);
+
+	useEffect(() => {
+		if (newTask) onNewTask(newTask);
+		setNewTask(null);
+		//receive new
+	}, [newTask]);
 
 	const deleteCatalogue = async () => {
 		try {
@@ -56,32 +63,23 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		setIsCatalogueDel(false);
 	};
 
-	const onNewTask = useCallback(
-		async (text: string) => {
-			const newTask = {
-				text,
-				status: false,
-				created: +new Date(),
-			};
-
-			let newList: Array<Task> = [];
-			if (taskResult?.tasks.length) {
-				newList = [...taskResult?.tasks, newTask];
-			} else {
-				newList = [newTask];
+	const onNewTask = async (newTask: Task) => {
+		let newList: Array<Task> = [];
+		if (taskResult?.tasks.length) {
+			newList = [...taskResult?.tasks, newTask];
+		} else {
+			newList = [newTask];
+		}
+		if (taskResult) {
+			try {
+				console.log(newList, taskResult?.id);
+				await updateTask('tasks', { tasks: newList }, taskResult?.id);
+			} catch (err) {
+				console.log(err);
 			}
-			if (taskResult) {
-				try {
-					console.log(newList, taskResult?.id);
-					await updateTask('tasks', { tasks: newList }, taskResult?.id);
-				} catch (err) {
-					console.log(err);
-				}
-			}
-			//	saveInStorage(logoName, newList);
-		},
-		[taskResult]
-	);
+		}
+		//	saveInStorage(logoName, newList);
+	};
 
 	const canselEditTask = () => {
 		setTaskEdit(null);
@@ -148,22 +146,12 @@ export const TaskProvider = ({ children, loadData }: Props) => {
 		setTaskDel(0);
 	}, []);
 
-	const contextValue = useMemo(
-		() => ({
-			taskResult,
-			error,
-			onNewTask,
-			changeStatus,
-		}),
-		[error, taskResult, onNewTask, changeStatus]
-	);
-
 	return (
-		<TaskContext.Provider value={contextValue}>
+		<div>
 			{children}
 			{isCatalogueDel && <ModalDeleteCatalogue deleteCatalogue={deleteCatalogue} canselDeleteCatalogue={canselDeleteCatalogue} />}
 			{taskEdit && <ModalEditTask canselEditTask={canselEditTask} changeTask={changeTask} taskEdit={taskEdit} />}
 			{idTaskDel !== 0 && <ModalDeleteTask confirmDeleteClick={confirmDeleteClick} canselDeleteTask={canselDeleteTask} />}
-		</TaskContext.Provider>
+		</div>
 	);
 };

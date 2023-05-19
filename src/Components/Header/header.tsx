@@ -12,13 +12,14 @@ export const Header = () => {
 	const handleClick = async () => {
 		await logout();
 	};
+	const myCatalogueLink = logoName ? `/catalogue/${logoName?.uid}` : 'catalogue';
 
 	return (
-		<header className="  ">
+		<header className=" bg-fill-main ">
 			<div className="container  m-auto  flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 sm:py-6 pl-8 pr-8 shadow-lg">
 				{logoName && <p className="mb-2 sm:mb-4 sm:mb-0 text-skin-base">{logoName.displayName}</p>}
 				<nav className="flex justify-between sm:block">
-					<NavLink to="/tasks/user" end>
+					<NavLink to={`${myCatalogueLink}`} end>
 						{({ isActive }) => (
 							<span
 								className={
@@ -31,7 +32,7 @@ export const Header = () => {
 							</span>
 						)}
 					</NavLink>
-					<NavLink to="/tasks" end>
+					<NavLink to="/catalogue" end>
 						{({ isActive }) => (
 							<span
 								className={

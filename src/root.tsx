@@ -47,7 +47,7 @@ export const Root = createBrowserRouter([
 				element: <PrivateRoutes />,
 				children: [
 					{
-						path: '/tasks',
+						path: '/catalogue',
 						element: <Home />,
 						errorElement: <ErrorPage />,
 
@@ -58,12 +58,12 @@ export const Root = createBrowserRouter([
 								errorElement: <ErrorPage />,
 							},
 							{
-								path: ':userId',
+								path: ':userId/:catalogueId',
 								element: <TasksPage />,
 								errorElement: <ErrorPage />,
 							},
 							{
-								path: 'user',
+								path: ':userId',
 								element: <MyTasksCataloge />,
 								errorElement: <ErrorPage />,
 							},

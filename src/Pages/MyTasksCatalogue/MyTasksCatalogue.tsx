@@ -7,11 +7,11 @@ import useGetCollectction from '../../Hooks/getCollection';
 import { Data } from '../../globalTypes';
 import { Loader } from '../../Components/Loader/loader';
 import { Error } from '../../Components/Error/error';
+import { useParams } from 'react-router-dom';
 
 export const MyTasksCataloge = () => {
-	const { logoName } = useContext(UserContext);
-
-	const { documents, error, isPending } = useGetCollectction<Data>('tasks', logoName?.uid);
+	const { userId } = useParams();
+	const { documents, error, isPending } = useGetCollectction<Data>('tasks', userId);
 	if (isPending) return <Loader />;
 
 	return (

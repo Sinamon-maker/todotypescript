@@ -2,10 +2,13 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { TaskContext } from '../../../Context/taskContext';
 import { AppButton } from '../../../Module/Button/Button';
 import { AppInput } from '../../../Module/Input/Input';
+import useChangeTaskQueryStore from '../../../store/tasksStore';
 
 export const NewTaskForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
+
+	const setNewTask = useChangeTaskQueryStore((s) => s.setNewTask);
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -15,8 +18,6 @@ export const NewTaskForm = () => {
 			inputRef.current.focus();
 		}
 	}, []);
-
-	const { onNewTask } = useContext(TaskContext);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -34,7 +35,7 @@ export const NewTaskForm = () => {
 
 	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
 		e.preventDefault();
-		onNewTask(taskName);
+		setNewTask({ text: taskName, created: +new Date(), status: false });
 		setTaskName('');
 		setDisableSave(true);
 	};

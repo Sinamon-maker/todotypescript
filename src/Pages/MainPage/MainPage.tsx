@@ -8,7 +8,7 @@ export const MainPage = () => {
 	console.log('Welcome', isLoading, logoName);
 	useEffect(() => {
 		if (logoName !== null) {
-			navigate('/tasks/user');
+			navigate(`/catalogue/${logoName.uid}`);
 		}
 	}, [logoName, navigate]);
 
