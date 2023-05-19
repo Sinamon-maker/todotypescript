@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { Outlet, Navigate } from 'react-router-dom';
-import { UserContext } from '../../Context/userContext';
+import { Outlet } from 'react-router-dom';
 
-import { Header } from '../../Components/Header/header';
+import { Header } from '../../Components/Header/Header';
 
 const Home = () => {
 	//const { isLoading, logoName } = useContext(UserContext);
@@ -13,9 +12,9 @@ const Home = () => {
 	//if (!logoName) return <Navigate to="/login" />;
 
 	return (
-		<div className="h-full flex flex-col">
+		<div className=" flex flex-col relative h-screen">
 			<Header />
-			<main className="w-full h-full flex flex-col overflow-y-auto scroll-smooth m-auto grow   p-b-1">
+			<main className="w-full  h-full flex flex-col  m-auto grow   p-b-1">
 				<Outlet />
 			</main>
 		</div>

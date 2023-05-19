@@ -7,6 +7,8 @@ import { AppButton } from '../../../Module/Button/Button';
 import { AppInput } from '../../../Module/Input/Input';
 import { Container } from '../../../Module/Container/Container';
 
+import { styleType } from '../../../styles/styles';
+
 export const NewCatalogeForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
@@ -72,13 +74,7 @@ export const NewCatalogeForm = () => {
 						inputRef={inputRef}
 					/>
 
-					<AppButton
-						style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong border-fill-weak hover:border-fill-strong disabled:opacity-25 text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
-						type="submit"
-						nameValue="addTask"
-						title="Save"
-						disabled={disableSave}
-					/>
+					<AppButton style={styleType.buttonStyle} type="submit" nameValue="addTask" title="Save" disabled={disableSave} />
 				</div>
 			</form>
 		</Container>

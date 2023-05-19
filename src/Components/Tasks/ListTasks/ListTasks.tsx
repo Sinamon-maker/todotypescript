@@ -19,9 +19,9 @@ export const ListTasks = ({ resultData }: Props) => {
 
 	if (!resultData?.tasks?.length) return <NotTasks />;
 	return (
-		<div className="w-full grow  overflow-y-auto  scroll-smooth grid">
+		<div className="w-full grow  grid">
 			<Container>
-				<ul className=" w-full sm:w-full p-2  bg-fill-main tracking-normal   font-normal text-base ssm:text-lg text-left  text-skin-base overflow-hidden rounded-md shadow-md">
+				<ul className=" w-full sm:w-full p-2  overflow-y-auto  scroll-smooth bg-fill-main tracking-normal   font-normal text-base ssm:text-lg text-left  text-skin-base overflow-hidden rounded-md shadow-md">
 					{sortedList.map((item, index) => (
 						<TableRaw key={item.created} item={item} index={index} />
 					))}

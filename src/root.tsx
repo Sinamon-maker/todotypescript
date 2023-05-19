@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromChildren } from 'react-router-dom';
 import Main from './Main';
 import { MainPage } from './Pages/MainPage/MainPage';
 import { ErrorPage } from './Pages/ErrorPage/ErrorPage';
@@ -13,6 +13,7 @@ import { auth } from './Firebase/Config';
 
 import { useGetDocument } from './api/useGetDocument';
 import { PrivateRoutes } from './Pages/PrivateRoutes/PrivateRoutes';
+import { Cataloge } from './Components/Cataloge/Catalogue/Catalogue';
 
 const func = async () => {
 	const user = auth.currentUser;

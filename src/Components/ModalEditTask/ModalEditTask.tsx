@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import { TaskContext } from '../../Context/taskContext';
+import React, { useContext, useState, useRef } from 'react';
 import { UserContext } from '../../Context/userContext';
 import { Task } from '../../globalTypes';
 import { AppButton } from '../../Module/Button/Button';

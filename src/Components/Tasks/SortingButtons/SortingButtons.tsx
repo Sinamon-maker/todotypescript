@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { AppButton } from '../../../Module/Button/Button';
 
 import { SortParam } from '../../../globalTypes';
 import useChangeTaskQueryStore from '../../../store/tasksStore';
+import { styleType } from '../../../styles/styles';
 
 export const SortingButtons = () => {
 	const sorted = useChangeTaskQueryStore((s) => s.sorted);
@@ -12,7 +13,7 @@ export const SortingButtons = () => {
 	return (
 		<div className="flex gap-2 items-center  pb-1 pt-2 py-2 ssm:pt-4 ssm:pb-2 w-full ssm:w-fit justify-end ">
 			<AppButton
-				style="flex-shrink-0 border-transparent border-4 bg-fill-weak text-skin-base hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg  disabled:underline disabled:bg-transparent"
+				style={styleType.link}
 				type="button"
 				nameValue="allTask"
 				title="All"
@@ -20,7 +21,7 @@ export const SortingButtons = () => {
 				onClick={() => setSorted(SortParam.all)}
 			/>
 			<AppButton
-				style="flex-shrink-0 border-transparent border-4 bg-fill-weak text-skin-base hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg  disabled:underline disabled:bg-transparent"
+				style={styleType.link}
 				type="button"
 				nameValue="doneTask"
 				title="Done"
@@ -29,7 +30,7 @@ export const SortingButtons = () => {
 			/>
 
 			<AppButton
-				style="flex-shrink-0 border-transparent border-4 bg-fill-weak text-skin-base hover:text-fill-strong text-sm py-1 px-2 rounded shadow-lg  disabled:underline disabled:bg-transparent"
+				style={styleType.link}
 				type="button"
 				nameValue="ongoingTask"
 				title="Ongoing"

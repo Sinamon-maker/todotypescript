@@ -7,6 +7,7 @@ import ImageEdit from '../../../../Images/edit.svg';
 import Chevron from '../../../../Images/chevron.svg';
 
 import { Task } from '../../../../globalTypes';
+import { styleType } from '../../../../styles/styles';
 
 type Props = {
 	task: Task;
@@ -20,8 +21,8 @@ export const ActionsTableElement = ({ task, delClick, editClick, toggleDetailes 
 	<span className=" h-full flex justify-end ssm:flex-row gap-2 sm:gap-4 ssm:justify-end">
 		{task.detailes && (
 			<AppButton
-				style="w-6 h-6 sm:w-8 sm:h-8 block   hover:bg-fill-strong  hover:border-fill-strong text-sm   rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
-				nameValue="edit"
+				style={styleType.icon}
+				nameValue="expand"
 				onClick={toggleDetailes}
 				title=""
 				ariaLabel="editTask"
@@ -29,7 +30,7 @@ export const ActionsTableElement = ({ task, delClick, editClick, toggleDetailes 
 			/>
 		)}
 		<AppButton
-			style="w-6 h-6 sm:w-8 sm:h-8 block   hover:bg-fill-strong  hover:border-fill-strong text-sm   rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
+			style={styleType.icon}
 			nameValue="edit"
 			onClick={(e) => editClick(e, task)}
 			title=""
@@ -38,7 +39,7 @@ export const ActionsTableElement = ({ task, delClick, editClick, toggleDetailes 
 		/>
 
 		<AppButton
-			style="w-6 h-6 sm:w-8 sm:h-8 block   hover:bg-fill-strong  hover:border-fill-strong text-sm   rounded-full shadow-lg flex justify-center items-center disabled:opacity-80 disabled:bg-transparent disabled:border-fill-strong"
+			style={styleType.icon}
 			nameValue="deleteTask"
 			title=""
 			ariaLabel="deleteTask"

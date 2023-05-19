@@ -28,7 +28,7 @@ export const ThemeComponent = ({ children }: Props) => {
 	styl = `h-screen ${them}`;
 
 	return (
-		<div className={`bg-gradient-to-tr from-blue-800  to-red-800 ${styl}`}>
+		<div className={`bg-gradient-to-tr from-blue-800 h-full to-red-800 ${styl}`}>
 			<ThemeButtons setTheme={setTheme} />
 			{children}
 		</div>
