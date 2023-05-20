@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+
 import { AppButton } from '../../../Module/Button/Button';
 
 import { AppInput } from '../../../Module/Input/Input';
 import { styleType } from '../../../styles/styles';
-import { UsersCollection } from '../../../globalTypes';
-import { setDefaultResultOrder } from 'dns';
+import { Folders, Folder } from '../../../globalTypes';
+import useChangeCatalogueStore from '../../../store/catalogueStore';
+
+import { useAuth } from '../../../Context/useAuth';
 
 type Props = {
-	folders: UsersCollection | null;
+	folders: Folder[];
 };
 
 export const SideBar = ({ folders }: Props) => {
-	const { userId } = useParams();
+	const { logoName } = useAuth();
 	const [value, setValue] = useState('');
 	const [error, setError] = useState('');
 	const [isDisabled, setDisableSave] = useState(true);
+
+	const setNewFolder = useChangeCatalogueStore((s) => s.setNewFolder);
 
 	const onChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -28,21 +32,16 @@ export const SideBar = ({ folders }: Props) => {
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (folders) {
-			const isExist = folders.folders.find((it) => it === value);
-			if (!isExist) {
-				const updatedFolders = [...folders.folders, value];
-			} else {
+			const isExist = folders.find((it) => it.name === value);
+			if (isExist) {
 				setError('this folder not unique');
+				return;
 			}
-			//updateDoc
-		} else {
-			const newFolder = {
-				userId,
-				folders: [value],
-			};
-			//addDocument
 		}
-		console.log(value);
+
+		//addDocument
+
+		setNewFolder({ name: value, userId: logoName?.uid });
 		setValue('');
 	};
 
@@ -50,17 +49,17 @@ export const SideBar = ({ folders }: Props) => {
 		<aside className=" p-4 w-1/3 h-full flex flex-col rounded text-skin-base border border-fill-weak">
 			<h2 className="text-lg">Folders</h2>
 			<div className="grow  ">
-				{folders && (
+				{folders.length !== 0 && (
 					<ul className=" my-4">
-						{folders.folders.map((it) => (
-							<li key={it}>{it}</li>
+						{folders.map((it) => (
+							<li key={it.id}>{it.name}</li>
 						))}
 					</ul>
 				)}
-				{!folders && <p>No folders yet. Start creating</p>}
+				{folders.length == 0 && <p>No folders yet. Start creating</p>}
 			</div>
 			<form onSubmit={onSubmit} className=" w-full mt-6">
-				<div className="w-full border-2 border-sky-800 p-2 rounded flex ">
+				<div className="w-full border-2 border-sky-800 p-2 rounded flex items-center">
 					<AppInput style="w-full bg-transparent" placeholder="Add new folder" value={value} onChange={onChange} />
 					<AppButton
 						style={styleType.buttonStyle}

@@ -34,9 +34,17 @@ export type UserObject = {
 	email: string;
 };
 
+export type Folder = {
+	name: string;
+	id: number;
+	userId: string;
+};
+
+export type Folders = Folder[];
+
 export type UsersCollection = {
 	userId: string;
-	folders: string[];
+	folders: Folder[];
 };
 export type serverDataTask = {
 	newDoc: Data | null;

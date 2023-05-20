@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Task, serverDataTask, Data } from '../../globalTypes';
 import { UserContext } from '../../Context/userContext';
 
-import { ModalDeleteTask } from '../ModalDeleteTask/modalDeleteTask';
+import { ModalDelete } from '../../Components/ModalDelete/modalDelete';
 import { ModalEditTask } from '../ModalEditTask/ModalEditTask';
 
 import { updateTask } from '../../api/updateDocument';
@@ -152,7 +152,7 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 			{children}
 			{isCatalogueDel && <ModalDeleteCatalogue deleteCatalogue={deleteCatalogue} canselDeleteCatalogue={canselDeleteCatalogue} />}
 			{taskEdit && <ModalEditTask canselEditTask={canselEditTask} changeTask={changeTask} taskEdit={taskEdit} />}
-			{idTaskDel !== 0 && <ModalDeleteTask confirmDeleteClick={confirmDeleteClick} canselDeleteTask={canselDeleteTask} />}
+			{idTaskDel !== 0 && <ModalDelete title="Are you sure you want to delete tsak?" confirmDeleteClick={confirmDeleteClick} canselDelete={canselDeleteTask} />}
 		</div>
 	);
 };
