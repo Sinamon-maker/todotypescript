@@ -12,6 +12,15 @@ export enum SortParam {
 	ongoing = 'Ongoing',
 }
 
+export type Folder = {
+	name: string;
+	id: string;
+	userId: string;
+	createdAt: number;
+};
+
+export type Folders = Folder[];
+
 export interface Task {
 	text: string;
 	status: boolean;
@@ -26,6 +35,7 @@ export interface Data {
 	userId: string;
 	tasks: Array<Task>;
 	displayName: string;
+	folder: string;
 }
 
 export type UserObject = {
@@ -33,14 +43,6 @@ export type UserObject = {
 	displayName: string;
 	email: string;
 };
-
-export type Folder = {
-	name: string;
-	id: number;
-	userId: string;
-};
-
-export type Folders = Folder[];
 
 export type UsersCollection = {
 	userId: string;

@@ -24,6 +24,7 @@ const useGetCollection = <T,>(collectionName: string, q?: string) => {
 					const d = { ...doc.data(), id: doc.id } as T;
 					results.push(d);
 				});
+				console.log('get collection', results);
 				setDocuments(results);
 				setIsPending(false);
 			},

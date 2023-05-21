@@ -33,8 +33,6 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 	const newTask = useChangeTaskQueryStore((s) => s.newTask);
 	const setNewTask = useChangeTaskQueryStore((s) => s.setNewTask);
 
-	const [isCatalogueDel, setIsCatalogueDel] = useState(false);
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -48,21 +46,6 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 		setNewTask(null);
 		//receive new
 	}, [newTask]);
-
-	const deleteCatalogue = async () => {
-		try {
-			if (taskResult) {
-				await deleteTask('tasks', taskResult.id);
-				navigate('/tasks');
-			}
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	const canselDeleteCatalogue = () => {
-		setIsCatalogueDel(false);
-	};
 
 	const onNewTask = async (newTask: Task) => {
 		let newList: Array<Task> = [];
@@ -150,7 +133,7 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 	return (
 		<div>
 			{children}
-			{isCatalogueDel && <ModalDeleteCatalogue deleteCatalogue={deleteCatalogue} canselDeleteCatalogue={canselDeleteCatalogue} />}
+
 			{taskEdit && <ModalEditTask canselEditTask={canselEditTask} changeTask={changeTask} taskEdit={taskEdit} />}
 			{idTaskDel !== 0 && <ModalDelete title="Are you sure you want to delete tsak?" confirmDeleteClick={confirmDeleteClick} canselDelete={canselDeleteTask} />}
 		</div>

@@ -1,6 +1,4 @@
 import { useContext } from 'react';
 import { UserContext } from './userContext';
 
-export const useAuth = () => {
-	return useContext(UserContext);
-};
+export const useAuth = () => useContext(UserContext);

@@ -6,12 +6,15 @@ import useCollection from '../../../Hooks/useCollection';
 import { AppButton } from '../../../Module/Button/Button';
 import { AppInput } from '../../../Module/Input/Input';
 import { Container } from '../../../Module/Container/Container';
+import useChangeFolderStore from '../../../store/folderStore';
 
 import { styleType } from '../../../styles/styles';
 
 export const NewCatalogeForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
+
+	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
 	const { error, addDocument } = useCollection('tasks');
 	const { logoName } = useContext(UserContext);
@@ -44,6 +47,7 @@ export const NewCatalogeForm = () => {
 				displayName: logoName?.displayName,
 				createdAt: serverTimestamp(),
 				tasks: [],
+				folder: currentFolder?.id,
 			};
 			console.log(newTask);
 			await addDocument(newTask);

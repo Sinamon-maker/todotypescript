@@ -4,10 +4,13 @@ import { AppButton } from '../../../Module/Button/Button';
 
 import { AppInput } from '../../../Module/Input/Input';
 import { styleType } from '../../../styles/styles';
-import { Folders, Folder } from '../../../globalTypes';
+import { Folder } from '../../../globalTypes';
 import useChangeCatalogueStore from '../../../store/catalogueStore';
+import useChangeFolderStore from '../../../store/folderStore';
 
 import { useAuth } from '../../../Context/useAuth';
+import { serverTimestamp } from 'firebase/firestore';
+import { FolderItem } from '../FolderItem/FolderItem';
 
 type Props = {
 	folders: Folder[];
@@ -19,7 +22,8 @@ export const SideBar = ({ folders }: Props) => {
 	const [error, setError] = useState('');
 	const [isDisabled, setDisableSave] = useState(true);
 
-	const setNewFolder = useChangeCatalogueStore((s) => s.setNewFolder);
+	const setNewFolder = useChangeFolderStore((s) => s.setNewFolder);
+	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
 	const onChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -38,10 +42,7 @@ export const SideBar = ({ folders }: Props) => {
 				return;
 			}
 		}
-
-		//addDocument
-
-		setNewFolder({ name: value, userId: logoName?.uid });
+		setNewFolder(value);
 		setValue('');
 	};
 
@@ -52,7 +53,7 @@ export const SideBar = ({ folders }: Props) => {
 				{folders.length !== 0 && (
 					<ul className=" my-4">
 						{folders.map((it) => (
-							<li key={it.id}>{it.name}</li>
+							<FolderItem key={it.id} folderItem={it} />
 						))}
 					</ul>
 				)}

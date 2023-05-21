@@ -13,6 +13,7 @@ type Props = {
 
 export const CatalogueItem = ({ docum, logoName }: Props) => {
 	const setIdCatalogueDel = useChangeCatalogueStore((s) => s.setIdCatalogueDel);
+
 	if (logoName && docum.userId === logoName.uid) {
 		return (
 			<div className="w-full grow p-4 rounded-lg border border-fill-weak flex gap-4 items-center text-skin-base hover:scale-105 hover:shadow-lg hover:transition-all transition-all">

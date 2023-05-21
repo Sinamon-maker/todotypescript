@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react';
 import useChangeCatalogueStore from '../../../store/catalogueStore';
+import useChangeFolderStore from '../../../store/folderStore';
 
 import { Folder } from '../../../globalTypes';
 import { ModalDelete } from '../../ModalDelete/modalDelete';
+import { deleteTask } from '../../../api/deleteDocument';
+import useCollection from '../../../Hooks/useCollection';
+import { useAuth } from '../../../Context/useAuth';
+import { serverTimestamp } from 'firebase/firestore';
 
 type Props = {
 	children: React.ReactNode;
@@ -10,27 +15,40 @@ type Props = {
 };
 
 export const CatalogueContainer = ({ children, folders }: Props) => {
-	const idFolderRename = useChangeCatalogueStore((s) => s.idFolderRename);
-	const setFolderRename = useChangeCatalogueStore((s) => s.setFolderRename);
-	const idFolderDelete = useChangeCatalogueStore((s) => s.idFolderDelete);
-	const setFolderDel = useChangeCatalogueStore((s) => s.setFolderDel);
-	const newFolder = useChangeCatalogueStore((s) => s.newFolder);
-	const setNewFolder = useChangeCatalogueStore((s) => s.setNewFolder);
+	const { logoName } = useAuth();
+	const idFolderRename = useChangeFolderStore((s) => s.idFolderRename);
+	const setFolderRename = useChangeFolderStore((s) => s.setFolderRename);
+	const idFolderDelete = useChangeFolderStore((s) => s.idFolderDelete);
+	const setFolderDel = useChangeFolderStore((s) => s.setFolderDel);
+	const newFolder = useChangeFolderStore((s) => s.newFolder);
+	const setNewFolder = useChangeFolderStore((s) => s.setNewFolder);
 	const idCatalogueDel = useChangeCatalogueStore((s) => s.idCatalogueDel);
 	const setIdCatalogueDel = useChangeCatalogueStore((s) => s.setIdCatalogueDel);
 
+	const { error, addDocument } = useCollection('folders');
+	console.log('idCatalogueDel', idCatalogueDel);
 	useEffect(() => {
 		if (newFolder) {
 			createNewFolder(newFolder);
 		}
 	}, [newFolder]);
 
-	const createNewFolder = async (folder: Partial<Folder>) => {
-		//addDocument
+	const createNewFolder = async (folder: string) => {
+		const newFolder = { name: folder, userId: logoName?.uid, createdAt: serverTimestamp() };
+		console.log('newFolder');
+		try {
+			await addDocument(newFolder);
+		} catch (err) {
+			console.log('err adding folder', err);
+		}
 	};
 
-	const confirmDeleteCatalogue = () => {
-		//delCatalogue
+	const confirmDeleteCatalogue = async () => {
+		try {
+			await deleteTask('tasks', idCatalogueDel);
+		} catch (err) {
+			console.log(err);
+		}
 		setIdCatalogueDel('');
 	};
 
