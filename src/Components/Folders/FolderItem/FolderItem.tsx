@@ -8,6 +8,8 @@ import { Folder } from '../../../globalTypes';
 import useChangeFolderStore from '../../../store/folderStore';
 import FolderIcon from '../../../Images/folder.svg';
 import FolderOpenIcon from '../../../Images/folder-open.svg';
+import { AiFillFolder } from 'react-icons/ai';
+import { AiFillFolderOpen } from 'react-icons/ai';
 
 type Props = {
 	folderItem: Folder;
@@ -26,8 +28,8 @@ export const FolderItem = ({ folderItem }: Props) => {
 
 	return (
 		<li className="flex items-center w-full mb-4">
-			{!disabled && <FolderIcon className="w-4 h-4 sm:w-6 sm:h-6 text-orange-700" />}
-			{disabled && <FolderOpenIcon className="w-4 h-4 sm:w-6 sm:h-6  text-orange-700" />}
+			{!disabled && <AiFillFolder className="w-4 h-4 sm:w-6 sm:h-6 text-orange-700" />}
+			{disabled && <AiFillFolderOpen className="w-4 h-4 sm:w-6 sm:h-6  text-orange-700" />}
 			<AppButton style={styleType.transparent} type="button" nameValue="allTask" disabled={disabled} title={folderItem.name} onClick={onFolderClick} />
 		</li>
 	);

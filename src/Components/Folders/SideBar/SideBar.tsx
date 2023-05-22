@@ -34,8 +34,8 @@ export const SideBar = ({ folders }: Props) => {
 	const onChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
 			setError('');
-			if (e.target.value.length < 3) setDisableSave(true);
-			if (e.target.value.length >= 3) setDisableSave(false);
+			if (e.target.value.trim().length < 3) setDisableSave(true);
+			if (e.target.value.trim().length >= 3) setDisableSave(false);
 			setValue(e.target.value);
 		}
 	};

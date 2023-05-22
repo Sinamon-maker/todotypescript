@@ -5,6 +5,7 @@ import { Data, ContextUser } from '../../../globalTypes';
 import { AppButton } from '../../../Module/Button/Button';
 import ImageDelete from '../../../Images/trash.svg';
 import { styleType } from '../../../styles/styles';
+import { FiTrash2 } from 'react-icons/fi';
 
 type Props = {
 	docum: Data;
@@ -27,7 +28,7 @@ export const CatalogueItem = ({ docum, logoName }: Props) => {
 					title=""
 					ariaLabel="deleteTask"
 					onClick={(e) => setIdCatalogueDel(docum.id)}
-					Icon={<ImageDelete className="w-4 h-4 sm:w-10 sm:h-10" />}
+					Icon={<FiTrash2 className="w-4 h-4 sm:w-10 sm:h-10" />}
 				/>
 			</div>
 		);
