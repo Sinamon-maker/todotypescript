@@ -1,6 +1,6 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { serverTimestamp } from 'firebase/firestore';
-import { UserContext } from '../../../Context/userContext';
+
 import useCollection from '../../../Hooks/useCollection';
 
 import { AppButton } from '../../../Module/Button/Button';
@@ -9,6 +9,7 @@ import { Container } from '../../../Module/Container/Container';
 import useChangeFolderStore from '../../../store/folderStore';
 
 import { styleType } from '../../../styles/styles';
+import { useAuth } from '../../../Context/useAuth';
 
 export const NewCatalogeForm = () => {
 	const [taskName, setTaskName] = useState('');
@@ -17,7 +18,7 @@ export const NewCatalogeForm = () => {
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
 	const { error, addDocument } = useCollection('tasks');
-	const { logoName } = useContext(UserContext);
+	const { logoName } = useAuth();
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -49,7 +50,7 @@ export const NewCatalogeForm = () => {
 				tasks: [],
 				folder: currentFolder?.id,
 			};
-			console.log(newTask);
+
 			await addDocument(newTask);
 			setTaskName('');
 			setDisableSave(true);

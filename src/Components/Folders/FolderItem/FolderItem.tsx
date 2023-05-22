@@ -6,8 +6,8 @@ import { styleType } from '../../../styles/styles';
 import { Folder } from '../../../globalTypes';
 
 import useChangeFolderStore from '../../../store/folderStore';
-
-import { useAuth } from '../../../Context/useAuth';
+import FolderIcon from '../../../Images/folder.svg';
+import FolderOpenIcon from '../../../Images/folder-open.svg';
 
 type Props = {
 	folderItem: Folder;
@@ -25,8 +25,10 @@ export const FolderItem = ({ folderItem }: Props) => {
 	};
 
 	return (
-		<li className="">
-			<AppButton style={styleType.link} type="button" nameValue="allTask" title={folderItem.name} disabled={disabled} onClick={onFolderClick} />
+		<li className="flex items-center w-full mb-4">
+			{!disabled && <FolderIcon className="w-4 h-4 sm:w-6 sm:h-6 text-orange-700" />}
+			{disabled && <FolderOpenIcon className="w-4 h-4 sm:w-6 sm:h-6  text-orange-700" />}
+			<AppButton style={styleType.transparent} type="button" nameValue="allTask" disabled={disabled} title={folderItem.name} onClick={onFolderClick} />
 		</li>
 	);
 };

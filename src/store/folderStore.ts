@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { Folder } from '../globalTypes';
 
+export const folderAll = { id: 'all', name: 'all', createdAt: 1, userId: '' };
+
 export interface FolderChangeQuery {
 	currentFolder: Folder | null;
 	newFolder: string;

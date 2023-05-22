@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useAuth } from '../../../Context/useAuth';
-import { UserContext } from '../../../Context/userContext';
+
 import { Data } from '../../../globalTypes';
 import { Container } from '../../../Module/Container/Container';
 import { CatalogueItem } from '../CatalogueItem/CatalogurItem';
 import { NewCatalogeForm } from '../NewCatalogeForm/NewCatalogeForm';
-import useChangeCatalogueStore from '../../../store/catalogueStore';
+
 import useChangeFolderStore from '../../../store/folderStore';
 
 type Props = {
@@ -17,8 +17,13 @@ export const CatalogeList = ({ documents }: Props) => {
 
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
-	const renderedCatalogues = currentFolder !== null ? documents.filter((it) => it.folder === currentFolder.id) : documents;
-	console.log('documents', documents);
+	const renderedCatalogues = (documents: Data[]) => {
+		if (currentFolder === null || currentFolder.id === 'all') {
+			return documents;
+		}
+		return documents.filter((it) => it.folder === currentFolder.id);
+	};
+
 	if (documents.length === 0 && !currentFolder) return <p>Here should be your list of catalogues</p>;
 
 	return (
@@ -31,7 +36,7 @@ export const CatalogeList = ({ documents }: Props) => {
 				) : (
 					<Container>
 						<div className="w-full flex  flex-col gap-4 ">
-							{renderedCatalogues?.map((docum) => (
+							{renderedCatalogues(documents)?.map((docum) => (
 								<CatalogueItem key={docum.id} docum={docum} logoName={logoName} />
 							))}
 						</div>

@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { AppButton } from '../../../Module/Button/Button';
 
 import { AppInput } from '../../../Module/Input/Input';
 import { styleType } from '../../../styles/styles';
 import { Folder } from '../../../globalTypes';
-import useChangeCatalogueStore from '../../../store/catalogueStore';
-import useChangeFolderStore from '../../../store/folderStore';
+import useChangeFolderStore, { folderAll } from '../../../store/folderStore';
 
-import { useAuth } from '../../../Context/useAuth';
-import { serverTimestamp } from 'firebase/firestore';
 import { FolderItem } from '../FolderItem/FolderItem';
 
 type Props = {
@@ -17,13 +14,18 @@ type Props = {
 };
 
 export const SideBar = ({ folders }: Props) => {
-	const { logoName } = useAuth();
 	const [value, setValue] = useState('');
 	const [error, setError] = useState('');
 	const [isDisabled, setDisableSave] = useState(true);
 
 	const setNewFolder = useChangeFolderStore((s) => s.setNewFolder);
-	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
+	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
+
+	useEffect(() => {
+		if (folders.length > 1) {
+			setCurrentFolder(folderAll);
+		}
+	}, []);
 
 	const onChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -47,15 +49,19 @@ export const SideBar = ({ folders }: Props) => {
 	};
 
 	return (
-		<aside className=" p-4 w-1/3 h-full flex flex-col rounded text-skin-base border border-fill-weak">
-			<h2 className="text-lg">Folders</h2>
-			<div className="grow  ">
+		<aside className=" p-4  w-1/3 h-full flex flex-col rounded text-skin-base border border-fill-weak">
+			<div className="smm:p-8 ssm:pl-10 grow">
+				<h2 className="text-lg ssm:text-xl my-6 underline underline-offset-4">Folders</h2>
+
 				{folders.length !== 0 && (
-					<ul className=" my-4">
-						{folders.map((it) => (
-							<FolderItem key={it.id} folderItem={it} />
-						))}
-					</ul>
+					<>
+						{folders.length > 1 && <FolderItem folderItem={folderAll} />}
+						<ul className=" my-4">
+							{folders.map((it) => (
+								<FolderItem key={it.id} folderItem={it} />
+							))}
+						</ul>
+					</>
 				)}
 				{folders.length == 0 && <p>No folders yet. Start creating</p>}
 			</div>
