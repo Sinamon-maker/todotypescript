@@ -57,7 +57,7 @@ export const CatalogueContainer = ({ children, folders }: Props) => {
 	};
 
 	return (
-		<div className="w-full h-full  flex  gap-2 ">
+		<div className="w-full h-full  flex  gap-2 relative">
 			{children}
 			{idCatalogueDel && (
 				<ModalDelete
