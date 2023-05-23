@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppInput } from '../../Module/Input/Input';
 import { AppButton } from '../../Module/Button/Button';
-import { Error } from '../../Components/Error/error';
+import { ErrorMessage } from '../../Components/ErrorMessage/ErrorMessage';
 import useSignup from '../../Hooks/useSignup';
 
 export const RegisterForm = () => {
@@ -87,7 +87,7 @@ export const RegisterForm = () => {
 						onChange={handleChange}
 					/>
 				</div>
-				<Error message={error} />
+				<ErrorMessage message={error} />
 				<AppButton
 					style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong disabled:opacity-25 border-fill-weak hover:border-fill-strong text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
 					type="submit"

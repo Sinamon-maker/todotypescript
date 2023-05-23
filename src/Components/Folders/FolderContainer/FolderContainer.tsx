@@ -3,10 +3,10 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { Folder } from '../../../globalTypes';
 import useChangeFolderStore, { folderAll } from '../../../store/folderStore';
 
-import { IconButton } from '../../../Module/IconButton/IconButton';
 import useCollection from '../../../Hooks/useCollection';
 import { serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../../../Context/useAuth';
+import { AppButton } from '../../../Module/Button/Button';
 
 type Props = {
 	folders: Folder[];
@@ -61,10 +61,13 @@ export const FolderContainer = ({ folders, children }: Props) => {
 	return (
 		<>
 			<aside className={`${styleSideBar}`}>
-				<IconButton
-					styleBtn={!isOpenSidebar ? 'absolute p-2 ssm:hidden' : 'absolute p-2 ssm:hidden right-0.5'}
+				<AppButton
+					style={!isOpenSidebar ? 'absolute p-2 ssm:hidden' : 'absolute p-2 ssm:hidden right-0.5'}
 					ariaLabel=""
 					type="button"
+					iconStyle=""
+					nameValue="menu"
+					title=""
 					onClick={() => setOpenSideBar(!isOpenSidebar)}
 					Icon={!isOpenSidebar ? 'menu' : 'close'}
 				/>

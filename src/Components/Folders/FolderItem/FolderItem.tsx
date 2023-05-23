@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { AppButton } from '../../../Module/Button/Button';
 
@@ -6,10 +6,8 @@ import { styleType } from '../../../styles/styles';
 import { Folder } from '../../../globalTypes';
 
 import useChangeFolderStore from '../../../store/folderStore';
-import FolderIcon from '../../../Images/folder.svg';
-import FolderOpenIcon from '../../../Images/folder-open.svg';
-import { AiFillFolder } from 'react-icons/ai';
-import { AiFillFolderOpen } from 'react-icons/ai';
+
+import { IconComponent } from '../../../Icons/Icon';
 
 type Props = {
 	folderItem: Folder;
@@ -28,8 +26,8 @@ export const FolderItem = ({ folderItem }: Props) => {
 
 	return (
 		<li className="flex items-center w-full mb-4">
-			{!disabled && <AiFillFolder className="w-8 h-8 sm:w-8 sm:h-8  text-orange-700" />}
-			{disabled && <AiFillFolderOpen className="w-8 h-8 sm:w-8 sm:h-8  text-orange-700" />}
+			<IconComponent style="w-8 h-8 sm:w-8 sm:h-8  text-orange-700" Icon={disabled ? 'openFolder' : 'folder'} />
+
 			<AppButton style={styleType.transparent} type="button" nameValue="allTask" disabled={disabled} title={folderItem.name} onClick={onFolderClick} />
 		</li>
 	);

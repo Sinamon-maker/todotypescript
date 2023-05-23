@@ -1,13 +1,8 @@
 import React from 'react';
 
-import { AppButton } from '../../../../Module/Button/Button';
-
-import ImageDelete from '../../../../Images/trash.svg';
-import ImageEdit from '../../../../Images/edit.svg';
-import Chevron from '../../../../Images/chevron.svg';
-
 import { Task } from '../../../../globalTypes';
 import { styleType } from '../../../../styles/styles';
+import { AppButton } from '../../../../Module/Button/Button';
 
 type Props = {
 	task: Task;
@@ -21,30 +16,33 @@ export const ActionsTableElement = ({ task, delClick, editClick, toggleDetailes 
 	<span className=" h-full flex justify-end ssm:flex-row gap-2 sm:gap-4 ssm:justify-end">
 		{task.detailes && (
 			<AppButton
+				title=""
 				style={styleType.icon}
 				nameValue="expand"
 				onClick={toggleDetailes}
-				title=""
 				ariaLabel="editTask"
-				Icon={<Chevron className="w-4 h-4 sm:w-6 sm:h-6" />}
+				iconStyle="w-2 h-2 sm:w-4 sm:h-4"
+				Icon="expand"
 			/>
 		)}
 		<AppButton
+			title=""
 			style={styleType.icon}
 			nameValue="edit"
 			onClick={(e) => editClick(e, task)}
-			title=""
+			iconStyle="w-4 h-4 sm:w-6 sm:h-6"
 			ariaLabel="editTask"
-			Icon={<ImageEdit className="w-4 h-4 sm:w-6 sm:h-6" />}
+			Icon="edit"
 		/>
 
 		<AppButton
+			title=""
 			style={styleType.icon}
 			nameValue="deleteTask"
-			title=""
+			iconStyle="w-4 h-4 sm:w-6 sm:h-6"
 			ariaLabel="deleteTask"
 			onClick={(e) => delClick(e, task.created)}
-			Icon={<ImageDelete className="w-4 h-4 sm:w-10 sm:h-10" />}
+			Icon="delete"
 		/>
 	</span>
 );

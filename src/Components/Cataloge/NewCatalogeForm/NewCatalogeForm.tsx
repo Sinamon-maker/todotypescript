@@ -10,14 +10,16 @@ import useChangeFolderStore from '../../../store/folderStore';
 
 import { styleType } from '../../../styles/styles';
 import { useAuth } from '../../../Context/useAuth';
+import { ErrorMessage } from '../../ErrorMessage/ErrorMessage';
 
 export const NewCatalogeForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
+	const [errorSubmit, setErrorSubmit] = useState('');
 
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
-	const { error, addDocument } = useCollection('tasks');
+	const { error: errorAddingDocument, addDocument } = useCollection('tasks');
 	const { logoName } = useAuth();
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -32,8 +34,8 @@ export const NewCatalogeForm = () => {
 		if (e.target instanceof HTMLInputElement) {
 			console.log(e.target.value);
 			const neVal = e.target.value;
-			if (neVal.length < 3) setDisableSave(true);
-			if (neVal.length >= 3) setDisableSave(false);
+			if (neVal.trim().length < 3) setDisableSave(true);
+			if (neVal.trim().length >= 3) setDisableSave(false);
 			setTaskName(neVal);
 		}
 	};
@@ -41,7 +43,7 @@ export const NewCatalogeForm = () => {
 	const onSubmit = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
 
-		if (taskName.length >= 3) {
+		if (taskName.trim().length >= 3 && currentFolder && currentFolder.id !== 'all') {
 			const newTask = {
 				title: taskName,
 				userId: logoName?.uid,
@@ -81,6 +83,8 @@ export const NewCatalogeForm = () => {
 
 					<AppButton style={styleType.buttonStyle} type="submit" nameValue="addTask" title="Save" disabled={disableSave} />
 				</div>
+				{(!currentFolder || currentFolder.id === 'all') && <ErrorMessage message="Choose folder" />}
+				<ErrorMessage message={errorAddingDocument} />
 			</form>
 		</Container>
 	);

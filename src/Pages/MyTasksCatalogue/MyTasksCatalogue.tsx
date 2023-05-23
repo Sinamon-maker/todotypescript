@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { CatalogeList } from '../../Components/Cataloge/CatalogeList/CatalogeList';
 import useGetCollection from '../../Hooks/getCollection';
-import { Data, Folder, Folders, UsersCollection } from '../../globalTypes';
+import { Data, Folder } from '../../globalTypes';
 import { Loader } from '../../Components/Loader/loader';
-import { Error } from '../../Components/Error/error';
+
 import { useParams } from 'react-router-dom';
 import { SideBar } from '../../Components/Folders/SideBar/SideBar';
+import { Catalogues } from '../../Components/Cataloge/Catalogues/Catalogues';
 
 export const MyTasksCataloge = () => {
 	const { userId } = useParams();
@@ -20,7 +20,7 @@ export const MyTasksCataloge = () => {
 	return (
 		<div className="w-full h-full  flex  gap-2 relative">
 			<SideBar folders={folders} />
-			{folders.length !== 0 && <CatalogeList documents={documents} />}
+			{folders.length !== 0 && <Catalogues documents={documents} />}
 		</div>
 	);
 };

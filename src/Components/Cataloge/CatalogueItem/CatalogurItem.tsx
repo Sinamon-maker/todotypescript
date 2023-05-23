@@ -26,9 +26,10 @@ export const CatalogueItem = ({ docum, logoName }: Props) => {
 					style={styleType.icon}
 					nameValue="deleteTask"
 					title=""
+					iconStyle="w-4 h-4 sm:w-6 sm:h-6"
 					ariaLabel="deleteTask"
 					onClick={(e) => setIdCatalogueDel(docum.id)}
-					Icon={<FiTrash2 className="w-4 h-4 sm:w-6 sm:h-6" />}
+					Icon="delete"
 				/>
 			</div>
 		);
