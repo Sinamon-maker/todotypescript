@@ -1,4 +1,5 @@
 import React from 'react';
+import { MapIcons } from '../../Icons/Icon';
 
 type Props = {
 	title: string;

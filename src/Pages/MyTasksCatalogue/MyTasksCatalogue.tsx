@@ -7,7 +7,6 @@ import { Loader } from '../../Components/Loader/loader';
 import { Error } from '../../Components/Error/error';
 import { useParams } from 'react-router-dom';
 import { SideBar } from '../../Components/Folders/SideBar/SideBar';
-import { CatalogueContainer } from '../../Components/Cataloge/CatalogueContainer/CatalogueContainer';
 
 export const MyTasksCataloge = () => {
 	const { userId } = useParams();
@@ -19,10 +18,9 @@ export const MyTasksCataloge = () => {
 	if (!userId) return <p>Sth wrong</p>;
 	if (isPending) return <Loader />;
 	return (
-		<CatalogueContainer folders={folders}>
+		<div className="w-full h-full  flex  gap-2 relative">
 			<SideBar folders={folders} />
-
 			{folders.length !== 0 && <CatalogeList documents={documents} />}
-		</CatalogueContainer>
+		</div>
 	);
 };

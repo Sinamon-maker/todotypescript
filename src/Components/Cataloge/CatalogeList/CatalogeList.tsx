@@ -7,6 +7,7 @@ import { CatalogueItem } from '../CatalogueItem/CatalogurItem';
 import { NewCatalogeForm } from '../NewCatalogeForm/NewCatalogeForm';
 
 import useChangeFolderStore from '../../../store/folderStore';
+import { CatalogueContainer } from '../CatalogueContainer/CatalogueContainer';
 
 type Props = {
 	documents: Data[];
@@ -27,7 +28,7 @@ export const CatalogeList = ({ documents }: Props) => {
 	if (documents.length === 0 && !currentFolder) return <p>Here should be your list of catalogues</p>;
 
 	return (
-		<div className="flex flex-col grow gap-2">
+		<CatalogueContainer documents={documents}>
 			{currentFolder ? <NewCatalogeForm /> : <p>Choose Folder</p>}
 
 			<div className=" grow overflow-y-auto scroll-smooth">
@@ -43,6 +44,6 @@ export const CatalogeList = ({ documents }: Props) => {
 					</Container>
 				)}
 			</div>
-		</div>
+		</CatalogueContainer>
 	);
 };

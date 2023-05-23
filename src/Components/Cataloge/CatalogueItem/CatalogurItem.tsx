@@ -28,7 +28,7 @@ export const CatalogueItem = ({ docum, logoName }: Props) => {
 					title=""
 					ariaLabel="deleteTask"
 					onClick={(e) => setIdCatalogueDel(docum.id)}
-					Icon={<FiTrash2 className="w-4 h-4 sm:w-10 sm:h-10" />}
+					Icon={<FiTrash2 className="w-4 h-4 sm:w-6 sm:h-6" />}
 				/>
 			</div>
 		);

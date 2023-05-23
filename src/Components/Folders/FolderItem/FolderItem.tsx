@@ -28,8 +28,8 @@ export const FolderItem = ({ folderItem }: Props) => {
 
 	return (
 		<li className="flex items-center w-full mb-4">
-			{!disabled && <AiFillFolder className="w-4 h-4 sm:w-6 sm:h-6 text-orange-700" />}
-			{disabled && <AiFillFolderOpen className="w-4 h-4 sm:w-6 sm:h-6  text-orange-700" />}
+			{!disabled && <AiFillFolder className="w-8 h-8 sm:w-8 sm:h-8  text-orange-700" />}
+			{disabled && <AiFillFolderOpen className="w-8 h-8 sm:w-8 sm:h-8  text-orange-700" />}
 			<AppButton style={styleType.transparent} type="button" nameValue="allTask" disabled={disabled} title={folderItem.name} onClick={onFolderClick} />
 		</li>
 	);
