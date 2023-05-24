@@ -1,7 +1,6 @@
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../Firebase/Config';
-import { Data, serverDataTask } from '../globalTypes';
 
 export const useGetDocument = <T>(id: string, collectionName: string) => {
 	const [error, setError] = useState('');
@@ -25,7 +24,7 @@ export const useGetDocument = <T>(id: string, collectionName: string) => {
 			}
 		);
 		return unsub;
-	}, []);
+	}, [collectionName, id]);
 
 	return { error, newDoc, isLoading };
 };

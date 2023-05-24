@@ -1,8 +1,5 @@
 import React from 'react';
-import { useAuth } from '../../../Context/useAuth';
-
 import { Data } from '../../../globalTypes';
-import { Container } from '../../../Module/Container/Container';
 import { CatalogueList } from '../CatalogeList/CatalogeList';
 import { NewCatalogeForm } from '../NewCatalogeForm/NewCatalogeForm';
 

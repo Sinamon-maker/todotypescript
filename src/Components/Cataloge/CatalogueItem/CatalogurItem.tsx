@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import useChangeCatalogueStore from '../../../store/catalogueStore';
 import { Data, ContextUser } from '../../../globalTypes';
 import { AppButton } from '../../../Module/Button/Button';
-import ImageDelete from '../../../Images/trash.svg';
+
 import { styleType } from '../../../styles/styles';
-import { FiTrash2 } from 'react-icons/fi';
 
 type Props = {
 	docum: Data;

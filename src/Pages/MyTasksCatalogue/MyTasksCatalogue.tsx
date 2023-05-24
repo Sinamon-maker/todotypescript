@@ -1,10 +1,9 @@
 import React from 'react';
-
+import { useParams } from 'react-router-dom';
 import useGetCollection from '../../Hooks/getCollection';
 import { Data, Folder } from '../../globalTypes';
 import { Loader } from '../../Components/Loader/loader';
 
-import { useParams } from 'react-router-dom';
 import { SideBar } from '../../Components/Folders/SideBar/SideBar';
 import { Catalogues } from '../../Components/Cataloge/Catalogues/Catalogues';
 

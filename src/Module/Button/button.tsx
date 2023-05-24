@@ -9,7 +9,7 @@ type Props = {
 	style: string;
 	ariaLabel?: string;
 	Icon?: keyof MapIcons;
-	iconStyle: string;
+	iconStyle?: string;
 	onClick?: <T>(e: React.MouseEvent<HTMLButtonElement>, ...args: T[]) => void;
 };
 
@@ -26,7 +26,7 @@ export const AppButton = ({ title, type, iconStyle, ariaLabel, nameValue, disabl
 	if (Icon) {
 		return (
 			<button className={`${style}`} aria-label={ariaLabel} type={type} name={nameValue} disabled={disabled} onClick={onClick}>
-				<IconComponent style={iconStyle} Icon={Icon} />
+				<IconComponent style={iconStyle ? iconStyle : ''} Icon={Icon} />
 			</button>
 		);
 	}

@@ -1,9 +1,9 @@
-import React, { useContext, useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useContext, useCallback, useEffect } from 'react';
 
 import { Task, Data } from '../../globalTypes';
 import { UserContext } from '../../Context/userContext';
 
-import { ModalDelete } from '../../Components/ModalDelete/modalDelete';
+import { ModalDelete } from '../ModalDelete/modalDelete';
 import { ModalEditTask } from '../ModalEditTask/ModalEditTask';
 
 import { updateTask } from '../../api/updateDocument';

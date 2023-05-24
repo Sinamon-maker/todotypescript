@@ -10,7 +10,7 @@ import { Container } from '../../Module/Container/Container';
 import { NewTaskForm } from '../../Components/Tasks/NewTaskForm/NewTaskForm';
 import { CatalogeHeading } from '../../Components/Tasks/CatalogeHeading/CatalogeHeading';
 import { Loader } from '../../Components/Loader/loader';
-import { Data, serverDataTask } from '../../globalTypes';
+import { serverDataTask } from '../../globalTypes';
 
 const TasksPage = () => {
 	//const loadData = useLoaderData() as serverDataTask;

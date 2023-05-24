@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-
+import { serverTimestamp } from 'firebase/firestore';
 import { Folder } from '../../../globalTypes';
 import useChangeFolderStore, { folderAll } from '../../../store/folderStore';
 
 import useCollection from '../../../Hooks/useCollection';
-import { serverTimestamp } from 'firebase/firestore';
+
 import { useAuth } from '../../../Context/useAuth';
 import { AppButton } from '../../../Module/Button/Button';
 
@@ -28,12 +28,6 @@ export const FolderContainer = ({ folders, children }: Props) => {
 
 	const { error, addDocument } = useCollection('folders');
 
-	useEffect(() => {
-		if (newFolder) {
-			createNewFolder(newFolder);
-		}
-	}, [newFolder]);
-
 	const createNewFolder = async (folder: string) => {
 		const newFolder = { name: folder, userId: logoName?.uid, createdAt: serverTimestamp() };
 		console.log('newFolder');
@@ -43,6 +37,12 @@ export const FolderContainer = ({ folders, children }: Props) => {
 			console.log('err adding folder', err);
 		}
 	};
+
+	useEffect(() => {
+		if (newFolder) {
+			createNewFolder(newFolder);
+		}
+	}, [newFolder]);
 
 	useEffect(() => {
 		if (folders.length > 1) {
@@ -62,7 +62,7 @@ export const FolderContainer = ({ folders, children }: Props) => {
 		<>
 			<aside className={`${styleSideBar}`}>
 				<AppButton
-					style={!isOpenSidebar ? 'absolute p-2 ssm:hidden' : 'absolute p-2 ssm:hidden right-0.5'}
+					style={!isOpenSidebar ? 'absolute p-2 ssm:hidden top-4' : 'absolute p-2 ssm:hidden top-4 right-0.5'}
 					ariaLabel=""
 					type="button"
 					iconStyle=""

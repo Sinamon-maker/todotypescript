@@ -12,10 +12,14 @@ type Props = {
 export const FoldersList = ({ folders }: Props) => {
 	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
 
-	useEffect(() => {
+	const initializeCurrentFolder = () => {
 		if (folders.length > 1) {
 			setCurrentFolder(folderAll);
 		}
+	};
+
+	useEffect(() => {
+		initializeCurrentFolder();
 	}, []);
 
 	return (
@@ -32,7 +36,7 @@ export const FoldersList = ({ folders }: Props) => {
 					</ul>
 				</>
 			)}
-			{folders.length == 0 && <p>No folders yet. Start creating</p>}
+			{folders.length === 0 && <p>No folders yet. Start creating</p>}
 		</div>
 	);
 };

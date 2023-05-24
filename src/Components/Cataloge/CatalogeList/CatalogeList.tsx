@@ -16,17 +16,17 @@ export const CatalogueList = ({ documents }: Props) => {
 
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
-	const renderedCatalogues = (documents: Data[]) => {
+	const renderedCatalogues = (docs: Data[]) => {
 		if (currentFolder === null || currentFolder.id === 'all') {
-			return documents;
+			return docs;
 		}
-		return documents.filter((it) => it.folder === currentFolder.id);
+		return docs.filter((it) => it.folder === currentFolder.id);
 	};
 
 	if (documents.length === 0 && !currentFolder) return <p>Here should be your list of catalogues</p>;
 
 	return (
-		<div className="pt-4 grow overflow-y-auto scroll-smooth">
+		<div className="pt-2  ssm:pt-4 grow overflow-y-auto scroll-smooth">
 			{!renderedCatalogues.length ? (
 				<div className="m-4 text-skin-base">There is not any Catalogue yet, Just start creating.</div>
 			) : (

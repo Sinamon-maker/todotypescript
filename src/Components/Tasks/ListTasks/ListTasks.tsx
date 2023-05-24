@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { sortList } from '../../../Utils';
 import { NotTasks } from '../../NotTasks/notTasks';

@@ -15,7 +15,6 @@ import { ErrorMessage } from '../../ErrorMessage/ErrorMessage';
 export const NewCatalogeForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
-	const [errorSubmit, setErrorSubmit] = useState('');
 
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
@@ -67,7 +66,7 @@ export const NewCatalogeForm = () => {
 
 	return (
 		<Container>
-			<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded  px-2 pt-2 sm:pt-4 pb-0 " name="newCataloge">
+			<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded pl-8 ssm:px-2 pt-2 sm:pt-4 pb-0 " name="newCataloge">
 				<div className="flex items-center border-b border-fill-weak py-2">
 					<AppInput
 						style=" bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"

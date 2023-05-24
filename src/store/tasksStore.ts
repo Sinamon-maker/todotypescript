@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Data, SortParam, Task } from '../globalTypes';
+import { SortParam, Task } from '../globalTypes';
 
 export interface TaskChangeQuery {
 	idTaskDel: number;

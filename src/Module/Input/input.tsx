@@ -10,7 +10,7 @@ type Props = {
 	id?: string;
 	onChange: (e: React.ChangeEvent<EventTarget>) => void;
 	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-	inputRef: React.RefObject<HTMLInputElement>;
+	inputRef?: React.RefObject<HTMLInputElement>;
 };
 
 const defaultProps = {

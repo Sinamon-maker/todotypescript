@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useChangeCatalogueStore from '../../../store/catalogueStore';
-import useChangeFolderStore from '../../../store/folderStore';
 
 import { Data, Folder } from '../../../globalTypes';
 import { ModalDelete } from '../../ModalDelete/modalDelete';
 import { deleteTask } from '../../../api/deleteDocument';
-import useCollection from '../../../Hooks/useCollection';
+
 import { useAuth } from '../../../Context/useAuth';
-import { serverTimestamp } from 'firebase/firestore';
 
 type Props = {
 	children: React.ReactNode;

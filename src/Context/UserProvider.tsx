@@ -1,10 +1,9 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useMemo } from 'react';
+
 import { UserContext } from './userContext';
 
 import UseGetUser from '../Hooks/UseGetUser';
 
-import { ContextUser } from '../globalTypes';
 import { Loader } from '../Components/Loader/loader';
 
 type Props = {
