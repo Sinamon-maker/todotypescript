@@ -72,9 +72,7 @@ export const changeStatus = async (data: Data, id: number) => {
 	}
 };
 
-const isTaskForDelete = <T extends { created: number }>(item: T, idCompare: number) => {
-	return item.created === idCompare;
-};
+const isTaskForDelete = <T extends { created: number }>(item: T, idCompare: number) => item.created === idCompare;
 
 export const deleteTask = async (data: Data, id: number) => {
 	const newTaskList: Task[] | [] = data.tasks.filter((task: Task) => !isTaskForDelete(task, id));
@@ -91,5 +89,11 @@ export const changeTask = async (data: Data, newTask: Task) => {
 		return task;
 	});
 
+	await updateTask('tasks', { tasks: newList }, data?.id);
+};
+
+export const onNewTask = async (data: Data, task: Task) => {
+	const newList: Array<Task> = [...data.tasks];
+	newList.push(task);
 	await updateTask('tasks', { tasks: newList }, data?.id);
 };

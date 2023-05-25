@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AppButton } from '../../../Module/Button/Apbutton';
 import { AppInput } from '../../../Module/Input/Input';
-import useChangeTaskQueryStore from '../../../store/tasksStore';
+import { Data } from '../../../globalTypes';
+import { onNewTask } from '../../../Utils';
 
-export const NewTaskForm = () => {
+type Props = {
+	catalogue: Data;
+};
+
+export const NewTaskForm = ({ catalogue }: Props) => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
-
-	const setNewTask = useChangeTaskQueryStore((s) => s.setNewTask);
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,11 +35,17 @@ export const NewTaskForm = () => {
 		}
 	};
 
-	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
+	const onSubmit = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
-		setNewTask({ text: taskName, created: +new Date(), status: false });
-		setTaskName('');
-		setDisableSave(true);
+		const newTask = { text: taskName, created: +new Date(), status: false };
+
+		try {
+			await onNewTask(catalogue, newTask);
+			setTaskName('');
+			setDisableSave(true);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const onPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {

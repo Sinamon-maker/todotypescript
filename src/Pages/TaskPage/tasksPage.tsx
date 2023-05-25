@@ -18,13 +18,13 @@ const TasksPage = () => {
 	const { error, newDoc, isLoading } = useGetDocument<serverDataTask>(catalogueId!, 'tasks') as serverDataTask;
 
 	if (isLoading) return <Loader />;
-	if (!newDoc) return <p>Could Not Retreive the data {error}</p>;
+	if (!newDoc || error) return <p>Could Not Retreive the data {error}</p>;
 
 	return (
-		<TaskContainer newDoc={newDoc} error={error}>
+		<TaskContainer newDoc={newDoc}>
 			<Container>
 				<div className="flex flex-col justify-between items-end ssm:flex-row">
-					<NewTaskForm />
+					<NewTaskForm catalogue={newDoc} />
 					<SortingButtons />
 				</div>
 			</Container>
