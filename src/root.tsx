@@ -11,18 +11,13 @@ import { MyTasksCataloge } from './Pages/MyTasksCatalogue/MyTasksCatalogue';
 import Home from './Pages/Home/Home';
 import { auth } from './Firebase/Config';
 
-import { loadDocFromFirebase } from './api/getDocument';
+import { PrivateRoutes } from './Pages/PrivateRoutes/PrivateRoutes';
 
 const func = async () => {
 	const user = auth.currentUser;
 	console.log('user', user);
 
 	return 2;
-};
-
-const LoadData = async ({ params }: any) => {
-	console.log('params', params);
-	return loadDocFromFirebase(params.userId);
 };
 
 export const Root = createBrowserRouter([
@@ -36,38 +31,42 @@ export const Root = createBrowserRouter([
 				loader: func,
 				children: [
 					{
-						path: '/login',
+						path: 'login',
 						element: <LoginForm />,
 						errorElement: <ErrorPage />,
 					},
 					{
-						path: '/register',
+						path: 'register',
 						element: <RegisterForm />,
 						errorElement: <ErrorPage />,
 					},
 				],
 			},
 			{
-				path: '/tasks',
-				element: <Home />,
-				errorElement: <ErrorPage />,
-
+				element: <PrivateRoutes />,
 				children: [
 					{
-						path: '/tasks',
-						element: <TasksCataloge />,
+						path: '/catalogue',
+						element: <Home />,
 						errorElement: <ErrorPage />,
-					},
-					{
-						path: '/tasks/:userId',
-						element: <TasksPage />,
-						errorElement: <ErrorPage />,
-						loader: LoadData,
-					},
-					{
-						path: '/tasks/user',
-						element: <MyTasksCataloge />,
-						errorElement: <ErrorPage />,
+
+						children: [
+							{
+								path: '',
+								element: <TasksCataloge />,
+								errorElement: <ErrorPage />,
+							},
+							{
+								path: ':userId/:catalogueId',
+								element: <TasksPage />,
+								errorElement: <ErrorPage />,
+							},
+							{
+								path: ':userId',
+								element: <MyTasksCataloge />,
+								errorElement: <ErrorPage />,
+							},
+						],
 					},
 				],
 			},

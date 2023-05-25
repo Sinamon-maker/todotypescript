@@ -1,13 +1,22 @@
-import React, { useState, useContext } from 'react';
-import { TaskContext } from '../../../Context/taskContext';
+import React, { useState, useEffect, useRef } from 'react';
 import { AppButton } from '../../../Module/Button/Button';
 import { AppInput } from '../../../Module/Input/Input';
+import useChangeTaskQueryStore from '../../../store/tasksStore';
 
 export const NewTaskForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
 
-	const { onNewTask } = useContext(TaskContext);
+	const setNewTask = useChangeTaskQueryStore((s) => s.setNewTask);
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		console.log('inputRef', inputRef.current);
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, []);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -25,7 +34,7 @@ export const NewTaskForm = () => {
 
 	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
 		e.preventDefault();
-		onNewTask(taskName);
+		setNewTask({ text: taskName, created: +new Date(), status: false });
 		setTaskName('');
 		setDisableSave(true);
 	};
@@ -48,6 +57,7 @@ export const NewTaskForm = () => {
 					ariaLabel="Full name"
 					onChange={handleChange}
 					onKeyDown={onPressEnter}
+					inputRef={inputRef}
 				/>
 
 				<AppButton

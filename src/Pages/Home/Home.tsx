@@ -1,28 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 
-import { Outlet, useNavigate } from 'react-router-dom';
-import { UserContext } from '../../Context/userContext';
+import { Outlet } from 'react-router-dom';
 
-import { Header } from '../../Components/Header/header';
+import { Header } from '../../Components/Header/Header';
 
-const Home = () => {
-	const { isLoading, logoName } = useContext(UserContext);
-	const navigate = useNavigate();
-	console.log('Welcome', isLoading, logoName);
-	useEffect(() => {
-		if (logoName === null && !isLoading) {
-			console.log('By from Home');
-			navigate('/login');
-		}
-	}, [logoName, navigate, isLoading]);
-	return (
-		<div className="h-full flex flex-col">
-			<Header />
-			<main className="w-full h-full flex flex-col overflow-y-auto scroll-smooth m-auto grow   p-b-1">
-				<Outlet />
-			</main>
-		</div>
-	);
-};
+const Home = () => (
+	<div className="   h-screen flex flex-col">
+		<Header />
+		<main className="w-full h-full  grow  overflow-y-auto  scroll-smooth  p-b-1">
+			<Outlet />
+		</main>
+	</div>
+);
 
 export default Home;

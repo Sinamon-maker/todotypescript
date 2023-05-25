@@ -22,5 +22,7 @@ export const ThemeButtons = ({ setTheme }: Props) => (
 		<ThemeBtn value="yellow" setTheme={setTheme} style="bg-black border-yellow-500 hover:bg-sky-500" />
 		<ThemeBtn value="red" setTheme={setTheme} style="bg-indigo-900 border-rose-600 hover:bg-slate-400" />
 		<ThemeBtn value="indigo" setTheme={setTheme} style="bg-indigo-900 border-gray-500 hover:bg-slate-400" />
+		<ThemeBtn value="white" setTheme={setTheme} style="bg-indigo-900 border-gray-500 hover:bg-slate-400" />
+		<ThemeBtn value="cyan" setTheme={setTheme} style="bg-indigo-900 border-gray-500 hover:bg-slate-400" />
 	</div>
 );

@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { TaskContext } from '../../Context/taskContext';
-import { UserContext } from '../../Context/userContext';
+import React, { useState, useRef } from 'react';
 import { Task } from '../../globalTypes';
 import { AppButton } from '../../Module/Button/Button';
 import { AppInput } from '../../Module/Input/Input';
@@ -8,43 +6,33 @@ import { AppTextarea } from '../../Module/TextArea/textarea';
 import { ModalContainer } from '../../Module/ModuleContainer/modalContainer';
 
 type Props = {
+	taskEdit: Task;
 	canselEditTask: () => void;
-	changeTask: (val1: string, val2: number, val3: string) => void;
+	changeTask: (val: Task) => void;
 };
 
-export const ModalEditTask = ({ canselEditTask, changeTask }: Props) => {
-	const [text, setText] = useState('');
-	const [detailesValue, setDetailesValue] = useState('');
-	const { idEditTask, listOfTasks } = useContext(TaskContext);
-	const logoName = useContext(UserContext);
+export const ModalEditTask = ({ taskEdit, canselEditTask, changeTask }: Props) => {
+	const [task, setText] = useState(taskEdit);
 
 	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
 		e.preventDefault();
-		changeTask(text, idEditTask, detailesValue);
+		changeTask(task);
 	};
 
 	const onCanselEditClick = () => {
 		canselEditTask();
 	};
 
-	useEffect(() => {
-		if (listOfTasks.length) {
-			const editTask: Task | undefined = listOfTasks.find((task: Task) => task.created === idEditTask);
-			setText(editTask?.text ?? '');
-			if (editTask?.detailes) {
-				setDetailesValue(editTask?.detailes);
-			}
-		}
-	}, [logoName, idEditTask, listOfTasks]);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
-			setText(e.target.value);
+			setText({ ...task, text: e.target.value });
 		}
 	};
 	const onChangeText = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLTextAreaElement) {
-			setDetailesValue(e.target.value);
+			setText({ ...task, detailes: e.target.value });
 		}
 	};
 
@@ -57,14 +45,15 @@ export const ModalEditTask = ({ canselEditTask, changeTask }: Props) => {
 							style=" bg-transparent  w-full text-skin-base  mr-3 py-1 px-2 leading-tight focus:outline-none"
 							type="text"
 							nameValue="edit"
-							value={text}
+							value={task.text}
 							placeholder=""
 							ariaLabel="Full name"
 							onChange={handleChange}
+							inputRef={inputRef}
 						/>
 					</div>
 					<div className="flex items-center border-b border-fill-weak mb-6  py-2">
-						<AppTextarea style="block h-16 w-full mt-2 rounded" value={detailesValue} onChangeText={onChangeText} />
+						<AppTextarea style="block bg-transparent h-16 w-full mt-2 text-skin-base rounded" value={task?.detailes || ''} onChangeText={onChangeText} />
 					</div>
 					<span className="block w-full flex justify-around">
 						<AppButton

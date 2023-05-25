@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where, CollectionReference, DocumentData, Query, orderBy } from 'firebase/firestore';
 import { db } from '../Firebase/Config';
 
-const useGetCollection = <T,>(collectionName: string, q?: string | undefined) => {
+const useGetCollection = <T,>(collectionName: string, q?: string) => {
 	const [documents, setDocuments] = useState<T[] | []>([]);
 	const [error, setError] = useState('');
 	const [isPending, setIsPending] = useState(true);
@@ -10,6 +10,7 @@ const useGetCollection = <T,>(collectionName: string, q?: string | undefined) =>
 	useEffect(() => {
 		let colRef: CollectionReference<DocumentData> | Query<DocumentData>;
 		if (q && q[q.length - 1]) {
+			console.log('q', q);
 			colRef = query(collection(db, collectionName), where('userId', '==', q), orderBy('createdAt'));
 		} else {
 			colRef = query(collection(db, collectionName), orderBy('createdAt'));
@@ -23,6 +24,7 @@ const useGetCollection = <T,>(collectionName: string, q?: string | undefined) =>
 					const d = { ...doc.data(), id: doc.id } as T;
 					results.push(d);
 				});
+				console.log('get collection', results);
 				setDocuments(results);
 				setIsPending(false);
 			},
@@ -32,6 +34,7 @@ const useGetCollection = <T,>(collectionName: string, q?: string | undefined) =>
 				if (err instanceof Error) message = err.message;
 				else message = String(err);
 				setError(message);
+				setIsPending(false);
 			}
 		);
 

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppInput } from '../../Module/Input/Input';
 import { AppButton } from '../../Module/Button/Button';
-import { Error } from '../../Components/Error/error';
+import { ErrorMessage } from '../../Components/ErrorMessage/ErrorMessage';
 import useSignup from '../../Hooks/useSignup';
 
 export const RegisterForm = () => {
@@ -13,6 +13,14 @@ export const RegisterForm = () => {
 	const { error, signup } = useSignup();
 
 	const navigate = useNavigate();
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, []);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -54,6 +62,7 @@ export const RegisterForm = () => {
 						placeholder="displayName"
 						ariaLabel="displayName"
 						onChange={handleChange}
+						inputRef={inputRef}
 					/>
 				</div>
 				<div className=" border-b border-fill-weak py-2 mb-2">
@@ -78,7 +87,7 @@ export const RegisterForm = () => {
 						onChange={handleChange}
 					/>
 				</div>
-				<Error message={error} />
+				<ErrorMessage message={error} />
 				<AppButton
 					style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong disabled:opacity-25 border-fill-weak hover:border-fill-strong text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
 					type="submit"

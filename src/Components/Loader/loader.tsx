@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container } from '../../Module/Container/Container';
+import { IconComponent } from '../../Icons/Icon';
 
 export const Loader = () => (
-	<Container>
-		<div className="w-full p-4 mx-auto my-10 text-center">Loading...</div>
-	</Container>
+	<div className="w-full p-6 flex justify-center">
+		<IconComponent Icon="spinner" style=" w-8 h-8 text-skin-base animate-spin" />
+	</div>
 );

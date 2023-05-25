@@ -1,44 +1,66 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { serverTimestamp } from 'firebase/firestore';
-import { UserContext } from '../../../Context/userContext';
+
 import useCollection from '../../../Hooks/useCollection';
 
 import { AppButton } from '../../../Module/Button/Button';
 import { AppInput } from '../../../Module/Input/Input';
 import { Container } from '../../../Module/Container/Container';
+import useChangeFolderStore from '../../../store/folderStore';
+
+import { styleType } from '../../../styles/styles';
+import { useAuth } from '../../../Context/useAuth';
+import { ErrorMessage } from '../../ErrorMessage/ErrorMessage';
 
 export const NewCatalogeForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
+	const [tough, setTough] = useState(false);
 
-	const { error, addDocument } = useCollection('tasks');
-	const { logoName } = useContext(UserContext);
+	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
+
+	const { error: errorAddingDocument, addDocument } = useCollection('tasks');
+	const { logoName } = useAuth();
+
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, []);
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
-			console.log(e.target.value);
 			const neVal = e.target.value;
-			if (neVal.length < 3) setDisableSave(true);
-			if (neVal.length >= 3) setDisableSave(false);
+			if (neVal.trim().length < 3) setDisableSave(true);
+			if (neVal.trim().length >= 3) setDisableSave(false);
 			setTaskName(neVal);
+			if (neVal.trim().length === 0) {
+				setTough(false);
+			} else {
+				setTough(true);
+			}
 		}
 	};
 
 	const onSubmit = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
 
-		if (taskName.length >= 3) {
+		if (taskName.trim().length >= 3 && currentFolder && currentFolder !== 'all') {
 			const newTask = {
 				title: taskName,
 				userId: logoName?.uid,
 				displayName: logoName?.displayName,
 				createdAt: serverTimestamp(),
 				tasks: [],
+				folder: currentFolder,
 			};
-			console.log(newTask);
+
 			await addDocument(newTask);
 			setTaskName('');
 			setDisableSave(true);
+			setTough(false);
 		}
 	};
 
@@ -50,10 +72,10 @@ export const NewCatalogeForm = () => {
 
 	return (
 		<Container>
-			<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded  px-2 pt-2 sm:pt-4 pb-0 " name="newCataloge">
+			<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded pl-8 ssm:px-2 pt-2 sm:pt-4 pb-0 " name="newCataloge">
 				<div className="flex items-center border-b border-fill-weak py-2">
 					<AppInput
-						style="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+						style=" bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
 						type="text"
 						nameValue="task"
 						value={taskName}
@@ -61,16 +83,13 @@ export const NewCatalogeForm = () => {
 						ariaLabel="Full name"
 						onChange={handleChange}
 						onKeyDown={onPressEnter}
+						inputRef={inputRef}
 					/>
 
-					<AppButton
-						style="flex-shrink-0 bg-fill-weak hover:bg-fill-strong border-fill-weak hover:border-fill-strong disabled:opacity-25 text-sm border-4 text-skin-base py-1 px-2 rounded shadow-lg"
-						type="submit"
-						nameValue="addTask"
-						title="Save"
-						disabled={disableSave}
-					/>
+					<AppButton style={styleType.buttonStyle} type="submit" nameValue="addTask" title="Save" disabled={disableSave} />
 				</div>
+				{(!currentFolder || (currentFolder === 'all' && tough)) && <ErrorMessage message="Choose folder" />}
+				<ErrorMessage message={errorAddingDocument} />
 			</form>
 		</Container>
 	);
