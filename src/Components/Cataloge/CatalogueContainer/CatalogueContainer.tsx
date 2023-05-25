@@ -1,20 +1,14 @@
 import React from 'react';
 import useChangeCatalogueStore from '../../../store/catalogueStore';
 
-import { Data, Folder } from '../../../globalTypes';
 import { ModalDelete } from '../../ModalDelete/modalDelete';
 import { deleteTask } from '../../../api/deleteDocument';
 
-import { useAuth } from '../../../Context/useAuth';
-
 type Props = {
 	children: React.ReactNode;
-	documents: Data[];
 };
 
-export const CatalogueContainer = ({ children, documents }: Props) => {
-	const { logoName } = useAuth();
-
+export const CatalogueContainer = ({ children }: Props) => {
 	const idCatalogueDel = useChangeCatalogueStore((s) => s.idCatalogueDel);
 	const setIdCatalogueDel = useChangeCatalogueStore((s) => s.setIdCatalogueDel);
 

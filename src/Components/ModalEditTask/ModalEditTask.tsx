@@ -1,5 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
-import { UserContext } from '../../Context/userContext';
+import React, { useState, useRef } from 'react';
 import { Task } from '../../globalTypes';
 import { AppButton } from '../../Module/Button/Button';
 import { AppInput } from '../../Module/Input/Input';
@@ -14,8 +13,6 @@ type Props = {
 
 export const ModalEditTask = ({ taskEdit, canselEditTask, changeTask }: Props) => {
 	const [task, setText] = useState(taskEdit);
-
-	const logoName = useContext(UserContext);
 
 	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
 		e.preventDefault();

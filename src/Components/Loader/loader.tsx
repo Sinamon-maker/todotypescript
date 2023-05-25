@@ -1,9 +1,8 @@
 import React from 'react';
-import { ImSpinner6 } from 'react-icons/im';
-import { Container } from '../../Module/Container/Container';
+import { IconComponent } from '../../Icons/Icon';
 
 export const Loader = () => (
-	<Container>
-		<ImSpinner6 />
-	</Container>
+	<div className="w-full p-6 flex justify-center">
+		<IconComponent Icon="spinner" style=" w-8 h-8 text-skin-base animate-spin" />
+	</div>
 );

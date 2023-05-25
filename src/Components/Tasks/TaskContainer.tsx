@@ -33,21 +33,14 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 	useEffect(() => {
 		if (idTaskComplete) changeStatus(idTaskComplete);
 		setTaskComplete(0);
-		//receive new
 	}, [idTaskComplete]);
 
-	useEffect(() => {
-		if (newTask) onNewTask(newTask);
-		setNewTask(null);
-		//receive new
-	}, [newTask]);
-
-	const onNewTask = async (newTask: Task) => {
+	const onNewTask = async (task: Task) => {
 		let newList: Array<Task> = [];
 		if (taskResult?.tasks.length) {
-			newList = [...taskResult?.tasks, newTask];
+			newList = [...taskResult?.tasks, task];
 		} else {
-			newList = [newTask];
+			newList = [task];
 		}
 		if (taskResult) {
 			try {
@@ -57,8 +50,12 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 				console.log(err);
 			}
 		}
-		//	saveInStorage(logoName, newList);
+		setNewTask(null);
 	};
+
+	useEffect(() => {
+		if (newTask) onNewTask(newTask);
+	}, [newTask]);
 
 	const canselEditTask = () => {
 		setTaskEdit(null);
@@ -82,7 +79,6 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 				console.log(err);
 			}
 		}
-		//		saveInStorage(logoName, newList);
 	};
 
 	const confirmDeleteClick = async () => {
@@ -98,7 +94,6 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 					console.log(err);
 				}
 			}
-			//	saveInStorage(logoName, newTaskList);
 		}
 	};
 

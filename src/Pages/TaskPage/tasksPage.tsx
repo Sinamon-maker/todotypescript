@@ -13,8 +13,6 @@ import { Loader } from '../../Components/Loader/loader';
 import { serverDataTask } from '../../globalTypes';
 
 const TasksPage = () => {
-	//const loadData = useLoaderData() as serverDataTask;
-
 	const { userId, catalogueId } = useParams();
 	console.log('id', userId);
 	const { error, newDoc, isLoading } = useGetDocument<serverDataTask>(catalogueId!, 'tasks') as serverDataTask;

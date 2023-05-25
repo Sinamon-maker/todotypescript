@@ -15,7 +15,7 @@ export const styleType = {
 	buttonStyle: styles.buttons.main + styles.buttons.hide,
 	transparent: styles.buttons.transparent,
 	realLink: styles.buttons.transparent,
-	activeRealLink: styles.buttons.transparent + 'underline',
+	activeRealLink: `${styles.buttons.transparent} underline`,
 	icon: styles.buttons.iconRound,
 	iconWithBorder: styles.buttons.iconRound + styles.buttons.iconBorder,
 };

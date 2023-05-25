@@ -9,12 +9,10 @@ type Props = {
 	documents: Data[];
 };
 
-export const Catalogues = ({ documents }: Props) => {
-	return (
-		<CatalogueContainer documents={documents}>
-			<NewCatalogeForm />
+export const Catalogues = ({ documents }: Props) => (
+	<CatalogueContainer>
+		<NewCatalogeForm />
 
-			<CatalogueList documents={documents} />
-		</CatalogueContainer>
-	);
-};
+		<CatalogueList documents={documents} />
+	</CatalogueContainer>
+);

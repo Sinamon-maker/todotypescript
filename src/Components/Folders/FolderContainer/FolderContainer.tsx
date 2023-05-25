@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { serverTimestamp } from 'firebase/firestore';
 import { Folder } from '../../../globalTypes';
 import useChangeFolderStore, { folderAll } from '../../../store/folderStore';
@@ -28,27 +28,34 @@ export const FolderContainer = ({ folders, children }: Props) => {
 
 	const { error, addDocument } = useCollection('folders');
 
-	const createNewFolder = async (folder: string) => {
-		const newFolder = { name: folder, userId: logoName?.uid, createdAt: serverTimestamp() };
-		console.log('newFolder');
-		try {
-			await addDocument(newFolder);
-		} catch (err) {
-			console.log('err adding folder', err);
-		}
-	};
+	const createNewFolder = useCallback(
+		async (folder: string) => {
+			const folderNew = { name: folder, userId: logoName?.uid, createdAt: serverTimestamp() };
+
+			try {
+				await addDocument(folderNew);
+			} catch (err) {
+				console.log('err adding folder', err);
+			}
+		},
+		[addDocument, logoName?.uid]
+	);
 
 	useEffect(() => {
 		if (newFolder) {
 			createNewFolder(newFolder);
 		}
-	}, [newFolder]);
+	}, [newFolder, createNewFolder]);
 
-	useEffect(() => {
+	const initializeCurrentFolder = useCallback(() => {
 		if (folders.length > 1) {
 			setCurrentFolder(folderAll);
 		}
-	}, []);
+	}, [folders.length, setCurrentFolder]);
+
+	useEffect(() => {
+		initializeCurrentFolder();
+	}, [initializeCurrentFolder]);
 
 	const closeStyle = 'w-0 static';
 	const openStyle = 'absolute inset-y-0 w-3/4 z-40';
@@ -59,20 +66,18 @@ export const FolderContainer = ({ folders, children }: Props) => {
 	const styleSideBar = togglePart + stylenormal;
 
 	return (
-		<>
-			<aside className={`${styleSideBar}`}>
-				<AppButton
-					style={!isOpenSidebar ? 'absolute p-2 ssm:hidden top-4' : 'absolute p-2 ssm:hidden top-4 right-0.5'}
-					ariaLabel=""
-					type="button"
-					iconStyle=""
-					nameValue="menu"
-					title=""
-					onClick={() => setOpenSideBar(!isOpenSidebar)}
-					Icon={!isOpenSidebar ? 'menu' : 'close'}
-				/>
-				{children}
-			</aside>
-		</>
+		<aside className={`${styleSideBar}`}>
+			<AppButton
+				style={!isOpenSidebar ? 'absolute p-2 ssm:hidden top-4' : 'absolute p-2 ssm:hidden top-4 right-0.5'}
+				ariaLabel=""
+				type="button"
+				iconStyle=""
+				nameValue="menu"
+				title=""
+				onClick={() => setOpenSideBar(!isOpenSidebar)}
+				Icon={!isOpenSidebar ? 'menu' : 'close'}
+			/>
+			{children}
+		</aside>
 	);
 };

@@ -15,7 +15,7 @@ export const MyTasksCataloge = () => {
 	const { documents: folders, error: err, isPending: isPen } = useGetCollection<Folder>('folders');
 	console.log('foldersLength', folders.length);
 	if (!userId) return <p>Sth wrong</p>;
-	if (isPending) return <Loader />;
+	if (isPending || isPen) return <Loader />;
 	return (
 		<div className="w-full h-full  flex  gap-2 relative">
 			<SideBar folders={folders} />

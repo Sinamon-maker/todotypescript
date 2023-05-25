@@ -8,7 +8,7 @@ import { styleType } from '../../styles/styles';
 
 export const Header = () => {
 	const { logoName } = useContext(UserContext);
-	const { error, logout } = useLogout();
+	const { logout } = useLogout();
 
 	const handleClick = async () => {
 		await logout();

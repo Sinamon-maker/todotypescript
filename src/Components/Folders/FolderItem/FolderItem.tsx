@@ -17,7 +17,7 @@ export const FolderItem = ({ folderItem }: Props) => {
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
 
-	const disabled = currentFolder && folderItem.id === currentFolder.id ? true : false;
+	const disabled = (currentFolder && folderItem.id === currentFolder.id) ?? false;
 
 	const onFolderClick = () => {
 		console.log('click folder', currentFolder);

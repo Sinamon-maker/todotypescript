@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { AppButton } from '../../../Module/Button/Button';
 
 import { AppInput } from '../../../Module/Input/Input';
 import { styleType } from '../../../styles/styles';
 import { Folder } from '../../../globalTypes';
-import useChangeFolderStore, { folderAll } from '../../../store/folderStore';
+import useChangeFolderStore from '../../../store/folderStore';
 
 type Props = {
 	folders: Folder[];
@@ -17,13 +17,6 @@ export const NewFolderForm = ({ folders }: Props) => {
 	const [isDisabled, setDisableSave] = useState(true);
 
 	const setNewFolder = useChangeFolderStore((s) => s.setNewFolder);
-	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
-
-	useEffect(() => {
-		if (folders.length > 1) {
-			setCurrentFolder(folderAll);
-		}
-	}, []);
 
 	const onChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {

@@ -10,11 +10,9 @@ type Props = {
 	folders: Folder[];
 };
 
-export const SideBar = ({ folders }: Props) => {
-	return (
-		<FolderContainer folders={folders}>
-			<FoldersList folders={folders} />
-			<NewFolderForm folders={folders} />
-		</FolderContainer>
-	);
-};
+export const SideBar = ({ folders }: Props) => (
+	<FolderContainer folders={folders}>
+		<FoldersList folders={folders} />
+		<NewFolderForm folders={folders} />
+	</FolderContainer>
+);

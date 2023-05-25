@@ -26,7 +26,7 @@ export const AppButton = ({ title, type, iconStyle, ariaLabel, nameValue, disabl
 	if (Icon) {
 		return (
 			<button className={`${style}`} aria-label={ariaLabel} type={type} name={nameValue} disabled={disabled} onClick={onClick}>
-				<IconComponent style={iconStyle ? iconStyle : ''} Icon={Icon} />
+				<IconComponent style={iconStyle} Icon={Icon} />
 			</button>
 		);
 	}
