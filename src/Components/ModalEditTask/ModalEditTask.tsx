@@ -8,15 +8,15 @@ import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
 type Props = {
 	taskEdit: Task;
 	canselEditTask: () => void;
-	changeTask: (val: Task) => void;
+	onConfirmChangeTask: (val: Task) => void;
 };
 
-export const ModalEditTask = ({ taskEdit, canselEditTask, changeTask }: Props) => {
+export const ModalEditTask = ({ taskEdit, canselEditTask, onConfirmChangeTask }: Props) => {
 	const [task, setText] = useState(taskEdit);
 
 	const onSubmit = (e: React.FormEvent<EventTarget>): void => {
 		e.preventDefault();
-		changeTask(task);
+		onConfirmChangeTask(task);
 	};
 
 	const onCanselEditClick = () => {

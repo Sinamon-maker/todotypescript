@@ -18,7 +18,6 @@ export const TableRaw = ({ item, index, onClickChangeStatus }: Props) => {
 	const [showDetailes, setShowDetailes] = useState(false);
 
 	const setDelId = useChangeTaskQueryStore((s) => s.setTaskDel);
-	const setTaskComplete = useChangeTaskQueryStore((s) => s.setTaskComplete);
 	const setTaskEdit = useChangeTaskQueryStore((s) => s.setTaskEdit);
 
 	const handleClick = () => {

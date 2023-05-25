@@ -9,6 +9,7 @@ import { ModalEditTask } from '../../ModalEditTask/ModalEditTask';
 import { updateTask } from '../../../api/updateDocument';
 
 import useChangeTaskQueryStore from '../../../store/tasksStore';
+import { changeTask, deleteTask } from '../../../Utils';
 
 type Props = {
 	children: React.ReactNode;
@@ -23,8 +24,6 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 
 	const idTaskDel = useChangeTaskQueryStore((s) => s.idTaskDel);
 	const setTaskDel = useChangeTaskQueryStore((s) => s.setTaskDel);
-	const idTaskComplete = useChangeTaskQueryStore((s) => s.idTaskComplete);
-	const setTaskComplete = useChangeTaskQueryStore((s) => s.setTaskComplete);
 	const setTaskEdit = useChangeTaskQueryStore((s) => s.setTaskEdit);
 	const taskEdit = useChangeTaskQueryStore((s) => s.taskEdit);
 	const newTask = useChangeTaskQueryStore((s) => s.newTask);
@@ -56,38 +55,23 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 		setTaskEdit(null);
 	};
 
-	const changeTask = async (newTask: Task) => {
-		if (taskResult && taskResult?.tasks !== null) {
-			const newList = taskResult?.tasks.map((task) => {
-				if (task.created === newTask.created) {
-					return { ...newTask };
-				}
+	const onConfirmChangeTask = async (newTask: Task) => {
+		try {
+			await changeTask(taskResult, newTask);
 
-				return task;
-			});
-
-			try {
-				await updateTask('tasks', { tasks: newList }, taskResult?.id);
-
-				canselEditTask();
-			} catch (err) {
-				console.log(err);
-			}
+			canselEditTask();
+		} catch (err) {
+			console.log(err);
 		}
 	};
 
 	const confirmDeleteClick = async () => {
 		if (taskResult && taskResult.tasks.length) {
-			const newTaskList: Task[] | [] = taskResult.tasks.filter((task: Task) => task.created !== idTaskDel);
-			if (taskResult) {
-				try {
-					console.log('delete', newTaskList);
-					await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
-
-					setTaskDel(0);
-				} catch (err) {
-					console.log(err);
-				}
+			try {
+				await deleteTask(taskResult, idTaskDel);
+				setTaskDel(0);
+			} catch (error) {
+				console.log(error);
 			}
 		}
 	};
@@ -100,7 +84,7 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 		<div>
 			{children}
 
-			{taskEdit && <ModalEditTask canselEditTask={canselEditTask} changeTask={changeTask} taskEdit={taskEdit} />}
+			{taskEdit && <ModalEditTask canselEditTask={canselEditTask} onConfirmChangeTask={onConfirmChangeTask} taskEdit={taskEdit} />}
 			{idTaskDel !== 0 && <ModalDelete title="Are you sure you want to delete tsak?" confirmDeleteClick={confirmDeleteClick} canselDelete={canselDeleteTask} />}
 		</div>
 	);

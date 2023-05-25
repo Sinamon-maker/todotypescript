@@ -34,11 +34,6 @@ export const findTasks = (user: string) => {
 	return list;
 };
 
-export const deleteTask = (user: string, list: Task[]) => {
-	const data = JSON.stringify(list);
-	localStorage.setItem(user, data);
-};
-
 export const saveInStorage = <T,>(user: string, list: T[]) => {
 	const data = JSON.stringify(list);
 	localStorage.setItem(user, data);
@@ -75,4 +70,26 @@ export const changeStatus = async (data: Data, id: number) => {
 	} catch (err) {
 		console.log(err);
 	}
+};
+
+const isTaskForDelete = <T extends { created: number }>(item: T, idCompare: number) => {
+	return item.created === idCompare;
+};
+
+export const deleteTask = async (data: Data, id: number) => {
+	const newTaskList: Task[] | [] = data.tasks.filter((task: Task) => !isTaskForDelete(task, id));
+
+	await updateTask('tasks', { tasks: newTaskList }, data?.id);
+};
+
+export const changeTask = async (data: Data, newTask: Task) => {
+	const newList = data?.tasks.map((task) => {
+		if (task.created === newTask.created) {
+			return { ...newTask };
+		}
+
+		return task;
+	});
+
+	await updateTask('tasks', { tasks: newList }, data?.id);
 };
