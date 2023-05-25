@@ -54,11 +54,11 @@ export const TaskContainer = ({ children, newDoc }: Props) => {
 	};
 
 	return (
-		<div>
+		<>
 			{children}
 
 			{taskEdit && <ModalEditTask canselEditTask={canselEditTask} onConfirmChangeTask={onConfirmChangeTask} taskEdit={taskEdit} />}
 			{idTaskDel !== 0 && <ModalDelete title="Are you sure you want to delete tsak?" confirmDeleteClick={confirmDeleteClick} canselDelete={canselDeleteTask} />}
-		</div>
+		</>
 	);
 };

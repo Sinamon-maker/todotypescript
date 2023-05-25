@@ -55,7 +55,7 @@ export const NewTaskForm = ({ catalogue }: Props) => {
 	};
 
 	return (
-		<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded px-6 sm:px-10 pt-2 sm:pt-4 pb-0 " name="newTask">
+		<form onSubmit={(e) => onSubmit(e)} className="w-full max-w-xl  rounded px-6 sm:px-2 pt-2 sm:pt-4 pb-0 " name="newTask">
 			<div className="flex items-center border-b border-fill-weak py-2">
 				<AppInput
 					style="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"

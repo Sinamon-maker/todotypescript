@@ -45,7 +45,7 @@ export const TableRaw = ({ item, index, onClickChangeStatus }: Props) => {
 				style={styleType.iconWithBorder}
 				nameValue="inProcess"
 				onClick={(e) => onChangeStatus(e, item.created)}
-				iconStyle=""
+				iconStyle="w-4 h-4 sm:w-4 sm:h-8 sm:w-8"
 				ariaLabel="changeStatus"
 				Icon={item.status ? 'done' : ''}
 			/>

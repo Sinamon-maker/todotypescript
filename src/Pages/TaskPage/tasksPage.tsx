@@ -8,7 +8,7 @@ import { ListTasks } from '../../Components/Tasks/ListTasks/ListTasks';
 import { SortingButtons } from '../../Components/Tasks/SortingButtons/SortingButtons';
 import { Container } from '../../Module/Container/Container';
 import { NewTaskForm } from '../../Components/Tasks/NewTaskForm/NewTaskForm';
-import { CatalogeHeading } from '../../Components/Tasks/CatalogeHeading/CatalogeHeading';
+
 import { Loader } from '../../Components/Loader/Loader';
 import { serverDataTask } from '../../globalTypes';
 
@@ -21,17 +21,18 @@ const TasksPage = () => {
 	if (!newDoc || error) return <p>Could Not Retreive the data {error}</p>;
 
 	return (
-		<TaskContainer newDoc={newDoc}>
-			<Container>
-				<div className="flex flex-col justify-between items-end ssm:flex-row">
-					<NewTaskForm catalogue={newDoc} />
-					<SortingButtons />
-				</div>
-			</Container>
+		<div>
+			<TaskContainer newDoc={newDoc}>
+				<Container>
+					<div className="flex flex-col justify-between items-end ssm:flex-row">
+						<NewTaskForm catalogue={newDoc} />
+						<SortingButtons />
+					</div>
+				</Container>
 
-			<CatalogeHeading resultData={newDoc} />
-			<ListTasks resultData={newDoc} />
-		</TaskContainer>
+				<ListTasks resultData={newDoc} />
+			</TaskContainer>
+		</div>
 	);
 };
 
