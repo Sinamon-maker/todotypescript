@@ -2,14 +2,14 @@ import React from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { TaskContainer } from '../../Components/Tasks/TaskContainer';
+import { TaskContainer } from '../../Components/Tasks/TasksContainer/TaskContainer';
 import { useGetDocument } from '../../api/useGetDocument';
 import { ListTasks } from '../../Components/Tasks/ListTasks/ListTasks';
 import { SortingButtons } from '../../Components/Tasks/SortingButtons/SortingButtons';
 import { Container } from '../../Module/Container/Container';
 import { NewTaskForm } from '../../Components/Tasks/NewTaskForm/NewTaskForm';
 import { CatalogeHeading } from '../../Components/Tasks/CatalogeHeading/CatalogeHeading';
-import { Loader } from '../../Components/Loader/loader';
+import { Loader } from '../../Components/Loader/Loader';
 import { serverDataTask } from '../../globalTypes';
 
 const TasksPage = () => {

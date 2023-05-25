@@ -1,14 +1,14 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 
-import { Task, Data } from '../../globalTypes';
-import { UserContext } from '../../Context/userContext';
+import { Task, Data } from '../../../globalTypes';
+import { UserContext } from '../../../Context/userContext';
 
-import { ModalDelete } from '../ModalDelete/modalDelete';
-import { ModalEditTask } from '../ModalEditTask/ModalEditTask';
+import { ModalDelete } from '../../ModalDelete/ModalDelete';
+import { ModalEditTask } from '../../ModalEditTask/ModalEditTask';
 
-import { updateTask } from '../../api/updateDocument';
+import { updateTask } from '../../../api/updateDocument';
 
-import useChangeTaskQueryStore from '../../store/tasksStore';
+import useChangeTaskQueryStore from '../../../store/tasksStore';
 
 type Props = {
 	children: React.ReactNode;

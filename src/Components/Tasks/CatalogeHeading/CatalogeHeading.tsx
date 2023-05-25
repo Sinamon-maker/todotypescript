@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Data } from '../../../globalTypes';
-import { AppButton } from '../../../Module/Button/Button';
+import { AppButton } from '../../../Module/Button/Apbutton';
 import { Container } from '../../../Module/Container/Container';
 import { styleType } from '../../../styles/styles';
 

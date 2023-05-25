@@ -2,7 +2,7 @@ import React from 'react';
 
 import useGetCollectction from '../../Hooks/getCollection';
 import { Data } from '../../globalTypes';
-import { Loader } from '../../Components/Loader/loader';
+import { Loader } from '../../Components/Loader/Loader';
 import { ErrorMessage } from '../../Components/ErrorMessage/ErrorMessage';
 
 import { CatalogueList } from '../../Components/Cataloge/CatalogeList/CatalogeList';

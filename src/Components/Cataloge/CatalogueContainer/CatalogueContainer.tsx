@@ -1,7 +1,7 @@
 import React from 'react';
 import useChangeCatalogueStore from '../../../store/catalogueStore';
 
-import { ModalDelete } from '../../ModalDelete/modalDelete';
+import { ModalDelete } from '../../ModalDelete/ModalDelete';
 import { deleteTask } from '../../../api/deleteDocument';
 
 type Props = {

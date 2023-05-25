@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppButton } from '../../../Module/Button/Button';
+import { AppButton } from '../../../Module/Button/Apbutton';
 
 import { styleType } from '../../../styles/styles';
 import { Folder } from '../../../globalTypes';

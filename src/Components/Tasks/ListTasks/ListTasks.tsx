@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { sortList } from '../../../Utils';
-import { NotTasks } from '../../NotTasks/notTasks';
+import { NotTasks } from '../../NotTasks/NotTasks';
 import { Container } from '../../../Module/Container/Container';
 import useChangeTaskQueryStore from '../../../store/tasksStore';
-import { TableRaw } from '../TableElements/TaskTableRaw/tableRaw';
+import { TableRaw } from '../TableElements/TaskTableRaw/TableRaw';
 
 import { Data } from '../../../globalTypes';
 

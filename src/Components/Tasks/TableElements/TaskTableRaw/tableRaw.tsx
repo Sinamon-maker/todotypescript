@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import useChangeTaskQueryStore from '../../../../store/tasksStore';
-import { TextTableElement } from '../TextTableElement/textTableElement';
+import { TextTableElement } from '../TextTableElement/TextTableElement';
 import { Task } from '../../../../globalTypes';
 
-import { ActionsTableElement } from '../ActionsTableElement/actionsTableElement';
+import { ActionsTableElement } from '../ActionsTableElement/ActionsTableElement';
 
 import { styleType } from '../../../../styles/styles';
-import { AppButton } from '../../../../Module/Button/Button';
+import { AppButton } from '../../../../Module/Button/Apbutton';
 
 interface Props {
 	item: Task;

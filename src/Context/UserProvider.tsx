@@ -4,7 +4,7 @@ import { UserContext } from './userContext';
 
 import UseGetUser from '../Hooks/UseGetUser';
 
-import { Loader } from '../Components/Loader/loader';
+import { Loader } from '../Components/Loader/Loader';
 
 type Props = {
 	children: React.ReactNode;

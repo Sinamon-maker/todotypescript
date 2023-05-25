@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Task } from '../../globalTypes';
-import { AppButton } from '../../Module/Button/Button';
+import { AppButton } from '../../Module/Button/Apbutton';
 import { AppInput } from '../../Module/Input/Input';
-import { AppTextarea } from '../../Module/TextArea/textarea';
-import { ModalContainer } from '../../Module/ModuleContainer/modalContainer';
+import { AppTextarea } from '../../Module/TextArea/AppTextarea';
+import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
 
 type Props = {
 	taskEdit: Task;

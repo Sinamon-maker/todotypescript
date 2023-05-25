@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { AppButton } from '../../Module/Button/Button';
-import { ModalContainer } from '../../Module/ModuleContainer/modalContainer';
+import { AppButton } from '../../Module/Button/Apbutton';
+import { ModalContainer } from '../../Module/ModuleContainer/ModalContainer';
 
 type Props = {
 	confirmDeleteClick: () => void;
