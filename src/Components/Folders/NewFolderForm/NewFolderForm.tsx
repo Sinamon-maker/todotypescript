@@ -6,6 +6,7 @@ import { AppInput } from '../../../Module/Input/Input';
 import { styleType } from '../../../styles/styles';
 import { Folder } from '../../../globalTypes';
 import useCollection from '../../../Hooks/useCollection';
+import useChangeFolderStore from '../../../store/folderStore';
 
 import { useAuth } from '../../../Context/useAuth';
 import { ErrorMessage } from '../../ErrorMessage/ErrorMessage';
@@ -22,6 +23,7 @@ export const NewFolderForm = ({ folders }: Props) => {
 	const { logoName } = useAuth();
 
 	const { error: errorAddingFolder, addDocument } = useCollection('folders');
+	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
 
 	const onChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -36,7 +38,10 @@ export const NewFolderForm = ({ folders }: Props) => {
 		const folderNew = { name: folder, userId: logoName?.uid, createdAt: serverTimestamp() };
 
 		try {
-			await addDocument(folderNew);
+			const res = await addDocument(folderNew);
+			if (res) {
+				setCurrentFolder(res);
+			}
 		} catch (err) {
 			console.log('err adding folder', err);
 		}
