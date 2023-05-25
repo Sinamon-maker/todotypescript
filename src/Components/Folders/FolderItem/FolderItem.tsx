@@ -17,18 +17,17 @@ export const FolderItem = ({ folderItem }: Props) => {
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
 
-	const disabled = (currentFolder && folderItem.id === currentFolder.id) ?? false;
+	const disabled = () => folderItem.id === currentFolder;
 
 	const onFolderClick = () => {
-		console.log('click folder', currentFolder);
-		setCurrentFolder(folderItem);
+		setCurrentFolder(folderItem.id);
 	};
 
 	return (
 		<li className="flex items-center w-full mb-4">
-			<IconComponent style="w-8 h-8 sm:w-8 sm:h-8  text-orange-700" Icon={disabled ? 'openFolder' : 'folder'} />
+			<IconComponent style="w-8 h-8 sm:w-8 sm:h-8  text-orange-700" Icon={disabled() ? 'openFolder' : 'folder'} />
 
-			<AppButton style={styleType.transparent} type="button" nameValue="allTask" disabled={disabled} title={folderItem.name} onClick={onFolderClick} />
+			<AppButton style={styleType.transparent} type="button" nameValue="allTask" disabled={disabled()} title={folderItem.name} onClick={onFolderClick} />
 		</li>
 	);
 };

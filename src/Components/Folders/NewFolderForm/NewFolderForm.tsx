@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-
+import { serverTimestamp } from 'firebase/firestore';
 import { AppButton } from '../../../Module/Button/Button';
 
 import { AppInput } from '../../../Module/Input/Input';
 import { styleType } from '../../../styles/styles';
 import { Folder } from '../../../globalTypes';
-import useChangeFolderStore from '../../../store/folderStore';
+import useCollection from '../../../Hooks/useCollection';
+
+import { useAuth } from '../../../Context/useAuth';
+import { ErrorMessage } from '../../ErrorMessage/ErrorMessage';
 
 type Props = {
 	folders: Folder[];
@@ -16,7 +19,9 @@ export const NewFolderForm = ({ folders }: Props) => {
 	const [error, setError] = useState('');
 	const [isDisabled, setDisableSave] = useState(true);
 
-	const setNewFolder = useChangeFolderStore((s) => s.setNewFolder);
+	const { logoName } = useAuth();
+
+	const { error: errorAddingFolder, addDocument } = useCollection('folders');
 
 	const onChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -26,6 +31,17 @@ export const NewFolderForm = ({ folders }: Props) => {
 			setValue(e.target.value);
 		}
 	};
+
+	const createNewFolder = async (folder: string) => {
+		const folderNew = { name: folder, userId: logoName?.uid, createdAt: serverTimestamp() };
+
+		try {
+			await addDocument(folderNew);
+		} catch (err) {
+			console.log('err adding folder', err);
+		}
+	};
+
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (folders) {
@@ -35,12 +51,14 @@ export const NewFolderForm = ({ folders }: Props) => {
 				return;
 			}
 		}
-		setNewFolder(value);
+		createNewFolder(value);
 		setValue('');
 	};
 
 	return (
 		<form onSubmit={onSubmit} className=" w-full mt-6">
+			<ErrorMessage message={errorAddingFolder} />
+			<ErrorMessage message={error} />
 			<div className="w-full border-2 border-sky-800 p-2 rounded flex items-center">
 				<AppInput style="w-full bg-transparent" placeholder="Add new folder" value={value} onChange={onChange} />
 				<AppButton
@@ -53,7 +71,6 @@ export const NewFolderForm = ({ folders }: Props) => {
 					onClick={() => console.log('add folder')}
 				/>
 			</div>
-			<p className="">{error}</p>
 		</form>
 	);
 };

@@ -17,10 +17,10 @@ export const CatalogueList = ({ documents }: Props) => {
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
 	const renderedCatalogues = (docs: Data[]) => {
-		if (currentFolder === null || currentFolder.id === 'all') {
+		if (!currentFolder || currentFolder === 'all') {
 			return docs;
 		}
-		return docs.filter((it) => it.folder === currentFolder.id);
+		return docs.filter((it) => it.folder === currentFolder);
 	};
 
 	if (documents.length === 0 && !currentFolder) return <p>Here should be your list of catalogues</p>;

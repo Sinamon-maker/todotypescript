@@ -47,7 +47,7 @@ export const TableRaw = ({ item, index }: Props) => {
 				onClick={(e) => onChangeStatus(e, item.created)}
 				iconStyle=""
 				ariaLabel="changeStatus"
-				Icon={item.status ? '' : 'done'}
+				Icon={item.status ? 'done' : ''}
 			/>
 
 			<div className="whitespace-normal grow px-2 py-1  sm:pt-2 sm:pr-2 md:pl-6 font-medium text-left  rounded items-center">

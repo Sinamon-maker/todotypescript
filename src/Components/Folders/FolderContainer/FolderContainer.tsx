@@ -1,11 +1,8 @@
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import { serverTimestamp } from 'firebase/firestore';
+import React, { ReactNode, useEffect, useState } from 'react';
+
 import { Folder } from '../../../globalTypes';
-import useChangeFolderStore, { folderAll } from '../../../store/folderStore';
+import useChangeFolderStore from '../../../store/folderStore';
 
-import useCollection from '../../../Hooks/useCollection';
-
-import { useAuth } from '../../../Context/useAuth';
 import { AppButton } from '../../../Module/Button/Button';
 
 type Props = {
@@ -18,40 +15,16 @@ export const FolderContainer = ({ folders, children }: Props) => {
 
 	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
 
-	const { logoName } = useAuth();
-	const idFolderRename = useChangeFolderStore((s) => s.idFolderRename);
-	const setFolderRename = useChangeFolderStore((s) => s.setFolderRename);
-	const idFolderDelete = useChangeFolderStore((s) => s.idFolderDelete);
-	const setFolderDel = useChangeFolderStore((s) => s.setFolderDel);
-	const newFolder = useChangeFolderStore((s) => s.newFolder);
-	const setNewFolder = useChangeFolderStore((s) => s.setNewFolder);
-
-	const { error, addDocument } = useCollection('folders');
-
-	const createNewFolder = useCallback(
-		async (folder: string) => {
-			const folderNew = { name: folder, userId: logoName?.uid, createdAt: serverTimestamp() };
-
-			try {
-				await addDocument(folderNew);
-			} catch (err) {
-				console.log('err adding folder', err);
-			}
-		},
-		[addDocument, logoName?.uid]
-	);
-
-	useEffect(() => {
-		if (newFolder) {
-			createNewFolder(newFolder);
-		}
-	}, [newFolder, createNewFolder]);
-
-	const initializeCurrentFolder = useCallback(() => {
+	const initializeCurrentFolder = () => {
 		if (folders.length > 1) {
-			setCurrentFolder(folderAll);
+			setCurrentFolder('all');
+			return;
 		}
-	}, [folders.length, setCurrentFolder]);
+		if (folders.length === 1) {
+			console.log('initialize current folder', folders, folders[0].id);
+			setCurrentFolder(folders[0].id);
+		}
+	};
 
 	useEffect(() => {
 		initializeCurrentFolder();

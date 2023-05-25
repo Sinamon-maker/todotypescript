@@ -15,6 +15,7 @@ import { ErrorMessage } from '../../ErrorMessage/ErrorMessage';
 export const NewCatalogeForm = () => {
 	const [taskName, setTaskName] = useState('');
 	const [disableSave, setDisableSave] = useState(true);
+	const [tough, setTough] = useState(false);
 
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
@@ -31,30 +32,31 @@ export const NewCatalogeForm = () => {
 
 	const handleChange = (e: React.ChangeEvent<EventTarget>) => {
 		if (e.target instanceof HTMLInputElement) {
-			console.log(e.target.value);
 			const neVal = e.target.value;
 			if (neVal.trim().length < 3) setDisableSave(true);
 			if (neVal.trim().length >= 3) setDisableSave(false);
 			setTaskName(neVal);
+			setTough(true);
 		}
 	};
 
 	const onSubmit = async (e: React.FormEvent<EventTarget>): Promise<void> => {
 		e.preventDefault();
 
-		if (taskName.trim().length >= 3 && currentFolder && currentFolder.id !== 'all') {
+		if (taskName.trim().length >= 3 && currentFolder && currentFolder !== 'all') {
 			const newTask = {
 				title: taskName,
 				userId: logoName?.uid,
 				displayName: logoName?.displayName,
 				createdAt: serverTimestamp(),
 				tasks: [],
-				folder: currentFolder?.id,
+				folder: currentFolder,
 			};
 
 			await addDocument(newTask);
 			setTaskName('');
 			setDisableSave(true);
+			setTough(false);
 		}
 	};
 
@@ -82,7 +84,7 @@ export const NewCatalogeForm = () => {
 
 					<AppButton style={styleType.buttonStyle} type="submit" nameValue="addTask" title="Save" disabled={disableSave} />
 				</div>
-				{(!currentFolder || currentFolder.id === 'all') && <ErrorMessage message="Choose folder" />}
+				{(!currentFolder || (currentFolder === 'all' && tough)) && <ErrorMessage message="Choose folder" />}
 				<ErrorMessage message={errorAddingDocument} />
 			</form>
 		</Container>
