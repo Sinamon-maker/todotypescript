@@ -30,11 +30,6 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 	const newTask = useChangeTaskQueryStore((s) => s.newTask);
 	const setNewTask = useChangeTaskQueryStore((s) => s.setNewTask);
 
-	useEffect(() => {
-		if (idTaskComplete) changeStatus(idTaskComplete);
-		setTaskComplete(0);
-	}, [idTaskComplete]);
-
 	const onNewTask = async (task: Task) => {
 		let newList: Array<Task> = [];
 		if (taskResult?.tasks.length) {
@@ -94,25 +89,6 @@ export const TaskContainer = ({ children, newDoc, error }: Props) => {
 					console.log(err);
 				}
 			}
-		}
-	};
-
-	const changeStatus = async (id: number) => {
-		if (taskResult && taskResult.tasks.length) {
-			const newTaskList = taskResult.tasks.map((task) => {
-				if (task.created === id) return { ...task, status: !task.status };
-
-				return task;
-			});
-			if (taskResult) {
-				try {
-					await updateTask('tasks', { tasks: newTaskList }, taskResult?.id);
-				} catch (err) {
-					console.log(err);
-				}
-			}
-
-			//		saveInStorage(logoName, newTaskList);
 		}
 	};
 

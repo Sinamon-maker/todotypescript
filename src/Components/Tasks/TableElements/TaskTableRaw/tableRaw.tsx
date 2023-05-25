@@ -11,9 +11,10 @@ import { AppButton } from '../../../../Module/Button/Apbutton';
 interface Props {
 	item: Task;
 	index: number;
+	onClickChangeStatus: (id: number) => void;
 }
 
-export const TableRaw = ({ item, index }: Props) => {
+export const TableRaw = ({ item, index, onClickChangeStatus }: Props) => {
 	const [showDetailes, setShowDetailes] = useState(false);
 
 	const setDelId = useChangeTaskQueryStore((s) => s.setTaskDel);
@@ -26,7 +27,7 @@ export const TableRaw = ({ item, index }: Props) => {
 	};
 
 	const onChangeStatus = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-		setTaskComplete(id);
+		onClickChangeStatus(id);
 	};
 	const editClick = (e: React.MouseEvent<HTMLButtonElement>, val: Task) => {
 		setTaskEdit(val);

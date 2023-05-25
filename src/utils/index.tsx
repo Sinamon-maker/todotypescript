@@ -1,4 +1,5 @@
-import { SortParam, Task, Users } from '../globalTypes';
+import { updateTask } from '../api/updateDocument';
+import { Data, SortParam, Task, Users } from '../globalTypes';
 
 export const findUser = (user: string): string | null => {
 	const data = localStorage.getItem('users');
@@ -59,4 +60,19 @@ export const sortList = (list: Array<Task>, sort: SortParam) => {
 		return list?.filter((task) => !task.status).sort((a, b) => b.created - a.created);
 	}
 	return list.slice().sort((a, b) => b.created - a.created);
+};
+
+const changeStatusOfTask = <T extends { status: boolean; created: number }>(item: T, idCompare: number): T => {
+	if (item.created === idCompare) return { ...item, status: !item.status };
+	return item;
+};
+
+export const changeStatus = async (data: Data, id: number) => {
+	const newTaskList = data.tasks.map((task: Task) => changeStatusOfTask(task, id));
+
+	try {
+		await updateTask('tasks', { tasks: newTaskList }, data?.id);
+	} catch (err) {
+		console.log(err);
+	}
 };
