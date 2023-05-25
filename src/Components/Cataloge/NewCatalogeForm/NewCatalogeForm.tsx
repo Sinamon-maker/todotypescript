@@ -36,7 +36,11 @@ export const NewCatalogeForm = () => {
 			if (neVal.trim().length < 3) setDisableSave(true);
 			if (neVal.trim().length >= 3) setDisableSave(false);
 			setTaskName(neVal);
-			setTough(true);
+			if (neVal.trim().length === 0) {
+				setTough(false);
+			} else {
+				setTough(true);
+			}
 		}
 	};
 

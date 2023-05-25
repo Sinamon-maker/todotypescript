@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { Folder } from '../../../globalTypes';
 import useChangeFolderStore from '../../../store/folderStore';
@@ -14,17 +14,20 @@ export const FolderContainer = ({ folders, children }: Props) => {
 	const [isOpenSidebar, setOpenSideBar] = useState(false);
 
 	const setCurrentFolder = useChangeFolderStore((s) => s.setCurrentFolder);
+	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
 
-	const initializeCurrentFolder = () => {
-		if (folders.length > 1) {
-			setCurrentFolder('all');
-			return;
+	const initializeCurrentFolder = useCallback(() => {
+		if (!currentFolder) {
+			if (folders.length > 1) {
+				setCurrentFolder('all');
+				return;
+			}
+			if (folders.length === 1) {
+				console.log('initialize current folder', folders, folders[0].id);
+				setCurrentFolder(folders[0].id);
+			}
 		}
-		if (folders.length === 1) {
-			console.log('initialize current folder', folders, folders[0].id);
-			setCurrentFolder(folders[0].id);
-		}
-	};
+	}, [setCurrentFolder, folders, currentFolder]);
 
 	useEffect(() => {
 		initializeCurrentFolder();
