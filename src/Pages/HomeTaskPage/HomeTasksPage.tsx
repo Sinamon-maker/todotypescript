@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { Outlet, useParams, useSearchParams } from 'react-router-dom';
-
-import { useGetDocument } from '../../api/useGetDocument';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 import { CatalogeHeadingMenu } from '../../Components/CatalogueHeading/CatalogeHeadingMenu/CatalogeHeadingMenu';
 import { Loader } from '../../Components/Loader/Loader';

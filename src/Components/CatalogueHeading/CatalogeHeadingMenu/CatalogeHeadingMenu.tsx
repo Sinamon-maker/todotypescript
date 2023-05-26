@@ -6,6 +6,7 @@ import { Container } from '../../../Module/Container/Container';
 import { styleType } from '../../../styles/styles';
 import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 import { ListFoldersHeading } from '../ListFoldersHeading/ListFoldersHeading';
+import { folderAll } from '../../../store/folderStore';
 
 type Props = {
 	documents: Data[];
@@ -15,6 +16,7 @@ type Props = {
 };
 
 const fakeCatalogue = { title: 'choose', id: 'id', userId: '444', folder: 'all', tasks: [], displayName: '', createdAt: 9888 };
+
 export const CatalogeHeadingMenu = ({ currentParams, changeParams, documents, folders }: Props) => {
 	const navigate = useNavigate();
 	const { userId } = useParams();
@@ -27,8 +29,14 @@ export const CatalogeHeadingMenu = ({ currentParams, changeParams, documents, fo
 		}
 		return fakeCatalogue;
 	};
+	const newFolders = [...folders, folderAll];
 
-	const [currentFolderId, setCurrentFolderId] = useState(initialTask(documents, catalogueId).folder);
+	const initialFolder = () => {
+		const folder = initialTask(documents, catalogueId).folder;
+		return newFolders.find((it) => it.id === folder) ?? folderAll;
+	};
+
+	const [currentFolder, setCurrentFolder] = useState(initialFolder());
 
 	const [selectedCatalogue, setSelectedCatalogue] = useState(initialTask(documents, catalogueId));
 	const delCatalodue = () => {
@@ -46,8 +54,8 @@ export const CatalogeHeadingMenu = ({ currentParams, changeParams, documents, fo
 		});
 	};
 
-	const changeFolder = (folder: string) => {
-		setCurrentFolderId(folder);
+	const changeFolder = (folder: Folder) => {
+		setCurrentFolder(folder);
 		setSelectedCatalogue(fakeCatalogue);
 		changeParams({});
 	};
@@ -57,10 +65,10 @@ export const CatalogeHeadingMenu = ({ currentParams, changeParams, documents, fo
 			<div className="w-full flex justify-between my-2 text-skin-base justify-between items-center">
 				<ul className="flex items-center gap-4">
 					<li className="">
-						<ListFoldersHeading folders={folders} currentFolderId={currentFolderId} changeFolder={changeFolder} />
+						<ListFoldersHeading folders={newFolders} currentFolder={currentFolder} changeFolder={changeFolder} />
 					</li>
 					<li className="">
-						<ListCataloguesHeading renderTasks={renderTasks} selectedCatalogue={selectedCatalogue} catalogues={documents} currentFolderId={currentFolderId} />
+						<ListCataloguesHeading renderTasks={renderTasks} selectedCatalogue={selectedCatalogue} catalogues={documents} currentFolder={currentFolder} />
 					</li>
 				</ul>
 

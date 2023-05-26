@@ -1,21 +1,20 @@
-import React, { useState, Fragment, Dispatch, SetStateAction } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 
 import { IconComponent } from '../../../Icons/Icon';
-import { Data } from '../../../globalTypes';
-import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
+import { Data, Folder } from '../../../globalTypes';
 
 type Props = {
 	catalogues: Data[];
-	currentFolderId: string;
+	currentFolder: Folder;
 	selectedCatalogue: Data;
 	renderTasks: (val: Data) => void;
 };
 
-export const ListCataloguesHeading = ({ renderTasks, selectedCatalogue, catalogues, currentFolderId }: Props) => {
+export const ListCataloguesHeading = ({ renderTasks, selectedCatalogue, catalogues, currentFolder }: Props) => {
 	const [query, setQuery] = useState('');
 
-	const inFolder = currentFolderId && currentFolderId !== 'all' ? catalogues?.filter((it) => it.folder === currentFolderId) : catalogues;
+	const inFolder = currentFolder && currentFolder.id !== 'all' ? catalogues?.filter((it) => it.folder === currentFolder.id) : catalogues;
 
 	const filteredCatalogues =
 		query === ''
