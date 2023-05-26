@@ -1,36 +1,26 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, Dispatch, SetStateAction } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 
 import { IconComponent } from '../../../Icons/Icon';
 import { Data } from '../../../globalTypes';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-
-const people = [
-	{ id: 1, name: 'Durward Reynolds' },
-	{ id: 2, name: 'Kenton Towne' },
-	{ id: 3, name: 'Therese Wunsch' },
-	{ id: 4, name: 'Benedict Kessler' },
-	{ id: 5, name: 'Katelyn Rohan' },
-];
+import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 
 type Props = {
 	catalogues: Data[];
+	currentFolderId: string;
+	selectedCatalogue: Data;
+	renderTasks: (val: Data) => void;
 };
 
-export const ListCataloguesHeading = ({ catalogues }: Props) => {
-	const [selectedCatalogue, setSelectedCatalogue] = useState(catalogues[0]);
+export const ListCataloguesHeading = ({ renderTasks, selectedCatalogue, catalogues, currentFolderId }: Props) => {
 	const [query, setQuery] = useState('');
-	const { userId } = useParams();
-	const navigate = useNavigate();
 
-	const renderTasks = (data: Data) => {
-		setSelectedCatalogue(data);
-		navigate(`/catalogue/${userId}/tasks/${data.id}`);
-	};
+	const inFolder = currentFolderId && currentFolderId !== 'all' ? catalogues?.filter((it) => it.folder === currentFolderId) : catalogues;
+
 	const filteredCatalogues =
 		query === ''
-			? catalogues
-			: catalogues.filter((item) => {
+			? inFolder
+			: inFolder?.filter((item) => {
 					return item.title.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''));
 			  });
 
@@ -49,7 +39,7 @@ export const ListCataloguesHeading = ({ catalogues }: Props) => {
 				</div>
 				<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0" afterLeave={() => setQuery('')}>
 					<Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gradient-to-tr from-blue-800  to-red-800 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-						{filteredCatalogues.length === 0 && query !== '' ? (
+						{!filteredCatalogues || (filteredCatalogues.length === 0 && query !== '') ? (
 							<div className="relative cursor-default select-none py-2 px-4 text-gray-700">Nothing found.</div>
 						) : (
 							filteredCatalogues.map((item) => (

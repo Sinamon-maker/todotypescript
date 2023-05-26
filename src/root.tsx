@@ -61,13 +61,6 @@ export const Root = createBrowserRouter([
 								path: ':userId/tasks',
 								element: <HomeTasksPage />,
 								errorElement: <ErrorPage />,
-								children: [
-									{
-										path: ':catalogueId',
-										element: <TasksPage />,
-										errorElement: <ErrorPage />,
-									},
-								],
 							},
 
 							{
