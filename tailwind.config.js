@@ -55,5 +55,5 @@ module.exports = {
 			textColor: ['disabled'],
 		},
 	},
-	plugins: [],
+	plugins: [require('@headlessui/tailwindcss')({ prefix: 'ui' })],
 };

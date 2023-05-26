@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const FoldersList = ({ folders }: Props) => (
-	<div className="p-8 ssm:pl-10 grow">
+	<div className="p-8 ssm:pl-10 grow overflow-auto">
 		<h2 className="text-lg ssm:text-xl my-6 underline underline-offset-4">Folders</h2>
 
 		{folders.length !== 0 && (

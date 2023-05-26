@@ -4,7 +4,7 @@ import { Outlet, useParams } from 'react-router-dom';
 
 import { useGetDocument } from '../../api/useGetDocument';
 
-import { CatalogeHeading } from '../../Components/Tasks/CatalogeHeading/CatalogeHeading';
+import { CatalogeHeadingMenu } from '../../Components/CatalogueHeading/CatalogeHeadingMenu/CatalogeHeadingMenu';
 import { Loader } from '../../Components/Loader/Loader';
 import { Data, Folder, serverDataTask } from '../../globalTypes';
 import useGetCollection from '../../Hooks/getCollection';
@@ -20,7 +20,7 @@ export const HomeTasksPage = () => {
 
 	return (
 		<div>
-			<CatalogeHeading documents={documents} folders={folders} />
+			<CatalogeHeadingMenu documents={documents} folders={folders} />
 			<Outlet />
 		</div>
 	);
