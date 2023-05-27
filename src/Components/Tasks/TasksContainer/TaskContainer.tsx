@@ -1,7 +1,6 @@
-import React, { useContext, useCallback } from 'react';
+import React from 'react';
 
 import { Task, Data } from '../../../globalTypes';
-import { UserContext } from '../../../Context/userContext';
 
 import { ModalDelete } from '../../ModalDelete/ModalDelete';
 import { ModalEditTask } from '../../ModalEditTask/ModalEditTask';
@@ -15,8 +14,6 @@ type Props = {
 };
 
 export const TaskContainer = ({ children, newDoc }: Props) => {
-	const logoName = useContext(UserContext);
-
 	const taskResult = newDoc;
 
 	const idTaskDel = useChangeTaskQueryStore((s) => s.idTaskDel);

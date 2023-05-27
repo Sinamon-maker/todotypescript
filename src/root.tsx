@@ -5,7 +5,6 @@ import { MainPage } from './Pages/MainPage/MainPage';
 import { ErrorPage } from './Pages/ErrorPage/ErrorPage';
 import { LoginForm } from './Pages/LoginForm/LoginForm';
 import { RegisterForm } from './Pages/RegisterForm/RegisterForm';
-import TasksPage from './Pages/TaskPage/TasksPage';
 import { TasksCataloge } from './Pages/TasksCataloge/TasksCataloge';
 import { MyTasksCataloge } from './Pages/MyTasksCatalogue/MyTasksCatalogue';
 import Home from './Pages/Home/Home';

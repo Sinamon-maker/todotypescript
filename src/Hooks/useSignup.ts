@@ -25,6 +25,7 @@ const useSignup = () => {
 			console.log('err', err, message);
 			setError(() => message);
 		}
+		return null;
 	};
 
 	return { error, signup };

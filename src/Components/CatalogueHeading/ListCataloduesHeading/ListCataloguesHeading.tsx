@@ -17,11 +17,7 @@ export const ListCataloguesHeading = ({ renderTasks, selectedCatalogue, catalogu
 	const inFolder = currentFolder && currentFolder.id !== 'all' ? catalogues?.filter((it) => it.folder === currentFolder.id) : catalogues;
 
 	const filteredCatalogues =
-		query === ''
-			? inFolder
-			: inFolder?.filter((item) => {
-					return item.title.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''));
-			  });
+		query === '' ? inFolder : inFolder?.filter((item) => item.title.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, '')));
 
 	return (
 		<Combobox value={selectedCatalogue} onChange={renderTasks}>
