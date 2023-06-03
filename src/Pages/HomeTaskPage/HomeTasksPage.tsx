@@ -6,7 +6,7 @@ import { CatalogeHeadingMenu } from '../../Components/CatalogueHeading/CatalogeH
 import { Loader } from '../../Components/Loader/Loader';
 import { Data, Folder, Search } from '../../globalTypes';
 import useGetCollection from '../../Hooks/getCollection';
-import TasksPage from '../TaskPage/TasksPage';
+import { TasksPage } from '../TaskPage/TasksPage';
 
 export const HomeTasksPage = () => {
 	const { userId } = useParams();

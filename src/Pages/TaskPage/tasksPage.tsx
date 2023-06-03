@@ -14,7 +14,7 @@ type Props = {
 	currentParams: Search;
 };
 
-const TasksPage = ({ currentParams }: Props) => {
+export const TasksPage = ({ currentParams }: Props) => {
 	const catalogueId = currentParams.ctlg;
 
 	const { error, newDoc, isLoading } = useGetDocument<serverDataTask>(catalogueId, 'tasks') as serverDataTask;
@@ -37,5 +37,3 @@ const TasksPage = ({ currentParams }: Props) => {
 		</div>
 	);
 };
-
-export default TasksPage;
