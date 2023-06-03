@@ -64,3 +64,7 @@ export type TableHead = {
 };
 
 export type TableHeadings = TableHead[];
+
+export interface Search {
+	[key: string]: string;
+}

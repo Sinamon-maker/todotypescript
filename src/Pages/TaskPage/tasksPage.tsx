@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { useParams } from 'react-router-dom';
-
 import { TaskContainer } from '../../Components/Tasks/TasksContainer/TaskContainer';
 import { useGetDocument } from '../../api/useGetDocument';
 import { ListTasks } from '../../Components/Tasks/ListTasks/ListTasks';
@@ -10,18 +8,22 @@ import { Container } from '../../Module/Container/Container';
 import { NewTaskForm } from '../../Components/Tasks/NewTaskForm/NewTaskForm';
 
 import { Loader } from '../../Components/Loader/Loader';
-import { serverDataTask } from '../../globalTypes';
+import { Search, serverDataTask } from '../../globalTypes';
 
-const TasksPage = () => {
-	const { userId, catalogueId } = useParams();
-	console.log('id', userId);
-	const { error, newDoc, isLoading } = useGetDocument<serverDataTask>(catalogueId!, 'tasks') as serverDataTask;
+type Props = {
+	currentParams: Search;
+};
+
+const TasksPage = ({ currentParams }: Props) => {
+	const catalogueId = currentParams.ctlg;
+
+	const { error, newDoc, isLoading } = useGetDocument<serverDataTask>(catalogueId, 'tasks') as serverDataTask;
 
 	if (isLoading) return <Loader />;
 	if (!newDoc || error) return <p>Could Not Retreive the data {error}</p>;
 
 	return (
-		<div>
+		<div className="w-full">
 			<TaskContainer newDoc={newDoc}>
 				<Container>
 					<div className="flex flex-col justify-between items-end ssm:flex-row">

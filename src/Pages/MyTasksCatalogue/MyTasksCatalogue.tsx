@@ -12,10 +12,12 @@ export const MyTasksCataloge = () => {
 
 	const { documents, error, isPending } = useGetCollection<Data>('tasks', userId);
 
-	const { documents: folders, error: err, isPending: isPen } = useGetCollection<Folder>('folders');
-	console.log('foldersLength', folders.length);
+	const { documents: folders, error: err, isPending: isPen } = useGetCollection<Folder>('folders', userId);
+
 	if (!userId) return <p>Sth wrong</p>;
 	if (isPending || isPen) return <Loader />;
+	if (err) return <p>{err}</p>;
+	if (err) return <p>{error}</p>;
 	return (
 		<div className="w-full h-full  flex  gap-2 relative">
 			<SideBar folders={folders} />
