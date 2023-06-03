@@ -72,7 +72,7 @@ export const CatalogeHeadingMenu = ({ currentParams, changeParams, documents, fo
 
 	return (
 		<Container>
-			<ul className="w-full flex justify-between my-2 gap-4 text-skin-base justify-around ssm:justify-start items-center">
+			<ul className="w-full flex  justify-between my-px ssm:my-2 gap-2 sm:gap-4 text-skin-base justify-around ssm:justify-start items-center">
 				<li className="">
 					<ListFoldersHeading folders={newFolders} currentFolder={currentFolder} changeFolder={changeFolder} />
 				</li>

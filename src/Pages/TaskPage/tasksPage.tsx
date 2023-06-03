@@ -23,7 +23,7 @@ const TasksPage = ({ currentParams }: Props) => {
 	if (!newDoc || error) return <p>Could Not Retreive the data {error}</p>;
 
 	return (
-		<div>
+		<div className="w-full">
 			<TaskContainer newDoc={newDoc}>
 				<Container>
 					<div className="flex flex-col justify-between items-end ssm:flex-row">

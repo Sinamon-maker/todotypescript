@@ -24,7 +24,7 @@ export const ListCataloguesHeading = ({ renderTasks, selectedCatalogue, catalogu
 			<div className="relative mt-1">
 				<div className="relative border border-fill-weak py-2 rounded-lg">
 					<Combobox.Input
-						className="appearance-none bg-transparent border-none w-full  text-skin-base mr-3 py-1 px-2 leading-tight focus:outline-none"
+						className="appearance-none bg-transparent border-none min-w-32 w-full text-base sm:text-lg trancate pr-8  text-skin-base   pl-2 leading-tight focus:outline-none"
 						displayValue={(item: Data) => item.title}
 						onChange={(event) => setQuery(event.target.value)}
 					/>
