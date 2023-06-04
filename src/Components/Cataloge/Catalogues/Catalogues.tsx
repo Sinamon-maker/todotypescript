@@ -4,6 +4,7 @@ import { CatalogueList } from '../CatalogeList/CatalogeList';
 import { NewCatalogeForm } from '../NewCatalogeForm/NewCatalogeForm';
 
 import { CatalogueContainer } from '../CatalogueContainer/CatalogueContainer';
+import { CatalogueSearch } from '../CatalogueSearch/CatalogueSearch';
 
 type Props = {
 	documents: Data[];
@@ -12,7 +13,7 @@ type Props = {
 export const Catalogues = ({ documents }: Props) => (
 	<CatalogueContainer>
 		<NewCatalogeForm />
-
+		<CatalogueSearch />
 		<CatalogueList documents={documents} />
 	</CatalogueContainer>
 );

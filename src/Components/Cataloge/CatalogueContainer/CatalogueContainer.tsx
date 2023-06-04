@@ -26,7 +26,7 @@ export const CatalogueContainer = ({ children }: Props) => {
 	};
 
 	return (
-		<div className="flex flex-col grow gap-2">
+		<div className="flex flex-col grow gap-2 text-skin-base">
 			{children}
 			{idCatalogueDel && (
 				<ModalDelete

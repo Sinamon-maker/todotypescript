@@ -6,6 +6,7 @@ import { Container } from '../../../Module/Container/Container';
 import { CatalogueItem } from '../CatalogueItem/CatalogurItem';
 
 import useChangeFolderStore from '../../../store/folderStore';
+import useChangeCatalogueStore from '../../../store/catalogueStore';
 
 type Props = {
 	documents: Data[];
@@ -15,12 +16,18 @@ export const CatalogueList = ({ documents }: Props) => {
 	const { logoName } = useAuth();
 
 	const currentFolder = useChangeFolderStore((s) => s.currentFolder);
+	const searchCatalogueQuery = useChangeCatalogueStore((s) => s.searchCatalogueQuery);
 
-	const renderedCatalogues = (docs: Data[]) => {
+	const searchDocuments = (val: string, docums: Data[]) => docums.filter((it) => it.title.includes(val));
+
+	const renderedCatalogues = (docs: Data[], searchQuery: string) => {
 		if (!currentFolder || currentFolder === 'all') {
-			return docs;
+			return searchDocuments(searchQuery, docs);
 		}
-		return docs.filter((it) => it.folder === currentFolder);
+		return searchDocuments(
+			searchQuery,
+			docs.filter((it) => it.folder === currentFolder)
+		);
 	};
 
 	if (documents.length === 0 && !currentFolder) return <p>Here should be your list of catalogues</p>;
@@ -32,7 +39,7 @@ export const CatalogueList = ({ documents }: Props) => {
 			) : (
 				<Container>
 					<div className="w-full flex  flex-col gap-4 ">
-						{renderedCatalogues(documents)?.map((docum) => (
+						{renderedCatalogues(documents, searchCatalogueQuery)?.map((docum) => (
 							<CatalogueItem key={docum.id} docum={docum} logoName={logoName} />
 						))}
 					</div>

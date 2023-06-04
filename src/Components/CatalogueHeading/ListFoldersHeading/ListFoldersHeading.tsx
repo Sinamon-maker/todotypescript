@@ -12,8 +12,8 @@ type Props = {
 
 export const ListFoldersHeading = ({ changeFolder, currentFolder, folders }: Props) => (
 	<Listbox value={currentFolder} onChange={changeFolder}>
-		<div className="relative mt-1 min-w-24">
-			<Listbox.Button className="relative w-full  text-base sm:text-lg border border-fill-weak px-2 py-2  cursor-default rounded-lg text-skin-base py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 ">
+		<div className="relative mt-1 min-w-28 w-32">
+			<Listbox.Button className="relative w-full   text-base sm:text-lg border border-fill-weak px-2 py-2  cursor-default rounded-lg text-skin-base py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 ">
 				<span className="block truncate ">{currentFolder.name}</span>
 				<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 					<IconComponent Icon="expand" style="" />

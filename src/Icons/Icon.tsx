@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconType } from 'react-icons';
-import { AiOutlineMenu, AiOutlineClose, AiFillFolder, AiFillFolderOpen, AiOutlineEdit, AiOutlineCheck } from 'react-icons/ai';
+import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose, AiFillFolder, AiFillFolderOpen, AiOutlineEdit, AiOutlineCheck } from 'react-icons/ai';
 import { FiTrash2 } from 'react-icons/fi';
 import { BiExpandVertical } from 'react-icons/bi';
 import { ImSpinner6 } from 'react-icons/im';
@@ -17,6 +17,7 @@ const iconMaps: MapIcons = {
 	done: AiOutlineCheck,
 	expand: BiExpandVertical,
 	spinner: ImSpinner6,
+	search: AiOutlineSearch,
 };
 
 type Props = {

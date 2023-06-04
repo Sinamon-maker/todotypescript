@@ -11,9 +11,9 @@ const useGetCollection = <T,>(collectionName: string, q?: string) => {
 		let colRef: CollectionReference<DocumentData> | Query<DocumentData>;
 		if (q && q[q.length - 1]) {
 			console.log('q', q);
-			colRef = query(collection(db, collectionName), where('userId', '==', q), orderBy('createdAt'));
+			colRef = query(collection(db, collectionName), where('userId', '==', q), orderBy('createdAt', 'desc'));
 		} else {
-			colRef = query(collection(db, collectionName), orderBy('createdAt'));
+			colRef = query(collection(db, collectionName), orderBy('createdAt', 'desc'));
 		}
 		const unsub = onSnapshot(
 			colRef,
