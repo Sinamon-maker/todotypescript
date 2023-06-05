@@ -1,8 +1,7 @@
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, DocumentData, WithFieldValue } from 'firebase/firestore';
 import { db } from '../Firebase/Config';
-import { Data } from '../globalTypes';
 
-export const updateTask = async (collectionName: string, updatedField: Partial<Data>, id: string) => {
+export const updateField = async <T extends WithFieldValue<DocumentData>>(collectionName: string, updatedField: T, id: string) => {
 	const docRef = doc(db, collectionName, id);
 	await updateDoc(docRef, updatedField);
 };

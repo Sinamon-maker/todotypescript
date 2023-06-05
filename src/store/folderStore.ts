@@ -5,19 +5,19 @@ export const folderAll = { id: 'all', name: 'all', createdAt: 1, userId: '' };
 export interface FolderChangeQuery {
 	currentFolder: string;
 	searchQueryFolder: string;
-	idFolderDelete: number;
-	idFolderRename: number;
+	idFolderDelete: string;
+	idFolderRename: string;
 
 	setCurrentFolder: (folder: string) => void;
-	setFolderDel: (id: number) => void;
-	setFolderRename: (id: number) => void;
+	setFolderDel: (id: string) => void;
+	setFolderRename: (id: string) => void;
 	setSearchQueryFolder: (val: string) => void;
 }
 
 const useChangeFolderStore = create<FolderChangeQuery>((set) => ({
 	currentFolder: '',
-	idFolderDelete: 0,
-	idFolderRename: 0,
+	idFolderDelete: '',
+	idFolderRename: '',
 	searchQueryFolder: '',
 	setCurrentFolder: (folder) => set(() => ({ currentFolder: folder })),
 	setFolderDel: (id) => set(() => ({ idFolderDelete: id })),

@@ -36,7 +36,7 @@ export const FolderContainer = ({ folders, children }: Props) => {
 	const closeStyle = 'w-0 static';
 	const openStyle = 'absolute inset-y-0 w-3/4 z-40 py-4 px-1 md:pl-8';
 	const stylenormal =
-		'sm:py-4 sm:px-1 md:pl-8  sm:relative  ssm:w-1/3 sm:w-80 h-full ssm:h-5/6 overflow-auto rounded-md bg-gradient-to-tr from-blue-800  to-red-800 overflow-auto rounded-lg shadow-lg ssm:m-4 md:ml-10 flex flex-col rounded  overflow-hidden   text-skin-base  transition-all';
+		'sm:py-4 sm:px-1 md:pl-8  ssm:relative  ssm:w-1/3 sm:w-80 h-full ssm:h-5/6 overflow-auto rounded-md bg-gradient-to-tr from-blue-800  to-red-800 overflow-auto rounded-lg shadow-lg ssm:m-4 md:ml-10 flex flex-col rounded  overflow-hidden   text-skin-base  transition-all';
 	const togglePart = isOpenSidebar ? openStyle : closeStyle;
 
 	const styleSideBar = togglePart + stylenormal;

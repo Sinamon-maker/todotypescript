@@ -38,7 +38,7 @@ export const TableRaw = ({ item, index, onClickChangeStatus }: Props) => {
 
 	return (
 		<li key={item.created} className="  flex items-center">
-			<div className="w-6 sm: w-1/12  pl-2 sm:px-6 py-1 shrink-0 text-gray-400 ">{index + 1}</div>
+			<div className="w-6 sm: w-1/12 pl-1 ssm:pl-2 sm:px-6 py-1 shrink-0 text-gray-400 ">{index + 1}</div>
 
 			<AppButton
 				title=""
@@ -50,8 +50,8 @@ export const TableRaw = ({ item, index, onClickChangeStatus }: Props) => {
 				Icon={item.status ? 'done' : ''}
 			/>
 
-			<div className="whitespace-normal grow px-2 py-1  sm:pt-2 sm:pr-2 md:pl-6 font-medium text-left  rounded items-center">
-				<div className="grow ml-4">
+			<div className="whitespace-normal grow ssm:px-1 sm:px-2 py-1  sm:pt-2 sm:pr-2 md:pl-6 font-medium text-left  rounded items-center">
+				<div className="grow ml-2 ssm:ml-4">
 					<TextTableElement task={item} />
 					{showDetailes && <p className="rounded py-2 border-b text-rose-600 border-gray-700 leading-relaxed md:w-3/4 lg:4/5">{item.detailes}</p>}
 				</div>

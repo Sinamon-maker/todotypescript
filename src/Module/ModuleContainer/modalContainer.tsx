@@ -24,7 +24,7 @@ export const ModalContainer = ({ children, close }: Props) => {
 			onKeyDown={handleKeyDown}
 			role="button"
 			onClick={handleClick}
-			className="bg-slate-100/[0.5] absolute bottom-0 left-0 flex justify-center items-center h-screen w-screen "
+			className="bg-slate-100/[0.5] absolute z-50 bottom-0 left-0 flex justify-center items-center h-screen w-screen "
 		>
 			{children}
 		</div>

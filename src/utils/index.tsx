@@ -1,4 +1,4 @@
-import { updateTask } from '../api/updateDocument';
+import { updateField } from '../api/updateDocument';
 import { Data, SortParam, Task, Users } from '../globalTypes';
 
 export const findUser = (user: string): string | null => {
@@ -66,7 +66,7 @@ export const changeStatus = async (data: Data, id: number) => {
 	const newTaskList = data.tasks.map((task: Task) => changeStatusOfTask(task, id));
 
 	try {
-		await updateTask('tasks', { tasks: newTaskList }, data?.id);
+		await updateField('tasks', { tasks: newTaskList }, data?.id);
 	} catch (err) {
 		console.log(err);
 	}
@@ -77,7 +77,7 @@ const isTaskForDelete = <T extends { created: number }>(item: T, idCompare: numb
 export const deleteTask = async (data: Data, id: number) => {
 	const newTaskList: Task[] | [] = data.tasks.filter((task: Task) => !isTaskForDelete(task, id));
 
-	await updateTask('tasks', { tasks: newTaskList }, data?.id);
+	await updateField('tasks', { tasks: newTaskList }, data?.id);
 };
 
 export const changeTask = async (data: Data, newTask: Task) => {
@@ -89,11 +89,11 @@ export const changeTask = async (data: Data, newTask: Task) => {
 		return task;
 	});
 
-	await updateTask('tasks', { tasks: newList }, data?.id);
+	await updateField('tasks', { tasks: newList }, data?.id);
 };
 
 export const onNewTask = async (data: Data, task: Task) => {
 	const newList: Array<Task> = [...data.tasks];
 	newList.push(task);
-	await updateTask('tasks', { tasks: newList }, data?.id);
+	await updateField('tasks', { tasks: newList }, data?.id);
 };

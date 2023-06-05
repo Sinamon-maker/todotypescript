@@ -6,6 +6,7 @@ import { Loader } from '../../Components/Loader/Loader';
 
 import { SideBar } from '../../Components/Folders/SideBar/SideBar';
 import { Catalogues } from '../../Components/Cataloge/Catalogues/Catalogues';
+import { MyCataloguePageContainer } from '../../Components/MyCataloguesPageContainer/MyCataloguePageContainer';
 
 export const MyTasksCataloge = () => {
 	const { userId } = useParams();
@@ -19,9 +20,9 @@ export const MyTasksCataloge = () => {
 	if (err) return <p>{err}</p>;
 	if (err) return <p>{error}</p>;
 	return (
-		<div className="w-full h-full  flex  gap-2 relative">
+		<MyCataloguePageContainer folders={folders} documents={documents}>
 			<SideBar folders={folders} />
 			{folders.length !== 0 && <Catalogues documents={documents} />}
-		</div>
+		</MyCataloguePageContainer>
 	);
 };

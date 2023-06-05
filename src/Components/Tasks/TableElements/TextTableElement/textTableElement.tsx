@@ -9,5 +9,5 @@ interface Props {
 export const TextTableElement = ({ task }: Props) => {
 	const doneStyle = task.status ? 'line-through' : '';
 
-	return <span className={`grow h-full py-1 text-left   ${doneStyle}`}>{task.text}</span>;
+	return <span className={`grow h-full w-full block py-1 text-left   ${doneStyle}`}>{task.text}</span>;
 };

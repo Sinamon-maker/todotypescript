@@ -2,7 +2,7 @@ import React from 'react';
 import useChangeCatalogueStore from '../../../store/catalogueStore';
 
 import { ModalDelete } from '../../ModalDelete/ModalDelete';
-import { deleteTask } from '../../../api/deleteDocument';
+import { deleteDocument } from '../../../api/deleteDocument';
 
 type Props = {
 	children: React.ReactNode;
@@ -14,7 +14,7 @@ export const CatalogueContainer = ({ children }: Props) => {
 
 	const confirmDeleteCatalogue = async () => {
 		try {
-			await deleteTask('tasks', idCatalogueDel);
+			await deleteDocument('tasks', idCatalogueDel);
 		} catch (err) {
 			console.log(err);
 		}
